@@ -1,1345 +1,1805 @@
-```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>家族法律・ニュース管理</title>
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+
+<title>家族法律ナビ</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
-  box-sizing:border-box;
+ box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  font-family:
-    -apple-system,BlinkMacSystemFont,"Segoe UI",
-    "Noto Sans JP",sans-serif;
-  background:#f4f6fb;
-  color:#222;
+ margin:0;
+ font-family:
+ -apple-system,
+ BlinkMacSystemFont,
+ "Segoe UI",
+ "Noto Sans JP",
+ sans-serif;
+ background:#f4f6fb;
+ color:#222;
 }
 
 header{
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
-  padding:22px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 4px 15px rgba(0,0,0,.15);
+ background:linear-gradient(135deg,#2563eb,#7c3aed);
+ color:white;
+ padding:18px;
 }
 
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
+.header{
+ max-width:1100px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
 
 .logo{
-  font-size:22px;
-  font-weight:800;
-}
-
-.header-sub{
-  font-size:12px;
-  opacity:.85;
-}
-
-button{
-  border:0;
-  border-radius:12px;
-  padding:11px 16px;
-  cursor:pointer;
-  font-weight:700;
-  transition:.2s;
-}
-
-button:hover{
-  transform:translateY(-1px);
-}
-
-.admin-btn{
-  background:white;
-  color:#2563eb;
+ font-size:22px;
+ font-weight:800;
 }
 
 .container{
-  max-width:1100px;
-  margin:auto;
-  padding:25px 16px 60px;
+ max-width:1100px;
+ margin:auto;
+ padding:20px;
 }
 
 .nav{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
-  margin-bottom:25px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+ margin-bottom:20px;
 }
 
 .nav button{
-  background:white;
-  color:#333;
-  box-shadow:0 2px 8px rgba(0,0,0,.07);
+ background:white;
+ border:0;
+ padding:13px;
+ border-radius:12px;
+ font-weight:bold;
+ cursor:pointer;
 }
 
 .nav button.active{
-  background:#2563eb;
-  color:white;
+ background:#2563eb;
+ color:white;
 }
 
 .page{
-  display:none;
+ display:none;
 }
 
 .page.active{
-  display:block;
-}
-
-.hero{
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 4px 15px rgba(0,0,0,.07);
-  margin-bottom:20px;
-}
-
-.hero h1{
-  margin-top:0;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+ display:block;
 }
 
 .card{
-  background:white;
-  border-radius:18px;
-  padding:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,.07);
+ background:white;
+ padding:20px;
+ border-radius:18px;
+ margin-bottom:15px;
+ box-shadow:0 4px 14px #00000010;
 }
 
-.card-icon{
-  font-size:32px;
-}
-
-.card h3{
-  margin-bottom:5px;
-}
-
-.stat{
-  font-size:28px;
-  font-weight:800;
-  color:#2563eb;
-}
-
-.search{
-  width:100%;
-  padding:14px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  margin-bottom:15px;
-  font-size:16px;
-}
-
-.list{
-  display:grid;
-  gap:15px;
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:15px;
 }
 
 .item{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.07);
+ background:white;
+ padding:18px;
+ border-radius:16px;
+ margin-bottom:12px;
+ box-shadow:0 3px 10px #0000000d;
 }
 
-.item-title{
-  font-size:19px;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.tag{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:999px;
-  background:#e8efff;
-  color:#2563eb;
-  font-size:12px;
-  margin-right:5px;
-}
-
-.penalty{
-  color:#dc2626;
-  font-weight:800;
-}
-
-.news-date{
-  color:#777;
-  font-size:13px;
-}
-
-.family-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.family{
-  text-align:center;
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.07);
-}
-
-.avatar{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:#e8efff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:35px;
-  margin:0 auto 10px;
-}
-
-.admin-panel{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.07);
-  margin-bottom:20px;
-}
-
-input,textarea,select{
-  width:100%;
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  margin:6px 0 12px;
-  font-size:15px;
+input,
+select,
+textarea{
+ width:100%;
+ padding:12px;
+ border:1px solid #ddd;
+ border-radius:10px;
+ margin:5px 0 12px;
+ font-size:15px;
 }
 
 textarea{
-  min-height:100px;
-  resize:vertical;
+ min-height:100px;
+}
+
+button{
+ border:0;
+ border-radius:10px;
+ padding:11px 15px;
+ cursor:pointer;
+ font-weight:bold;
 }
 
 .primary{
-  background:#2563eb;
-  color:white;
+ background:#2563eb;
+ color:white;
 }
 
-.danger{
-  background:#dc2626;
-  color:white;
+.green{
+ background:#16a34a;
+ color:white;
 }
 
-.secondary{
-  background:#e5e7eb;
-  color:#222;
+.red{
+ background:#dc2626;
+ color:white;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.gray{
+ background:#e5e7eb;
+ color:#222;
+}
+
+.badge{
+ display:inline-block;
+ padding:5px 10px;
+ border-radius:20px;
+ background:#e8efff;
+ color:#2563eb;
+ font-size:12px;
+}
+
+.parent{
+ background:#fff0f0;
+ color:#dc2626;
+}
+
+.child{
+ background:#e8f7ed;
+ color:#16803c;
+}
+
+.done{
+ text-decoration:line-through;
+ opacity:.5;
+}
+
+.message{
+ background:#fff8d8;
+ border-left:5px solid #f59e0b;
 }
 
 .modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:100;
-  padding:15px;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ z-index:100;
 }
 
 .modal.show{
-  display:flex;
+ display:flex;
 }
 
 .modal-box{
-  background:white;
-  width:100%;
-  max-width:500px;
-  border-radius:20px;
-  padding:25px;
-  max-height:90vh;
-  overflow:auto;
+ background:white;
+ width:100%;
+ max-width:500px;
+ padding:25px;
+ border-radius:20px;
+ max-height:90vh;
+ overflow:auto;
 }
 
-.modal-title{
-  font-size:22px;
-  font-weight:800;
-  margin-bottom:15px;
+.login{
+ max-width:420px;
+ margin:60px auto;
 }
 
-.admin-actions{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-  flex-wrap:wrap;
+.family-code{
+ font-size:28px;
+ font-weight:800;
+ letter-spacing:5px;
+ color:#2563eb;
 }
 
 .empty{
-  text-align:center;
-  padding:35px;
-  color:#777;
-  background:white;
-  border-radius:18px;
+ text-align:center;
+ padding:30px;
+ color:#777;
 }
 
-footer{
-  text-align:center;
-  color:#777;
-  padding:30px 15px;
-  font-size:12px;
+.hidden{
+ display:none!important;
 }
 
-@media(max-width:750px){
+@media(max-width:700px){
 
-  .nav{
-    grid-template-columns:repeat(3,1fr);
-  }
+ .grid{
+   grid-template-columns:1fr;
+ }
 
-  .cards{
-    grid-template-columns:1fr;
-  }
+ .nav{
+   grid-template-columns:repeat(2,1fr);
+ }
 
-  .family-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+ .header{
+   gap:10px;
+ }
 
-  .form-grid{
-    grid-template-columns:1fr;
-  }
+ .logo{
+   font-size:18px;
+ }
 
-  .header-sub{
-    display:none;
-  }
-
-  .logo{
-    font-size:18px;
-  }
 }
+
 </style>
+
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <div>
-      <div class="logo">👨‍👩‍👧‍👦 家族法律ナビ</div>
-      <div class="header-sub">法律・罰則・ニュースを家族で管理</div>
-    </div>
 
-    <button class="admin-btn" onclick="openAdmin()">
-      🔐 管理画面
-    </button>
-  </div>
+<!-- LOGIN -->
+
+<div id="loginScreen">
+
+<div class="card login">
+
+<h1>👨‍👩‍👧‍👦 家族ログイン</h1>
+
+<div id="loginError"
+     style="color:#dc2626"></div>
+
+<input id="email"
+       type="email"
+       placeholder="メールアドレス">
+
+<input id="password"
+       type="password"
+       placeholder="パスワード">
+
+<button class="primary"
+        onclick="login()">
+ログイン
+</button>
+
+<br><br>
+
+<button class="gray"
+        onclick="signup()">
+新しいアカウントを作る
+</button>
+
+<p>
+家族コードを使って、同じ家族に参加できます。
+</p>
+
+</div>
+
+</div>
+
+
+<!-- APP -->
+
+<div id="app" class="hidden">
+
+<header>
+
+<div class="header">
+
+<div>
+
+<div class="logo">
+👨‍👩‍👧‍👦 家族法律ナビ
+</div>
+
+<div id="familyInfo">
+</div>
+
+</div>
+
+<div>
+
+<span id="roleBadge"
+      class="badge">
+</span>
+
+<button class="gray"
+        onclick="logout()">
+ログアウト
+</button>
+
+</div>
+
+</div>
+
 </header>
+
 
 <div class="container">
 
-  <nav class="nav">
-    <button class="active" onclick="showPage('home',this)">🏠 ホーム</button>
-    <button onclick="showPage('law',this)">⚖️ 法律</button>
-    <button onclick="showPage('penalty',this)">💴 罰則</button>
-    <button onclick="showPage('news',this)">📰 ニュース</button>
-    <button onclick="showPage('family',this)">👨‍👩‍👧‍👦 家族</button>
-  </nav>
 
-  <!-- HOME -->
-  <section id="home" class="page active">
+<nav class="nav">
 
-    <div class="hero">
-      <h1>家族法律ナビへようこそ 👋</h1>
-      <p>
-        家族に関係する法律・罰則・ニュースを
-        まとめて確認できる管理アプリです。
-      </p>
-    </div>
+<button class="active"
+ onclick="showPage('home',this)">
+🏠 ホーム
+</button>
 
-    <div class="cards">
+<button onclick="showPage('duties',this)">
+📋 当番
+</button>
 
-      <div class="card">
-        <div class="card-icon">⚖️</div>
-        <h3>法律</h3>
-        <div class="stat" id="lawCount">0</div>
-        <p>登録されている法律情報</p>
-      </div>
+<button onclick="showPage('tasks',this)">
+✅ やること
+</button>
 
-      <div class="card">
-        <div class="card-icon">💴</div>
-        <h3>罰則</h3>
-        <div class="stat" id="penaltyCount">0</div>
-        <p>登録されている罰則情報</p>
-      </div>
+<button onclick="showPage('events',this)">
+📅 予定
+</button>
 
-      <div class="card">
-        <div class="card-icon">📰</div>
-        <h3>ニュース</h3>
-        <div class="stat" id="newsCount">0</div>
-        <p>登録されているニュース</p>
-      </div>
+<button onclick="showPage('messages',this)">
+💌 メッセージ
+</button>
 
-    </div>
+<button onclick="showPage('family',this)">
+👨‍👩‍👧 家族
+</button>
 
-    <div class="hero" style="margin-top:20px">
-      <h2>🔔 最近のニュース</h2>
-      <div id="homeNews"></div>
-    </div>
+<button onclick="showPage('law',this)">
+⚖️ 法律
+</button>
 
-  </section>
+<button onclick="showPage('news',this)">
+📰 ニュース
+</button>
+
+</nav>
 
 
-  <!-- LAW -->
-  <section id="law" class="page">
+<!-- HOME -->
 
-    <div class="hero">
-      <h1>⚖️ 法律情報</h1>
-      <input
-        id="lawSearch"
-        class="search"
-        placeholder="法律名・キーワードを検索..."
-        oninput="renderLaw()"
-      >
-    </div>
+<section id="home"
+         class="page active">
 
-    <div id="lawList" class="list"></div>
+<div class="card">
 
-  </section>
+<h1>
+🏠 家族ホーム
+</h1>
 
-
-  <!-- PENALTY -->
-  <section id="penalty" class="page">
-
-    <div class="hero">
-      <h1>💴 罰則・罰金情報</h1>
-      <input
-        id="penaltySearch"
-        class="search"
-        placeholder="罰則・キーワードを検索..."
-        oninput="renderPenalty()"
-      >
-    </div>
-
-    <div id="penaltyList" class="list"></div>
-
-  </section>
-
-
-  <!-- NEWS -->
-  <section id="news" class="page">
-
-    <div class="hero">
-      <h1>📰 法律・家族ニュース</h1>
-
-      <input
-        id="newsSearch"
-        class="search"
-        placeholder="ニュースを検索..."
-        oninput="renderNews()"
-      >
-
-      <button class="primary" onclick="addNews()">
-        ＋ ニュースを追加
-      </button>
-    </div>
-
-    <div id="newsList" class="list"></div>
-
-  </section>
-
-
-  <!-- FAMILY -->
-  <section id="family" class="page">
-
-    <div class="hero">
-      <h1>👨‍👩‍👧‍👦 家族管理</h1>
-      <button class="primary" onclick="addFamily()">
-        ＋ 家族を追加
-      </button>
-    </div>
-
-    <div id="familyList" class="family-grid"></div>
-
-  </section>
+<div id="homeSummary">
+読み込み中...
+</div>
 
 </div>
 
-<footer>
-  家族法律ナビ ｜ 法律情報は必ず公的な情報源で確認してください。
-</footer>
+<div class="card">
 
+<h2>
+💌 最新メッセージ
+</h2>
 
-<!-- ADMIN LOGIN -->
-<div id="loginModal" class="modal">
-
-  <div class="modal-box">
-
-    <div class="modal-title">
-      🔐 管理者ログイン
-    </div>
-
-    <p>管理画面に入るにはパスワードを入力してください。</p>
-
-    <input
-      id="adminPassword"
-      type="password"
-      placeholder="管理者パスワード"
-    >
-
-    <button class="primary" onclick="loginAdmin()">
-      ログイン
-    </button>
-
-    <button class="secondary" onclick="closeModal('loginModal')">
-      キャンセル
-    </button>
-
-  </div>
+<div id="homeMessage">
+</div>
 
 </div>
 
+</section>
 
-<!-- ADMIN -->
-<div id="adminModal" class="modal">
 
-  <div class="modal-box">
+<!-- DUTIES -->
 
-    <div class="modal-title">
-      ⚙️ 管理画面
-    </div>
+<section id="duties"
+         class="page">
 
-    <button class="primary" onclick="addLaw()">
-      ＋ 法律を追加
-    </button>
+<div class="card">
 
-    <button class="primary" onclick="addNews()">
-      ＋ ニュースを追加
-    </button>
+<h1>📋 当番表</h1>
 
-    <button class="primary" onclick="addFamily()">
-      ＋ 家族を追加
-    </button>
+<button id="addDutyButton"
+        class="primary"
+        onclick="openDutyForm()">
+＋ 当番を追加
+</button>
 
-    <hr>
+</div>
 
-    <button class="danger" onclick="resetData()">
-      ⚠️ データを初期化
-    </button>
+<div id="dutiesList"></div>
 
-    <button class="secondary" onclick="closeModal('adminModal')">
-      閉じる
-    </button>
+</section>
 
-  </div>
+
+<!-- TASKS -->
+
+<section id="tasks"
+         class="page">
+
+<div class="card">
+
+<h1>✅ やること</h1>
+
+<button id="addTaskButton"
+        class="primary"
+        onclick="openTaskForm()">
+＋ やることを追加
+</button>
+
+</div>
+
+<div id="tasksList"></div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events"
+         class="page">
+
+<div class="card">
+
+<h1>📅 予定表</h1>
+
+<button id="addEventButton"
+        class="primary"
+        onclick="openEventForm()">
+＋ 予定を追加
+</button>
+
+</div>
+
+<div id="eventsList"></div>
+
+</section>
+
+
+<!-- MESSAGES -->
+
+<section id="messages"
+         class="page">
+
+<div class="card">
+
+<h1>💌 親からのメッセージ</h1>
+
+<button id="addMessageButton"
+        class="primary"
+        onclick="openMessageForm()">
+＋ メッセージを送る
+</button>
+
+</div>
+
+<div id="messagesList"></div>
+
+</section>
+
+
+<!-- FAMILY -->
+
+<section id="family"
+         class="page">
+
+<div class="card">
+
+<h1>👨‍👩‍👧‍👦 家族</h1>
+
+<div>
+家族コード：
+</div>
+
+<div id="familyCode"
+     class="family-code">
+</div>
+
+</div>
+
+<div id="membersList"></div>
+
+</section>
+
+
+<section id="law"
+         class="page">
+
+<div class="card">
+
+<h1>⚖️ 法律</h1>
+
+<p>
+家族に関係する法律情報を表示する場所です。
+</p>
+
+</div>
+
+</section>
+
+
+<section id="news"
+         class="page">
+
+<div class="card">
+
+<h1>📰 ニュース</h1>
+
+<p>
+法律・家族関連ニュースを表示できます。
+</p>
+
+</div>
+
+</section>
+
+
+</div>
 
 </div>
 
 
 <!-- FORM MODAL -->
-<div id="formModal" class="modal">
 
-  <div class="modal-box">
+<div id="formModal"
+     class="modal">
 
-    <div id="formTitle" class="modal-title"></div>
+<div class="modal-box">
 
-    <div id="formContent"></div>
+<h2 id="formTitle"></h2>
 
-    <div class="admin-actions">
-      <button class="primary" onclick="saveForm()">保存</button>
-      <button class="secondary" onclick="closeModal('formModal')">
-        キャンセル
-      </button>
-    </div>
+<div id="formContent"></div>
 
-  </div>
+<button class="primary"
+        onclick="saveForm()">
+保存
+</button>
+
+<button class="gray"
+        onclick="closeForm()">
+キャンセル
+</button>
+
+</div>
 
 </div>
 
 
 <script>
 
-const ADMIN_PASSWORD = "1234";
 
-let data = JSON.parse(
-  localStorage.getItem("familyLawApp")
-) || {
+/* ==================================
+   SUPABASE
+================================== */
 
-  laws:[
-    {
-      id:1,
-      title:"法律情報サンプル",
-      category:"サンプル",
-      description:"ここには管理者が確認した法律情報を登録できます。",
-      penalty:"実際の罰則は公的資料を確認してください。"
-    }
-  ],
+const SUPABASE_URL =
+"https://cxwdndlbtdagvvcuvopm.supabase.co";
 
-  news:[
-    {
-      id:1,
-      title:"家族法律ナビへようこそ",
-      date:"2026-08-23",
-      category:"お知らせ",
-      body:"管理画面から法律やニュースを追加できます。"
-    }
-  ],
+const SUPABASE_KEY =
+"sb_publishable_qux36ew_JkABxzXCQEgW1A_ijJRoraO";
 
-  family:[
-    {
-      id:1,
-      name:"お父さん",
-      role:"大人",
-      icon:"👨"
-    },
-    {
-      id:2,
-      name:"お母さん",
-      role:"大人",
-      icon:"👩"
-    },
-    {
-      id:3,
-      name:"子ども",
-      role:"子ども",
-      icon:"🧒"
-    }
-  ]
+const supabaseClient =
+supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+);
+
+
+/* ==================================
+   STATE
+================================== */
+
+let currentUser=null;
+let currentMember=null;
+let currentFamily=null;
+let currentForm=null;
+
+
+/* ==================================
+   AUTH
+================================== */
+
+async function login(){
+
+const email=
+document.getElementById("email")
+.value.trim();
+
+const password=
+document.getElementById("password")
+.value;
+
+const {data,error}=
+await supabaseClient.auth
+.signInWithPassword({
+ email,
+ password
+});
+
+if(error){
+
+showLoginError(error.message);
+return;
+
+}
+
+await initializeApp();
+
+}
+
+
+async function signup(){
+
+const email=
+document.getElementById("email")
+.value.trim();
+
+const password=
+document.getElementById("password")
+.value;
+
+if(!email || !password){
+
+showLoginError(
+"メールアドレスとパスワードを入力してください。"
+);
+
+return;
+
+}
+
+if(password.length<6){
+
+showLoginError(
+"パスワードは6文字以上にしてください。"
+);
+
+return;
+
+}
+
+const {data,error}=
+await supabaseClient.auth
+.signUp({
+ email,
+ password
+});
+
+if(error){
+
+showLoginError(error.message);
+return;
+
+}
+
+if(data.session){
+
+await initializeApp();
+
+}else{
+
+alert(
+"アカウントを作成しました。\n"+
+"メール確認が必要な設定の場合は、"+
+"メールを確認してください。"
+);
+
+}
+
+}
+
+
+function showLoginError(message){
+
+document.getElementById("loginError")
+.textContent=message;
+
+}
+
+
+async function logout(){
+
+await supabaseClient.auth.signOut();
+
+location.reload();
+
+}
+
+
+/* ==================================
+   INIT
+================================== */
+
+async function initializeApp(){
+
+const {
+ data:{user}
+}=await supabaseClient.auth.getUser();
+
+if(!user){
+
+showLogin();
+return;
+
+}
+
+currentUser=user;
+
+const {data:member,error}=
+await supabaseClient
+.from("family_members")
+.select("*")
+.eq("user_id",user.id)
+.maybeSingle();
+
+if(error){
+
+console.error(error);
+
+}
+
+if(!member){
+
+await showJoinOrCreate();
+
+return;
+
+}
+
+currentMember=member;
+
+const {data:family}=await supabaseClient
+.from("families")
+.select("*")
+.eq("id",member.family_id)
+.single();
+
+if(!family){
+
+alert("家族情報を取得できません。");
+return;
+
+}
+
+currentFamily=family;
+
+showApp();
+
+loadAll();
+
+}
+
+
+function showLogin(){
+
+document.getElementById("loginScreen")
+.classList.remove("hidden");
+
+document.getElementById("app")
+.classList.add("hidden");
+
+}
+
+
+function showApp(){
+
+document.getElementById("loginScreen")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
+
+document.getElementById("familyInfo")
+.textContent=
+currentFamily.name;
+
+document.getElementById("familyCode")
+.textContent=
+currentFamily.family_code;
+
+const badge=
+document.getElementById("roleBadge");
+
+if(currentMember.role==="parent"){
+
+badge.textContent="👑 親";
+badge.className="badge parent";
+
+}else{
+
+badge.textContent="🧒 子ども";
+badge.className="badge child";
+
+}
+
+applyPermissions();
+
+}
+
+
+/* ==================================
+   FAMILY CREATE / JOIN
+================================== */
+
+async function showJoinOrCreate(){
+
+const code=
+prompt(
+"家族コードを入力してください。\n"+
+"新しい家族を作る場合は「新規」と入力してください。"
+);
+
+if(code===null)return;
+
+if(code==="新規"){
+
+await createFamily();
+
+}else{
+
+await joinFamily(code);
+
+}
+
+}
+
+
+async function createFamily(){
+
+const name=
+prompt("家族名を入力してください。");
+
+if(!name)return;
+
+const code=
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase();
+
+const {data:family,error}=
+await supabaseClient
+.from("families")
+.insert({
+ name,
+ family_code:code,
+ created_by:currentUser.id
+})
+.select()
+.single();
+
+if(error){
+
+alert(error.message);
+return;
+
+}
+
+const memberName=
+prompt("あなたの名前を入力してください。");
+
+if(!memberName)return;
+
+const {data:member,error:memberError}=
+await supabaseClient
+.from("family_members")
+.insert({
+ family_id:family.id,
+ user_id:currentUser.id,
+ name:memberName,
+ role:"parent",
+ icon:"👨"
+})
+.select()
+.single();
+
+if(memberError){
+
+alert(memberError.message);
+return;
+
+}
+
+currentFamily=family;
+currentMember=member;
+
+showApp();
+loadAll();
+
+alert(
+"家族を作成しました！\n\n"+
+"家族コード："+
+code
+);
+
+}
+
+
+async function joinFamily(code){
+
+const {data:family,error}=
+await supabaseClient
+.from("families")
+.select("*")
+.eq("family_code",code.toUpperCase())
+.single();
+
+if(error || !family){
+
+alert("家族コードが見つかりません。");
+return;
+
+}
+
+const name=
+prompt("あなたの名前を入力してください。");
+
+if(!name)return;
+
+const role=
+confirm(
+"親として参加しますか？\n\n"+
+"「OK」= 親\n"+
+"「キャンセル」= 子ども"
+)
+?"parent":"child";
+
+const {data:member,error:memberError}=
+await supabaseClient
+.from("family_members")
+.insert({
+ family_id:family.id,
+ user_id:currentUser.id,
+ name,
+ role,
+ icon:role==="parent"?"👨":"🧒"
+})
+.select()
+.single();
+
+if(memberError){
+
+alert(memberError.message);
+return;
+
+}
+
+currentFamily=family;
+currentMember=member;
+
+showApp();
+loadAll();
+
+}
+
+
+/* ==================================
+   PERMISSION UI
+================================== */
+
+function applyPermissions(){
+
+const parent=
+currentMember.role==="parent";
+
+document
+.getElementById("addDutyButton")
+.classList.toggle(
+"hidden",
+!parent
+);
+
+document
+.getElementById("addTaskButton")
+.classList.toggle(
+"hidden",
+!parent
+);
+
+document
+.getElementById("addEventButton")
+.classList.toggle(
+"hidden",
+!parent
+);
+
+document
+.getElementById("addMessageButton")
+.classList.toggle(
+"hidden",
+!parent
+);
+
+}
+
+
+/* ==================================
+   NAV
+================================== */
+
+function showPage(id,button){
+
+document
+.querySelectorAll(".page")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll(".nav button")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+button.classList.add("active");
+
+}
+
+
+/* ==================================
+   DUTIES
+================================== */
+
+async function loadDuties(){
+
+const {data,error}=
+await supabaseClient
+.from("duties")
+.select(
+"*,family_members(name)"
+)
+.eq(
+"family_id",
+currentFamily.id
+)
+.order("duty_date");
+
+if(error){
+
+console.error(error);
+return;
+
+}
+
+const el=
+document.getElementById("dutiesList");
+
+if(!data.length){
+
+el.innerHTML=
+'<div class="empty">当番はありません。</div>';
+
+return;
+
+}
+
+el.innerHTML=data.map(x=>`
+
+<div class="item ${x.completed?"done":""}">
+
+<h3>
+📋 ${escapeHTML(x.title)}
+</h3>
+
+<p>
+担当：
+${escapeHTML(
+x.family_members?.name||"未設定"
+)}
+</p>
+
+<p>
+📅 ${escapeHTML(x.duty_date)}
+</p>
+
+<button class="green"
+onclick="toggleDuty(
+'${x.id}',
+${!x.completed}
+)">
+
+${x.completed?"未完了":"完了"}
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+async function toggleDuty(id,value){
+
+const {error}=
+await supabaseClient
+.from("duties")
+.update({
+ completed:value
+})
+.eq("id",id);
+
+if(error){
+
+alert(error.message);
+return;
+
+}
+
+loadDuties();
+
+}
+
+
+/* ==================================
+   TASKS
+================================== */
+
+async function loadTasks(){
+
+const {data,error}=
+await supabaseClient
+.from("tasks")
+.select(
+"*,family_members(name)"
+)
+.eq(
+"family_id",
+currentFamily.id
+)
+.order("due_date");
+
+if(error)return;
+
+const el=
+document.getElementById("tasksList");
+
+if(!data.length){
+
+el.innerHTML=
+'<div class="empty">やることはありません。</div>';
+
+return;
+
+}
+
+el.innerHTML=data.map(x=>`
+
+<div class="item ${x.completed?"done":""}">
+
+<h3>
+✅ ${escapeHTML(x.title)}
+</h3>
+
+<p>
+担当：
+${escapeHTML(
+x.family_members?.name||"家族"
+)}
+</p>
+
+<p>
+期限：
+${escapeHTML(x.due_date||"なし")}
+</p>
+
+<button class="green"
+onclick="toggleTask(
+'${x.id}',
+${!x.completed}
+)">
+
+${x.completed?"未完了":"完了"}
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+async function toggleTask(id,value){
+
+await supabaseClient
+.from("tasks")
+.update({
+ completed:value
+})
+.eq("id",id);
+
+loadTasks();
+
+}
+
+
+/* ==================================
+   EVENTS
+================================== */
+
+async function loadEvents(){
+
+const {data,error}=
+await supabaseClient
+.from("family_events")
+.select("*")
+.eq(
+"family_id",
+currentFamily.id
+)
+.order("event_date");
+
+if(error)return;
+
+const el=
+document.getElementById("eventsList");
+
+if(!data.length){
+
+el.innerHTML=
+'<div class="empty">予定はありません。</div>';
+
+return;
+
+}
+
+el.innerHTML=data.map(x=>`
+
+<div class="item">
+
+<h3>
+📅 ${escapeHTML(x.title)}
+</h3>
+
+<p>
+${escapeHTML(x.event_date)}
+${x.event_time?
+" "+escapeHTML(x.event_time):""}
+</p>
+
+<p>
+${escapeHTML(
+x.description||""
+)}
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ==================================
+   MESSAGES
+================================== */
+
+async function loadMessages(){
+
+const {data,error}=
+await supabaseClient
+.from("parent_messages")
+.select("*")
+.eq(
+"family_id",
+currentFamily.id
+)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error)return;
+
+const el=
+document.getElementById("messagesList");
+
+if(!data.length){
+
+el.innerHTML=
+'<div class="empty">メッセージはありません。</div>';
+
+return;
+
+}
+
+el.innerHTML=data.map(x=>`
+
+<div class="item message">
+
+<h3>
+💌 ${escapeHTML(x.title)}
+</h3>
+
+<p>
+${escapeHTML(x.message)}
+</p>
+
+<small>
+${escapeHTML(x.sender)}
+</small>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ==================================
+   MEMBERS
+================================== */
+
+async function loadMembers(){
+
+const {data,error}=
+await supabaseClient
+.from("family_members")
+.select("*")
+.eq(
+"family_id",
+currentFamily.id
+)
+.order("created_at");
+
+if(error)return;
+
+const el=
+document.getElementById("membersList");
+
+el.innerHTML=data.map(x=>`
+
+<div class="item">
+
+<h3>
+${escapeHTML(x.icon)}
+${escapeHTML(x.name)}
+</h3>
+
+<span class="badge ${
+x.role==="parent"
+?"parent":"child"
+}">
+
+${
+x.role==="parent"
+?"👑 親":"🧒 子ども"
+}
+
+</span>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ==================================
+   FORM
+================================== */
+
+function openForm(){
+
+document
+.getElementById("formModal")
+.classList.add("show");
+
+}
+
+function closeForm(){
+
+document
+.getElementById("formModal")
+.classList.remove("show");
+
+}
+
+
+function openDutyForm(){
+
+if(currentMember.role!=="parent"){
+alert("親だけが当番を追加できます。");
+return;
+}
+
+currentForm="duty";
+
+document.getElementById("formTitle")
+.textContent="📋 当番を追加";
+
+document.getElementById("formContent")
+.innerHTML=`
+
+<input id="title"
+placeholder="当番名">
+
+<input id="date"
+type="date">
+
+`;
+
+openForm();
+
+}
+
+
+function openTaskForm(){
+
+if(currentMember.role!=="parent"){
+alert("親だけがやることを追加できます。");
+return;
+}
+
+currentForm="task";
+
+document.getElementById("formTitle")
+.textContent="✅ やることを追加";
+
+document.getElementById("formContent")
+.innerHTML=`
+
+<input id="title"
+placeholder="やること">
+
+<input id="date"
+type="date">
+
+`;
+
+openForm();
+
+}
+
+
+function openEventForm(){
+
+if(currentMember.role!=="parent"){
+alert("親だけが予定を追加できます。");
+return;
+}
+
+currentForm="event";
+
+document.getElementById("formTitle")
+.textContent="📅 予定を追加";
+
+document.getElementById("formContent")
+.innerHTML=`
+
+<input id="title"
+placeholder="予定">
+
+<input id="date"
+type="date">
+
+<input id="time"
+placeholder="時間">
+
+<textarea id="description"
+placeholder="詳細"></textarea>
+
+`;
+
+openForm();
+
+}
+
+
+function openMessageForm(){
+
+if(currentMember.role!=="parent"){
+alert("親だけがメッセージを送れます。");
+return;
+}
+
+currentForm="message";
+
+document.getElementById("formTitle")
+.textContent="💌 親からのメッセージ";
+
+document.getElementById("formContent")
+.innerHTML=`
+
+<input id="title"
+placeholder="タイトル">
+
+<textarea id="message"
+placeholder="メッセージ"></textarea>
+
+`;
+
+openForm();
+
+}
+
+
+/* ==================================
+   SAVE
+================================== */
+
+async function saveForm(){
+
+if(currentMember.role!=="parent"){
+
+alert("親だけが追加できます。");
+return;
+
+}
+
+let table;
+let record;
+
+
+if(currentForm==="duty"){
+
+table="duties";
+
+record={
+
+family_id:currentFamily.id,
+
+title:
+document.getElementById("title").value,
+
+duty_date:
+document.getElementById("date").value
 
 };
 
-let currentForm = null;
-let editingId = null;
-
-
-/* SAVE */
-
-function saveData(){
-
-  localStorage.setItem(
-    "familyLawApp",
-    JSON.stringify(data)
-  );
-
-  updateStats();
 }
 
 
-/* PAGE */
+if(currentForm==="task"){
 
-function showPage(page,button){
+table="tasks";
 
-  document.querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
+record={
 
-  document.getElementById(page)
-    .classList.add("active");
+family_id:currentFamily.id,
 
-  document.querySelectorAll(".nav button")
-    .forEach(b=>b.classList.remove("active"));
+title:
+document.getElementById("title").value,
 
-  if(button){
-    button.classList.add("active");
-  }
+due_date:
+document.getElementById("date").value
 
-  renderAll();
-}
-
-
-/* STATS */
-
-function updateStats(){
-
-  document.getElementById("lawCount")
-    .textContent=data.laws.length;
-
-  document.getElementById("penaltyCount")
-    .textContent=data.laws.filter(x=>x.penalty).length;
-
-  document.getElementById("newsCount")
-    .textContent=data.news.length;
-}
-
-
-/* LAW */
-
-function renderLaw(){
-
-  const keyword=
-    (document.getElementById("lawSearch")?.value||"")
-      .toLowerCase();
-
-  const list=data.laws.filter(x=>
-    `${x.title}${x.category}${x.description}`
-      .toLowerCase()
-      .includes(keyword)
-  );
-
-  const el=document.getElementById("lawList");
-
-  if(!list.length){
-    el.innerHTML='<div class="empty">法律情報がありません。</div>';
-    return;
-  }
-
-  el.innerHTML=list.map(x=>`
-
-    <div class="item">
-
-      <div class="item-title">
-        ⚖️ ${escapeHTML(x.title)}
-      </div>
-
-      <span class="tag">
-        ${escapeHTML(x.category)}
-      </span>
-
-      <p>${escapeHTML(x.description)}</p>
-
-      <p>
-        <strong>💴 罰則・注意：</strong>
-        ${escapeHTML(x.penalty)}
-      </p>
-
-      <div class="admin-actions">
-        <button
-          class="secondary"
-          onclick="editLaw(${x.id})">
-          ✏️ 編集
-        </button>
-
-        <button
-          class="danger"
-          onclick="deleteLaw(${x.id})">
-          🗑️ 削除
-        </button>
-      </div>
-
-    </div>
-
-  `).join("");
-}
-
-
-/* PENALTY */
-
-function renderPenalty(){
-
-  const keyword=
-    (document.getElementById("penaltySearch")?.value||"")
-      .toLowerCase();
-
-  const list=data.laws.filter(x=>
-    `${x.title}${x.penalty}`
-      .toLowerCase()
-      .includes(keyword)
-  );
-
-  const el=document.getElementById("penaltyList");
-
-  if(!list.length){
-    el.innerHTML='<div class="empty">罰則情報がありません。</div>';
-    return;
-  }
-
-  el.innerHTML=list.map(x=>`
-
-    <div class="item">
-
-      <div class="item-title">
-        💴 ${escapeHTML(x.title)}
-      </div>
-
-      <p>
-        ${escapeHTML(x.description)}
-      </p>
-
-      <p class="penalty">
-        ⚠️ ${escapeHTML(x.penalty)}
-      </p>
-
-    </div>
-
-  `).join("");
-}
-
-
-/* NEWS */
-
-function renderNews(){
-
-  const keyword=
-    (document.getElementById("newsSearch")?.value||"")
-      .toLowerCase();
-
-  const list=data.news.filter(x=>
-    `${x.title}${x.category}${x.body}`
-      .toLowerCase()
-      .includes(keyword)
-  );
-
-  const el=document.getElementById("newsList");
-
-  if(!list.length){
-    el.innerHTML='<div class="empty">ニュースがありません。</div>';
-    return;
-  }
-
-  el.innerHTML=list.map(x=>`
-
-    <div class="item">
-
-      <div class="item-title">
-        📰 ${escapeHTML(x.title)}
-      </div>
-
-      <span class="tag">
-        ${escapeHTML(x.category)}
-      </span>
-
-      <div class="news-date">
-        ${escapeHTML(x.date)}
-      </div>
-
-      <p>${escapeHTML(x.body)}</p>
-
-      <div class="admin-actions">
-
-        <button
-          class="secondary"
-          onclick="editNews(${x.id})">
-          ✏️ 編集
-        </button>
-
-        <button
-          class="danger"
-          onclick="deleteNews(${x.id})">
-          🗑️ 削除
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-}
-
-
-/* HOME NEWS */
-
-function renderHomeNews(){
-
-  const list=data.news.slice(-3).reverse();
-
-  document.getElementById("homeNews").innerHTML=
-    list.map(x=>`
-
-      <div class="item" style="margin-bottom:10px">
-
-        <div class="item-title">
-          📰 ${escapeHTML(x.title)}
-        </div>
-
-        <div class="news-date">
-          ${escapeHTML(x.date)}
-        </div>
-
-      </div>
-
-    `).join("");
-}
-
-
-/* FAMILY */
-
-function renderFamily(){
-
-  const el=document.getElementById("familyList");
-
-  if(!data.family.length){
-
-    el.innerHTML=
-      '<div class="empty">家族メンバーがいません。</div>';
-
-    return;
-  }
-
-  el.innerHTML=data.family.map(x=>`
-
-    <div class="family">
-
-      <div class="avatar">
-        ${escapeHTML(x.icon)}
-      </div>
-
-      <strong>${escapeHTML(x.name)}</strong>
-
-      <p>${escapeHTML(x.role)}</p>
-
-      <button
-        class="secondary"
-        onclick="editFamily(${x.id})">
-        ✏️ 編集
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteFamily(${x.id})">
-        🗑️
-      </button>
-
-    </div>
-
-  `).join("");
-}
-
-
-/* RENDER ALL */
-
-function renderAll(){
-
-  renderLaw();
-  renderPenalty();
-  renderNews();
-  renderFamily();
-  renderHomeNews();
-  updateStats();
+};
 
 }
 
 
-/* ADMIN */
+if(currentForm==="event"){
 
-function openAdmin(){
+table="family_events";
 
-  document.getElementById("loginModal")
-    .classList.add("show");
+record={
 
-  document.getElementById("adminPassword").value="";
+family_id:currentFamily.id,
 
-}
+title:
+document.getElementById("title").value,
 
+event_date:
+document.getElementById("date").value,
 
-function loginAdmin(){
+event_time:
+document.getElementById("time").value,
 
-  const password=
-    document.getElementById("adminPassword").value;
+description:
+document.getElementById("description").value
 
-  if(password===ADMIN_PASSWORD){
-
-    closeModal("loginModal");
-
-    document.getElementById("adminModal")
-      .classList.add("show");
-
-  }else{
-
-    alert("パスワードが違います。");
-
-  }
+};
 
 }
 
 
-/* ADD LAW */
+if(currentForm==="message"){
 
-function addLaw(){
+table="parent_messages";
 
-  currentForm="law";
-  editingId=null;
+record={
 
-  document.getElementById("formTitle")
-    .textContent="⚖️ 法律を追加";
+family_id:currentFamily.id,
 
-  document.getElementById("formContent").innerHTML=`
+title:
+document.getElementById("title").value,
 
-    <label>法律名</label>
-    <input id="fTitle" placeholder="例：法律情報">
+message:
+document.getElementById("message").value,
 
-    <label>カテゴリー</label>
-    <input id="fCategory" placeholder="例：交通・生活">
+sender:currentMember.name
 
-    <label>説明</label>
-    <textarea id="fDescription"
-      placeholder="法律の内容"></textarea>
-
-    <label>罰則・注意</label>
-    <textarea id="fPenalty"
-      placeholder="公的資料を確認して入力"></textarea>
-
-  `;
-
-  closeModal("adminModal");
-  document.getElementById("formModal").classList.add("show");
+};
 
 }
 
 
-/* EDIT LAW */
+const {error}=
+await supabaseClient
+.from(table)
+.insert(record);
 
-function editLaw(id){
+if(error){
 
-  const x=data.laws.find(a=>a.id===id);
+alert(error.message);
+return;
 
-  currentForm="law";
-  editingId=id;
+}
 
-  document.getElementById("formTitle")
-    .textContent="⚖️ 法律を編集";
+closeForm();
 
-  document.getElementById("formContent").innerHTML=`
-
-    <label>法律名</label>
-    <input id="fTitle" value="${escapeAttr(x.title)}">
-
-    <label>カテゴリー</label>
-    <input id="fCategory" value="${escapeAttr(x.category)}">
-
-    <label>説明</label>
-    <textarea id="fDescription">${escapeHTML(x.description)}</textarea>
-
-    <label>罰則・注意</label>
-    <textarea id="fPenalty">${escapeHTML(x.penalty)}</textarea>
-
-  `;
-
-  document.getElementById("formModal").classList.add("show");
+loadAll();
 
 }
 
 
-/* ADD NEWS */
+/* ==================================
+   HOME
+================================== */
 
-function addNews(){
+async function loadHome(){
 
-  currentForm="news";
-  editingId=null;
+const {data:tasks}=
+await supabaseClient
+.from("tasks")
+.select("id")
+.eq("family_id",currentFamily.id)
+.eq("completed",false);
 
-  document.getElementById("formTitle")
-    .textContent="📰 ニュースを追加";
+const {data:duties}=
+await supabaseClient
+.from("duties")
+.select("id")
+.eq("family_id",currentFamily.id)
+.eq("completed",false);
 
-  document.getElementById("formContent").innerHTML=`
+document.getElementById("homeSummary")
+.innerHTML=`
 
-    <label>タイトル</label>
-    <input id="fTitle">
+<p>
+✅ 未完了のやること：
+<strong>
+${tasks?.length||0}
+</strong>
+件
+</p>
 
-    <label>カテゴリー</label>
-    <input id="fCategory" placeholder="法律・家族など">
+<p>
+📋 未完了の当番：
+<strong>
+${duties?.length||0}
+</strong>
+件
+</p>
 
-    <label>日付</label>
-    <input id="fDate" type="date">
-
-    <label>内容</label>
-    <textarea id="fBody"></textarea>
-
-  `;
-
-  closeModal("adminModal");
-  document.getElementById("formModal").classList.add("show");
-
-}
-
-
-/* EDIT NEWS */
-
-function editNews(id){
-
-  const x=data.news.find(a=>a.id===id);
-
-  currentForm="news";
-  editingId=id;
-
-  document.getElementById("formTitle")
-    .textContent="📰 ニュースを編集";
-
-  document.getElementById("formContent").innerHTML=`
-
-    <label>タイトル</label>
-    <input id="fTitle" value="${escapeAttr(x.title)}">
-
-    <label>カテゴリー</label>
-    <input id="fCategory" value="${escapeAttr(x.category)}">
-
-    <label>日付</label>
-    <input id="fDate" type="date" value="${escapeAttr(x.date)}">
-
-    <label>内容</label>
-    <textarea id="fBody">${escapeHTML(x.body)}</textarea>
-
-  `;
-
-  document.getElementById("formModal").classList.add("show");
+`;
 
 }
 
 
-/* ADD FAMILY */
+/* ==================================
+   HOME MESSAGE
+================================== */
 
-function addFamily(){
+async function loadHomeMessage(){
 
-  currentForm="family";
-  editingId=null;
+const {data}=
+await supabaseClient
+.from("parent_messages")
+.select("*")
+.eq(
+"family_id",
+currentFamily.id
+)
+.order(
+"created_at",
+{ascending:false}
+)
+.limit(1);
 
-  document.getElementById("formTitle")
-    .textContent="👨‍👩‍👧‍👦 家族を追加";
+const el=
+document.getElementById("homeMessage");
 
-  document.getElementById("formContent").innerHTML=`
+if(!data?.length){
 
-    <label>名前</label>
-    <input id="fName">
+el.innerHTML="メッセージはありません。";
+return;
 
-    <label>区分</label>
-    <select id="fRole">
-      <option>大人</option>
-      <option>子ども</option>
-      <option>その他</option>
-    </select>
+}
 
-    <label>アイコン</label>
-    <input id="fIcon" value="👤">
+const x=data[0];
 
-  `;
+el.innerHTML=`
 
-  closeModal("adminModal");
-  document.getElementById("formModal").classList.add("show");
+<div class="item message">
+
+<h3>
+💌 ${escapeHTML(x.title)}
+</h3>
+
+<p>
+${escapeHTML(x.message)}
+</p>
+
+</div>
+
+`;
 
 }
 
 
-/* EDIT FAMILY */
+/* ==================================
+   LOAD
+================================== */
 
-function editFamily(id){
+async function loadAll(){
 
-  const x=data.family.find(a=>a.id===id);
-
-  currentForm="family";
-  editingId=id;
-
-  document.getElementById("formTitle")
-    .textContent="👨‍👩‍👧‍👦 家族を編集";
-
-  document.getElementById("formContent").innerHTML=`
-
-    <label>名前</label>
-    <input id="fName" value="${escapeAttr(x.name)}">
-
-    <label>区分</label>
-    <select id="fRole">
-
-      <option ${x.role==="大人"?"selected":""}>
-        大人
-      </option>
-
-      <option ${x.role==="子ども"?"selected":""}>
-        子ども
-      </option>
-
-      <option ${x.role==="その他"?"selected":""}>
-        その他
-      </option>
-
-    </select>
-
-    <label>アイコン</label>
-    <input id="fIcon" value="${escapeAttr(x.icon)}">
-
-  `;
-
-  document.getElementById("formModal").classList.add("show");
+await loadHome();
+await loadHomeMessage();
+await loadDuties();
+await loadTasks();
+await loadEvents();
+await loadMessages();
+await loadMembers();
 
 }
 
 
-/* SAVE FORM */
+/* ==================================
+   ESCAPE
+================================== */
 
-function saveForm(){
+function escapeHTML(value){
 
-  if(currentForm==="law"){
-
-    const item={
-      id:editingId || Date.now(),
-      title:document.getElementById("fTitle").value,
-      category:document.getElementById("fCategory").value,
-      description:document.getElementById("fDescription").value,
-      penalty:document.getElementById("fPenalty").value
-    };
-
-    if(editingId){
-
-      const i=data.laws.findIndex(x=>x.id===editingId);
-      data.laws[i]=item;
-
-    }else{
-
-      data.laws.push(item);
-
-    }
-
-  }
-
-
-  if(currentForm==="news"){
-
-    const item={
-      id:editingId || Date.now(),
-      title:document.getElementById("fTitle").value,
-      category:document.getElementById("fCategory").value,
-      date:document.getElementById("fDate").value ||
-        new Date().toISOString().slice(0,10),
-      body:document.getElementById("fBody").value
-    };
-
-    if(editingId){
-
-      const i=data.news.findIndex(x=>x.id===editingId);
-      data.news[i]=item;
-
-    }else{
-
-      data.news.push(item);
-
-    }
-
-  }
-
-
-  if(currentForm==="family"){
-
-    const item={
-      id:editingId || Date.now(),
-      name:document.getElementById("fName").value,
-      role:document.getElementById("fRole").value,
-      icon:document.getElementById("fIcon").value
-    };
-
-    if(editingId){
-
-      const i=data.family.findIndex(x=>x.id===editingId);
-      data.family[i]=item;
-
-    }else{
-
-      data.family.push(item);
-
-    }
-
-  }
-
-  saveData();
-  closeModal("formModal");
-  renderAll();
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
-/* DELETE */
+/* ==================================
+   AUTH STATE
+================================== */
 
-function deleteLaw(id){
+supabaseClient.auth
+.onAuthStateChange(
+async(event,session)=>{
 
-  if(confirm("この法律情報を削除しますか？")){
+if(session && !currentUser){
 
-    data.laws=data.laws.filter(x=>x.id!==id);
-
-    saveData();
-    renderAll();
-
-  }
-
-}
-
-
-function deleteNews(id){
-
-  if(confirm("このニュースを削除しますか？")){
-
-    data.news=data.news.filter(x=>x.id!==id);
-
-    saveData();
-    renderAll();
-
-  }
+await initializeApp();
 
 }
 
+if(!session){
 
-function deleteFamily(id){
-
-  if(confirm("この家族メンバーを削除しますか？")){
-
-    data.family=data.family.filter(x=>x.id!==id);
-
-    saveData();
-    renderAll();
-
-  }
+showLogin();
 
 }
 
-
-/* RESET */
-
-function resetData(){
-
-  if(confirm(
-    "すべての登録データを初期化します。よろしいですか？"
-  )){
-
-    localStorage.removeItem("familyLawApp");
-    location.reload();
-
-  }
-
-}
+});
 
 
-/* MODAL */
-
-function closeModal(id){
-
-  document.getElementById(id)
-    .classList.remove("show");
-
-}
-
-
-/* SECURITY */
-
-function escapeHTML(str){
-
-  return String(str ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-function escapeAttr(str){
-
-  return escapeHTML(str);
-
-}
-
-
-/* START */
-
-renderAll();
+initializeApp();
 
 </script>
 
