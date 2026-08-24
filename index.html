@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
 <title>家族法律ナビ</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -40,10 +47,6 @@ button{
   display:none!important;
 }
 
-/* =========================
-   LOGIN
-========================= */
-
 #authScreen{
   min-height:100vh;
   display:flex;
@@ -51,29 +54,33 @@ button{
   justify-content:center;
   padding:20px;
   background:
-    linear-gradient(135deg,#2563eb,#7c3aed);
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
 }
 
 .auth-card{
   width:100%;
   max-width:440px;
-  background:white;
+  background:#fff;
   border-radius:24px;
   padding:30px;
-  box-shadow:0 20px 60px #0004;
+  box-shadow:
+    0 20px 60px #0004;
 }
 
 .logo-large{
   text-align:center;
   font-size:30px;
   font-weight:900;
-  margin-bottom:8px;
 }
 
 .subtitle{
   text-align:center;
   color:#666;
-  margin-bottom:25px;
+  margin:8px 0 25px;
 }
 
 .auth-tabs{
@@ -93,11 +100,11 @@ button{
 
 .auth-tabs button.active{
   background:#2563eb;
-  color:white;
+  color:#fff;
 }
 
 .field{
-  margin-bottom:14px;
+  margin-bottom:15px;
 }
 
 .field label{
@@ -113,8 +120,8 @@ select{
   width:100%;
   border:1px solid #d9dee8;
   border-radius:12px;
-  padding:12px 13px;
-  background:white;
+  padding:12px;
+  background:#fff;
   outline:none;
 }
 
@@ -122,7 +129,6 @@ input:focus,
 textarea:focus,
 select:focus{
   border-color:#2563eb;
-  box-shadow:0 0 0 3px #2563eb18;
 }
 
 textarea{
@@ -132,7 +138,7 @@ textarea{
 
 .primary{
   background:#2563eb;
-  color:white;
+  color:#fff;
   border:0;
   border-radius:12px;
   padding:12px 18px;
@@ -150,16 +156,7 @@ textarea{
 
 .success{
   background:#16a34a;
-  color:white;
-  border:0;
-  border-radius:12px;
-  padding:10px 15px;
-  font-weight:bold;
-}
-
-.danger{
-  background:#dc2626;
-  color:white;
+  color:#fff;
   border:0;
   border-radius:12px;
   padding:10px 15px;
@@ -173,26 +170,19 @@ textarea{
 .error{
   background:#fee2e2;
   color:#b91c1c;
-  border-radius:12px;
   padding:12px;
+  border-radius:12px;
   margin-bottom:15px;
-  display:none;
 }
-
-.info{
-  background:#eff6ff;
-  color:#1d4ed8;
-  border-radius:12px;
-  padding:12px;
-}
-
-/* =========================
-   APP HEADER
-========================= */
 
 header{
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
+  color:#fff;
   padding:15px 18px;
   position:sticky;
   top:0;
@@ -203,8 +193,8 @@ header{
   max-width:1150px;
   margin:auto;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
 }
 
@@ -221,30 +211,26 @@ header{
 
 .header-right{
   display:flex;
-  align-items:center;
   gap:8px;
+  align-items:center;
 }
 
 .role-badge{
-  padding:7px 11px;
-  border-radius:30px;
-  background:white;
+  background:#fff;
   color:#2563eb;
-  font-size:13px;
+  padding:7px 12px;
+  border-radius:30px;
   font-weight:bold;
+  font-size:13px;
 }
 
 .logout{
   border:0;
   background:#ffffff22;
-  color:white;
+  color:#fff;
   padding:9px 12px;
   border-radius:10px;
 }
-
-/* =========================
-   MAIN
-========================= */
 
 .container{
   max-width:1150px;
@@ -254,14 +240,15 @@ header{
 
 .nav{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
   gap:8px;
   margin-bottom:18px;
 }
 
 .nav button{
   border:0;
-  background:white;
+  background:#fff;
   padding:13px 8px;
   border-radius:13px;
   font-weight:bold;
@@ -270,7 +257,7 @@ header{
 
 .nav button.active{
   background:#2563eb;
-  color:white;
+  color:#fff;
 }
 
 .page{
@@ -281,33 +268,26 @@ header{
   display:block;
 }
 
-/* =========================
-   CARDS
-========================= */
-
 .card{
-  background:white;
+  background:#fff;
   border-radius:18px;
   padding:20px;
   margin-bottom:15px;
-  box-shadow:0 4px 15px #0000000b;
-}
-
-.card h1,
-.card h2,
-.card h3{
-  margin-top:0;
+  box-shadow:
+    0 4px 15px #0000000b;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+    repeat(2,1fr);
   gap:15px;
 }
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+    repeat(3,1fr);
   gap:12px;
 }
 
@@ -324,16 +304,16 @@ header{
 }
 
 .item{
-  background:white;
+  background:#fff;
   border-radius:17px;
   padding:17px;
   margin-bottom:12px;
-  box-shadow:0 3px 12px #0000000b;
+  box-shadow:
+    0 3px 12px #0000000b;
 }
 
 .item-top{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
@@ -377,15 +357,26 @@ header{
   text-decoration:line-through;
 }
 
-.message-card{
-  border-left:5px solid #f59e0b;
-  background:#fffaf0;
-}
-
 .empty{
   text-align:center;
   color:#777;
   padding:30px 10px;
+}
+
+.invite-code{
+  text-align:center;
+  background:#f5f7ff;
+  border:2px dashed #2563eb;
+  border-radius:18px;
+  padding:20px;
+}
+
+.code{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:7px;
+  color:#2563eb;
+  margin:10px;
 }
 
 .actions{
@@ -394,30 +385,17 @@ header{
   flex-wrap:wrap;
 }
 
-/* =========================
-   FAMILY CODE
-========================= */
-
-.invite-code{
-  text-align:center;
-  background:#f5f7ff;
-  border:2px dashed #2563eb;
-  border-radius:18px;
-  padding:20px;
-  margin:15px 0;
+.info{
+  background:#eff6ff;
+  color:#1d4ed8;
+  border-radius:12px;
+  padding:12px;
 }
 
-.code{
-  font-size:34px;
-  font-weight:900;
-  letter-spacing:7px;
-  color:#2563eb;
-  margin:8px 0;
+.message-card{
+  border-left:5px solid #f59e0b;
+  background:#fffaf0;
 }
-
-/* =========================
-   MODAL
-========================= */
 
 .modal{
   position:fixed;
@@ -439,7 +417,7 @@ header{
   max-width:520px;
   max-height:90vh;
   overflow:auto;
-  background:white;
+  background:#fff;
   border-radius:22px;
   padding:24px;
 }
@@ -450,26 +428,18 @@ header{
   margin-top:15px;
 }
 
-/* =========================
-   TOAST
-========================= */
-
 #toast{
   position:fixed;
   left:50%;
   bottom:25px;
   transform:translateX(-50%);
   background:#222;
-  color:white;
+  color:#fff;
   padding:13px 18px;
   border-radius:12px;
   z-index:300;
   display:none;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:700px){
 
@@ -479,15 +449,15 @@ header{
 
   .header-right{
     flex-direction:column;
-    align-items:flex-end;
   }
 
   .nav{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
-  .grid,
-  .stats{
+  .stats,
+  .grid{
     grid-template-columns:1fr;
   }
 
@@ -495,157 +465,183 @@ header{
     font-size:17px;
   }
 
-  .role-badge{
-    font-size:11px;
-  }
-
 }
+
 </style>
+
 </head>
 
 <body>
 
 
-<!-- =================================================
-     AUTH SCREEN
-================================================= -->
+<!-- ==================================================
+     LOGIN
+================================================== -->
 
 <div id="authScreen">
 
-  <div class="auth-card">
+<div class="auth-card">
 
-    <div class="logo-large">
-      👨‍👩‍👧‍👦
-    </div>
+<div class="logo-large">
+👨‍👩‍👧‍👦
+</div>
 
-    <div class="logo-large">
-      家族法律ナビ
-    </div>
+<div class="logo-large">
+家族法律ナビ
+</div>
 
-    <div class="subtitle">
-      家族の予定・当番・やることをまとめて管理
-    </div>
+<div class="subtitle">
+家族の予定・当番・法律・ニュースを管理
+</div>
 
-    <div id="authError" class="error"></div>
+<div
+  id="authError"
+  class="error hidden">
+</div>
 
-    <div class="auth-tabs">
+<div class="auth-tabs">
 
-      <button id="loginTab"
-              class="active"
-              onclick="switchAuth('login')">
-        ログイン
-      </button>
+<button
+  id="loginTab"
+  class="active"
+  onclick="switchAuth('login')">
+ログイン
+</button>
 
-      <button id="signupTab"
-              onclick="switchAuth('signup')">
-        新規登録
-      </button>
-
-    </div>
-
-
-    <!-- LOGIN -->
-
-    <div id="loginForm">
-
-      <div class="field">
-        <label>メールアドレス</label>
-        <input id="loginEmail"
-               type="email"
-               autocomplete="email"
-               placeholder="example@mail.com">
-      </div>
-
-      <div class="field">
-        <label>パスワード</label>
-        <input id="loginPassword"
-               type="password"
-               autocomplete="current-password"
-               placeholder="パスワード">
-      </div>
-
-      <button class="primary full"
-              onclick="login()">
-        🔐 ログイン
-      </button>
-
-    </div>
-
-
-    <!-- SIGNUP -->
-
-    <div id="signupForm"
-         class="hidden">
-
-      <div class="field">
-        <label>メールアドレス</label>
-        <input id="signupEmail"
-               type="email"
-               autocomplete="email"
-               placeholder="example@mail.com">
-      </div>
-
-      <div class="field">
-        <label>パスワード</label>
-        <input id="signupPassword"
-               type="password"
-               autocomplete="new-password"
-               placeholder="6文字以上">
-      </div>
-
-      <button class="primary full"
-              onclick="signup()">
-        ✨ アカウントを作成
-      </button>
-
-      <p style="font-size:13px;color:#777">
-        登録後、家族を作るか、親からもらった招待コードで家族に参加できます。
-      </p>
-
-    </div>
-
-  </div>
+<button
+  id="signupTab"
+  onclick="switchAuth('signup')">
+新規登録
+</button>
 
 </div>
 
 
-<!-- =================================================
-     APP
-================================================= -->
+<div id="loginForm">
 
-<div id="app"
-     class="hidden">
+<div class="field">
+
+<label>
+メールアドレス
+</label>
+
+<input
+  id="loginEmail"
+  type="email"
+  placeholder="example@mail.com"
+>
+
+</div>
+
+<div class="field">
+
+<label>
+パスワード
+</label>
+
+<input
+  id="loginPassword"
+  type="password"
+  placeholder="パスワード"
+>
+
+</div>
+
+<button
+  class="primary full"
+  onclick="login()">
+🔐 ログイン
+</button>
+
+</div>
+
+
+<div
+  id="signupForm"
+  class="hidden">
+
+<div class="field">
+
+<label>
+メールアドレス
+</label>
+
+<input
+  id="signupEmail"
+  type="email"
+  placeholder="example@mail.com"
+>
+
+</div>
+
+<div class="field">
+
+<label>
+パスワード
+</label>
+
+<input
+  id="signupPassword"
+  type="password"
+  placeholder="6文字以上"
+>
+
+</div>
+
+<button
+  class="primary full"
+  onclick="signup()">
+✨ アカウントを作成
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     APP
+================================================== -->
+
+<div
+  id="app"
+  class="hidden">
 
 <header>
 
-  <div class="header-inner">
+<div class="header-inner">
 
-    <div>
+<div>
 
-      <div class="logo">
-        👨‍👩‍👧‍👦 家族法律ナビ
-      </div>
+<div class="logo">
+👨‍👩‍👧‍👦 家族法律ナビ
+</div>
 
-      <div id="headerFamilyName"
-           class="family-name">
-      </div>
+<div
+  id="headerFamilyName"
+  class="family-name">
+</div>
 
-    </div>
+</div>
 
-    <div class="header-right">
+<div class="header-right">
 
-      <span id="roleBadge"
-            class="role-badge">
-      </span>
+<span
+  id="roleBadge"
+  class="role-badge">
+</span>
 
-      <button class="logout"
-              onclick="logout()">
-        ログアウト
-      </button>
+<button
+  class="logout"
+  onclick="logout()">
+ログアウト
+</button>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
 </header>
 
@@ -657,455 +653,450 @@ header{
 
 <nav class="nav">
 
-  <button class="active"
-          onclick="showPage('home',this)">
-    🏠 ホーム
-  </button>
+<button
+  class="active"
+  onclick="showPage('home',this)">
+🏠 ホーム
+</button>
 
-  <button onclick="showPage('duties',this)">
-    📋 当番
-  </button>
+<button
+  onclick="showPage('duties',this)">
+📋 当番
+</button>
 
-  <button onclick="showPage('tasks',this)">
-    ✅ やること
-  </button>
+<button
+  onclick="showPage('tasks',this)">
+✅ やること
+</button>
 
-  <button onclick="showPage('events',this)">
-    📅 予定
-  </button>
+<button
+  onclick="showPage('events',this)">
+📅 予定
+</button>
 
-  <button onclick="showPage('messages',this)">
-    💌 メッセージ
-  </button>
+<button
+  onclick="showPage('messages',this)">
+💌 メッセージ
+</button>
 
-  <button onclick="showPage('family',this)">
-    👨‍👩‍👧 家族
-  </button>
+<button
+  onclick="showPage('family',this)">
+👨‍👩‍👧 家族
+</button>
 
-  <button onclick="showPage('law',this)">
-    ⚖️ 法律
-  </button>
+<button
+  onclick="showPage('law',this)">
+⚖️ 法律
+</button>
 
-  <button onclick="showPage('news',this)">
-    📰 ニュース
-  </button>
+<button
+  onclick="showPage('news',this)">
+📰 ニュース
+</button>
 
 </nav>
 
 
-<!-- =================================================
-     HOME
-================================================= -->
+<!-- HOME -->
 
-<section id="home"
-         class="page active">
+<section
+  id="home"
+  class="page active">
 
-  <div class="card">
+<div class="card">
 
-    <h1>
-      🏠 家族ホーム
-    </h1>
+<h1>
+🏠 家族ホーム
+</h1>
 
-    <p id="welcomeText">
-      読み込み中...
-    </p>
+<p id="welcomeText">
+読み込み中...
+</p>
 
-    <div class="stats">
+<div class="stats">
 
-      <div class="stat">
+<div class="stat">
 
-        <div>
-          📋 未完了の当番
-        </div>
+<div>
+📋 未完了の当番
+</div>
 
-        <div id="dutyCount"
-             class="stat-number">
-          0
-        </div>
-
-      </div>
-
-      <div class="stat">
-
-        <div>
-          ✅ 未完了のやること
-        </div>
-
-        <div id="taskCount"
-             class="stat-number">
-          0
-        </div>
-
-      </div>
-
-      <div class="stat">
-
-        <div>
-          📅 今後の予定
-        </div>
-
-        <div id="eventCount"
-             class="stat-number">
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>
-      💌 最新の親からのメッセージ
-    </h2>
-
-    <div id="latestMessage">
-      読み込み中...
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>
-      📅 直近の予定
-    </h2>
-
-    <div id="homeEvents">
-      読み込み中...
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =================================================
-     DUTIES
-================================================= -->
-
-<section id="duties"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      📋 当番表
-    </h1>
-
-    <p>
-      家族の当番を管理します。
-    </p>
-
-    <button id="addDutyBtn"
-            class="primary"
-            onclick="openDutyModal()">
-      ＋ 当番を追加
-    </button>
-
-  </div>
-
-  <div id="dutiesList"></div>
-
-</section>
-
-
-<!-- =================================================
-     TASKS
-================================================= -->
-
-<section id="tasks"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      ✅ やること
-    </h1>
-
-    <button id="addTaskBtn"
-            class="primary"
-            onclick="openTaskModal()">
-      ＋ やることを追加
-    </button>
-
-  </div>
-
-  <div id="tasksList"></div>
-
-</section>
-
-
-<!-- =================================================
-     EVENTS
-================================================= -->
-
-<section id="events"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      📅 家族の予定
-    </h1>
-
-    <button id="addEventBtn"
-            class="primary"
-            onclick="openEventModal()">
-      ＋ 予定を追加
-    </button>
-
-  </div>
-
-  <div id="eventsList"></div>
-
-</section>
-
-
-<!-- =================================================
-     MESSAGES
-================================================= -->
-
-<section id="messages"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      💌 親からのメッセージ
-    </h1>
-
-    <p>
-      親から家族へ送られたメッセージです。
-    </p>
-
-    <button id="addMessageBtn"
-            class="primary"
-            onclick="openMessageModal()">
-      ＋ メッセージを送る
-    </button>
-
-  </div>
-
-  <div id="messagesList"></div>
-
-</section>
-
-
-<!-- =================================================
-     FAMILY
-================================================= -->
-
-<section id="family"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      👨‍👩‍👧‍👦 家族
-    </h1>
-
-    <h2 id="familyTitle">
-    </h2>
-
-    <p>
-      あなた：
-      <strong id="myName"></strong>
-    </p>
-
-    <span id="myRole"
-          class="badge">
-    </span>
-
-  </div>
-
-
-  <!-- PARENT ONLY -->
-
-  <div id="parentInviteCard"
-       class="card">
-
-    <h2>
-      🔑 子ども招待コード
-    </h2>
-
-    <p>
-      このコードを子どものアカウントで入力すると、
-      この家族に参加できます。
-    </p>
-
-    <div class="invite-code">
-
-      <div>
-        現在の招待コード
-      </div>
-
-      <div id="inviteCode"
-           class="code">
-        ------
-      </div>
-
-      <div class="actions"
-           style="justify-content:center">
-
-        <button class="primary"
-                onclick="createInvite()">
-          🔑 新しいコードを発行
-        </button>
-
-        <button class="secondary"
-                onclick="copyInvite()">
-          📋 コピー
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- CHILD JOIN -->
-
-  <div id="childJoinCard"
-       class="card hidden">
-
-    <h2>
-      🔑 別の家族に参加
-    </h2>
-
-    <p>
-      親から受け取った招待コードを入力します。
-    </p>
-
-    <div class="field">
-
-      <input id="joinCode"
-             maxlength="6"
-             placeholder="例：AB12CD"
-             style="text-transform:uppercase">
-
-    </div>
-
-    <button class="primary"
-            onclick="joinAnotherFamily()">
-      家族に参加
-    </button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>
-      👨‍👩‍👧 家族メンバー
-    </h2>
-
-    <div id="membersList">
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =================================================
-     LAW
-================================================= -->
-
-<section id="law"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      ⚖️ 家族の法律
-    </h1>
-
-    <div class="info">
-
-      このページでは、家族に関係する法律情報を
-      表示できます。
-
-    </div>
-
-    <br>
-
-    <h3>
-      📌 注意
-    </h3>
-
-    <p>
-      法律情報は参考情報として利用してください。
-      個別の法律問題については専門家への相談が必要です。
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =================================================
-     NEWS
-================================================= -->
-
-<section id="news"
-         class="page">
-
-  <div class="card">
-
-    <h1>
-      📰 家族ニュース
-    </h1>
-
-    <div class="info">
-      ニュースAPIを接続すると、
-      最新ニュースを表示できます。
-    </div>
-
-  </div>
-
-</section>
-
+<div
+  id="dutyCount"
+  class="stat-number">
+0
+</div>
 
 </div>
+
+<div class="stat">
+
+<div>
+✅ 未完了のやること
+</div>
+
+<div
+  id="taskCount"
+  class="stat-number">
+0
+</div>
+
+</div>
+
+<div class="stat">
+
+<div>
+📅 今後の予定
+</div>
+
+<div
+  id="eventCount"
+  class="stat-number">
+0
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 
-<!-- =================================================
-     MODAL
-================================================= -->
+<div class="card">
 
-<div id="modal"
-     class="modal">
+<h2>
+💌 最新メッセージ
+</h2>
 
-  <div class="modal-box">
+<div id="latestMessage">
+読み込み中...
+</div>
 
-    <h2 id="modalTitle">
-    </h2>
+</div>
 
-    <div id="modalContent">
-    </div>
 
-    <div class="modal-actions">
+<div class="card">
 
-      <button class="primary"
-              onclick="saveModal()">
-        保存
-      </button>
+<h2>
+📅 直近の予定
+</h2>
 
-      <button class="secondary"
-              onclick="closeModal()">
-        キャンセル
-      </button>
+<div id="homeEvents">
+読み込み中...
+</div>
 
-    </div>
+</div>
 
-  </div>
+</section>
+
+
+<!-- DUTIES -->
+
+<section
+  id="duties"
+  class="page">
+
+<div class="card">
+
+<h1>
+📋 当番表
+</h1>
+
+<button
+  id="addDutyBtn"
+  class="primary"
+  onclick="openDutyModal()">
+＋ 当番を追加
+</button>
+
+</div>
+
+<div id="dutiesList"></div>
+
+</section>
+
+
+<!-- TASKS -->
+
+<section
+  id="tasks"
+  class="page">
+
+<div class="card">
+
+<h1>
+✅ やること
+</h1>
+
+<button
+  id="addTaskBtn"
+  class="primary"
+  onclick="openTaskModal()">
+＋ やることを追加
+</button>
+
+</div>
+
+<div id="tasksList"></div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section
+  id="events"
+  class="page">
+
+<div class="card">
+
+<h1>
+📅 家族の予定
+</h1>
+
+<button
+  id="addEventBtn"
+  class="primary"
+  onclick="openEventModal()">
+＋ 予定を追加
+</button>
+
+</div>
+
+<div id="eventsList"></div>
+
+</section>
+
+
+<!-- MESSAGES -->
+
+<section
+  id="messages"
+  class="page">
+
+<div class="card">
+
+<h1>
+💌 親からのメッセージ
+</h1>
+
+<button
+  id="addMessageBtn"
+  class="primary"
+  onclick="openMessageModal()">
+＋ メッセージを送る
+</button>
+
+</div>
+
+<div id="messagesList"></div>
+
+</section>
+
+
+<!-- FAMILY -->
+
+<section
+  id="family"
+  class="page">
+
+<div class="card">
+
+<h1>
+👨‍👩‍👧‍👦 家族
+</h1>
+
+<h2 id="familyTitle">
+</h2>
+
+<p>
+あなた：
+<strong id="myName"></strong>
+</p>
+
+<span
+  id="myRole"
+  class="badge">
+</span>
+
+</div>
+
+
+<div
+  id="parentInviteCard"
+  class="card hidden">
+
+<h2>
+🔑 子ども招待コード
+</h2>
+
+<p>
+このコードを子どものアカウントで入力してください。
+</p>
+
+<div class="invite-code">
+
+<div>
+招待コード
+</div>
+
+<div
+  id="inviteCode"
+  class="code">
+------
+</div>
+
+<div class="actions">
+
+<button
+  class="primary"
+  onclick="createInvite()">
+🔑 新しいコード
+</button>
+
+<button
+  class="secondary"
+  onclick="copyInvite()">
+📋 コピー
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+  id="childJoinCard"
+  class="card hidden">
+
+<h2>
+🔑 家族に参加
+</h2>
+
+<input
+  id="joinCode"
+  maxlength="6"
+  placeholder="招待コード"
+>
+
+<br><br>
+
+<button
+  class="primary"
+  onclick="joinAnotherFamily()">
+家族に参加
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+👨‍👩‍👧 家族メンバー
+</h2>
+
+<div id="membersList">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LAW -->
+
+<section
+  id="law"
+  class="page">
+
+<div class="card">
+
+<h1>
+⚖️ 法律・罰金
+</h1>
+
+<div class="info">
+
+法律・罰金については、
+今後、信頼できる公的情報源から
+最新情報を表示する機能を追加できます。
+
+</div>
+
+<br>
+
+<p>
+⚠️ このアプリの法律情報は参考情報として扱い、
+重要な問題については公的機関や専門家に確認してください。
+</p>
+
+</div>
+
+</section>
+
+
+<!-- NEWS -->
+
+<section
+  id="news"
+  class="page">
+
+<div class="card">
+
+<h1>
+📰 ニュース
+</h1>
+
+<div class="info">
+
+ニュースAPIを接続すると、
+最新ニュースを表示できます。
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+  id="modal"
+  class="modal">
+
+<div class="modal-box">
+
+<h2 id="modalTitle">
+</h2>
+
+<div id="modalContent">
+</div>
+
+<div class="modal-actions">
+
+<button
+  class="primary"
+  onclick="saveModal()">
+保存
+</button>
+
+<button
+  class="secondary"
+  onclick="closeModal()">
+キャンセル
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1115,9 +1106,10 @@ header{
 
 <script>
 
-/* =====================================================
+
+/* ==================================================
    SUPABASE
-===================================================== */
+================================================== */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -1132,9 +1124,9 @@ supabase.createClient(
 );
 
 
-/* =====================================================
+/* ==================================================
    STATE
-===================================================== */
+================================================== */
 
 let currentUser = null;
 let currentFamily = null;
@@ -1143,14 +1135,13 @@ let currentForm = null;
 let currentInviteCode = "";
 
 
-/* =====================================================
+/* ==================================================
    HELPERS
-===================================================== */
+================================================== */
 
 function $(id){
   return document.getElementById(id);
 }
-
 
 function escapeHTML(value){
 
@@ -1160,8 +1151,8 @@ function escapeHTML(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
-}
 
+}
 
 function isParent(){
 
@@ -1170,87 +1161,104 @@ function isParent(){
 
 }
 
-
 function showToast(message){
 
-  const toast = $("toast");
+  const toast =
+    $("toast");
 
-  toast.textContent = message;
-  toast.style.display = "block";
+  toast.textContent =
+    message;
 
-  clearTimeout(window.toastTimer);
+  toast.style.display =
+    "block";
+
+  clearTimeout(
+    window.toastTimer
+  );
 
   window.toastTimer =
-    setTimeout(()=>{
-      toast.style.display="none";
-    },2500);
+    setTimeout(
+      ()=>{
+        toast.style.display =
+          "none";
+      },
+      2500
+    );
 
 }
 
 
-function showAuthError(message){
-
-  const el = $("authError");
-
-  el.textContent = message;
-  el.style.display = "block";
-
-}
-
-
-function clearAuthError(){
-
-  $("authError").style.display="none";
-
-}
-
-
-/* =====================================================
-   AUTH TABS
-===================================================== */
+/* ==================================================
+   AUTH
+================================================== */
 
 function switchAuth(type){
 
-  clearAuthError();
+  $("authError")
+    .classList.add("hidden");
 
   if(type === "login"){
 
-    $("loginTab").classList.add("active");
-    $("signupTab").classList.remove("active");
+    $("loginTab")
+      .classList.add("active");
 
-    $("loginForm").classList.remove("hidden");
-    $("signupForm").classList.add("hidden");
+    $("signupTab")
+      .classList.remove("active");
+
+    $("loginForm")
+      .classList.remove("hidden");
+
+    $("signupForm")
+      .classList.add("hidden");
 
   }else{
 
-    $("signupTab").classList.add("active");
-    $("loginTab").classList.remove("active");
+    $("signupTab")
+      .classList.add("active");
 
-    $("signupForm").classList.remove("hidden");
-    $("loginForm").classList.add("hidden");
+    $("loginTab")
+      .classList.remove("active");
+
+    $("signupForm")
+      .classList.remove("hidden");
+
+    $("loginForm")
+      .classList.add("hidden");
 
   }
 
 }
 
 
-/* =====================================================
-   SIGNUP
-===================================================== */
+function showError(message){
+
+  const el =
+    $("authError");
+
+  el.textContent =
+    message;
+
+  el.classList.remove(
+    "hidden"
+  );
+
+}
+
 
 async function signup(){
 
-  clearAuthError();
-
   const email =
-    $("signupEmail").value.trim();
+    $("signupEmail")
+      .value
+      .trim();
 
   const password =
-    $("signupPassword").value;
+    $("signupPassword")
+      .value;
 
   if(!email || !password){
 
-    showAuthError(
+    showError(
       "メールアドレスとパスワードを入力してください。"
     );
 
@@ -1259,14 +1267,17 @@ async function signup(){
 
   if(password.length < 6){
 
-    showAuthError(
+    showError(
       "パスワードは6文字以上にしてください。"
     );
 
     return;
   }
 
-  const {data,error} =
+  const {
+    data,
+    error
+  } =
     await supabaseClient.auth.signUp({
       email,
       password
@@ -1274,20 +1285,26 @@ async function signup(){
 
   if(error){
 
-    showAuthError(error.message);
+    showError(
+      error.message
+    );
+
     return;
   }
 
   if(data.session){
 
-    await initialize();
+    currentUser =
+      data.user;
+
+    await findMember();
 
   }else{
 
     alert(
-      "アカウントを作成しました。\n\n"+
-      "メール確認が有効になっている場合は、"+
-      "届いたメールを確認してください。"
+      "登録しました！\n\n"+
+      "メール確認が有効な場合は、"+
+      "確認メールを確認してください。"
     );
 
   }
@@ -1295,30 +1312,30 @@ async function signup(){
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
-
 async function login(){
 
-  clearAuthError();
-
   const email =
-    $("loginEmail").value.trim();
+    $("loginEmail")
+      .value
+      .trim();
 
   const password =
-    $("loginPassword").value;
+    $("loginPassword")
+      .value;
 
   if(!email || !password){
 
-    showAuthError(
+    showError(
       "メールアドレスとパスワードを入力してください。"
     );
 
     return;
   }
 
-  const {data,error} =
+  const {
+    data,
+    error
+  } =
     await supabaseClient.auth
       .signInWithPassword({
         email,
@@ -1327,20 +1344,20 @@ async function login(){
 
   if(error){
 
-    showAuthError(error.message);
+    showError(
+      error.message
+    );
+
     return;
   }
 
-  currentUser = data.user;
+  currentUser =
+    data.user;
 
-  await initialize();
+  await findMember();
 
 }
 
-
-/* =====================================================
-   LOGOUT
-===================================================== */
 
 async function logout(){
 
@@ -1351,61 +1368,80 @@ async function logout(){
 }
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+/* ==================================================
+   MEMBER
+================================================== */
 
-async function initialize(){
+async function findMember(){
 
   const {
-    data:{
-      user
-    }
+    data:userData
   } =
     await supabaseClient.auth.getUser();
 
-  if(!user){
-
-    showAuth();
+  if(!userData.user){
 
     return;
   }
 
-  currentUser = user;
-
-  await findMember();
-
-}
+  currentUser =
+    userData.user;
 
 
-/* =====================================================
-   FIND MEMBER
-===================================================== */
-
-async function findMember(){
-
-  const {data,error} =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("family_members")
       .select("*")
-      .eq("user_id",currentUser.id)
+      .eq(
+        "user_id",
+        currentUser.id
+      )
       .maybeSingle();
 
   if(error){
 
-    console.error(error);
-    showAuthError(error.message);
+    showError(
+      "メンバー情報を取得できません。\n"+
+      error.message
+    );
+
     return;
   }
+
 
   if(!data){
 
-    await showFamilySetup();
+    /*
+     * 初回ユーザー
+     */
+
+    const create =
+      confirm(
+        "家族に所属していません。\n\n"+
+        "OK：新しい家族を作る\n"+
+        "キャンセル：招待コードで参加"
+      );
+
+    if(create){
+
+      await createFamily();
+
+    }else{
+
+      await childJoin();
+
+    }
 
     return;
   }
 
-  currentMember = data;
+
+  currentMember =
+    data;
+
 
   const {
     data:family,
@@ -1414,12 +1450,15 @@ async function findMember(){
     await supabaseClient
       .from("families")
       .select("*")
-      .eq("id",data.family_id)
+      .eq(
+        "id",
+        data.family_id
+      )
       .single();
 
   if(familyError){
 
-    alert(
+    showError(
       "家族情報を取得できません。\n"+
       familyError.message
     );
@@ -1427,7 +1466,10 @@ async function findMember(){
     return;
   }
 
-  currentFamily = family;
+
+  currentFamily =
+    family;
+
 
   showApp();
 
@@ -1436,124 +1478,201 @@ async function findMember(){
 }
 
 
-/* =====================================================
-   FAMILY SETUP
-===================================================== */
+/* ==================================================
+   CREATE FAMILY
+================================================== */
 
-async function showFamilySetup(){
+function generateCode(){
 
-  const choice =
-    confirm(
-      "まだ家族に所属していません。\n\n"+
-      "OK：新しい家族を作る\n"+
-      "キャンセル：親からもらった招待コードで参加"
-    );
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-  if(choice){
+  let code = "";
 
-    await createFamily();
+  for(
+    let i=0;
+    i<6;
+    i++
+  ){
 
-  }else{
-
-    await childJoin();
+    code +=
+      chars[
+        Math.floor(
+          Math.random() *
+          chars.length
+        )
+      ];
 
   }
+
+  return code;
 
 }
 
 
-/* =====================================================
-   CREATE FAMILY
-===================================================== */
-
 async function createFamily(){
 
   const familyName =
-    prompt("家族名を入力してください。");
+    prompt(
+      "家族名を入力してください。\n例：山田家"
+    );
 
   if(!familyName){
 
     return;
   }
 
+
   const memberName =
-    prompt("あなたの名前を入力してください。");
+    prompt(
+      "あなたの名前を入力してください。\n例：お父さん"
+    );
 
   if(!memberName){
 
     return;
   }
 
+
   const code =
     generateCode();
 
-  const {
-    data:family,
-    error
-  } =
-    await supabaseClient
-      .from("families")
-      .insert({
-        name:familyName,
-        family_code:code,
-        created_by:currentUser.id
-      })
-      .select()
-      .single();
 
-  if(error){
+  try{
 
-    alert(error.message);
-    return;
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.rpc(
+        "create_family_with_parent",
+        {
+          p_family_name:
+            familyName,
+
+          p_member_name:
+            memberName,
+
+          p_family_code:
+            code
+        }
+      );
+
+
+    if(error){
+
+      console.error(
+        error
+      );
+
+      alert(
+        "家族作成に失敗しました。\n\n"+
+        error.message
+      );
+
+      return;
+    }
+
+
+    console.log(
+      "RPC結果:",
+      data
+    );
+
+
+    const {
+      data:family,
+      error:familyError
+    } =
+      await supabaseClient
+        .from("families")
+        .select("*")
+        .eq(
+          "id",
+          data.family_id
+        )
+        .single();
+
+
+    if(familyError){
+
+      alert(
+        "家族情報を取得できません。\n\n"+
+        familyError.message
+      );
+
+      return;
+    }
+
+
+    const {
+      data:member,
+      error:memberError
+    } =
+      await supabaseClient
+        .from("family_members")
+        .select("*")
+        .eq(
+          "id",
+          data.member_id
+        )
+        .single();
+
+
+    if(memberError){
+
+      alert(
+        "親情報を取得できません。\n\n"+
+        memberError.message
+      );
+
+      return;
+    }
+
+
+    currentFamily =
+      family;
+
+    currentMember =
+      member;
+
+
+    showApp();
+
+    await loadAll();
+
+
+    alert(
+      "🎉 家族を作成しました！\n\n"+
+      "家族名："+
+      familyName+
+      "\n"+
+      "あなた："+
+      memberName+
+      "\n"+
+      "役割：👑 親"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    alert(
+      "エラーが発生しました。\n\n"+
+      error.message
+    );
+
   }
-
-
-  /*
-   * 作成者は必ず親
-   */
-
-  const {
-    data:member,
-    error:memberError
-  } =
-    await supabaseClient
-      .from("family_members")
-      .insert({
-        family_id:family.id,
-        user_id:currentUser.id,
-        name:memberName,
-        role:"parent",
-        icon:"👑"
-      })
-      .select()
-      .single();
-
-  if(memberError){
-
-    alert(memberError.message);
-    return;
-  }
-
-  currentFamily = family;
-  currentMember = member;
-
-  showApp();
-
-  await loadAll();
-
-  alert(
-    "家族を作成しました！\n\n"+
-    "家族名："+familyName+
-    "\n\n"+
-    "家族コード："+code
-  );
 
 }
 
 
-/* =====================================================
+/* ==================================================
    CHILD JOIN
-===================================================== */
+================================================== */
 
 async function childJoin(){
 
@@ -1567,31 +1686,32 @@ async function childJoin(){
     return;
   }
 
+
   const name =
-    prompt("あなたの名前を入力してください。");
+    prompt(
+      "あなたの名前を入力してください。"
+    );
 
   if(!name){
 
     return;
   }
 
+
   await joinFamilyWithCode(
-    code.trim().toUpperCase(),
+    code
+      .trim()
+      .toUpperCase(),
     name
   );
 
 }
 
 
-/* =====================================================
-   JOIN FAMILY
-===================================================== */
-
-async function joinFamilyWithCode(code,name){
-
-  /*
-   * 招待コードを検索
-   */
+async function joinFamilyWithCode(
+  code,
+  name
+){
 
   const {
     data:invite,
@@ -1600,34 +1720,37 @@ async function joinFamilyWithCode(code,name){
     await supabaseClient
       .from("family_invites")
       .select("*")
-      .eq("code",code)
-      .eq("used",false)
+      .eq(
+        "code",
+        code
+      )
+      .eq(
+        "used",
+        false
+      )
       .maybeSingle();
+
 
   if(error){
 
     alert(
-      "招待コードを確認できません。\n"+
+      "招待コードの確認に失敗しました。\n\n"+
       error.message
     );
 
     return;
   }
 
+
   if(!invite){
 
     alert(
-      "招待コードが正しくないか、"+
-      "すでに使用されています。"
+      "招待コードが正しくありません。"
     );
 
     return;
   }
 
-
-  /*
-   * 子どもとして参加
-   */
 
   const {
     data:member,
@@ -1636,43 +1759,46 @@ async function joinFamilyWithCode(code,name){
     await supabaseClient
       .from("family_members")
       .insert({
-        family_id:invite.family_id,
-        user_id:currentUser.id,
-        name:name,
-        role:"child",
-        icon:"🧒"
+        family_id:
+          invite.family_id,
+
+        user_id:
+          currentUser.id,
+
+        name:
+          name,
+
+        role:
+          "child",
+
+        icon:
+          "🧒"
       })
       .select()
       .single();
 
+
   if(memberError){
 
-    alert(memberError.message);
+    alert(
+      "家族参加に失敗しました。\n\n"+
+      memberError.message
+    );
+
     return;
   }
 
 
-  /*
-   * 使用済みにする
-   */
+  await supabaseClient
+    .from("family_invites")
+    .update({
+      used:true
+    })
+    .eq(
+      "id",
+      invite.id
+    );
 
-  const {error:updateError} =
-    await supabaseClient
-      .from("family_invites")
-      .update({
-        used:true
-      })
-      .eq("id",invite.id);
-
-  if(updateError){
-
-    console.error(updateError);
-  }
-
-
-  /*
-   * 家族取得
-   */
 
   const {
     data:family
@@ -1680,225 +1806,42 @@ async function joinFamilyWithCode(code,name){
     await supabaseClient
       .from("families")
       .select("*")
-      .eq("id",invite.family_id)
+      .eq(
+        "id",
+        invite.family_id
+      )
       .single();
 
-  currentMember = member;
-  currentFamily = family;
+
+  currentMember =
+    member;
+
+  currentFamily =
+    family;
+
 
   showApp();
 
   await loadAll();
 
-  showToast(
-    "家族に参加しました！"
-  );
-
 }
 
 
-/* =====================================================
-   PARENT INVITE
-===================================================== */
-
-function generateCode(){
-
-  const chars =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-  let result="";
-
-  for(let i=0;i<6;i++){
-
-    result +=
-      chars[
-        Math.floor(
-          Math.random()*chars.length
-        )
-      ];
-
-  }
-
-  return result;
-
-}
-
-
-async function createInvite(){
-
-  if(!isParent()){
-
-    alert(
-      "親だけが招待コードを発行できます。"
-    );
-
-    return;
-  }
-
-
-  /*
-   * 既存の未使用コード
-   */
-
-  const code =
-    generateCode();
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("family_invites")
-      .insert({
-        family_id:currentFamily.id,
-        code:code,
-        created_by:currentUser.id,
-        used:false
-      })
-      .select()
-      .single();
-
-  if(error){
-
-    alert(error.message);
-    return;
-  }
-
-  currentInviteCode = data.code;
-
-  $("inviteCode").textContent =
-    data.code;
-
-  showToast(
-    "新しい招待コードを発行しました"
-  );
-
-}
-
-
-async function loadInvite(){
-
-  if(!isParent()){
-
-    return;
-  }
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("family_invites")
-      .select("*")
-      .eq("family_id",currentFamily.id)
-      .eq("used",false)
-      .order("created_at",{
-        ascending:false
-      })
-      .limit(1)
-      .maybeSingle();
-
-  if(error){
-
-    console.error(error);
-    return;
-  }
-
-  if(data){
-
-    currentInviteCode =
-      data.code;
-
-    $("inviteCode").textContent =
-      data.code;
-
-  }else{
-
-    $("inviteCode").textContent =
-      "------";
-
-  }
-
-}
-
-
-function copyInvite(){
-
-  if(!currentInviteCode){
-
-    alert(
-      "先に招待コードを発行してください。"
-    );
-
-    return;
-  }
-
-  navigator.clipboard
-    .writeText(currentInviteCode)
-    .then(()=>{
-      showToast(
-        "招待コードをコピーしました"
-      );
-    });
-
-}
-
-
-/* =====================================================
-   JOIN ANOTHER FAMILY
-===================================================== */
-
-async function joinAnotherFamily(){
-
-  const code =
-    $("joinCode")
-      .value
-      .trim()
-      .toUpperCase();
-
-  if(!code){
-
-    alert("招待コードを入力してください。");
-    return;
-  }
-
-  const name =
-    prompt(
-      "参加時の名前を入力してください。"
-    );
-
-  if(!name)return;
-
-  await joinFamilyWithCode(
-    code,
-    name
-  );
-
-}
-
-
-/* =====================================================
-   SHOW APP
-===================================================== */
-
-function showAuth(){
-
-  $("authScreen")
-    .classList.remove("hidden");
-
-  $("app")
-    .classList.add("hidden");
-
-}
-
+/* ==================================================
+   APP
+================================================== */
 
 function showApp(){
 
   $("authScreen")
-    .classList.add("hidden");
+    .classList.add(
+      "hidden"
+    );
 
   $("app")
-    .classList.remove("hidden");
+    .classList.remove(
+      "hidden"
+    );
 
 
   $("headerFamilyName")
@@ -1923,31 +1866,12 @@ function showApp(){
         : "🧒 子ども";
 
 
-  const badge =
-    $("roleBadge");
+  $("roleBadge")
+    .textContent =
+      isParent()
+        ? "👑 親"
+        : "🧒 子ども";
 
-  if(isParent()){
-
-    badge.textContent =
-      "👑 親";
-
-    badge.style.color =
-      "#dc2626";
-
-  }else{
-
-    badge.textContent =
-      "🧒 子ども";
-
-    badge.style.color =
-      "#15803d";
-
-  }
-
-
-  /*
-   * 親だけ表示
-   */
 
   $("parentInviteCard")
     .classList.toggle(
@@ -1956,10 +1880,6 @@ function showApp(){
     );
 
 
-  /*
-   * 子どもだけ表示
-   */
-
   $("childJoinCard")
     .classList.toggle(
       "hidden",
@@ -1967,15 +1887,12 @@ function showApp(){
     );
 
 
-  /*
-   * 追加ボタン
-   */
-
   $("addDutyBtn")
     .classList.toggle(
       "hidden",
       !isParent()
     );
+
 
   $("addTaskBtn")
     .classList.toggle(
@@ -1983,11 +1900,13 @@ function showApp(){
       !isParent()
     );
 
+
   $("addEventBtn")
     .classList.toggle(
       "hidden",
       !isParent()
     );
+
 
   $("addMessageBtn")
     .classList.toggle(
@@ -1998,35 +1917,266 @@ function showApp(){
 }
 
 
-/* =====================================================
-   NAV
-===================================================== */
-
-function showPage(id,button){
+function showPage(
+  id,
+  button
+){
 
   document
     .querySelectorAll(".page")
-    .forEach(page=>{
-      page.classList.remove("active");
-    });
+    .forEach(
+      page =>
+        page.classList.remove(
+          "active"
+        )
+    );
+
 
   $(id)
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
+
 
   document
     .querySelectorAll(".nav button")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "active"
+        )
+    );
 
-  button.classList.add("active");
+
+  button.classList.add(
+    "active"
+  );
 
 }
 
 
-/* =====================================================
+/* ==================================================
+   HOME
+================================================== */
+
+async function loadHome(){
+
+  const {
+    data:tasks
+  } =
+    await supabaseClient
+      .from("tasks")
+      .select("id")
+      .eq(
+        "family_id",
+        currentFamily.id
+      )
+      .eq(
+        "completed",
+        false
+      );
+
+
+  const {
+    data:duties
+  } =
+    await supabaseClient
+      .from("duties")
+      .select("id")
+      .eq(
+        "family_id",
+        currentFamily.id
+      )
+      .eq(
+        "completed",
+        false
+      );
+
+
+  const today =
+    new Date()
+      .toISOString()
+      .slice(0,10);
+
+
+  const {
+    data:events
+  } =
+    await supabaseClient
+      .from("family_events")
+      .select("id")
+      .eq(
+        "family_id",
+        currentFamily.id
+      )
+      .gte(
+        "event_date",
+        today
+      );
+
+
+  $("dutyCount")
+    .textContent =
+      duties?.length || 0;
+
+
+  $("taskCount")
+    .textContent =
+      tasks?.length || 0;
+
+
+  $("eventCount")
+    .textContent =
+      events?.length || 0;
+
+
+  $("welcomeText")
+    .textContent =
+      currentMember.name+
+      "さん、こんにちは！";
+
+
+  await loadLatestMessage();
+
+  await loadHomeEvents();
+
+}
+
+
+async function loadLatestMessage(){
+
+  const {
+    data
+  } =
+    await supabaseClient
+      .from("parent_messages")
+      .select("*")
+      .eq(
+        "family_id",
+        currentFamily.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(1);
+
+
+  if(!data?.length){
+
+    $("latestMessage")
+      .innerHTML =
+      '<div class="empty">メッセージはありません。</div>';
+
+    return;
+  }
+
+
+  const item =
+    data[0];
+
+
+  $("latestMessage")
+    .innerHTML = `
+
+      <div class="item message-card">
+
+        <div class="item-title">
+          💌 ${escapeHTML(item.title)}
+        </div>
+
+        <p>
+          ${escapeHTML(item.message)}
+        </p>
+
+        <div class="item-meta">
+          ${escapeHTML(
+            item.sender || "親"
+          )}
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+
+async function loadHomeEvents(){
+
+  const today =
+    new Date()
+      .toISOString()
+      .slice(0,10);
+
+
+  const {
+    data
+  } =
+    await supabaseClient
+      .from("family_events")
+      .select("*")
+      .eq(
+        "family_id",
+        currentFamily.id
+      )
+      .gte(
+        "event_date",
+        today
+      )
+      .order("event_date")
+      .limit(5);
+
+
+  if(!data?.length){
+
+    $("homeEvents")
+      .innerHTML =
+      '<div class="empty">予定はありません。</div>';
+
+    return;
+  }
+
+
+  $("homeEvents")
+    .innerHTML =
+    data.map(
+      item => `
+
+      <div class="item">
+
+        <div class="item-title">
+          📅 ${escapeHTML(item.title)}
+        </div>
+
+        <div class="item-meta">
+          ${escapeHTML(
+            item.event_date
+          )}
+
+          ${
+            item.event_time
+              ? " "+escapeHTML(
+                  item.event_time
+                )
+              : ""
+          }
+
+        </div>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* ==================================================
    DUTIES
-===================================================== */
+================================================== */
 
 async function loadDuties(){
 
@@ -2046,25 +2196,28 @@ async function loadDuties(){
       )
       .order("duty_date");
 
+
   if(error){
 
     console.error(error);
     return;
   }
 
-  const el =
-    $("dutiesList");
 
-  if(!data || !data.length){
+  if(!data?.length){
 
-    el.innerHTML =
+    $("dutiesList")
+      .innerHTML =
       '<div class="empty">当番はありません。</div>';
 
     return;
   }
 
-  el.innerHTML =
-    data.map(item=>`
+
+  $("dutiesList")
+    .innerHTML =
+    data.map(
+      item => `
 
       <div class="item ${
         item.completed
@@ -2081,8 +2234,7 @@ async function loadDuties(){
             </div>
 
             <div class="item-meta">
-              👤 担当：
-              ${escapeHTML(
+              👤 ${escapeHTML(
                 item.family_members?.name ||
                 "未設定"
               )}
@@ -2110,14 +2262,16 @@ async function loadDuties(){
 
         <button
           class="success"
-          onclick="toggleDuty(
-            '${item.id}',
-            ${!item.completed}
-          )">
+          onclick="
+            toggleDuty(
+              '${item.id}',
+              ${!item.completed}
+            )
+          ">
 
           ${
             item.completed
-              ? "↩ 未完了に戻す"
+              ? "↩ 戻す"
               : "✓ 完了"
           }
 
@@ -2125,12 +2279,16 @@ async function loadDuties(){
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-async function toggleDuty(id,value){
+async function toggleDuty(
+  id,
+  value
+){
 
   const {
     error
@@ -2140,7 +2298,11 @@ async function toggleDuty(id,value){
       .update({
         completed:value
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
+
 
   if(error){
 
@@ -2148,15 +2310,16 @@ async function toggleDuty(id,value){
     return;
   }
 
+
   await loadDuties();
   await loadHome();
 
 }
 
 
-/* =====================================================
+/* ==================================================
    TASKS
-===================================================== */
+================================================== */
 
 async function loadTasks(){
 
@@ -2176,25 +2339,28 @@ async function loadTasks(){
       )
       .order("due_date");
 
+
   if(error){
 
     console.error(error);
     return;
   }
 
-  const el =
-    $("tasksList");
 
-  if(!data || !data.length){
+  if(!data?.length){
 
-    el.innerHTML =
+    $("tasksList")
+      .innerHTML =
       '<div class="empty">やることはありません。</div>';
 
     return;
   }
 
-  el.innerHTML =
-    data.map(item=>`
+
+  $("tasksList")
+    .innerHTML =
+    data.map(
+      item => `
 
       <div class="item ${
         item.completed
@@ -2207,23 +2373,26 @@ async function loadTasks(){
           <div>
 
             <div class="item-title">
-              ✅ ${escapeHTML(item.title)}
+              ✅ ${escapeHTML(
+                item.title
+              )}
             </div>
 
             <div class="item-meta">
-              👤 担当：
-              ${escapeHTML(
+              👤 ${escapeHTML(
                 item.family_members?.name ||
                 "未設定"
               )}
             </div>
 
             <div class="item-meta">
-              📅 期限：
-              ${escapeHTML(
-                item.due_date ||
-                "なし"
-              )}
+              📅 ${
+                item.due_date
+                  ? escapeHTML(
+                      item.due_date
+                    )
+                  : "期限なし"
+              }
             </div>
 
           </div>
@@ -2242,14 +2411,16 @@ async function loadTasks(){
 
         <button
           class="success"
-          onclick="toggleTask(
-            '${item.id}',
-            ${!item.completed}
-          )">
+          onclick="
+            toggleTask(
+              '${item.id}',
+              ${!item.completed}
+            )
+          ">
 
           ${
             item.completed
-              ? "↩ 未完了に戻す"
+              ? "↩ 戻す"
               : "✓ 完了"
           }
 
@@ -2257,12 +2428,16 @@ async function loadTasks(){
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-async function toggleTask(id,value){
+async function toggleTask(
+  id,
+  value
+){
 
   const {
     error
@@ -2272,7 +2447,11 @@ async function toggleTask(id,value){
       .update({
         completed:value
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
+
 
   if(error){
 
@@ -2280,15 +2459,16 @@ async function toggleTask(id,value){
     return;
   }
 
+
   await loadTasks();
   await loadHome();
 
 }
 
 
-/* =====================================================
+/* ==================================================
    EVENTS
-===================================================== */
+================================================== */
 
 async function loadEvents(){
 
@@ -2303,8 +2483,8 @@ async function loadEvents(){
         "family_id",
         currentFamily.id
       )
-      .order("event_date")
-      .order("event_time");
+      .order("event_date");
+
 
   if(error){
 
@@ -2312,29 +2492,35 @@ async function loadEvents(){
     return;
   }
 
-  const el =
-    $("eventsList");
 
-  if(!data || !data.length){
+  if(!data?.length){
 
-    el.innerHTML =
+    $("eventsList")
+      .innerHTML =
       '<div class="empty">予定はありません。</div>';
 
     return;
   }
 
-  el.innerHTML =
-    data.map(item=>`
+
+  $("eventsList")
+    .innerHTML =
+    data.map(
+      item => `
 
       <div class="item">
 
         <div class="item-title">
-          📅 ${escapeHTML(item.title)}
+          📅 ${escapeHTML(
+            item.title
+          )}
         </div>
 
         <div class="item-meta">
           日付：
-          ${escapeHTML(item.event_date)}
+          ${escapeHTML(
+            item.event_date
+          )}
         </div>
 
         <div class="item-meta">
@@ -2347,26 +2533,27 @@ async function loadEvents(){
 
         ${
           item.description
-          ? `
-            <div class="item-meta">
-              📝 ${escapeHTML(
-                item.description
-              )}
-            </div>
-          `
-          : ""
+            ? `
+              <div class="item-meta">
+                📝 ${escapeHTML(
+                  item.description
+                )}
+              </div>
+            `
+            : ""
         }
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-/* =====================================================
+/* ==================================================
    MESSAGES
-===================================================== */
+================================================== */
 
 async function loadMessages(){
 
@@ -2388,53 +2575,61 @@ async function loadMessages(){
         }
       );
 
+
   if(error){
 
     console.error(error);
     return;
   }
 
-  const el =
-    $("messagesList");
 
-  if(!data || !data.length){
+  if(!data?.length){
 
-    el.innerHTML =
+    $("messagesList")
+      .innerHTML =
       '<div class="empty">メッセージはありません。</div>';
 
     return;
   }
 
-  el.innerHTML =
-    data.map(item=>`
+
+  $("messagesList")
+    .innerHTML =
+    data.map(
+      item => `
 
       <div class="item message-card">
 
         <div class="item-title">
-          💌 ${escapeHTML(item.title)}
+          💌 ${escapeHTML(
+            item.title
+          )}
         </div>
 
         <p>
-          ${escapeHTML(item.message)}
+          ${escapeHTML(
+            item.message
+          )}
         </p>
 
         <div class="item-meta">
-          送信者：
           ${escapeHTML(
-            item.sender || "親"
+            item.sender ||
+            "親"
           )}
         </div>
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-/* =====================================================
+/* ==================================================
    MEMBERS
-===================================================== */
+================================================== */
 
 async function loadMembers(){
 
@@ -2451,40 +2646,43 @@ async function loadMembers(){
       )
       .order("created_at");
 
+
   if(error){
 
     console.error(error);
     return;
   }
 
-  const el =
-    $("membersList");
 
-  if(!data || !data.length){
+  if(!data?.length){
 
-    el.innerHTML =
+    $("membersList")
+      .innerHTML =
       '<div class="empty">メンバーはいません。</div>';
 
     return;
   }
 
-  el.innerHTML =
-    data.map(member=>`
+
+  $("membersList")
+    .innerHTML =
+    data.map(
+      member => `
 
       <div class="item">
 
         <div class="item-top">
 
-          <div>
+          <div class="item-title">
 
-            <div class="item-title">
-              ${escapeHTML(
-                member.icon || "👤"
-              )}
-              ${escapeHTML(
-                member.name
-              )}
-            </div>
+            ${escapeHTML(
+              member.icon ||
+              "👤"
+            )}
+
+            ${escapeHTML(
+              member.name
+            )}
 
           </div>
 
@@ -2506,102 +2704,37 @@ async function loadMembers(){
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-/* =====================================================
-   HOME
-===================================================== */
+/* ==================================================
+   INVITE
+================================================== */
 
-async function loadHome(){
+async function loadInvite(){
 
-  const {
-    data:tasks
-  } =
-    await supabaseClient
-      .from("tasks")
-      .select("id")
-      .eq(
-        "family_id",
-        currentFamily.id
-      )
-      .eq(
-        "completed",
-        false
-      );
+  if(!isParent()){
 
-  const {
-    data:duties
-  } =
-    await supabaseClient
-      .from("duties")
-      .select("id")
-      .eq(
-        "family_id",
-        currentFamily.id
-      )
-      .eq(
-        "completed",
-        false
-      );
+    return;
+  }
 
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0,10);
-
-  const {
-    data:events
-  } =
-    await supabaseClient
-      .from("family_events")
-      .select("id")
-      .eq(
-        "family_id",
-        currentFamily.id
-      )
-      .gte(
-        "event_date",
-        today
-      );
-
-
-  $("dutyCount")
-    .textContent =
-      duties?.length || 0;
-
-  $("taskCount")
-    .textContent =
-      tasks?.length || 0;
-
-  $("eventCount")
-    .textContent =
-      events?.length || 0;
-
-  $("welcomeText")
-    .textContent =
-      `${currentMember.name}さん、こんにちは！`;
-
-
-  await loadLatestMessage();
-  await loadHomeEvents();
-
-}
-
-
-async function loadLatestMessage(){
 
   const {
     data
   } =
     await supabaseClient
-      .from("parent_messages")
+      .from("family_invites")
       .select("*")
       .eq(
         "family_id",
         currentFamily.id
+      )
+      .eq(
+        "used",
+        false
       )
       .order(
         "created_at",
@@ -2609,142 +2742,247 @@ async function loadLatestMessage(){
           ascending:false
         }
       )
-      .limit(1);
+      .limit(1)
+      .maybeSingle();
 
-  if(!data || !data.length){
 
-    $("latestMessage").innerHTML =
-      '<div class="empty">メッセージはありません。</div>';
+  if(data){
 
-    return;
+    currentInviteCode =
+      data.code;
+
+    $("inviteCode")
+      .textContent =
+      data.code;
+
+  }else{
+
+    $("inviteCode")
+      .textContent =
+      "------";
+
   }
-
-  const item =
-    data[0];
-
-  $("latestMessage").innerHTML = `
-
-    <div class="item message-card">
-
-      <div class="item-title">
-        💌 ${escapeHTML(item.title)}
-      </div>
-
-      <p>
-        ${escapeHTML(item.message)}
-      </p>
-
-      <div class="item-meta">
-        ${escapeHTML(
-          item.sender || "親"
-        )}
-      </div>
-
-    </div>
-
-  `;
 
 }
 
 
-async function loadHomeEvents(){
+async function createInvite(){
 
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0,10);
+  if(!isParent()){
+
+    alert(
+      "親だけが招待コードを発行できます。"
+    );
+
+    return;
+  }
+
+
+  const code =
+    generateCode();
+
 
   const {
     data,
     error
   } =
     await supabaseClient
-      .from("family_events")
-      .select("*")
-      .eq(
-        "family_id",
-        currentFamily.id
-      )
-      .gte(
-        "event_date",
-        today
-      )
-      .order("event_date")
-      .order("event_time")
-      .limit(5);
+      .from("family_invites")
+      .insert({
+        family_id:
+          currentFamily.id,
 
-  if(error)return;
+        code:
+          code,
 
-  if(!data || !data.length){
+        created_by:
+          currentUser.id,
 
-    $("homeEvents").innerHTML =
-      '<div class="empty">予定はありません。</div>';
+        used:
+          false
+      })
+      .select()
+      .single();
+
+
+  if(error){
+
+    alert(
+      "招待コードを作成できません。\n\n"+
+      error.message
+    );
 
     return;
   }
 
-  $("homeEvents").innerHTML =
-    data.map(item=>`
 
-      <div class="item">
+  currentInviteCode =
+    data.code;
 
-        <div class="item-title">
-          📅 ${escapeHTML(item.title)}
-        </div>
 
-        <div class="item-meta">
-          ${escapeHTML(item.event_date)}
-          ${
-            item.event_time
-              ? " "+escapeHTML(
-                  item.event_time
-                )
-              : ""
-          }
-        </div>
+  $("inviteCode")
+    .textContent =
+    data.code;
 
-      </div>
 
-    `).join("");
+  showToast(
+    "招待コードを発行しました"
+  );
 
 }
 
 
-/* =====================================================
+function copyInvite(){
+
+  if(!currentInviteCode){
+
+    alert(
+      "先に招待コードを発行してください。"
+    );
+
+    return;
+  }
+
+
+  navigator.clipboard
+    .writeText(
+      currentInviteCode
+    )
+    .then(
+      ()=>{
+        showToast(
+          "コピーしました"
+        );
+      }
+    );
+
+}
+
+
+/* ==================================================
+   MODAL
+================================================== */
+
+function openModal(){
+
+  $("modal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+function closeModal(){
+
+  $("modal")
+    .classList.remove(
+      "show"
+    );
+
+  currentForm =
+    null;
+
+}
+
+
+async function fillMemberSelect(){
+
+  const {
+    data
+  } =
+    await supabaseClient
+      .from("family_members")
+      .select(
+        "id,name,role"
+      )
+      .eq(
+        "family_id",
+        currentFamily.id
+      );
+
+
+  const select =
+    $("formMember");
+
+
+  if(!select){
+
+    return;
+  }
+
+
+  data?.forEach(
+    member => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        member.id;
+
+      option.textContent =
+        (
+          member.role === "parent"
+            ? "👑 "
+            : "🧒 "
+        )+
+        member.name;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+/* ==================================================
    DUTY MODAL
-===================================================== */
+================================================== */
 
 async function openDutyModal(){
 
   if(!isParent()){
 
-    alert(
-      "親だけが当番を追加できます。"
-    );
-
     return;
   }
 
-  currentForm = "duty";
+
+  currentForm =
+    "duty";
+
 
   $("modalTitle")
     .textContent =
-      "📋 当番を追加";
+    "📋 当番を追加";
 
-  $("modalContent").innerHTML = `
+
+  $("modalContent")
+    .innerHTML = `
 
     <div class="field">
 
-      <label>当番名</label>
+      <label>
+        当番名
+      </label>
 
-      <input id="formTitleInput"
-             placeholder="例：ゴミ出し">
+      <input
+        id="formTitleInput"
+        placeholder="例：ゴミ出し"
+      >
 
     </div>
 
     <div class="field">
 
-      <label>担当者</label>
+      <label>
+        担当者
+      </label>
 
       <select id="formMember">
 
@@ -2758,14 +2996,19 @@ async function openDutyModal(){
 
     <div class="field">
 
-      <label>日付</label>
+      <label>
+        日付
+      </label>
 
-      <input id="formDate"
-             type="date">
+      <input
+        id="formDate"
+        type="date"
+      >
 
     </div>
 
   `;
+
 
   await fillMemberSelect();
 
@@ -2774,41 +3017,48 @@ async function openDutyModal(){
 }
 
 
-/* =====================================================
+/* ==================================================
    TASK MODAL
-===================================================== */
+================================================== */
 
 async function openTaskModal(){
 
   if(!isParent()){
 
-    alert(
-      "親だけがやることを追加できます。"
-    );
-
     return;
   }
 
-  currentForm = "task";
+
+  currentForm =
+    "task";
+
 
   $("modalTitle")
     .textContent =
-      "✅ やることを追加";
+    "✅ やることを追加";
 
-  $("modalContent").innerHTML = `
+
+  $("modalContent")
+    .innerHTML = `
 
     <div class="field">
 
-      <label>やること</label>
+      <label>
+        やること
+      </label>
 
-      <input id="formTitleInput"
-             placeholder="例：宿題をする">
+      <input
+        id="formTitleInput"
+        placeholder="例：宿題をする"
+      >
 
     </div>
 
     <div class="field">
 
-      <label>担当者</label>
+      <label>
+        担当者
+      </label>
 
       <select id="formMember">
 
@@ -2822,14 +3072,19 @@ async function openTaskModal(){
 
     <div class="field">
 
-      <label>期限</label>
+      <label>
+        期限
+      </label>
 
-      <input id="formDate"
-             type="date">
+      <input
+        id="formDate"
+        type="date"
+      >
 
     </div>
 
   `;
+
 
   await fillMemberSelect();
 
@@ -2838,190 +3093,172 @@ async function openTaskModal(){
 }
 
 
-/* =====================================================
+/* ==================================================
    EVENT MODAL
-===================================================== */
+================================================== */
 
-async function openEventModal(){
+function openEventModal(){
 
   if(!isParent()){
-
-    alert(
-      "親だけが予定を追加できます。"
-    );
 
     return;
   }
 
-  currentForm = "event";
+
+  currentForm =
+    "event";
+
 
   $("modalTitle")
     .textContent =
-      "📅 予定を追加";
+    "📅 予定を追加";
 
-  $("modalContent").innerHTML = `
+
+  $("modalContent")
+    .innerHTML = `
 
     <div class="field">
 
-      <label>予定名</label>
+      <label>
+        予定名
+      </label>
 
-      <input id="formTitleInput"
-             placeholder="例：家族旅行">
+      <input
+        id="formTitleInput"
+        placeholder="例：家族旅行"
+      >
 
     </div>
 
     <div class="field">
 
-      <label>日付</label>
+      <label>
+        日付
+      </label>
 
-      <input id="formDate"
-             type="date">
-
-    </div>
-
-    <div class="field">
-
-      <label>時間</label>
-
-      <input id="formTime"
-             placeholder="例：18:00">
+      <input
+        id="formDate"
+        type="date"
+      >
 
     </div>
 
     <div class="field">
 
-      <label>詳細</label>
+      <label>
+        時間
+      </label>
 
-      <textarea id="formDescription"
-                placeholder="予定の詳細"></textarea>
+      <input
+        id="formTime"
+        placeholder="18:00"
+      >
+
+    </div>
+
+    <div class="field">
+
+      <label>
+        詳細
+      </label>
+
+      <textarea
+        id="formDescription"
+        placeholder="予定の詳細">
+      </textarea>
 
     </div>
 
   `;
+
 
   openModal();
 
 }
 
 
-/* =====================================================
+/* ==================================================
    MESSAGE MODAL
-===================================================== */
+================================================== */
 
-async function openMessageModal(){
+function openMessageModal(){
 
   if(!isParent()){
-
-    alert(
-      "親だけがメッセージを送れます。"
-    );
 
     return;
   }
 
-  currentForm = "message";
+
+  currentForm =
+    "message";
+
 
   $("modalTitle")
     .textContent =
-      "💌 親からのメッセージ";
+    "💌 メッセージを送る";
 
-  $("modalContent").innerHTML = `
+
+  $("modalContent")
+    .innerHTML = `
 
     <div class="field">
 
-      <label>タイトル</label>
+      <label>
+        タイトル
+      </label>
 
-      <input id="formTitleInput"
-             placeholder="例：明日の予定">
+      <input
+        id="formTitleInput"
+        placeholder="例：明日の予定"
+      >
 
     </div>
 
     <div class="field">
 
-      <label>メッセージ</label>
+      <label>
+        メッセージ
+      </label>
 
-      <textarea id="formMessage"
-                placeholder="家族へのメッセージ"></textarea>
+      <textarea
+        id="formMessage"
+        placeholder="家族へのメッセージ">
+      </textarea>
 
     </div>
 
   `;
+
 
   openModal();
 
 }
 
 
-/* =====================================================
-   MEMBER SELECT
-===================================================== */
-
-async function fillMemberSelect(){
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("family_members")
-      .select("id,name,role")
-      .eq(
-        "family_id",
-        currentFamily.id
-      )
-      .order("created_at");
-
-  if(error)return;
-
-  const select =
-    $("formMember");
-
-  if(!select)return;
-
-  data.forEach(member=>{
-
-    const option =
-      document.createElement("option");
-
-    option.value =
-      member.id;
-
-    option.textContent =
-      `${
-        member.role === "parent"
-          ? "👑"
-          : "🧒"
-      } ${member.name}`;
-
-    select.appendChild(option);
-
-  });
-
-}
-
-
-/* =====================================================
-   SAVE MODAL
-===================================================== */
+/* ==================================================
+   SAVE
+================================================== */
 
 async function saveModal(){
 
   if(!isParent()){
 
-    alert(
-      "親だけが追加できます。"
-    );
-
     return;
   }
 
+
   const title =
-    $("formTitleInput")?.value
+    $("formTitleInput")
+      ?.value
       .trim();
+
 
   if(!title){
 
-    alert("タイトルを入力してください。");
+    alert(
+      "タイトルを入力してください。"
+    );
+
     return;
   }
 
@@ -3029,16 +3266,23 @@ async function saveModal(){
   if(currentForm === "duty"){
 
     const memberId =
-      $("formMember").value;
+      $("formMember")
+        .value;
 
     const date =
-      $("formDate").value;
+      $("formDate")
+        .value;
+
 
     if(!date){
 
-      alert("日付を入力してください。");
+      alert(
+        "日付を入力してください。"
+      );
+
       return;
     }
+
 
     const {
       error
@@ -3046,12 +3290,22 @@ async function saveModal(){
       await supabaseClient
         .from("duties")
         .insert({
-          family_id:currentFamily.id,
+          family_id:
+            currentFamily.id,
+
           member_id:
             memberId || null,
-          title:title,
-          duty_date:date
+
+          title:
+            title,
+
+          duty_date:
+            date,
+
+          completed:
+            false
         });
+
 
     if(error){
 
@@ -3065,10 +3319,13 @@ async function saveModal(){
   if(currentForm === "task"){
 
     const memberId =
-      $("formMember").value;
+      $("formMember")
+        .value;
 
     const date =
-      $("formDate").value;
+      $("formDate")
+        .value;
+
 
     const {
       error
@@ -3076,13 +3333,22 @@ async function saveModal(){
       await supabaseClient
         .from("tasks")
         .insert({
-          family_id:currentFamily.id,
+          family_id:
+            currentFamily.id,
+
           member_id:
             memberId || null,
-          title:title,
+
+          title:
+            title,
+
           due_date:
-            date || null
+            date || null,
+
+          completed:
+            false
         });
+
 
     if(error){
 
@@ -3096,13 +3362,19 @@ async function saveModal(){
   if(currentForm === "event"){
 
     const date =
-      $("formDate").value;
+      $("formDate")
+        .value;
+
 
     if(!date){
 
-      alert("日付を入力してください。");
+      alert(
+        "日付を入力してください。"
+      );
+
       return;
     }
+
 
     const {
       error
@@ -3110,14 +3382,26 @@ async function saveModal(){
       await supabaseClient
         .from("family_events")
         .insert({
-          family_id:currentFamily.id,
-          title:title,
-          event_date:date,
+          family_id:
+            currentFamily.id,
+
+          title:
+            title,
+
+          event_date:
+            date,
+
           event_time:
-            $("formTime").value.trim(),
+            $("formTime")
+              .value
+              .trim(),
+
           description:
-            $("formDescription").value.trim()
+            $("formDescription")
+              .value
+              .trim()
         });
+
 
     if(error){
 
@@ -3131,13 +3415,20 @@ async function saveModal(){
   if(currentForm === "message"){
 
     const message =
-      $("formMessage").value.trim();
+      $("formMessage")
+        .value
+        .trim();
+
 
     if(!message){
 
-      alert("メッセージを入力してください。");
+      alert(
+        "メッセージを入力してください。"
+      );
+
       return;
     }
+
 
     const {
       error
@@ -3145,11 +3436,19 @@ async function saveModal(){
       await supabaseClient
         .from("parent_messages")
         .insert({
-          family_id:currentFamily.id,
-          title:title,
-          message:message,
-          sender:currentMember.name
+          family_id:
+            currentFamily.id,
+
+          title:
+            title,
+
+          message:
+            message,
+
+          sender:
+            currentMember.name
         });
+
 
     if(error){
 
@@ -3164,74 +3463,52 @@ async function saveModal(){
 
   await loadAll();
 
-  showToast("保存しました！");
+  showToast(
+    "保存しました！"
+  );
 
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
-
-function openModal(){
-
-  $("modal")
-    .classList.add("show");
-
-}
-
-
-function closeModal(){
-
-  $("modal")
-    .classList.remove("show");
-
-  currentForm = null;
-
-}
-
-
-/* =====================================================
+/* ==================================================
    LOAD ALL
-===================================================== */
+================================================== */
 
 async function loadAll(){
 
-  await loadHome();
-
-  await loadDuties();
-
-  await loadTasks();
-
-  await loadEvents();
-
-  await loadMessages();
-
-  await loadMembers();
-
-  await loadInvite();
+  await Promise.all([
+    loadHome(),
+    loadDuties(),
+    loadTasks(),
+    loadEvents(),
+    loadMessages(),
+    loadMembers(),
+    loadInvite()
+  ]);
 
 }
 
 
-/* =====================================================
+/* ==================================================
    AUTH STATE
-===================================================== */
+================================================== */
 
 supabaseClient.auth
   .onAuthStateChange(
-    async(event,session)=>{
+    async (
+      event,
+      session
+    )=>{
 
-      if(session){
+      if(
+        session &&
+        !currentMember
+      ){
 
         currentUser =
           session.user;
 
-        if(!currentFamily){
-
-          await findMember();
-
-        }
+        await findMember();
 
       }
 
@@ -3239,11 +3516,28 @@ supabaseClient.auth
   );
 
 
-/* =====================================================
+/* ==================================================
    START
-===================================================== */
+================================================== */
 
-initialize();
+(async()=>{
+
+  const {
+    data
+  } =
+    await supabaseClient.auth
+      .getSession();
+
+  if(data.session){
+
+    currentUser =
+      data.session.user;
+
+    await findMember();
+
+  }
+
+})();
 
 </script>
 
