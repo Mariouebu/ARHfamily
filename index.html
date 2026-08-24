@@ -14,12 +14,17 @@
 
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:
+    -apple-system,BlinkMacSystemFont,
+    "Segoe UI","Noto Sans JP",sans-serif;
   background:#f4f7fb;
   color:#172033;
 }
 
-button,input,textarea,select{
+button,
+input,
+textarea,
+select{
   font:inherit;
 }
 
@@ -31,53 +36,38 @@ button{
   display:none!important;
 }
 
-#authPage{
+/* LOGIN */
+
+#loginPage{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
+  background:
+    linear-gradient(135deg,#5b8def,#7c5cff);
 }
 
-.auth-box{
+.login-box{
   width:100%;
-  max-width:430px;
-  background:#fff;
+  max-width:460px;
+  background:white;
   border-radius:24px;
   padding:30px;
-  box-shadow:0 15px 50px rgba(0,0,0,.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 
 .logo{
   text-align:center;
-  font-size:30px;
-  font-weight:800;
+  font-size:34px;
+  font-weight:900;
   margin-bottom:8px;
 }
 
 .subtitle{
   text-align:center;
-  color:#718096;
+  color:#68738a;
   margin-bottom:25px;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:20px;
-}
-
-.tabs button{
-  flex:1;
-  border:0;
-  padding:12px;
-  border-radius:12px;
-  background:#edf1f7;
-}
-
-.tabs button.active{
-  background:#315efb;
-  color:#fff;
 }
 
 .field{
@@ -87,85 +77,99 @@ button{
 .field label{
   display:block;
   font-weight:700;
-  margin-bottom:7px;
+  margin-bottom:6px;
 }
 
-input,
-textarea,
-select{
+.field input,
+.field textarea,
+.field select{
   width:100%;
-  border:1px solid #d9e0ea;
+  border:1px solid #d8dfeb;
   border-radius:12px;
-  padding:12px 14px;
+  padding:12px;
   background:#fff;
-  outline:none;
 }
 
-textarea{
-  min-height:120px;
+.field textarea{
+  min-height:100px;
   resize:vertical;
 }
 
 .primary{
-  width:100%;
   border:0;
-  padding:13px 18px;
+  background:#5b7cfa;
+  color:white;
+  padding:12px 18px;
   border-radius:12px;
-  background:#315efb;
-  color:#fff;
-  font-weight:700;
+  font-weight:800;
 }
 
-.secondary{
+.primary:hover{
+  opacity:.9;
+}
+
+.gray{
   border:0;
-  padding:9px 13px;
-  border-radius:10px;
-  background:#edf1f7;
+  background:#e9edf5;
+  color:#263149;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:700;
 }
 
 .danger{
   border:0;
-  padding:9px 13px;
-  border-radius:10px;
-  background:#ffe5e5;
-  color:#d93025;
-}
-
-.successBtn{
-  border:0;
-  padding:9px 13px;
-  border-radius:10px;
-  background:#e3f7ea;
-  color:#16834a;
-}
-
-.error{
-  color:#d93025;
-  margin-top:12px;
-  white-space:pre-wrap;
+  background:#ef4444;
+  color:white;
+  padding:8px 12px;
+  border-radius:9px;
+  font-weight:700;
 }
 
 .success{
-  color:#16834a;
+  border:0;
+  background:#16a34a;
+  color:white;
+  padding:8px 12px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+.login-actions{
+  display:grid;
+  gap:10px;
+  margin-top:20px;
+}
+
+.error{
+  color:#dc2626;
+  font-weight:700;
   margin-top:12px;
 }
 
-.topbar{
-  height:64px;
-  background:#fff;
-  border-bottom:1px solid #e3e8f0;
+/* APP */
+
+#app{
+  display:none;
+  min-height:100vh;
+}
+
+.header{
+  height:70px;
+  background:white;
+  border-bottom:1px solid #e2e7f0;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 20px;
+  padding:0 22px;
   position:sticky;
   top:0;
   z-index:20;
 }
 
-.top-title{
-  font-size:20px;
-  font-weight:800;
+.header-title{
+  font-size:21px;
+  font-weight:900;
 }
 
 .user-info{
@@ -174,62 +178,50 @@ textarea{
   gap:10px;
 }
 
-.role{
-  padding:5px 9px;
-  border-radius:999px;
+.role-badge{
+  padding:6px 10px;
+  border-radius:20px;
+  background:#eef2ff;
+  color:#4f46e5;
+  font-weight:800;
   font-size:12px;
-  font-weight:700;
-  background:#edf1f7;
-}
-
-.role.parent{
-  background:#fff0c2;
-}
-
-.role.child{
-  background:#e3f1ff;
-}
-
-.logout{
-  border:0;
-  padding:8px 12px;
-  border-radius:10px;
-  background:#f0f2f5;
 }
 
 .layout{
   display:flex;
-  min-height:calc(100vh - 64px);
+  min-height:calc(100vh - 70px);
 }
 
 .sidebar{
   width:240px;
-  background:#fff;
-  border-right:1px solid #e3e8f0;
+  background:#111827;
+  color:white;
   padding:15px;
+  flex-shrink:0;
 }
 
-.nav{
+.sidebar button{
   width:100%;
   border:0;
   background:transparent;
+  color:#dbe2ef;
   text-align:left;
-  padding:12px;
-  border-radius:12px;
-  margin-bottom:5px;
-  font-weight:600;
+  padding:13px;
+  border-radius:10px;
+  margin-bottom:4px;
+  font-weight:700;
 }
 
-.nav:hover,
-.nav.active{
-  background:#edf2ff;
-  color:#315efb;
+.sidebar button:hover,
+.sidebar button.active{
+  background:#293548;
+  color:white;
 }
 
 .main{
   flex:1;
   padding:25px;
-  max-width:1300px;
+  max-width:1400px;
 }
 
 .page{
@@ -241,132 +233,81 @@ textarea{
 }
 
 .page-title{
-  font-size:28px;
-  margin:0 0 20px;
+  margin-top:0;
+  font-size:30px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:15px;
+  grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
 }
 
 .card{
-  background:#fff;
+  background:white;
   border-radius:18px;
   padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,.05);
+  box-shadow:0 4px 18px rgba(25,35,55,.06);
+  margin-bottom:16px;
 }
 
-.card h3{
+.card h2{
   margin-top:0;
 }
 
 .item{
-  background:#fff;
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:12px;
-  box-shadow:0 4px 15px rgba(0,0,0,.05);
+  background:#f8fafc;
+  border:1px solid #e4e9f2;
+  border-radius:14px;
+  padding:15px;
+  margin-top:10px;
 }
 
 .item-title{
-  font-size:18px;
-  font-weight:800;
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:8px;
 }
 
 .item-meta{
+  color:#6b7280;
   font-size:13px;
-  color:#718096;
-  margin-top:6px;
+  margin-top:5px;
 }
 
-.item p{
-  white-space:pre-wrap;
-  line-height:1.7;
+.stat{
+  font-size:25px;
+  font-weight:900;
+  margin-top:5px;
+}
+
+.empty{
+  padding:20px;
+  text-align:center;
+  color:#7b8497;
 }
 
 .actions{
   display:flex;
   gap:8px;
-  margin-top:12px;
   flex-wrap:wrap;
+  margin-top:12px;
 }
 
-.empty{
-  padding:30px;
-  text-align:center;
-  color:#718096;
-}
-
-.stat{
-  font-size:32px;
-  font-weight:800;
-}
-
-.stat-label{
-  color:#718096;
-}
-
-.family-code{
-  font-size:28px;
-  font-weight:800;
-  letter-spacing:4px;
-  text-align:center;
-  padding:15px;
-  background:#f3f5f9;
-  border-radius:14px;
-}
-
-.mobile-menu{
-  display:none;
-  border:0;
-  background:#edf1f7;
-  border-radius:10px;
-  padding:8px 12px;
-  margin-right:10px;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.badge-new{
-  background:#fff0c2;
-  color:#8a6200;
-}
-
-.badge-work{
-  background:#e3f1ff;
-  color:#1557a5;
-}
-
-.badge-done{
-  background:#e3f7ea;
-  color:#16834a;
-}
-
-.reply-box{
-  margin-top:15px;
-  padding:15px;
-  background:#f4f7fb;
+.notice{
+  padding:12px;
   border-radius:12px;
+  background:#eff6ff;
+  margin-top:10px;
 }
 
-.reply-title{
-  font-weight:800;
-  margin-bottom:8px;
-}
+/* MODAL */
 
-.modal-bg{
+#modalLayer{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
+  background:rgba(15,23,42,.55);
   display:none;
   align-items:center;
   justify-content:center;
@@ -374,87 +315,58 @@ textarea{
   z-index:100;
 }
 
-.modal-bg.show{
-  display:flex;
-}
-
 .modal{
   width:100%;
   max-width:600px;
   max-height:90vh;
   overflow:auto;
-  background:#fff;
+  background:white;
   border-radius:20px;
-  padding:25px;
+  padding:24px;
 }
 
-.modal-head{
+.modal-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
+  justify-content:space-between;
 }
 
-.modal-head h2{
-  margin:0;
-}
-
-.close{
+.modal-close{
   border:0;
-  background:#edf1f7;
-  width:36px;
-  height:36px;
+  background:#eef2f7;
+  width:38px;
+  height:38px;
   border-radius:50%;
+  font-size:20px;
 }
 
-.modal-actions{
-  display:flex;
-  gap:10px;
-  margin-top:20px;
-}
-
-.modal-actions button{
-  flex:1;
-}
-
-a{
-  color:#315efb;
-  font-weight:700;
-}
+/* MOBILE */
 
 @media(max-width:800px){
 
-  .layout{
-    display:block;
-  }
-
   .sidebar{
-    position:fixed;
-    left:-270px;
-    top:64px;
-    bottom:0;
-    z-index:50;
-    transition:.2s;
-    box-shadow:10px 0 30px rgba(0,0,0,.1);
+    width:72px;
+    padding:8px;
   }
 
-  .sidebar.open{
-    left:0;
+  .sidebar button{
+    font-size:0;
+    text-align:center;
   }
 
-  .mobile-menu{
-    display:block;
+  .sidebar button:first-letter{
+    font-size:22px;
   }
 
   .main{
     padding:15px;
   }
 
-  .page-title{
-    font-size:23px;
+  .header-title{
+    font-size:17px;
   }
 
-  #headerUserName{
+  .user-info span{
     display:none;
   }
 }
@@ -463,545 +375,562 @@ a{
 
 <body>
 
-<!-- ==============================
-     LOGIN
-============================== -->
+<!-- LOGIN -->
 
-<div id="authPage">
+<div id="loginPage">
 
-<div class="auth-box">
+  <div class="login-box">
 
-<div class="logo">
-👨‍👩‍👧 家族ホーム
-</div>
+    <div class="logo">
+      👨‍👩‍👧 家族ホーム
+    </div>
 
-<div class="subtitle">
-家族の予定・当番・法律・ニュース・お問い合わせ
-</div>
+    <div class="subtitle">
+      家族専用の管理アプリ
+    </div>
 
-<div class="tabs">
+    <div class="field">
+      <label>メールアドレス</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="family@example.com">
+    </div>
 
-<button id="loginTab"
-class="active"
-onclick="showAuth('login')">
-ログイン
-</button>
+    <div class="field">
+      <label>パスワード</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="パスワード">
+    </div>
 
-<button id="registerTab"
-onclick="showAuth('register')">
-新規登録
-</button>
+    <div class="field">
+      <label>家族コード</label>
+      <input
+        id="familyCode"
+        placeholder="家族コード">
+    </div>
 
-</div>
+    <div class="login-actions">
 
-<div id="loginForm">
+      <button
+        class="primary"
+        onclick="login()">
+        🔐 ログイン
+      </button>
 
-<div class="field">
-<label>メールアドレス</label>
-<input
-id="loginEmail"
-type="email"
-autocomplete="email"
-placeholder="example@email.com">
-</div>
+      <button
+        class="gray"
+        onclick="register()">
+        📝 新規登録
+      </button>
 
-<div class="field">
-<label>パスワード</label>
-<input
-id="loginPassword"
-type="password"
-autocomplete="current-password">
-</div>
+    </div>
 
-<button class="primary"
-onclick="login()">
-ログイン
-</button>
+    <div
+      id="loginError"
+      class="error">
+    </div>
 
-</div>
-
-<div id="registerForm" class="hidden">
-
-<div class="field">
-<label>名前</label>
-<input
-id="registerName"
-autocomplete="name"
-placeholder="太郎">
-</div>
-
-<div class="field">
-<label>メールアドレス</label>
-<input
-id="registerEmail"
-type="email"
-autocomplete="email"
-placeholder="example@email.com">
-</div>
-
-<div class="field">
-<label>パスワード</label>
-<input
-id="registerPassword"
-type="password"
-autocomplete="new-password"
-placeholder="6文字以上">
-</div>
-
-<div class="field">
-
-<label>家族の作成方法</label>
-
-<select id="familyMode">
-
-<option value="create">
-新しい家族を作る
-</option>
-
-<option value="join">
-既存の家族に参加する
-</option>
-
-</select>
+  </div>
 
 </div>
 
-<div id="familyNameField"
-class="field">
 
-<label>家族名</label>
+<!-- APP -->
 
-<input
-id="registerFamilyName"
-placeholder="山田家">
+<div id="app">
 
-</div>
+<header class="header">
 
-<div id="familyCodeField"
-class="field hidden">
+  <div class="header-title">
+    👨‍👩‍👧 家族ホーム
+  </div>
 
-<label>家族コード</label>
+  <div class="user-info">
 
-<input
-id="registerFamilyCode"
-placeholder="例：AB12CD">
+    <span id="userName"></span>
 
-</div>
+    <span
+      id="roleBadge"
+      class="role-badge">
+    </span>
 
-<button class="primary"
-onclick="register()">
-登録する
-</button>
+    <button
+      class="gray"
+      onclick="logout()">
+      ログアウト
+    </button>
 
-</div>
-
-<div id="authMessage"></div>
-
-</div>
-</div>
-
-
-<!-- ==============================
-     APP
-============================== -->
-
-<div id="app" class="hidden">
-
-<header class="topbar">
-
-<div style="display:flex;align-items:center">
-
-<button class="mobile-menu"
-onclick="toggleSidebar()">
-☰
-</button>
-
-<div class="top-title">
-👨‍👩‍👧 家族ホーム
-</div>
-
-</div>
-
-<div class="user-info">
-
-<span id="headerUserName"></span>
-
-<span id="headerRole"
-class="role">
-</span>
-
-<button class="logout"
-onclick="logout()">
-ログアウト
-</button>
-
-</div>
+  </div>
 
 </header>
 
+
 <div class="layout">
 
-<aside id="sidebar"
-class="sidebar">
+<aside class="sidebar">
 
-<button class="nav active"
-onclick="showPage('home',this)">
-🏠 ホーム
-</button>
+  <button
+    class="active"
+    onclick="showPage('home',this)">
+    🏠 ホーム
+  </button>
 
-<button class="nav"
-onclick="showPage('duties',this)">
-📋 当番表
-</button>
+  <button
+    onclick="showPage('laws',this)">
+    ⚖️ 家族の法律
+  </button>
 
-<button class="nav"
-onclick="showPage('tasks',this)">
-✅ やること
-</button>
+  <button
+    onclick="showPage('news',this)">
+    📰 家族ニュース
+  </button>
 
-<button class="nav"
-onclick="showPage('events',this)">
-📅 予定表
-</button>
+  <button
+    onclick="showPage('schedule',this)">
+    📅 予定表
+  </button>
 
-<button class="nav"
-onclick="showPage('messages',this)">
-💌 親からのメッセージ
-</button>
+  <button
+    onclick="showPage('duties',this)">
+    🔄 当番表
+  </button>
 
-<button class="nav"
-onclick="showPage('laws',this)">
-⚖️ 法律・罰金
-</button>
+  <button
+    onclick="showPage('messages',this)">
+    💬 親からのメッセージ
+  </button>
 
-<button class="nav"
-onclick="showPage('news',this)">
-📰 家族ニュース
-</button>
+  <button
+    onclick="showPage('todos',this)">
+    ✅ やること
+  </button>
 
-<button class="nav"
-onclick="showPage('contacts',this)">
-📩 お問い合わせ
-</button>
+  <button
+    onclick="showPage('contact',this)">
+    📩 お問い合わせ
+  </button>
 
-<button class="nav"
-onclick="showPage('members',this)">
-👨‍👩‍👧 家族メンバー
-</button>
+  <button
+    onclick="showPage('children',this)">
+    🧒 子どもページ
+  </button>
 
 </aside>
 
 
 <main class="main">
 
+
 <!-- HOME -->
 
-<section id="page-home"
-class="page active">
+<section
+  id="page-home"
+  class="page active">
 
-<h1 class="page-title">
-🏠 ホーム
-</h1>
+  <h1 class="page-title">
+    🏠 家族ホーム
+  </h1>
 
-<div class="grid">
+  <div class="grid">
 
-<div class="card">
-<h3>👨‍👩‍👧 家族</h3>
-<div id="homeFamilyName"
-class="stat">-</div>
-<div class="stat-label">家族名</div>
-</div>
+    <div class="card">
+      <h2>⚖️ 家族の法律</h2>
+      <p>
+        家族で決めたルールを確認できます。
+      </p>
+    </div>
 
-<div class="card">
-<h3>📋 当番</h3>
-<div id="homeDuties"
-class="stat">0</div>
-<div class="stat-label">登録数</div>
-</div>
+    <div class="card">
+      <h2>📰 ニュース</h2>
+      <p>
+        家族のお知らせを確認できます。
+      </p>
+    </div>
 
-<div class="card">
-<h3>⚖️ 法律</h3>
-<div id="homeLaws"
-class="stat">0</div>
-<div class="stat-label">家族専用</div>
-</div>
+    <div class="card">
+      <h2>📅 予定</h2>
+      <p>
+        家族の予定を確認できます。
+      </p>
+    </div>
 
-<div class="card">
-<h3>📰 ニュース</h3>
-<div id="homeNews"
-class="stat">0</div>
-<div class="stat-label">家族専用</div>
-</div>
+    <div class="card">
+      <h2>🧒 子どもページ</h2>
+      <p>
+        子ども専用の情報を確認できます。
+      </p>
+    </div>
 
-</div>
-
-<div class="card">
-
-<h3>🔑 家族コード</h3>
-
-<div id="homeFamilyCode"
-class="family-code">
--
-</div>
-
-<p>
-このコードを家族に教えて参加してもらえます。
-</p>
-
-</div>
-
-</section>
-
-
-<!-- DUTIES -->
-
-<section id="page-duties"
-class="page">
-
-<h1 class="page-title">
-📋 当番表
-</h1>
-
-<div class="card">
-
-<button id="addDutyButton"
-class="primary"
-onclick="openDutyModal()">
-＋ 当番を追加
-</button>
-
-</div>
-
-<div id="dutiesList"></div>
-
-</section>
-
-
-<!-- TASKS -->
-
-<section id="page-tasks"
-class="page">
-
-<h1 class="page-title">
-✅ やること
-</h1>
-
-<div class="card">
-
-<button id="addTaskButton"
-class="primary"
-onclick="openTaskModal()">
-＋ やることを追加
-</button>
-
-</div>
-
-<div id="tasksList"></div>
-
-</section>
-
-
-<!-- EVENTS -->
-
-<section id="page-events"
-class="page">
-
-<h1 class="page-title">
-📅 予定表
-</h1>
-
-<div class="card">
-
-<button id="addEventButton"
-class="primary"
-onclick="openEventModal()">
-＋ 予定を追加
-</button>
-
-</div>
-
-<div id="eventsList"></div>
-
-</section>
-
-
-<!-- MESSAGES -->
-
-<section id="page-messages"
-class="page">
-
-<h1 class="page-title">
-💌 親からのメッセージ
-</h1>
-
-<div class="card">
-
-<button id="addMessageButton"
-class="primary"
-onclick="openMessageModal()">
-＋ メッセージを送る
-</button>
-
-</div>
-
-<div id="messagesList"></div>
+  </div>
 
 </section>
 
 
 <!-- LAWS -->
 
-<section id="page-laws"
-class="page">
+<section
+  id="page-laws"
+  class="page">
 
-<h1 class="page-title">
-⚖️ 家族の法律・罰金
-</h1>
+  <h1 class="page-title">
+    ⚖️ 家族の法律
+  </h1>
 
-<div class="card">
+  <div class="card">
 
-<p>
-家族だけで共有する法律・罰金・家族ルールです。
-</p>
+    <button
+      id="addLawButton"
+      class="primary"
+      onclick="openLawModal()">
+      ＋ 法律を追加
+    </button>
 
-<button id="addLawButton"
-class="primary"
-onclick="openLawModal()">
-＋ 法律・罰金を追加
-</button>
+    <div id="lawsList"></div>
 
-</div>
-
-<div id="lawsList"></div>
+  </div>
 
 </section>
 
 
 <!-- NEWS -->
 
-<section id="page-news"
-class="page">
+<section
+  id="page-news"
+  class="page">
 
-<h1 class="page-title">
-📰 家族ニュース
-</h1>
+  <h1 class="page-title">
+    📰 家族ニュース
+  </h1>
 
-<div class="card">
+  <div class="card">
 
-<p>
-家族だけで共有するニュースです。
-</p>
+    <button
+      id="addNewsButton"
+      class="primary"
+      onclick="openNewsModal()">
+      ＋ ニュースを追加
+    </button>
 
-<button id="addNewsButton"
-class="primary"
-onclick="openNewsModal()">
-＋ ニュースを追加
-</button>
+    <div id="newsList"></div>
 
-</div>
-
-<div id="newsList"></div>
+  </div>
 
 </section>
 
 
-<!-- CONTACTS -->
+<!-- SCHEDULE -->
 
-<section id="page-contacts"
-class="page">
+<section
+  id="page-schedule"
+  class="page">
 
-<h1 class="page-title">
-📩 お問い合わせ
-</h1>
+  <h1 class="page-title">
+    📅 予定表
+  </h1>
 
-<div class="card">
+  <div class="card">
 
-<h3>
-お問い合わせを送る
-</h3>
+    <button
+      id="addScheduleButton"
+      class="primary"
+      onclick="openScheduleModal()">
+      ＋ 予定を追加
+    </button>
 
-<p>
-家族の管理者・親に質問や相談を送ることができます。
-</p>
+    <div id="scheduleList"></div>
 
-<button
-class="primary"
-onclick="openContactModal()">
-＋ お問い合わせを作成
-</button>
-
-</div>
-
-<div id="contactsList"></div>
+  </div>
 
 </section>
 
 
-<!-- MEMBERS -->
+<!-- DUTIES -->
 
-<section id="page-members"
-class="page">
+<section
+  id="page-duties"
+  class="page">
 
-<h1 class="page-title">
-👨‍👩‍👧 家族メンバー
-</h1>
+  <h1 class="page-title">
+    🔄 当番表
+  </h1>
 
-<div id="membersList"></div>
+  <div class="card">
+
+    <button
+      id="addDutyButton"
+      class="primary"
+      onclick="openDutyModal()">
+      ＋ 当番を追加
+    </button>
+
+    <div id="dutiesList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- MESSAGES -->
+
+<section
+  id="page-messages"
+  class="page">
+
+  <h1 class="page-title">
+    💬 親からのメッセージ
+  </h1>
+
+  <div class="card">
+
+    <button
+      id="addMessageButton"
+      class="primary"
+      onclick="openMessageModal()">
+      ＋ メッセージを追加
+    </button>
+
+    <div id="messagesList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- TODOS -->
+
+<section
+  id="page-todos"
+  class="page">
+
+  <h1 class="page-title">
+    ✅ やること
+  </h1>
+
+  <div class="card">
+
+    <button
+      id="addTodoButton"
+      class="primary"
+      onclick="openTodoModal()">
+      ＋ やることを追加
+    </button>
+
+    <div id="todosList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section
+  id="page-contact"
+  class="page">
+
+  <h1 class="page-title">
+    📩 お問い合わせ
+  </h1>
+
+  <div class="card">
+
+    <button
+      class="primary"
+      onclick="openContactModal()">
+      ＋ お問い合わせを送る
+    </button>
+
+    <div id="contactsList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- CHILDREN -->
+
+<section
+  id="page-children"
+  class="page">
+
+  <h1 class="page-title">
+    🧒 子どもページ
+  </h1>
+
+
+  <!-- RANKING -->
+
+  <div class="card">
+
+    <h2>
+      🏆 子どもランキング
+    </h2>
+
+    <p>
+      家族内で設定したポイントによるランキングです。
+    </p>
+
+    <button
+      id="addPointButton"
+      class="primary"
+      onclick="openPointModal()">
+      ＋ ポイントを設定
+    </button>
+
+    <div id="childRanking">
+      読み込み中...
+    </div>
+
+  </div>
+
+
+  <!-- VIOLATIONS -->
+
+  <div class="card">
+
+    <h2>
+      🚨 違反記録
+    </h2>
+
+    <p>
+      親が登録した記録を確認できます。
+    </p>
+
+    <button
+      id="addViolationButton"
+      class="primary"
+      onclick="openViolationModal()">
+      ＋ 違反を記録
+    </button>
+
+    <div id="violationsList"></div>
+
+  </div>
+
+
+  <!-- CHILD NEWS -->
+
+  <div class="card">
+
+    <h2>
+      📰 子どもニュース
+    </h2>
+
+    <button
+      id="addChildNewsButton"
+      class="primary"
+      onclick="openChildNewsModal()">
+      ＋ 子どもニュースを追加
+    </button>
+
+    <div id="childNewsList"></div>
+
+  </div>
+
+
+  <!-- GAMES -->
+
+  <div class="card">
+
+    <h2>
+      🎮 ゲーム予定
+    </h2>
+
+    <button
+      id="addGameButton"
+      class="primary"
+      onclick="openGameModal()">
+      ＋ ゲーム予定を追加
+    </button>
+
+    <div id="gamesList"></div>
+
+  </div>
+
+
+  <!-- PRESIDENT -->
+
+  <div class="card">
+
+    <h2>
+      🗳️ 子ども大統領
+    </h2>
+
+    <p>
+      この家族アプリ内だけの投票ゲームです。
+    </p>
+
+    <button
+      id="addCandidateButton"
+      class="primary"
+      onclick="openCandidateModal()">
+      ＋ 候補者を追加
+    </button>
+
+    <div id="presidentList"></div>
+
+  </div>
 
 </section>
 
 </main>
-</div>
-</div>
-
-
-<!-- ==============================
-     MODAL
-============================== -->
-
-<div id="modalBg"
-class="modal-bg">
-
-<div class="modal">
-
-<div class="modal-head">
-
-<h2 id="modalTitle">
-追加
-</h2>
-
-<button class="close"
-onclick="closeModal()">
-×
-</button>
-
-</div>
-
-<div id="modalContent"></div>
-
-<div class="modal-actions">
-
-<button class="secondary"
-onclick="closeModal()">
-キャンセル
-</button>
-
-<button class="primary"
-onclick="saveModal()">
-保存
-</button>
 
 </div>
 
 </div>
+
+
+<!-- MODAL -->
+
+<div id="modalLayer">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h2 id="modalTitle">
+        入力
+      </h2>
+
+      <button
+        class="modal-close"
+        onclick="closeModal()">
+        ×
+      </button>
+
+    </div>
+
+    <div id="modalContent"></div>
+
+    <div class="actions">
+
+      <button
+        class="primary"
+        onclick="saveModal()">
+        保存
+      </button>
+
+      <button
+        class="gray"
+        onclick="closeModal()">
+        キャンセル
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
 
 
 <script>
 
-/* ==================================
+/* =========================================
    SUPABASE
-================================== */
+========================================= */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -1010,25 +939,26 @@ const SUPABASE_KEY =
 "sb_publishable_qux36ew_JkABxzXCQEgW1A_ijJRoraO";
 
 const supabaseClient =
-window.supabase.createClient(
+supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
 
-/* ==================================
+/* =========================================
    STATE
-================================== */
+========================================= */
 
 let currentUser = null;
-let currentFamily = null;
 let currentMember = null;
+let currentFamily = null;
+
 let currentForm = null;
 
 
-/* ==================================
+/* =========================================
    HELPERS
-================================== */
+========================================= */
 
 function $(id){
   return document.getElementById(id);
@@ -1036,2706 +966,2271 @@ function $(id){
 
 function escapeHTML(value){
 
-  if(value === null ||
-     value === undefined){
-    return "";
-  }
-
-  return String(value)
+  return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(/'/g,"&#39;");
+
+}
+
+function formatDate(date){
+
+  if(!date) return "";
+
+  return new Date(date)
+    .toLocaleString("ja-JP");
+
 }
 
 function isParent(){
 
   return currentMember &&
          currentMember.role === "parent";
-}
 
-function showMessage(text,type="error"){
-
-  $("authMessage").className = type;
-
-  $("authMessage").textContent = text;
 }
 
 
-/* ==================================
-   AUTH
-================================== */
-
-function showAuth(type){
-
-  $("loginForm")
-    .classList.toggle(
-      "hidden",
-      type !== "login"
-    );
-
-  $("registerForm")
-    .classList.toggle(
-      "hidden",
-      type !== "register"
-    );
-
-  $("loginTab")
-    .classList.toggle(
-      "active",
-      type === "login"
-    );
-
-  $("registerTab")
-    .classList.toggle(
-      "active",
-      type === "register"
-    );
-
-  $("authMessage").textContent="";
-}
-
-
-$("familyMode").addEventListener(
-"change",
-function(){
-
-  const join =
-    this.value === "join";
-
-  $("familyNameField")
-    .classList.toggle(
-      "hidden",
-      join
-    );
-
-  $("familyCodeField")
-    .classList.toggle(
-      "hidden",
-      !join
-    );
-});
-
-
-/* ==================================
+/* =========================================
    REGISTER
-================================== */
+========================================= */
 
 async function register(){
 
-  try{
+  const email =
+    $("email").value.trim();
 
-    const name =
-      $("registerName").value.trim();
+  const password =
+    $("password").value;
 
-    const email =
-      $("registerEmail").value.trim();
+  if(!email || !password){
 
-    const password =
-      $("registerPassword").value;
+    $("loginError").textContent =
+      "メールアドレスとパスワードを入力してください。";
 
-    const mode =
-      $("familyMode").value;
+    return;
+  }
 
-
-    if(!name || !email || !password){
-
-      showMessage(
-        "必要な項目を入力してください。"
-      );
-
-      return;
-    }
-
-
-    if(password.length < 6){
-
-      showMessage(
-        "パスワードは6文字以上にしてください。"
-      );
-
-      return;
-    }
-
-
-    const {
-      data,
-      error
-    } =
+  const {data,error} =
     await supabaseClient.auth.signUp({
 
-      email:email,
-
-      password:password,
-
-      options:{
-        data:{
-          display_name:name
-        }
-      }
+      email,
+      password
 
     });
 
+  if(error){
 
-    if(error){
+    $("loginError").textContent =
+      error.message;
 
-      showMessage(error.message);
+    return;
+  }
 
-      return;
-    }
+  if(!data.user){
 
+    $("loginError").textContent =
+      "登録できませんでした。";
 
-    const user = data.user;
+    return;
+  }
 
+  const familyCode =
+    $("familyCode").value.trim();
 
-    if(!user){
+  if(!familyCode){
 
-      showMessage(
-        "登録しました。メール確認が必要な場合があります。",
-        "success"
-      );
+    $("loginError").textContent =
+      "家族コードを入力してください。";
 
-      return;
-    }
+    return;
+  }
 
+  /*
+    既存の家族コードを探す
+  */
 
-    /* JOIN */
-
-    if(mode === "join"){
-
-      const code =
-        $("registerFamilyCode")
-          .value
-          .trim()
-          .toUpperCase();
-
-
-      if(!code){
-
-        showMessage(
-          "家族コードを入力してください。"
-        );
-
-        return;
-      }
-
-
-      const {
-        data:family,
-        error:familyError
-      } =
-      await supabaseClient
-        .from("families")
-        .select("*")
-        .eq("family_code",code)
-        .maybeSingle();
-
-
-      if(familyError){
-
-        showMessage(
-          familyError.message
-        );
-
-        return;
-      }
-
-
-      if(!family){
-
-        showMessage(
-          "家族コードが見つかりません。"
-        );
-
-        return;
-      }
-
-
-      const {
-        error:memberError
-      } =
-      await supabaseClient
-        .from("family_members")
-        .insert({
-
-          family_id:family.id,
-
-          user_id:user.id,
-
-          name:name,
-
-          role:"child"
-
-        });
-
-
-      if(memberError){
-
-        showMessage(
-          memberError.message
-        );
-
-        return;
-      }
-
-
-      await loadApp();
-
-      return;
-    }
-
-
-    /* CREATE */
-
-    const familyName =
-      $("registerFamilyName")
-        .value
-        .trim();
-
-
-    if(!familyName){
-
-      showMessage(
-        "家族名を入力してください。"
-      );
-
-      return;
-    }
-
-
-    const familyCode =
-      generateFamilyCode();
-
-
-    const {
-      data:family,
-      error:familyError
-    } =
+  const {data:family,error:familyError} =
     await supabaseClient
       .from("families")
-      .insert({
+      .select("*")
+      .eq("family_code",familyCode)
+      .maybeSingle();
 
-        name:familyName,
+  if(familyError){
 
-        family_code:familyCode,
+    $("loginError").textContent =
+      familyError.message;
 
-        created_by:user.id
+    return;
+  }
 
-      })
-      .select()
-      .single();
+  if(!family){
 
+    $("loginError").textContent =
+      "その家族コードの家族が見つかりません。";
 
-    if(familyError){
+    return;
+  }
 
-      showMessage(
-        familyError.message
-      );
+  const name =
+    prompt(
+      "あなたの名前を入力してください"
+    ) || "メンバー";
 
-      return;
-    }
+  const role =
+    confirm(
+      "親として登録しますか？\n\nOK = 親\nキャンセル = 子ども"
+    )
+    ? "parent"
+    : "child";
 
-
-    const {
-      error:memberError
-    } =
+  const {error:memberError} =
     await supabaseClient
       .from("family_members")
       .insert({
 
         family_id:family.id,
 
-        user_id:user.id,
+        user_id:data.user.id,
 
         name:name,
 
-        role:"parent"
+        role:role
 
       });
 
+  if(memberError){
 
-    if(memberError){
+    $("loginError").textContent =
+      memberError.message;
 
-      showMessage(
-        memberError.message
-      );
-
-      return;
-    }
-
-
-    await loadApp();
-
+    return;
   }
-  catch(error){
 
-    showMessage(
-      error.message || String(error)
-    );
-
-  }
+  $("loginError").textContent =
+    "登録しました。メール確認が必要な場合があります。";
 
 }
 
 
-/* ==================================
-   FAMILY CODE
-================================== */
-
-function generateFamilyCode(){
-
-  const chars =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-  let result="";
-
-  for(let i=0;i<6;i++){
-
-    result +=
-      chars[
-        Math.floor(
-          Math.random()*chars.length
-        )
-      ];
-
-  }
-
-  return result;
-}
-
-
-/* ==================================
+/* =========================================
    LOGIN
-================================== */
+========================================= */
 
 async function login(){
 
   const email =
-    $("loginEmail").value.trim();
+    $("email").value.trim();
 
   const password =
-    $("loginPassword").value;
+    $("password").value;
 
+  const familyCode =
+    $("familyCode").value.trim();
 
-  if(!email || !password){
+  if(!email || !password || !familyCode){
 
-    showMessage(
-      "メールアドレスとパスワードを入力してください。"
-    );
+    $("loginError").textContent =
+      "すべて入力してください。";
 
     return;
   }
 
+  const {data,error} =
+    await supabaseClient.auth.signInWithPassword({
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .auth
-    .signInWithPassword({
-
-      email:email,
-
-      password:password
+      email,
+      password
 
     });
 
-
   if(error){
 
-    showMessage(error.message);
+    $("loginError").textContent =
+      error.message;
 
     return;
   }
 
+  currentUser =
+    data.user;
 
-  await loadApp();
-}
-
-
-/* ==================================
-   LOAD APP
-================================== */
-
-async function loadApp(){
-
-  try{
-
-    const {
-      data:{
-        user
-      }
-    } =
-    await supabaseClient
-      .auth
-      .getUser();
-
-
-    if(!user) return;
-
-
-    currentUser=user;
-
-
-    const {
-      data:member,
-      error:memberError
-    } =
-    await supabaseClient
-      .from("family_members")
-      .select("*")
-      .eq("user_id",user.id)
-      .maybeSingle();
-
-
-    if(memberError){
-
-      alert(
-        "family_membersの取得に失敗しました。\n\n"+
-        memberError.message
-      );
-
-      return;
-    }
-
-
-    if(!member){
-
-      alert(
-        "このアカウントには家族情報がありません。"
-      );
-
-      return;
-    }
-
-
-    currentMember=member;
-
-
-    const {
-      data:family,
-      error:familyError
-    } =
+  const {data:family,error:familyError} =
     await supabaseClient
       .from("families")
       .select("*")
-      .eq("id",member.family_id)
-      .single();
+      .eq("family_code",familyCode)
+      .maybeSingle();
 
+  if(familyError){
 
-    if(familyError){
+    $("loginError").textContent =
+      familyError.message;
 
-      alert(
-        "familiesの取得に失敗しました。\n\n"+
-        familyError.message
-      );
+    await supabaseClient.auth.signOut();
 
-      return;
-    }
-
-
-    currentFamily=family;
-
-
-    $("authPage")
-      .classList.add("hidden");
-
-    $("app")
-      .classList.remove("hidden");
-
-
-    $("headerUserName")
-      .textContent =
-      member.name || user.email;
-
-
-    $("headerRole")
-      .textContent =
-      member.role === "parent"
-      ? "親"
-      : "子ども";
-
-
-    $("headerRole")
-      .classList.toggle(
-        "parent",
-        member.role === "parent"
-      );
-
-
-    $("headerRole")
-      .classList.toggle(
-        "child",
-        member.role !== "parent"
-      );
-
-
-    $("homeFamilyName")
-      .textContent =
-      family.name;
-
-
-    $("homeFamilyCode")
-      .textContent =
-      family.family_code;
-
-
-    updatePermissionUI();
-
-    await loadAll();
-
+    return;
   }
-  catch(error){
 
-    alert(
-      error.message || String(error)
-    );
+  if(!family){
 
+    $("loginError").textContent =
+      "家族コードが違います。";
+
+    await supabaseClient.auth.signOut();
+
+    return;
   }
+
+  currentFamily =
+    family;
+
+  const {data:member,error:memberError} =
+    await supabaseClient
+      .from("family_members")
+      .select("*")
+      .eq("family_id",family.id)
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+  if(memberError){
+
+    $("loginError").textContent =
+      memberError.message;
+
+    return;
+  }
+
+  if(!member){
+
+    $("loginError").textContent =
+      "この家族のメンバーとして登録されていません。";
+
+    await supabaseClient.auth.signOut();
+
+    return;
+  }
+
+  currentMember =
+    member;
+
+  openApp();
 
 }
 
 
-/* ==================================
-   PERMISSION UI
-================================== */
+/* =========================================
+   APP
+========================================= */
 
-function updatePermissionUI(){
+function openApp(){
 
-  const parent=isParent();
+  $("loginPage").style.display =
+    "none";
 
-  [
-    "addDutyButton",
-    "addTaskButton",
-    "addEventButton",
-    "addMessageButton",
+  $("app").style.display =
+    "block";
+
+  $("userName").textContent =
+    currentMember.name;
+
+  $("roleBadge").textContent =
+    isParent()
+    ? "👨‍👩‍👧 親"
+    : "🧒 子ども";
+
+  updatePermissions();
+
+  loadAll();
+
+}
+
+
+function updatePermissions(){
+
+  const parent =
+    isParent();
+
+  const ids = [
+
     "addLawButton",
-    "addNewsButton"
-  ].forEach(id=>{
+    "addNewsButton",
+    "addScheduleButton",
+    "addDutyButton",
+    "addMessageButton",
+    "addTodoButton",
+    "addPointButton",
+    "addViolationButton",
+    "addChildNewsButton",
+    "addGameButton",
+    "addCandidateButton"
 
-    $(id)
-      .classList.toggle(
+  ];
+
+  ids.forEach(id=>{
+
+    const el = $(id);
+
+    if(el){
+
+      el.classList.toggle(
         "hidden",
         !parent
       );
+
+    }
 
   });
 
 }
 
 
-/* ==================================
-   LOGOUT
-================================== */
-
-async function logout(){
-
-  await supabaseClient
-    .auth
-    .signOut();
-
-  currentUser=null;
-  currentFamily=null;
-  currentMember=null;
-
-  $("app")
-    .classList.add("hidden");
-
-  $("authPage")
-    .classList.remove("hidden");
-}
-
-
-/* ==================================
-   NAVIGATION
-================================== */
+/* =========================================
+   NAV
+========================================= */
 
 function showPage(name,button){
 
   document
     .querySelectorAll(".page")
-    .forEach(p=>
-      p.classList.remove("active")
-    );
+    .forEach(p=>{
+      p.classList.remove("active");
+    });
 
+  const page =
+    $("page-"+name);
 
-  $("page-"+name)
-    .classList.add("active");
+  if(page){
 
+    page.classList.add("active");
+
+  }
 
   document
-    .querySelectorAll(".nav")
-    .forEach(n=>
-      n.classList.remove("active")
-    );
+    .querySelectorAll(".sidebar button")
+    .forEach(b=>{
+      b.classList.remove("active");
+    });
 
+  if(button){
 
-  if(button)
     button.classList.add("active");
 
-
-  $("sidebar")
-    .classList.remove("open");
-
-
-  if(name==="contacts"){
-    loadContacts();
   }
+
+  if(name==="children"){
+
+    loadChildren();
+
+  }
+
 }
 
 
-function toggleSidebar(){
-
-  $("sidebar")
-    .classList.toggle("open");
-}
-
-
-/* ==================================
+/* =========================================
    LOAD ALL
-================================== */
+========================================= */
 
 async function loadAll(){
 
-  await Promise.all([
-
-    loadDuties(),
-
-    loadTasks(),
-
-    loadEvents(),
-
-    loadMessages(),
-
-    loadLaws(),
-
-    loadNews(),
-
-    loadContacts(),
-
-    loadMembers()
-
-  ]);
-
-}
-
-
-/* ==================================
-   DUTIES
-================================== */
-
-async function loadDuties(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_duties")
-    .select("*")
-    .eq("family_id",currentFamily.id)
-    .order("created_at",{ascending:false});
-
-
-  if(error){
-
-    $("dutiesList").innerHTML=
-      `<div class="card empty">
-      当番表を読み込めませんでした。
-      </div>`;
-
-    return;
-  }
-
-
-  $("homeDuties").textContent=data.length;
-
-
-  if(!data.length){
-
-    $("dutiesList").innerHTML=
-      `<div class="card empty">
-      当番はありません。
-      </div>`;
-
-    return;
-  }
-
-
-  $("dutiesList").innerHTML=
-  data.map(item=>`
-
-  <div class="item">
-
-    <div class="item-title">
-      📋 ${escapeHTML(item.title)}
-    </div>
-
-    <div class="item-meta">
-      担当：
-      ${escapeHTML(item.assignee_name||"未設定")}
-    </div>
-
-    <div class="item-meta">
-      ${escapeHTML(item.day||"")}
-    </div>
-
-    ${
-      isParent()
-      ? `
-      <div class="actions">
-
-      <button
-      class="danger"
-      onclick="deleteDuty('${item.id}')">
-      削除
-      </button>
-
-      </div>
-      `
-      :""
-    }
-
-  </div>
-
-  `).join("");
-
-}
-
-
-function openDutyModal(){
-
-  if(!isParent())return;
-
-  currentForm="duty";
-
-  $("modalTitle").textContent=
-    "当番を追加";
-
-
-  $("modalContent").innerHTML=`
-
-  <div class="field">
-
-  <label>当番名</label>
-
-  <input
-  id="dutyTitle"
-  placeholder="ゴミ出し">
-
-  </div>
-
-  <div class="field">
-
-  <label>担当者</label>
-
-  <input
-  id="dutyAssignee"
-  placeholder="太郎">
-
-  </div>
-
-  <div class="field">
-
-  <label>曜日</label>
-
-  <select id="dutyDay">
-
-  <option>毎日</option>
-  <option>月曜日</option>
-  <option>火曜日</option>
-  <option>水曜日</option>
-  <option>木曜日</option>
-  <option>金曜日</option>
-  <option>土曜日</option>
-  <option>日曜日</option>
-
-  </select>
-
-  </div>
-
-  `;
-
-  openModal();
-}
-
-
-async function saveDuty(){
-
-  const title=
-    $("dutyTitle").value.trim();
-
-
-  if(!title){
-
-    alert("当番名を入力してください。");
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_duties")
-    .insert({
-
-      family_id:currentFamily.id,
-
-      title:title,
-
-      assignee_name:
-        $("dutyAssignee").value.trim(),
-
-      day:$("dutyDay").value,
-
-      created_by:currentUser.id
-
-    });
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
+  await loadLaws();
+  await loadNews();
+  await loadSchedule();
   await loadDuties();
-}
-
-
-async function deleteDuty(id){
-
-  if(!isParent())return;
-
-  if(!confirm("削除しますか？"))return;
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_duties")
-    .delete()
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await loadDuties();
-}
-
-
-/* ==================================
-   TASKS
-================================== */
-
-async function loadTasks(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_tasks")
-    .select("*")
-    .eq("family_id",currentFamily.id)
-    .order("created_at",{ascending:false});
-
-
-  if(error){
-
-    $("tasksList").innerHTML=
-      `<div class="card empty">
-      やることを読み込めませんでした。
-      </div>`;
-
-    return;
-  }
-
-
-  if(!data.length){
-
-    $("tasksList").innerHTML=
-      `<div class="card empty">
-      やることはありません。
-      </div>`;
-
-    return;
-  }
-
-
-  $("tasksList").innerHTML=
-  data.map(item=>`
-
-  <div class="item">
-
-    <div class="item-title">
-
-      ${item.completed?"☑️":"⬜"}
-
-      ${escapeHTML(item.title)}
-
-    </div>
-
-    <div class="item-meta">
-      担当：
-      ${escapeHTML(item.assignee_name||"未設定")}
-    </div>
-
-    <div class="item-meta">
-      期限：
-      ${escapeHTML(item.due_date||"なし")}
-    </div>
-
-    <div class="actions">
-
-    <button
-    class="secondary"
-    onclick="toggleTask(
-      '${item.id}',
-      ${!item.completed}
-    )">
-
-    ${item.completed
-      ?"未完了に戻す"
-      :"完了"}
-
-    </button>
-
-    ${
-      isParent()
-      ? `
-      <button
-      class="danger"
-      onclick="deleteTask('${item.id}')">
-      削除
-      </button>
-      `
-      :""
-    }
-
-    </div>
-
-  </div>
-
-  `).join("");
-
-}
-
-
-function openTaskModal(){
-
-  if(!isParent())return;
-
-  currentForm="task";
-
-  $("modalTitle").textContent=
-    "やることを追加";
-
-
-  $("modalContent").innerHTML=`
-
-  <div class="field">
-
-  <label>やること</label>
-
-  <input
-  id="taskTitle"
-  placeholder="宿題をする">
-
-  </div>
-
-  <div class="field">
-
-  <label>担当者</label>
-
-  <input
-  id="taskAssignee"
-  placeholder="太郎">
-
-  </div>
-
-  <div class="field">
-
-  <label>期限</label>
-
-  <input
-  id="taskDueDate"
-  type="date">
-
-  </div>
-
-  `;
-
-  openModal();
-}
-
-
-async function saveTask(){
-
-  const title=
-    $("taskTitle").value.trim();
-
-
-  if(!title){
-
-    alert("やることを入力してください。");
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_tasks")
-    .insert({
-
-      family_id:currentFamily.id,
-
-      title:title,
-
-      assignee_name:
-        $("taskAssignee").value.trim(),
-
-      due_date:
-        $("taskDueDate").value||null,
-
-      completed:false,
-
-      created_by:currentUser.id
-
-    });
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
-  await loadTasks();
-}
-
-
-async function toggleTask(id,completed){
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_tasks")
-    .update({
-      completed:completed
-    })
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await loadTasks();
-}
-
-
-async function deleteTask(id){
-
-  if(!isParent())return;
-
-  if(!confirm("削除しますか？"))return;
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_tasks")
-    .delete()
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await loadTasks();
-}
-
-
-/* ==================================
-   EVENTS
-================================== */
-
-async function loadEvents(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_events")
-    .select("*")
-    .eq("family_id",currentFamily.id)
-    .order("event_date",{ascending:true});
-
-
-  if(error||!data.length){
-
-    $("eventsList").innerHTML=
-      `<div class="card empty">
-      予定はありません。
-      </div>`;
-
-    return;
-  }
-
-
-  $("eventsList").innerHTML=
-  data.map(item=>`
-
-  <div class="item">
-
-    <div class="item-title">
-      📅 ${escapeHTML(item.title)}
-    </div>
-
-    <div class="item-meta">
-      ${escapeHTML(item.event_date||"")}
-    </div>
-
-    <p>
-      ${escapeHTML(item.description||"")}
-    </p>
-
-    ${
-      isParent()
-      ? `
-      <button
-      class="danger"
-      onclick="deleteEvent('${item.id}')">
-      削除
-      </button>
-      `
-      :""
-    }
-
-  </div>
-
-  `).join("");
-
-}
-
-
-function openEventModal(){
-
-  if(!isParent())return;
-
-  currentForm="event";
-
-  $("modalTitle").textContent=
-    "予定を追加";
-
-
-  $("modalContent").innerHTML=`
-
-  <div class="field">
-
-  <label>予定名</label>
-
-  <input
-  id="eventTitle"
-  placeholder="授業参観">
-
-  </div>
-
-  <div class="field">
-
-  <label>日時</label>
-
-  <input
-  id="eventDate"
-  type="datetime-local">
-
-  </div>
-
-  <div class="field">
-
-  <label>内容</label>
-
-  <textarea
-  id="eventDescription"></textarea>
-
-  </div>
-
-  `;
-
-  openModal();
-}
-
-
-async function saveEvent(){
-
-  const title=
-    $("eventTitle").value.trim();
-
-
-  if(!title){
-
-    alert("予定名を入力してください。");
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_events")
-    .insert({
-
-      family_id:currentFamily.id,
-
-      title:title,
-
-      event_date:
-        $("eventDate").value||null,
-
-      description:
-        $("eventDescription")
-          .value.trim(),
-
-      created_by:currentUser.id
-
-    });
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
-  await loadEvents();
-}
-
-
-async function deleteEvent(id){
-
-  if(!isParent())return;
-
-  if(!confirm("削除しますか？"))return;
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_events")
-    .delete()
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await loadEvents();
-}
-
-
-/* ==================================
-   MESSAGES
-================================== */
-
-async function loadMessages(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_messages")
-    .select("*")
-    .eq("family_id",currentFamily.id)
-    .order("created_at",{ascending:false});
-
-
-  if(error||!data.length){
-
-    $("messagesList").innerHTML=
-      `<div class="card empty">
-      メッセージはありません。
-      </div>`;
-
-    return;
-  }
-
-
-  $("messagesList").innerHTML=
-  data.map(item=>`
-
-  <div class="item">
-
-    <div class="item-title">
-      💌 ${escapeHTML(item.title)}
-    </div>
-
-    <p>
-      ${escapeHTML(item.body)}
-    </p>
-
-    ${
-      isParent()
-      ? `
-      <button
-      class="danger"
-      onclick="deleteMessage('${item.id}')">
-      削除
-      </button>
-      `
-      :""
-    }
-
-  </div>
-
-  `).join("");
-
-}
-
-
-function openMessageModal(){
-
-  if(!isParent())return;
-
-  currentForm="message";
-
-  $("modalTitle").textContent=
-    "親からのメッセージ";
-
-
-  $("modalContent").innerHTML=`
-
-  <div class="field">
-
-  <label>タイトル</label>
-
-  <input
-  id="messageTitle"
-  placeholder="明日の予定">
-
-  </div>
-
-  <div class="field">
-
-  <label>メッセージ</label>
-
-  <textarea
-  id="messageBody"></textarea>
-
-  </div>
-
-  `;
-
-  openModal();
-}
-
-
-async function saveMessage(){
-
-  const title=
-    $("messageTitle").value.trim();
-
-  const body=
-    $("messageBody").value.trim();
-
-
-  if(!title||!body){
-
-    alert(
-      "タイトルと内容を入力してください。"
-    );
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_messages")
-    .insert({
-
-      family_id:currentFamily.id,
-
-      title:title,
-
-      body:body,
-
-      created_by:currentUser.id
-
-    });
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
   await loadMessages();
+  await loadTodos();
+  await loadContacts();
+
 }
 
 
-async function deleteMessage(id){
-
-  if(!isParent())return;
-
-  if(!confirm("削除しますか？"))return;
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_messages")
-    .delete()
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await loadMessages();
-}
-
-
-/* ==================================
+/* =========================================
    LAWS
-================================== */
+========================================= */
 
 async function loadLaws(){
 
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_laws")
-    .select("*")
-    .eq("family_id",currentFamily.id)
-    .order("created_at",{ascending:false});
+  const {data,error} =
+    await supabaseClient
+      .from("family_laws")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
 
+  const box =
+    $("lawsList");
 
   if(error){
 
-    $("lawsList").innerHTML=
-      `<div class="card empty">
-      法律情報を読み込めませんでした。
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
       </div>`;
 
     return;
+
   }
 
+  if(!data?.length){
 
-  $("homeLaws").textContent=data.length;
-
-
-  if(!data.length){
-
-    $("lawsList").innerHTML=
-      `<div class="card empty">
-      まだありません。
+    box.innerHTML =
+      `<div class="empty">
+        法律はまだありません。
       </div>`;
 
     return;
+
   }
 
+  box.innerHTML =
+    data.map(x=>`
 
-  $("lawsList").innerHTML=
-  data.map(item=>`
+      <div class="item">
 
-  <div class="item">
+        <div class="item-title">
+          ⚖️ ${escapeHTML(x.title)}
+        </div>
 
-    <div class="item-title">
-      ⚖️ ${escapeHTML(item.title)}
-    </div>
+        <div>
+          ${escapeHTML(x.description || x.body || "")}
+        </div>
 
-    <div class="item-meta">
-      ${escapeHTML(item.category||"法律")}
-    </div>
-
-    <p>
-      ${escapeHTML(item.description||"")}
-    </p>
-
-    ${
-      item.penalty
-      ? `
-      <div class="item-meta">
-      罰金：
-      ${escapeHTML(item.penalty)}
-      </div>
-      `
-      :""
-    }
-
-    ${
-      item.source
-      ? `
-      <div class="item-meta">
-      出典：
-      ${escapeHTML(item.source)}
-      </div>
-      `
-      :""
-    }
-
-    ${
-      item.source_url
-      ? `
-      <div class="actions">
-
-      <a
-      href="${escapeHTML(item.source_url)}"
-      target="_blank"
-      rel="noopener noreferrer">
-      情報源を見る
-      </a>
+        ${
+          isParent()
+          ? `
+          <div class="actions">
+            <button
+              class="danger"
+              onclick="deleteRecord('family_laws','${x.id}',loadLaws)">
+              削除
+            </button>
+          </div>
+          `
+          :""
+        }
 
       </div>
-      `
-      :""
-    }
 
-    ${
-      isParent()
-      ? `
-      <button
-      class="danger"
-      onclick="deleteLaw('${item.id}')">
-      削除
-      </button>
-      `
-      :""
-    }
-
-  </div>
-
-  `).join("");
+    `).join("");
 
 }
 
 
 function openLawModal(){
 
-  if(!isParent())return;
+  if(!isParent()) return;
 
-  currentForm="law";
+  currentForm =
+    "law";
 
-  $("modalTitle").textContent=
-    "法律・罰金を追加";
+  $("modalTitle").textContent =
+    "⚖️ 家族の法律";
 
+  $("modalContent").innerHTML = `
 
-  $("modalContent").innerHTML=`
+    <div class="field">
 
-  <div class="field">
+      <label>タイトル</label>
 
-  <label>タイトル</label>
+      <input id="lawTitle">
 
-  <input
-  id="lawTitle"
-  placeholder="法律・家族ルール">
+    </div>
 
-  </div>
+    <div class="field">
 
-  <div class="field">
+      <label>内容</label>
 
-  <label>カテゴリー</label>
+      <textarea id="lawBody"></textarea>
 
-  <select id="lawCategory">
-
-  <option>法律</option>
-  <option>罰金</option>
-  <option>反則金</option>
-  <option>家族ルール</option>
-
-  </select>
-
-  </div>
-
-  <div class="field">
-
-  <label>内容</label>
-
-  <textarea
-  id="lawDescription"></textarea>
-
-  </div>
-
-  <div class="field">
-
-  <label>罰金・反則金</label>
-
-  <input
-  id="lawPenalty"
-  placeholder="例：5000円">
-
-  </div>
-
-  <div class="field">
-
-  <label>出典</label>
-
-  <input
-  id="lawSource"
-  placeholder="警察庁など">
-
-  </div>
-
-  <div class="field">
-
-  <label>情報源URL</label>
-
-  <input
-  id="lawSourceUrl"
-  type="url"
-  placeholder="https://example.com">
-
-  </div>
+    </div>
 
   `;
 
   openModal();
+
 }
 
 
 async function saveLaw(){
 
-  const title=
+  const title =
     $("lawTitle").value.trim();
 
-  const description=
-    $("lawDescription").value.trim();
+  const body =
+    $("lawBody").value.trim();
 
+  if(!title || !body){
 
-  if(!title||!description){
-
-    alert(
-      "タイトルと内容を入力してください。"
-    );
+    alert("タイトルと内容を入力してください。");
 
     return;
+
   }
 
+  const {error} =
+    await supabaseClient
+      .from("family_laws")
+      .insert({
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_laws")
-    .insert({
+        family_id:currentFamily.id,
 
-      family_id:currentFamily.id,
+        title:title,
 
-      title:title,
+        description:body,
 
-      category:
-        $("lawCategory").value,
+        created_by:currentUser.id
 
-      description:description,
-
-      penalty:
-        $("lawPenalty").value.trim(),
-
-      source:
-        $("lawSource").value.trim(),
-
-      source_url:
-        $("lawSourceUrl").value.trim(),
-
-      created_by:currentUser.id
-
-    });
-
+      });
 
   if(error){
 
     alert(error.message);
 
     return;
-  }
 
+  }
 
   closeModal();
 
-  await loadLaws();
+  loadLaws();
+
 }
 
 
-async function deleteLaw(id){
-
-  if(!isParent())return;
-
-  if(!confirm(
-    "この法律情報を削除しますか？"
-  ))return;
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_laws")
-    .delete()
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await loadLaws();
-}
-
-
-/* ==================================
+/* =========================================
    NEWS
-================================== */
+========================================= */
 
 async function loadNews(){
 
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_news")
-    .select("*")
-    .eq("family_id",currentFamily.id)
-    .order("created_at",{ascending:false});
+  const {data,error} =
+    await supabaseClient
+      .from("family_news")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
 
+  const box =
+    $("newsList");
 
   if(error){
 
-    $("newsList").innerHTML=
-      `<div class="card empty">
-      ニュースを読み込めませんでした。
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
       </div>`;
 
     return;
+
   }
 
+  if(!data?.length){
 
-  $("homeNews").textContent=data.length;
-
-
-  if(!data.length){
-
-    $("newsList").innerHTML=
-      `<div class="card empty">
-      まだニュースがありません。
+    box.innerHTML =
+      `<div class="empty">
+        ニュースはありません。
       </div>`;
 
     return;
+
   }
 
+  box.innerHTML =
+    data.map(x=>`
 
-  $("newsList").innerHTML=
-  data.map(item=>`
+      <div class="item">
 
-  <div class="item">
+        <div class="item-title">
+          📰 ${escapeHTML(x.title)}
+        </div>
 
-    <div class="item-title">
-      📰 ${escapeHTML(item.title)}
-    </div>
+        <p>
+          ${escapeHTML(x.body || x.description || "")}
+        </p>
 
-    <div class="item-meta">
-      ${escapeHTML(item.category||"ニュース")}
-    </div>
+        <div class="item-meta">
+          ${formatDate(x.created_at)}
+        </div>
 
-    <p>
-      ${escapeHTML(item.body||"")}
-    </p>
-
-    ${
-      item.source
-      ? `
-      <div class="item-meta">
-      出典：
-      ${escapeHTML(item.source)}
-      </div>
-      `
-      :""
-    }
-
-    ${
-      item.source_url
-      ? `
-      <div class="actions">
-
-      <a
-      href="${escapeHTML(item.source_url)}"
-      target="_blank"
-      rel="noopener noreferrer">
-      情報源を見る
-      </a>
+        ${
+          isParent()
+          ? `
+          <button
+            class="danger"
+            onclick="deleteRecord('family_news','${x.id}',loadNews)">
+            削除
+          </button>
+          `
+          :""
+        }
 
       </div>
-      `
-      :""
-    }
 
-    ${
-      isParent()
-      ? `
-      <button
-      class="danger"
-      onclick="deleteNews('${item.id}')">
-      削除
-      </button>
-      `
-      :""
-    }
-
-  </div>
-
-  `).join("");
+    `).join("");
 
 }
 
 
 function openNewsModal(){
 
-  if(!isParent())return;
+  if(!isParent()) return;
 
-  currentForm="news";
+  currentForm =
+    "news";
 
-  $("modalTitle").textContent=
-    "家族ニュースを追加";
+  $("modalTitle").textContent =
+    "📰 家族ニュース";
 
+  $("modalContent").innerHTML = `
 
-  $("modalContent").innerHTML=`
+    <div class="field">
 
-  <div class="field">
+      <label>タイトル</label>
 
-  <label>タイトル</label>
+      <input id="newsTitle">
 
-  <input
-  id="newsTitle"
-  placeholder="学校からのお知らせ">
+    </div>
 
-  </div>
+    <div class="field">
 
-  <div class="field">
+      <label>内容</label>
 
-  <label>カテゴリー</label>
+      <textarea id="newsBody"></textarea>
 
-  <select id="newsCategory">
-
-  <option>家族ニュース</option>
-  <option>学校</option>
-  <option>地域</option>
-  <option>重要</option>
-
-  </select>
-
-  </div>
-
-  <div class="field">
-
-  <label>内容</label>
-
-  <textarea
-  id="newsBody"></textarea>
-
-  </div>
-
-  <div class="field">
-
-  <label>出典</label>
-
-  <input
-  id="newsSource"
-  placeholder="学校・自治体など">
-
-  </div>
-
-  <div class="field">
-
-  <label>情報源URL</label>
-
-  <input
-  id="newsSourceUrl"
-  type="url"
-  placeholder="https://example.com">
-
-  </div>
+    </div>
 
   `;
 
   openModal();
+
 }
 
 
 async function saveNews(){
 
-  const title=
+  const title =
     $("newsTitle").value.trim();
 
-  const body=
+  const body =
     $("newsBody").value.trim();
 
+  if(!title || !body){
 
-  if(!title||!body){
-
-    alert(
-      "タイトルと内容を入力してください。"
-    );
+    alert("入力してください。");
 
     return;
+
   }
 
+  const {error} =
+    await supabaseClient
+      .from("family_news")
+      .insert({
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_news")
-    .insert({
+        family_id:currentFamily.id,
 
-      family_id:currentFamily.id,
+        title:title,
 
-      title:title,
+        body:body,
 
-      body:body,
+        created_by:currentUser.id
 
-      category:
-        $("newsCategory").value,
-
-      source:
-        $("newsSource").value.trim(),
-
-      source_url:
-        $("newsSourceUrl").value.trim(),
-
-      created_by:currentUser.id
-
-    });
-
+      });
 
   if(error){
 
     alert(error.message);
 
     return;
-  }
 
+  }
 
   closeModal();
 
-  await loadNews();
+  loadNews();
+
 }
 
 
-async function deleteNews(id){
+/* =========================================
+   GENERIC SIMPLE LOADERS
+========================================= */
 
-  if(!isParent())return;
+async function loadSchedule(){
 
-  if(!confirm(
-    "このニュースを削除しますか？"
-  ))return;
+  await loadSimple(
+    "family_schedule",
+    "scheduleList",
+    "予定はありません。",
+    "📅"
+  );
 
+}
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_news")
-    .delete()
-    .eq("id",id);
+async function loadDuties(){
 
+  await loadSimple(
+    "family_duties",
+    "dutiesList",
+    "当番はありません。",
+    "🔄"
+  );
+
+}
+
+async function loadMessages(){
+
+  await loadSimple(
+    "family_messages",
+    "messagesList",
+    "メッセージはありません。",
+    "💬"
+  );
+
+}
+
+async function loadTodos(){
+
+  await loadSimple(
+    "family_todos",
+    "todosList",
+    "やることはありません。",
+    "✅"
+  );
+
+}
+
+async function loadSimple(
+  table,
+  element,
+  empty,
+  icon
+){
+
+  const {data,error} =
+    await supabaseClient
+      .from(table)
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
+
+  const box =
+    $(element);
 
   if(error){
 
-    alert(error.message);
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
 
     return;
+
   }
 
+  if(!data?.length){
 
-  await loadNews();
+    box.innerHTML =
+      `<div class="empty">
+        ${empty}
+      </div>`;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    data.map(x=>`
+
+      <div class="item">
+
+        <div class="item-title">
+          ${icon}
+          ${escapeHTML(
+            x.title ||
+            x.name ||
+            x.task ||
+            "項目"
+          )}
+        </div>
+
+        <p>
+          ${escapeHTML(
+            x.body ||
+            x.description ||
+            x.content ||
+            ""
+          )}
+        </p>
+
+        ${
+          isParent()
+          ? `
+          <button
+            class="danger"
+            onclick="deleteRecord('${table}','${x.id}',()=>loadSimple('${table}','${element}','${empty}','${icon}'))">
+            削除
+          </button>
+          `
+          :""
+        }
+
+      </div>
+
+    `).join("");
+
 }
 
 
-/* ==================================
-   CONTACTS
-================================== */
+function openScheduleModal(){
+
+  openSimpleModal(
+    "schedule",
+    "📅 予定を追加"
+  );
+
+}
+
+function openDutyModal(){
+
+  openSimpleModal(
+    "duty",
+    "🔄 当番を追加"
+  );
+
+}
+
+function openMessageModal(){
+
+  openSimpleModal(
+    "message",
+    "💬 メッセージを追加"
+  );
+
+}
+
+function openTodoModal(){
+
+  openSimpleModal(
+    "todo",
+    "✅ やることを追加"
+  );
+
+}
+
+
+function openSimpleModal(type,title){
+
+  if(!isParent()) return;
+
+  currentForm =
+    type;
+
+  $("modalTitle").textContent =
+    title;
+
+  $("modalContent").innerHTML = `
+
+    <div class="field">
+
+      <label>タイトル</label>
+
+      <input id="simpleTitle">
+
+    </div>
+
+    <div class="field">
+
+      <label>内容</label>
+
+      <textarea id="simpleBody"></textarea>
+
+    </div>
+
+  `;
+
+  openModal();
+
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
 
 async function loadContacts(){
 
-  if(!currentFamily)return;
-
-
-  let query =
-    supabaseClient
+  const {data,error} =
+    await supabaseClient
       .from("family_contacts")
       .select("*")
       .eq("family_id",currentFamily.id)
       .order("created_at",{ascending:false});
 
-
-  /*
-    子ども：
-    自分のお問い合わせだけ表示
-
-    親：
-    家族のお問い合わせをすべて表示
-  */
-
-  if(!isParent()){
-
-    query =
-      query.eq(
-        "user_id",
-        currentUser.id
-      );
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-  await query;
-
+  const box =
+    $("contactsList");
 
   if(error){
 
-    $("contactsList").innerHTML=`
-
-    <div class="card">
-
-      <h3>お問い合わせを読み込めませんでした</h3>
-
-      <p style="white-space:pre-wrap">
-      ${escapeHTML(error.message)}
-      </p>
-
-    </div>
-
-    `;
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
 
     return;
+
   }
 
+  if(!data?.length){
 
-  if(!data.length){
-
-    $("contactsList").innerHTML=`
-
-    <div class="card empty">
-
-      ${
-        isParent()
-        ? "お問い合わせはありません。"
-        : "まだお問い合わせを送っていません。"
-      }
-
-    </div>
-
-    `;
+    box.innerHTML =
+      `<div class="empty">
+        お問い合わせはありません。
+      </div>`;
 
     return;
+
   }
 
+  box.innerHTML =
+    data.map(x=>`
 
-  $("contactsList").innerHTML=
-  data.map(item=>{
+      <div class="item">
 
-    let badgeClass="badge-new";
-
-    if(item.status==="対応中")
-      badgeClass="badge-work";
-
-    if(item.status==="解決済み")
-      badgeClass="badge-done";
-
-
-    return `
-
-    <div class="item">
-
-      <div class="item-title">
-
-        📩 ${escapeHTML(item.subject)}
-
-      </div>
-
-      <div class="item-meta">
-
-        ${escapeHTML(item.sender_name)}
-
-        ・
-
-        ${formatDate(item.created_at)}
-
-      </div>
-
-      <div style="margin-top:10px">
-
-        <span class="badge ${badgeClass}">
-
-          ${escapeHTML(item.status)}
-
-        </span>
-
-      </div>
-
-      <p>
-
-        ${escapeHTML(item.message)}
-
-      </p>
-
-
-      ${
-        item.admin_reply
-        ? `
-
-        <div class="reply-box">
-
-          <div class="reply-title">
-            💬 親からの返信
-          </div>
-
-          <div>
-            ${escapeHTML(item.admin_reply)}
-          </div>
-
+        <div class="item-title">
+          📩 ${escapeHTML(x.title || "お問い合わせ")}
         </div>
 
-        `
-        : ""
-      }
+        <p>
+          ${escapeHTML(x.body || x.message || "")}
+        </p>
 
-
-      ${
-        isParent()
-        ? `
-
-        <div class="actions">
-
-          <button
-          class="secondary"
-          onclick="editContact('${item.id}')">
-          対応する
-          </button>
-
+        <div class="item-meta">
+          ${formatDate(x.created_at)}
         </div>
 
-        `
-        : ""
-      }
+      </div>
 
-    </div>
+    `).join("");
 
-    `;
-
-  }).join("");
-
-}
-
-
-function formatDate(value){
-
-  if(!value)return "";
-
-  const d=new Date(value);
-
-  if(Number.isNaN(d.getTime()))
-    return "";
-
-  return d.toLocaleString(
-    "ja-JP",
-    {
-      year:"numeric",
-      month:"2-digit",
-      day:"2-digit",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
 }
 
 
 function openContactModal(){
 
-  currentForm="contact";
+  currentForm =
+    "contact";
 
-  $("modalTitle").textContent=
+  $("modalTitle").textContent =
     "📩 お問い合わせ";
 
+  $("modalContent").innerHTML = `
 
-  $("modalContent").innerHTML=`
+    <div class="field">
 
-  <div class="field">
+      <label>件名</label>
 
-    <label>件名</label>
+      <input id="contactTitle">
 
-    <input
-    id="contactSubject"
-    placeholder="お問い合わせの件名">
+    </div>
 
-  </div>
+    <div class="field">
 
+      <label>内容</label>
 
-  <div class="field">
+      <textarea id="contactBody"></textarea>
 
-    <label>お問い合わせ内容</label>
-
-    <textarea
-    id="contactMessage"
-    placeholder="質問・相談などを入力してください。"></textarea>
-
-  </div>
+    </div>
 
   `;
 
   openModal();
+
 }
 
 
 async function saveContact(){
 
-  const subject=
-    $("contactSubject")
-      .value
-      .trim();
+  const title =
+    $("contactTitle").value.trim();
 
-  const message=
-    $("contactMessage")
-      .value
-      .trim();
+  const body =
+    $("contactBody").value.trim();
 
+  if(!body){
 
-  if(!subject||!message){
-
-    alert(
-      "件名とお問い合わせ内容を入力してください。"
-    );
+    alert("お問い合わせ内容を入力してください。");
 
     return;
+
   }
 
+  const {error} =
+    await supabaseClient
+      .from("family_contacts")
+      .insert({
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_contacts")
-    .insert({
+        family_id:currentFamily.id,
 
-      family_id:currentFamily.id,
+        title:title || "お問い合わせ",
 
-      user_id:currentUser.id,
+        body:body,
 
-      sender_name:
-        currentMember.name ||
-        currentUser.email,
+        created_by:currentUser.id
 
-      subject:subject,
-
-      message:message,
-
-      status:"未対応",
-
-      admin_reply:null
-
-    });
-
-
-  if(error){
-
-    alert(
-      "お問い合わせを送信できませんでした。\n\n"+
-      error.message
-    );
-
-    return;
-  }
-
-
-  closeModal();
-
-  alert(
-    "お問い合わせを送信しました！"
-  );
-
-  await loadContacts();
-}
-
-
-function editContact(id){
-
-  if(!isParent())return;
-
-  currentForm="contactEdit";
-
-  $("modalTitle").textContent=
-    "📩 お問い合わせに対応";
-
-
-  loadContactForEdit(id);
-}
-
-
-async function loadContactForEdit(id){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_contacts")
-    .select("*")
-    .eq("id",id)
-    .single();
-
+      });
 
   if(error){
 
     alert(error.message);
 
     return;
+
   }
 
+  closeModal();
 
-  $("modalContent").innerHTML=`
+  loadContacts();
 
-  <div class="card"
-  style="box-shadow:none;background:#f4f7fb">
-
-    <strong>
-    ${escapeHTML(data.subject)}
-    </strong>
-
-    <p>
-    ${escapeHTML(data.message)}
-    </p>
-
-  </div>
+}
 
 
-  <div class="field">
+/* =========================================
+   CHILDREN
+========================================= */
 
-    <label>対応状況</label>
+async function loadChildren(){
 
-    <select id="contactStatus">
+  await loadChildRanking();
 
-      <option
-      ${data.status==="未対応"?"selected":""}>
-      未対応
-      </option>
+  await loadViolations();
 
-      <option
-      ${data.status==="対応中"?"selected":""}>
-      対応中
-      </option>
+  await loadChildNews();
 
-      <option
-      ${data.status==="解決済み"?"selected":""}>
-      解決済み
-      </option>
+  await loadGames();
 
-    </select>
+  await loadPresident();
 
-  </div>
+}
 
 
-  <div class="field">
+/* =========================================
+   CHILD RANKING
+========================================= */
 
-    <label>返信</label>
+async function loadChildRanking(){
 
-    <textarea
-    id="contactReply"
-    placeholder="返信を入力してください。">${escapeHTML(
-      data.admin_reply||""
-    )}</textarea>
+  const {data:children} =
+    await supabaseClient
+      .from("family_members")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .eq("role","child");
 
-  </div>
+  const {data:points} =
+    await supabaseClient
+      .from("child_points")
+      .select("*")
+      .eq("family_id",currentFamily.id);
 
-  <input
-  type="hidden"
-  id="editContactId"
-  value="${escapeHTML(data.id)}">
+  const box =
+    $("childRanking");
+
+  if(!children?.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        子どもメンバーはいません。
+      </div>`;
+
+    return;
+
+  }
+
+  const ranking =
+    children
+      .map(child=>{
+
+        const p =
+          points?.find(
+            x =>
+              x.child_user_id ===
+              child.user_id
+          );
+
+        return {
+
+          name:child.name,
+
+          user_id:child.user_id,
+
+          points:p?.points || 0
+
+        };
+
+      })
+      .sort(
+        (a,b)=>b.points-a.points
+      );
+
+  box.innerHTML =
+    ranking.map((x,i)=>`
+
+      <div class="item">
+
+        <div class="item-title">
+
+          ${
+            i===0
+            ? "👑 "
+            : `${i+1}位 `
+          }
+
+          ${escapeHTML(x.name)}
+
+        </div>
+
+        <div class="stat">
+          ${x.points} pt
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function openPointModal(){
+
+  if(!isParent()) return;
+
+  currentForm =
+    "point";
+
+  $("modalTitle").textContent =
+    "🏆 ポイント設定";
+
+  $("modalContent").innerHTML = `
+
+    <div class="field">
+
+      <label>子どものユーザーID</label>
+
+      <input
+        id="pointUserId"
+        placeholder="user id">
+
+    </div>
+
+    <div class="field">
+
+      <label>ポイント</label>
+
+      <input
+        id="pointValue"
+        type="number"
+        value="0">
+
+    </div>
 
   `;
 
   openModal();
+
 }
 
 
-async function saveContactEdit(){
+async function savePoint(){
 
-  if(!isParent())return;
+  const userId =
+    $("pointUserId")
+      .value.trim();
 
+  const points =
+    Number(
+      $("pointValue").value
+    );
 
-  const id=
-    $("editContactId").value;
+  if(!userId){
 
-  const status=
-    $("contactStatus").value;
+    alert("ユーザーIDを入力してください。");
 
-  const reply=
-    $("contactReply")
-      .value
-      .trim();
+    return;
 
+  }
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("family_contacts")
-    .update({
+  const {data:old} =
+    await supabaseClient
+      .from("child_points")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .eq("child_user_id",userId)
+      .maybeSingle();
 
-      status:status,
+  let error;
 
-      admin_reply:
-        reply||null,
+  if(old){
 
-      updated_at:
-        new Date().toISOString()
+    ({error} =
+      await supabaseClient
+        .from("child_points")
+        .update({
+          points:points
+        })
+        .eq("id",old.id));
 
-    })
-    .eq("id",id);
+  }else{
 
+    ({error} =
+      await supabaseClient
+        .from("child_points")
+        .insert({
+
+          family_id:currentFamily.id,
+
+          child_user_id:userId,
+
+          points:points
+
+        }));
+
+  }
 
   if(error){
 
-    alert(
-      "更新できませんでした。\n\n"+
-      error.message
-    );
+    alert(error.message);
 
     return;
-  }
 
+  }
 
   closeModal();
 
-  await loadContacts();
+  loadChildRanking();
+
 }
 
 
-/* ==================================
-   MEMBERS
-================================== */
+/* =========================================
+   VIOLATIONS
+========================================= */
 
-async function loadMembers(){
+async function loadViolations(){
 
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("family_members")
-    .select("*")
-    .eq("family_id",currentFamily.id);
+  const {data,error} =
+    await supabaseClient
+      .from("child_violations")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
 
+  const box =
+    $("violationsList");
 
   if(error){
 
-    $("membersList").innerHTML=
-      `<div class="card">
-      メンバーを取得できません。
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
       </div>`;
 
     return;
+
   }
 
+  if(!data?.length){
 
-  $("membersList").innerHTML=
-  data.map(item=>`
+    box.innerHTML =
+      `<div class="empty">
+        違反記録はありません。
+      </div>`;
 
-  <div class="item">
+    return;
 
-    <div class="item-title">
+  }
 
-      ${
-        item.role==="parent"
-        ? "👑"
-        : "🧒"
-      }
+  box.innerHTML =
+    data.map(x=>`
 
-      ${escapeHTML(
-        item.name||"名前なし"
-      )}
+      <div class="item">
 
-    </div>
+        <div class="item-title">
+          🚨 ${escapeHTML(x.child_name)}
+        </div>
 
-    <div class="item-meta">
+        <div>
+          ${escapeHTML(x.title)}
+        </div>
 
-      ${
-        item.role==="parent"
-        ? "親"
-        : "子ども"
-      }
+        <p>
+          ${escapeHTML(x.description || "")}
+        </p>
 
-    </div>
+        <div class="item-meta">
+          ${formatDate(x.created_at)}
+        </div>
 
-  </div>
+        ${
+          isParent()
+          ? `
+          <button
+            class="danger"
+            onclick="deleteRecord('child_violations','${x.id}',loadViolations)">
+            削除
+          </button>
+          `
+          :""
+        }
 
-  `).join("");
+      </div>
+
+    `).join("");
 
 }
 
 
-/* ==================================
+function openViolationModal(){
+
+  if(!isParent()) return;
+
+  currentForm =
+    "violation";
+
+  $("modalTitle").textContent =
+    "🚨 違反記録";
+
+  $("modalContent").innerHTML = `
+
+    <div class="field">
+
+      <label>子どもの名前</label>
+
+      <input id="violationChild">
+
+    </div>
+
+    <div class="field">
+
+      <label>内容</label>
+
+      <input id="violationTitle">
+
+    </div>
+
+    <div class="field">
+
+      <label>詳細</label>
+
+      <textarea id="violationBody"></textarea>
+
+    </div>
+
+  `;
+
+  openModal();
+
+}
+
+
+async function saveViolation(){
+
+  const child =
+    $("violationChild")
+      .value.trim();
+
+  const title =
+    $("violationTitle")
+      .value.trim();
+
+  const body =
+    $("violationBody")
+      .value.trim();
+
+  if(!child || !title){
+
+    alert("入力してください。");
+
+    return;
+
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("child_violations")
+      .insert({
+
+        family_id:currentFamily.id,
+
+        child_name:child,
+
+        title:title,
+
+        description:body,
+
+        created_by:currentUser.id
+
+      });
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  closeModal();
+
+  loadViolations();
+
+}
+
+
+/* =========================================
+   CHILD NEWS
+========================================= */
+
+async function loadChildNews(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("child_news")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
+
+  const box =
+    $("childNewsList");
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+
+  }
+
+  if(!data?.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        子どもニュースはありません。
+      </div>`;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    data.map(x=>`
+
+      <div class="item">
+
+        <div class="item-title">
+          📰 ${escapeHTML(x.title)}
+        </div>
+
+        <p>
+          ${escapeHTML(x.body)}
+        </p>
+
+        ${
+          isParent()
+          ? `
+          <button
+            class="danger"
+            onclick="deleteRecord('child_news','${x.id}',loadChildNews)">
+            削除
+          </button>
+          `
+          :""
+        }
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function openChildNewsModal(){
+
+  if(!isParent()) return;
+
+  currentForm =
+    "childNews";
+
+  $("modalTitle").textContent =
+    "📰 子どもニュース";
+
+  $("modalContent").innerHTML = `
+
+    <div class="field">
+
+      <label>タイトル</label>
+
+      <input id="childNewsTitle">
+
+    </div>
+
+    <div class="field">
+
+      <label>内容</label>
+
+      <textarea id="childNewsBody"></textarea>
+
+    </div>
+
+  `;
+
+  openModal();
+
+}
+
+
+async function saveChildNews(){
+
+  const title =
+    $("childNewsTitle")
+      .value.trim();
+
+  const body =
+    $("childNewsBody")
+      .value.trim();
+
+  if(!title || !body){
+
+    alert("入力してください。");
+
+    return;
+
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("child_news")
+      .insert({
+
+        family_id:currentFamily.id,
+
+        title:title,
+
+        body:body,
+
+        created_by:currentUser.id
+
+      });
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  closeModal();
+
+  loadChildNews();
+
+}
+
+
+/* =========================================
+   GAMES
+========================================= */
+
+async function loadGames(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("child_games")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
+
+  const box =
+    $("gamesList");
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+
+  }
+
+  if(!data?.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        ゲーム予定はありません。
+      </div>`;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    data.map(x=>`
+
+      <div class="item">
+
+        <div class="item-title">
+          🎮 ${escapeHTML(x.game_name)}
+        </div>
+
+        <div>
+          👦 ${escapeHTML(x.player_names)}
+        </div>
+
+        <div class="item-meta">
+          ${escapeHTML(x.game_date || "")}
+         　
+          ${escapeHTML(x.start_time || "")}
+          ～
+          ${escapeHTML(x.end_time || "")}
+        </div>
+
+        ${
+          isParent()
+          ? `
+          <button
+            class="danger"
+            onclick="deleteRecord('child_games','${x.id}',loadGames)">
+            削除
+          </button>
+          `
+          :""
+        }
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function openGameModal(){
+
+  if(!isParent()) return;
+
+  currentForm =
+    "game";
+
+  $("modalTitle").textContent =
+    "🎮 ゲーム予定";
+
+  $("modalContent").innerHTML = `
+
+    <div class="field">
+
+      <label>ゲーム名</label>
+
+      <input id="gameName">
+
+    </div>
+
+    <div class="field">
+
+      <label>参加する子ども</label>
+
+      <input
+        id="gamePlayers"
+        placeholder="太郎、次郎">
+
+    </div>
+
+    <div class="field">
+
+      <label>日付</label>
+
+      <input
+        id="gameDate"
+        type="date">
+
+    </div>
+
+    <div class="field">
+
+      <label>開始</label>
+
+      <input
+        id="gameStart"
+        type="time">
+
+    </div>
+
+    <div class="field">
+
+      <label>終了</label>
+
+      <input
+        id="gameEnd"
+        type="time">
+
+    </div>
+
+  `;
+
+  openModal();
+
+}
+
+
+async function saveGame(){
+
+  const game =
+    $("gameName").value.trim();
+
+  const players =
+    $("gamePlayers").value.trim();
+
+  if(!game || !players){
+
+    alert("ゲーム名と参加者を入力してください。");
+
+    return;
+
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("child_games")
+      .insert({
+
+        family_id:currentFamily.id,
+
+        game_name:game,
+
+        player_names:players,
+
+        game_date:$("gameDate").value,
+
+        start_time:$("gameStart").value,
+
+        end_time:$("gameEnd").value,
+
+        created_by:currentUser.id
+
+      });
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  closeModal();
+
+  loadGames();
+
+}
+
+
+/* =========================================
+   PRESIDENT
+========================================= */
+
+async function loadPresident(){
+
+  const {data:candidates,error} =
+    await supabaseClient
+      .from("child_president_candidates")
+      .select("*")
+      .eq("family_id",currentFamily.id);
+
+  const box =
+    $("presidentList");
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+
+  }
+
+  if(!candidates?.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        候補者はいません。
+      </div>`;
+
+    return;
+
+  }
+
+  const {data:votes} =
+    await supabaseClient
+      .from("child_president_votes")
+      .select("*")
+      .eq("family_id",currentFamily.id);
+
+  const total =
+    votes?.length || 0;
+
+  const results =
+    candidates.map(c=>{
+
+      const count =
+        votes?.filter(
+          v =>
+            v.candidate_id === c.id
+        ).length || 0;
+
+      return {
+
+        ...c,
+
+        count,
+
+        rate:
+          total
+          ? Math.round(
+              count / total * 100
+            )
+          : 0
+
+      };
+
+    }).sort(
+      (a,b)=>b.count-a.count
+    );
+
+  box.innerHTML =
+    results.map((x,i)=>`
+
+      <div class="item">
+
+        <div class="item-title">
+
+          ${i===0 ? "👑 " : ""}
+
+          ${escapeHTML(x.candidate_name)}
+
+        </div>
+
+        <p>
+          ${escapeHTML(x.slogan || "")}
+        </p>
+
+        <div class="stat">
+          ${x.rate}%
+        </div>
+
+        <div class="item-meta">
+          支持率 / ${x.count}票 / 全${total}票
+        </div>
+
+        ${
+          currentMember.role === "child"
+          ? `
+          <button
+            class="success"
+            onclick="vote('${x.id}')">
+            🗳️ 投票
+          </button>
+          `
+          :""
+        }
+
+        ${
+          isParent()
+          ? `
+          <button
+            class="danger"
+            onclick="deleteRecord('child_president_candidates','${x.id}',loadPresident)">
+            削除
+          </button>
+          `
+          :""
+        }
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function openCandidateModal(){
+
+  if(!isParent()) return;
+
+  currentForm =
+    "candidate";
+
+  $("modalTitle").textContent =
+    "🗳️ 候補者を追加";
+
+  $("modalContent").innerHTML = `
+
+    <div class="field">
+
+      <label>候補者名</label>
+
+      <input id="candidateName">
+
+    </div>
+
+    <div class="field">
+
+      <label>スローガン</label>
+
+      <input id="candidateSlogan">
+
+    </div>
+
+  `;
+
+  openModal();
+
+}
+
+
+async function saveCandidate(){
+
+  const name =
+    $("candidateName")
+      .value.trim();
+
+  const slogan =
+    $("candidateSlogan")
+      .value.trim();
+
+  if(!name){
+
+    alert("候補者名を入力してください。");
+
+    return;
+
+  }
+
+  const {data:child} =
+    await supabaseClient
+      .from("family_members")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .eq("role","child")
+      .eq("name",name)
+      .maybeSingle();
+
+  if(!child){
+
+    alert(
+      "家族メンバーに登録されている子どもの名前を入力してください。"
+    );
+
+    return;
+
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("child_president_candidates")
+      .insert({
+
+        family_id:currentFamily.id,
+
+        child_user_id:child.user_id,
+
+        candidate_name:name,
+
+        slogan:slogan
+
+      });
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  closeModal();
+
+  loadPresident();
+
+}
+
+
+async function vote(candidateId){
+
+  if(currentMember.role !== "child"){
+
+    alert(
+      "子どもだけが投票できます。"
+    );
+
+    return;
+
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("child_president_votes")
+      .insert({
+
+        family_id:currentFamily.id,
+
+        voter_user_id:currentUser.id,
+
+        candidate_id:candidateId
+
+      });
+
+  if(error){
+
+    if(
+      error.message
+      .toLowerCase()
+      .includes("duplicate")
+    ){
+
+      alert(
+        "すでに投票しています。"
+      );
+
+    }else{
+
+      alert(error.message);
+
+    }
+
+    return;
+
+  }
+
+  alert("投票しました！");
+
+  loadPresident();
+
+}
+
+
+/* =========================================
    MODAL
-================================== */
+========================================= */
 
 function openModal(){
 
-  $("modalBg")
-    .classList.add("show");
-}
+  $("modalLayer").style.display =
+    "flex";
 
+}
 
 function closeModal(){
 
-  $("modalBg")
-    .classList.remove("show");
+  $("modalLayer").style.display =
+    "none";
 
-  currentForm=null;
+  currentForm =
+    null;
+
 }
 
 
 async function saveModal(){
 
-  if(currentForm==="duty")
-    return saveDuty();
+  switch(currentForm){
 
-  if(currentForm==="task")
-    return saveTask();
+    case "law":
+      return saveLaw();
 
-  if(currentForm==="event")
-    return saveEvent();
+    case "news":
+      return saveNews();
 
-  if(currentForm==="message")
-    return saveMessage();
+    case "schedule":
+      return saveSimple(
+        "family_schedule",
+        loadSchedule
+      );
 
-  if(currentForm==="law")
-    return saveLaw();
+    case "duty":
+      return saveSimple(
+        "family_duties",
+        loadDuties
+      );
 
-  if(currentForm==="news")
-    return saveNews();
+    case "message":
+      return saveSimple(
+        "family_messages",
+        loadMessages
+      );
 
-  if(currentForm==="contact")
-    return saveContact();
+    case "todo":
+      return saveSimple(
+        "family_todos",
+        loadTodos
+      );
 
-  if(currentForm==="contactEdit")
-    return saveContactEdit();
+    case "contact":
+      return saveContact();
+
+    case "point":
+      return savePoint();
+
+    case "violation":
+      return saveViolation();
+
+    case "childNews":
+      return saveChildNews();
+
+    case "game":
+      return saveGame();
+
+    case "candidate":
+      return saveCandidate();
+
+  }
 
 }
 
 
-/* ==================================
-   AUTH STATE
-================================== */
+async function saveSimple(
+  table,
+  reload
+){
 
-supabaseClient
-.auth
-.onAuthStateChange(
-async function(event,session){
+  const title =
+    $("simpleTitle")
+      .value.trim();
 
-  if(
-    session &&
-    session.user &&
-    !currentUser
-  ){
+  const body =
+    $("simpleBody")
+      .value.trim();
 
-    await loadApp();
+  if(!title){
 
-  }
+    alert("タイトルを入力してください。");
 
-});
-
-
-/* ==================================
-   START
-================================== */
-
-(async function(){
-
-  const {
-    data:{
-      session
-    }
-  } =
-  await supabaseClient
-    .auth
-    .getSession();
-
-
-  if(session){
-
-    await loadApp();
+    return;
 
   }
 
-})();
+  const {error} =
+    await supabaseClient
+      .from(table)
+      .insert({
+
+        family_id:currentFamily.id,
+
+        title:title,
+
+        body:body,
+
+        created_by:currentUser.id
+
+      });
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  closeModal();
+
+  reload();
+
+}
+
+
+/* =========================================
+   DELETE
+========================================= */
+
+async function deleteRecord(
+  table,
+  id,
+  reload
+){
+
+  if(!isParent()) return;
+
+  if(!confirm(
+    "このデータを削除しますか？"
+  )) return;
+
+  const {error} =
+    await supabaseClient
+      .from(table)
+      .delete()
+      .eq("id",id);
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  reload();
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  currentUser =
+    null;
+
+  currentMember =
+    null;
+
+  currentFamily =
+    null;
+
+  $("app").style.display =
+    "none";
+
+  $("loginPage").style.display =
+    "flex";
+
+}
+
+
+/* =========================================
+   SESSION
+========================================= */
+
+supabaseClient.auth
+  .getSession()
+  .then(async({data})=>{
+
+    if(!data.session)
+      return;
+
+    currentUser =
+      data.session.user;
+
+  });
 
 </script>
 
