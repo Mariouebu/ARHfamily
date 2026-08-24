@@ -14,11 +14,7 @@
 
 body{
   margin:0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#f4f7fb;
   color:#172033;
 }
@@ -135,6 +131,14 @@ textarea{
   color:#d93025;
 }
 
+.successBtn{
+  border:0;
+  padding:9px 13px;
+  border-radius:10px;
+  background:#e3f7ea;
+  color:#16834a;
+}
+
 .error{
   color:#d93025;
   margin-top:12px;
@@ -199,7 +203,7 @@ textarea{
 }
 
 .sidebar{
-  width:230px;
+  width:240px;
   background:#fff;
   border-right:1px solid #e3e8f0;
   padding:15px;
@@ -243,8 +247,7 @@ textarea{
 
 .grid{
   display:grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(230px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:15px;
 }
 
@@ -325,6 +328,41 @@ textarea{
   margin-right:10px;
 }
 
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.badge-new{
+  background:#fff0c2;
+  color:#8a6200;
+}
+
+.badge-work{
+  background:#e3f1ff;
+  color:#1557a5;
+}
+
+.badge-done{
+  background:#e3f7ea;
+  color:#16834a;
+}
+
+.reply-box{
+  margin-top:15px;
+  padding:15px;
+  background:#f4f7fb;
+  border-radius:12px;
+}
+
+.reply-title{
+  font-weight:800;
+  margin-bottom:8px;
+}
+
 .modal-bg{
   position:fixed;
   inset:0;
@@ -392,7 +430,7 @@ a{
 
   .sidebar{
     position:fixed;
-    left:-260px;
+    left:-270px;
     top:64px;
     bottom:0;
     z-index:50;
@@ -416,10 +454,6 @@ a{
     font-size:23px;
   }
 
-  .user-info{
-    gap:5px;
-  }
-
   #headerUserName{
     display:none;
   }
@@ -429,7 +463,9 @@ a{
 
 <body>
 
-<!-- LOGIN -->
+<!-- ==============================
+     LOGIN
+============================== -->
 
 <div id="authPage">
 
@@ -440,20 +476,18 @@ a{
 </div>
 
 <div class="subtitle">
-家族の予定・当番・法律・ニュースを管理
+家族の予定・当番・法律・ニュース・お問い合わせ
 </div>
 
 <div class="tabs">
 
-<button
-id="loginTab"
+<button id="loginTab"
 class="active"
 onclick="showAuth('login')">
 ログイン
 </button>
 
-<button
-id="registerTab"
+<button id="registerTab"
 onclick="showAuth('register')">
 新規登録
 </button>
@@ -464,7 +498,6 @@ onclick="showAuth('register')">
 
 <div class="field">
 <label>メールアドレス</label>
-
 <input
 id="loginEmail"
 type="email"
@@ -474,27 +507,23 @@ placeholder="example@email.com">
 
 <div class="field">
 <label>パスワード</label>
-
 <input
 id="loginPassword"
 type="password"
 autocomplete="current-password">
 </div>
 
-<button
-class="primary"
+<button class="primary"
 onclick="login()">
 ログイン
 </button>
 
 </div>
 
-
 <div id="registerForm" class="hidden">
 
 <div class="field">
 <label>名前</label>
-
 <input
 id="registerName"
 autocomplete="name"
@@ -503,7 +532,6 @@ placeholder="太郎">
 
 <div class="field">
 <label>メールアドレス</label>
-
 <input
 id="registerEmail"
 type="email"
@@ -513,7 +541,6 @@ placeholder="example@email.com">
 
 <div class="field">
 <label>パスワード</label>
-
 <input
 id="registerPassword"
 type="password"
@@ -539,8 +566,7 @@ placeholder="6文字以上">
 
 </div>
 
-<div
-id="familyNameField"
+<div id="familyNameField"
 class="field">
 
 <label>家族名</label>
@@ -551,8 +577,7 @@ placeholder="山田家">
 
 </div>
 
-<div
-id="familyCodeField"
+<div id="familyCodeField"
 class="field hidden">
 
 <label>家族コード</label>
@@ -563,8 +588,7 @@ placeholder="例：AB12CD">
 
 </div>
 
-<button
-class="primary"
+<button class="primary"
 onclick="register()">
 登録する
 </button>
@@ -577,7 +601,9 @@ onclick="register()">
 </div>
 
 
-<!-- APP -->
+<!-- ==============================
+     APP
+============================== -->
 
 <div id="app" class="hidden">
 
@@ -585,8 +611,7 @@ onclick="register()">
 
 <div style="display:flex;align-items:center">
 
-<button
-class="mobile-menu"
+<button class="mobile-menu"
 onclick="toggleSidebar()">
 ☰
 </button>
@@ -601,13 +626,11 @@ onclick="toggleSidebar()">
 
 <span id="headerUserName"></span>
 
-<span
-id="headerRole"
+<span id="headerRole"
 class="role">
 </span>
 
-<button
-class="logout"
+<button class="logout"
 onclick="logout()">
 ログアウト
 </button>
@@ -616,57 +639,52 @@ onclick="logout()">
 
 </header>
 
-
 <div class="layout">
 
-<aside
-id="sidebar"
+<aside id="sidebar"
 class="sidebar">
 
-<button
-class="nav active"
+<button class="nav active"
 onclick="showPage('home',this)">
 🏠 ホーム
 </button>
 
-<button
-class="nav"
+<button class="nav"
 onclick="showPage('duties',this)">
 📋 当番表
 </button>
 
-<button
-class="nav"
+<button class="nav"
 onclick="showPage('tasks',this)">
 ✅ やること
 </button>
 
-<button
-class="nav"
+<button class="nav"
 onclick="showPage('events',this)">
 📅 予定表
 </button>
 
-<button
-class="nav"
+<button class="nav"
 onclick="showPage('messages',this)">
 💌 親からのメッセージ
 </button>
 
-<button
-class="nav"
+<button class="nav"
 onclick="showPage('laws',this)">
 ⚖️ 法律・罰金
 </button>
 
-<button
-class="nav"
+<button class="nav"
 onclick="showPage('news',this)">
 📰 家族ニュース
 </button>
 
-<button
-class="nav"
+<button class="nav"
+onclick="showPage('contacts',this)">
+📩 お問い合わせ
+</button>
+
+<button class="nav"
 onclick="showPage('members',this)">
 👨‍👩‍👧 家族メンバー
 </button>
@@ -678,8 +696,7 @@ onclick="showPage('members',this)">
 
 <!-- HOME -->
 
-<section
-id="page-home"
+<section id="page-home"
 class="page active">
 
 <h1 class="page-title">
@@ -690,62 +707,39 @@ class="page active">
 
 <div class="card">
 <h3>👨‍👩‍👧 家族</h3>
-<div
-id="homeFamilyName"
-class="stat">
--
-</div>
-<div class="stat-label">
-家族名
-</div>
+<div id="homeFamilyName"
+class="stat">-</div>
+<div class="stat-label">家族名</div>
 </div>
 
 <div class="card">
 <h3>📋 当番</h3>
-<div
-id="homeDuties"
-class="stat">
-0
-</div>
-<div class="stat-label">
-登録数
-</div>
+<div id="homeDuties"
+class="stat">0</div>
+<div class="stat-label">登録数</div>
 </div>
 
 <div class="card">
 <h3>⚖️ 法律</h3>
-<div
-id="homeLaws"
-class="stat">
-0
-</div>
-<div class="stat-label">
-家族専用
-</div>
+<div id="homeLaws"
+class="stat">0</div>
+<div class="stat-label">家族専用</div>
 </div>
 
 <div class="card">
 <h3>📰 ニュース</h3>
-<div
-id="homeNews"
-class="stat">
-0
-</div>
-<div class="stat-label">
-家族専用
-</div>
+<div id="homeNews"
+class="stat">0</div>
+<div class="stat-label">家族専用</div>
 </div>
 
 </div>
 
 <div class="card">
 
-<h3>
-🔑 家族コード
-</h3>
+<h3>🔑 家族コード</h3>
 
-<div
-id="homeFamilyCode"
+<div id="homeFamilyCode"
 class="family-code">
 -
 </div>
@@ -761,8 +755,7 @@ class="family-code">
 
 <!-- DUTIES -->
 
-<section
-id="page-duties"
+<section id="page-duties"
 class="page">
 
 <h1 class="page-title">
@@ -771,8 +764,7 @@ class="page">
 
 <div class="card">
 
-<button
-id="addDutyButton"
+<button id="addDutyButton"
 class="primary"
 onclick="openDutyModal()">
 ＋ 当番を追加
@@ -787,8 +779,7 @@ onclick="openDutyModal()">
 
 <!-- TASKS -->
 
-<section
-id="page-tasks"
+<section id="page-tasks"
 class="page">
 
 <h1 class="page-title">
@@ -797,8 +788,7 @@ class="page">
 
 <div class="card">
 
-<button
-id="addTaskButton"
+<button id="addTaskButton"
 class="primary"
 onclick="openTaskModal()">
 ＋ やることを追加
@@ -813,8 +803,7 @@ onclick="openTaskModal()">
 
 <!-- EVENTS -->
 
-<section
-id="page-events"
+<section id="page-events"
 class="page">
 
 <h1 class="page-title">
@@ -823,8 +812,7 @@ class="page">
 
 <div class="card">
 
-<button
-id="addEventButton"
+<button id="addEventButton"
 class="primary"
 onclick="openEventModal()">
 ＋ 予定を追加
@@ -839,8 +827,7 @@ onclick="openEventModal()">
 
 <!-- MESSAGES -->
 
-<section
-id="page-messages"
+<section id="page-messages"
 class="page">
 
 <h1 class="page-title">
@@ -849,8 +836,7 @@ class="page">
 
 <div class="card">
 
-<button
-id="addMessageButton"
+<button id="addMessageButton"
 class="primary"
 onclick="openMessageModal()">
 ＋ メッセージを送る
@@ -865,8 +851,7 @@ onclick="openMessageModal()">
 
 <!-- LAWS -->
 
-<section
-id="page-laws"
+<section id="page-laws"
 class="page">
 
 <h1 class="page-title">
@@ -879,8 +864,7 @@ class="page">
 家族だけで共有する法律・罰金・家族ルールです。
 </p>
 
-<button
-id="addLawButton"
+<button id="addLawButton"
 class="primary"
 onclick="openLawModal()">
 ＋ 法律・罰金を追加
@@ -895,8 +879,7 @@ onclick="openLawModal()">
 
 <!-- NEWS -->
 
-<section
-id="page-news"
+<section id="page-news"
 class="page">
 
 <h1 class="page-title">
@@ -909,8 +892,7 @@ class="page">
 家族だけで共有するニュースです。
 </p>
 
-<button
-id="addNewsButton"
+<button id="addNewsButton"
 class="primary"
 onclick="openNewsModal()">
 ＋ ニュースを追加
@@ -923,10 +905,41 @@ onclick="openNewsModal()">
 </section>
 
 
+<!-- CONTACTS -->
+
+<section id="page-contacts"
+class="page">
+
+<h1 class="page-title">
+📩 お問い合わせ
+</h1>
+
+<div class="card">
+
+<h3>
+お問い合わせを送る
+</h3>
+
+<p>
+家族の管理者・親に質問や相談を送ることができます。
+</p>
+
+<button
+class="primary"
+onclick="openContactModal()">
+＋ お問い合わせを作成
+</button>
+
+</div>
+
+<div id="contactsList"></div>
+
+</section>
+
+
 <!-- MEMBERS -->
 
-<section
-id="page-members"
+<section id="page-members"
 class="page">
 
 <h1 class="page-title">
@@ -942,10 +955,11 @@ class="page">
 </div>
 
 
-<!-- MODAL -->
+<!-- ==============================
+     MODAL
+============================== -->
 
-<div
-id="modalBg"
+<div id="modalBg"
 class="modal-bg">
 
 <div class="modal">
@@ -956,8 +970,7 @@ class="modal-bg">
 追加
 </h2>
 
-<button
-class="close"
+<button class="close"
 onclick="closeModal()">
 ×
 </button>
@@ -968,14 +981,12 @@ onclick="closeModal()">
 
 <div class="modal-actions">
 
-<button
-class="secondary"
+<button class="secondary"
 onclick="closeModal()">
 キャンセル
 </button>
 
-<button
-class="primary"
+<button class="primary"
 onclick="saveModal()">
 保存
 </button>
@@ -988,9 +999,9 @@ onclick="saveModal()">
 
 <script>
 
-/* ==================================================
+/* ==================================
    SUPABASE
-   ================================================== */
+================================== */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -1005,9 +1016,9 @@ window.supabase.createClient(
 );
 
 
-/* ==================================================
+/* ==================================
    STATE
-   ================================================== */
+================================== */
 
 let currentUser = null;
 let currentFamily = null;
@@ -1015,9 +1026,9 @@ let currentMember = null;
 let currentForm = null;
 
 
-/* ==================================================
+/* ==================================
    HELPERS
-   ================================================== */
+================================== */
 
 function $(id){
   return document.getElementById(id);
@@ -1044,10 +1055,7 @@ function isParent(){
          currentMember.role === "parent";
 }
 
-function showMessage(
-  text,
-  type="error"
-){
+function showMessage(text,type="error"){
 
   $("authMessage").className = type;
 
@@ -1055,9 +1063,9 @@ function showMessage(
 }
 
 
-/* ==================================================
+/* ==================================
    AUTH
-   ================================================== */
+================================== */
 
 function showAuth(type){
 
@@ -1085,7 +1093,7 @@ function showAuth(type){
       type === "register"
     );
 
-  $("authMessage").textContent = "";
+  $("authMessage").textContent="";
 }
 
 
@@ -1110,27 +1118,22 @@ function(){
 });
 
 
-/* ==================================================
+/* ==================================
    REGISTER
-   ================================================== */
+================================== */
 
 async function register(){
 
   try{
 
     const name =
-      $("registerName")
-        .value
-        .trim();
+      $("registerName").value.trim();
 
     const email =
-      $("registerEmail")
-        .value
-        .trim();
+      $("registerEmail").value.trim();
 
     const password =
-      $("registerPassword")
-        .value;
+      $("registerPassword").value;
 
     const mode =
       $("familyMode").value;
@@ -1178,12 +1181,12 @@ async function register(){
     if(error){
 
       showMessage(error.message);
+
       return;
     }
 
 
-    const user =
-      data.user;
+    const user = data.user;
 
 
     if(!user){
@@ -1376,23 +1379,23 @@ async function register(){
 }
 
 
-/* ==================================================
+/* ==================================
    FAMILY CODE
-   ================================================== */
+================================== */
 
 function generateFamilyCode(){
 
   const chars =
     "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-  let result = "";
+  let result="";
 
   for(let i=0;i<6;i++){
 
     result +=
       chars[
         Math.floor(
-          Math.random() * chars.length
+          Math.random()*chars.length
         )
       ];
 
@@ -1402,20 +1405,17 @@ function generateFamilyCode(){
 }
 
 
-/* ==================================================
+/* ==================================
    LOGIN
-   ================================================== */
+================================== */
 
 async function login(){
 
   const email =
-    $("loginEmail")
-      .value
-      .trim();
+    $("loginEmail").value.trim();
 
   const password =
-    $("loginPassword")
-      .value;
+    $("loginPassword").value;
 
 
   if(!email || !password){
@@ -1445,6 +1445,7 @@ async function login(){
   if(error){
 
     showMessage(error.message);
+
     return;
   }
 
@@ -1453,9 +1454,9 @@ async function login(){
 }
 
 
-/* ==================================================
+/* ==================================
    LOAD APP
-   ================================================== */
+================================== */
 
 async function loadApp(){
 
@@ -1471,12 +1472,10 @@ async function loadApp(){
       .getUser();
 
 
-    if(!user){
-      return;
-    }
+    if(!user) return;
 
 
-    currentUser = user;
+    currentUser=user;
 
 
     const {
@@ -1493,7 +1492,7 @@ async function loadApp(){
     if(memberError){
 
       alert(
-        "family_members の取得に失敗しました。\n\n"+
+        "family_membersの取得に失敗しました。\n\n"+
         memberError.message
       );
 
@@ -1511,7 +1510,7 @@ async function loadApp(){
     }
 
 
-    currentMember = member;
+    currentMember=member;
 
 
     const {
@@ -1528,7 +1527,7 @@ async function loadApp(){
     if(familyError){
 
       alert(
-        "families の取得に失敗しました。\n\n"+
+        "familiesの取得に失敗しました。\n\n"+
         familyError.message
       );
 
@@ -1536,7 +1535,7 @@ async function loadApp(){
     }
 
 
-    currentFamily = family;
+    currentFamily=family;
 
 
     $("authPage")
@@ -1548,15 +1547,14 @@ async function loadApp(){
 
     $("headerUserName")
       .textContent =
-        member.name ||
-        user.email;
+      member.name || user.email;
 
 
     $("headerRole")
       .textContent =
-        member.role === "parent"
-        ? "親"
-        : "子ども";
+      member.role === "parent"
+      ? "親"
+      : "子ども";
 
 
     $("headerRole")
@@ -1575,12 +1573,12 @@ async function loadApp(){
 
     $("homeFamilyName")
       .textContent =
-        family.name;
+      family.name;
 
 
     $("homeFamilyCode")
       .textContent =
-        family.family_code;
+      family.family_code;
 
 
     updatePermissionUI();
@@ -1599,15 +1597,13 @@ async function loadApp(){
 }
 
 
-/* ==================================================
-   PERMISSIONS
-   ================================================== */
+/* ==================================
+   PERMISSION UI
+================================== */
 
 function updatePermissionUI(){
 
-  const parent =
-    isParent();
-
+  const parent=isParent();
 
   [
     "addDutyButton",
@@ -1616,8 +1612,7 @@ function updatePermissionUI(){
     "addMessageButton",
     "addLawButton",
     "addNewsButton"
-  ]
-  .forEach(id => {
+  ].forEach(id=>{
 
     $(id)
       .classList.toggle(
@@ -1630,9 +1625,9 @@ function updatePermissionUI(){
 }
 
 
-/* ==================================================
+/* ==================================
    LOGOUT
-   ================================================== */
+================================== */
 
 async function logout(){
 
@@ -1640,9 +1635,9 @@ async function logout(){
     .auth
     .signOut();
 
-  currentUser = null;
-  currentFamily = null;
-  currentMember = null;
+  currentUser=null;
+  currentFamily=null;
+  currentMember=null;
 
   $("app")
     .classList.add("hidden");
@@ -1652,19 +1647,16 @@ async function logout(){
 }
 
 
-/* ==================================================
+/* ==================================
    NAVIGATION
-   ================================================== */
+================================== */
 
-function showPage(
-  name,
-  button
-){
+function showPage(name,button){
 
   document
     .querySelectorAll(".page")
-    .forEach(
-      p => p.classList.remove("active")
+    .forEach(p=>
+      p.classList.remove("active")
     );
 
 
@@ -1674,18 +1666,22 @@ function showPage(
 
   document
     .querySelectorAll(".nav")
-    .forEach(
-      n => n.classList.remove("active")
+    .forEach(n=>
+      n.classList.remove("active")
     );
 
 
-  if(button){
+  if(button)
     button.classList.add("active");
-  }
 
 
   $("sidebar")
     .classList.remove("open");
+
+
+  if(name==="contacts"){
+    loadContacts();
+  }
 }
 
 
@@ -1696,28 +1692,38 @@ function toggleSidebar(){
 }
 
 
-/* ==================================================
+/* ==================================
    LOAD ALL
-   ================================================== */
+================================== */
 
 async function loadAll(){
 
   await Promise.all([
+
     loadDuties(),
+
     loadTasks(),
+
     loadEvents(),
+
     loadMessages(),
+
     loadLaws(),
+
     loadNews(),
+
+    loadContacts(),
+
     loadMembers()
+
   ]);
 
 }
 
 
-/* ==================================================
+/* ==================================
    DUTIES
-   ================================================== */
+================================== */
 
 async function loadDuties(){
 
@@ -1729,14 +1735,12 @@ async function loadDuties(){
     .from("family_duties")
     .select("*")
     .eq("family_id",currentFamily.id)
-    .order("created_at",{
-      ascending:false
-    });
+    .order("created_at",{ascending:false});
 
 
   if(error){
 
-    $("dutiesList").innerHTML =
+    $("dutiesList").innerHTML=
       `<div class="card empty">
       当番表を読み込めませんでした。
       </div>`;
@@ -1745,14 +1749,12 @@ async function loadDuties(){
   }
 
 
-  $("homeDuties")
-    .textContent =
-      data.length;
+  $("homeDuties").textContent=data.length;
 
 
   if(!data.length){
 
-    $("dutiesList").innerHTML =
+    $("dutiesList").innerHTML=
       `<div class="card empty">
       当番はありません。
       </div>`;
@@ -1761,8 +1763,8 @@ async function loadDuties(){
   }
 
 
-  $("dutiesList").innerHTML =
-  data.map(item => `
+  $("dutiesList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
@@ -1772,25 +1774,27 @@ async function loadDuties(){
 
     <div class="item-meta">
       担当：
-      ${escapeHTML(item.assignee_name || "未設定")}
+      ${escapeHTML(item.assignee_name||"未設定")}
     </div>
 
     <div class="item-meta">
-      ${escapeHTML(item.day || "")}
+      ${escapeHTML(item.day||"")}
     </div>
 
     ${
       isParent()
       ? `
       <div class="actions">
-        <button
-        class="danger"
-        onclick="deleteDuty('${item.id}')">
-        削除
-        </button>
+
+      <button
+      class="danger"
+      onclick="deleteDuty('${item.id}')">
+      削除
+      </button>
+
       </div>
       `
-      : ""
+      :""
     }
 
   </div>
@@ -1802,47 +1806,53 @@ async function loadDuties(){
 
 function openDutyModal(){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  currentForm = "duty";
+  currentForm="duty";
 
-  $("modalTitle").textContent =
+  $("modalTitle").textContent=
     "当番を追加";
 
 
-  $("modalContent").innerHTML = `
+  $("modalContent").innerHTML=`
 
   <div class="field">
-    <label>当番名</label>
 
-    <input
-    id="dutyTitle"
-    placeholder="ゴミ出し">
+  <label>当番名</label>
+
+  <input
+  id="dutyTitle"
+  placeholder="ゴミ出し">
+
   </div>
 
   <div class="field">
-    <label>担当者</label>
 
-    <input
-    id="dutyAssignee"
-    placeholder="太郎">
+  <label>担当者</label>
+
+  <input
+  id="dutyAssignee"
+  placeholder="太郎">
+
   </div>
 
   <div class="field">
-    <label>曜日</label>
 
-    <select id="dutyDay">
+  <label>曜日</label>
 
-      <option>毎日</option>
-      <option>月曜日</option>
-      <option>火曜日</option>
-      <option>水曜日</option>
-      <option>木曜日</option>
-      <option>金曜日</option>
-      <option>土曜日</option>
-      <option>日曜日</option>
+  <select id="dutyDay">
 
-    </select>
+  <option>毎日</option>
+  <option>月曜日</option>
+  <option>火曜日</option>
+  <option>水曜日</option>
+  <option>木曜日</option>
+  <option>金曜日</option>
+  <option>土曜日</option>
+  <option>日曜日</option>
+
+  </select>
+
   </div>
 
   `;
@@ -1853,17 +1863,13 @@ function openDutyModal(){
 
 async function saveDuty(){
 
-  const title =
-    $("dutyTitle")
-      .value
-      .trim();
+  const title=
+    $("dutyTitle").value.trim();
 
 
   if(!title){
 
-    alert(
-      "当番名を入力してください。"
-    );
+    alert("当番名を入力してください。");
 
     return;
   }
@@ -1881,15 +1887,11 @@ async function saveDuty(){
       title:title,
 
       assignee_name:
-        $("dutyAssignee")
-          .value
-          .trim(),
+        $("dutyAssignee").value.trim(),
 
-      day:
-        $("dutyDay").value,
+      day:$("dutyDay").value,
 
-      created_by:
-        currentUser.id
+      created_by:currentUser.id
 
     });
 
@@ -1897,6 +1899,7 @@ async function saveDuty(){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -1909,10 +1912,9 @@ async function saveDuty(){
 
 async function deleteDuty(id){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  if(!confirm("削除しますか？"))
-    return;
+  if(!confirm("削除しますか？"))return;
 
 
   const {
@@ -1927,6 +1929,7 @@ async function deleteDuty(id){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -1935,9 +1938,9 @@ async function deleteDuty(id){
 }
 
 
-/* ==================================================
+/* ==================================
    TASKS
-   ================================================== */
+================================== */
 
 async function loadTasks(){
 
@@ -1949,14 +1952,12 @@ async function loadTasks(){
     .from("family_tasks")
     .select("*")
     .eq("family_id",currentFamily.id)
-    .order("created_at",{
-      ascending:false
-    });
+    .order("created_at",{ascending:false});
 
 
   if(error){
 
-    $("tasksList").innerHTML =
+    $("tasksList").innerHTML=
       `<div class="card empty">
       やることを読み込めませんでした。
       </div>`;
@@ -1967,7 +1968,7 @@ async function loadTasks(){
 
   if(!data.length){
 
-    $("tasksList").innerHTML =
+    $("tasksList").innerHTML=
       `<div class="card empty">
       やることはありません。
       </div>`;
@@ -1976,18 +1977,14 @@ async function loadTasks(){
   }
 
 
-  $("tasksList").innerHTML =
-  data.map(item => `
+  $("tasksList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
     <div class="item-title">
 
-      ${
-        item.completed
-        ? "☑️"
-        : "⬜"
-      }
+      ${item.completed?"☑️":"⬜"}
 
       ${escapeHTML(item.title)}
 
@@ -1995,46 +1992,40 @@ async function loadTasks(){
 
     <div class="item-meta">
       担当：
-      ${escapeHTML(
-        item.assignee_name || "未設定"
-      )}
+      ${escapeHTML(item.assignee_name||"未設定")}
     </div>
 
     <div class="item-meta">
       期限：
-      ${escapeHTML(
-        item.due_date || "なし"
-      )}
+      ${escapeHTML(item.due_date||"なし")}
     </div>
 
     <div class="actions">
 
+    <button
+    class="secondary"
+    onclick="toggleTask(
+      '${item.id}',
+      ${!item.completed}
+    )">
+
+    ${item.completed
+      ?"未完了に戻す"
+      :"完了"}
+
+    </button>
+
+    ${
+      isParent()
+      ? `
       <button
-      class="secondary"
-      onclick="toggleTask(
-        '${item.id}',
-        ${!item.completed}
-      )">
-
-      ${
-        item.completed
-        ? "未完了に戻す"
-        : "完了"
-      }
-
+      class="danger"
+      onclick="deleteTask('${item.id}')">
+      削除
       </button>
-
-      ${
-        isParent()
-        ? `
-        <button
-        class="danger"
-        onclick="deleteTask('${item.id}')">
-        削除
-        </button>
-        `
-        : ""
-      }
+      `
+      :""
+    }
 
     </div>
 
@@ -2047,43 +2038,43 @@ async function loadTasks(){
 
 function openTaskModal(){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  currentForm = "task";
+  currentForm="task";
 
-  $("modalTitle").textContent =
+  $("modalTitle").textContent=
     "やることを追加";
 
 
-  $("modalContent").innerHTML = `
+  $("modalContent").innerHTML=`
 
   <div class="field">
 
-    <label>やること</label>
+  <label>やること</label>
 
-    <input
-    id="taskTitle"
-    placeholder="宿題をする">
+  <input
+  id="taskTitle"
+  placeholder="宿題をする">
 
   </div>
 
   <div class="field">
 
-    <label>担当者</label>
+  <label>担当者</label>
 
-    <input
-    id="taskAssignee"
-    placeholder="太郎">
+  <input
+  id="taskAssignee"
+  placeholder="太郎">
 
   </div>
 
   <div class="field">
 
-    <label>期限</label>
+  <label>期限</label>
 
-    <input
-    id="taskDueDate"
-    type="date">
+  <input
+  id="taskDueDate"
+  type="date">
 
   </div>
 
@@ -2095,17 +2086,13 @@ function openTaskModal(){
 
 async function saveTask(){
 
-  const title =
-    $("taskTitle")
-      .value
-      .trim();
+  const title=
+    $("taskTitle").value.trim();
 
 
   if(!title){
 
-    alert(
-      "やることを入力してください。"
-    );
+    alert("やることを入力してください。");
 
     return;
   }
@@ -2123,18 +2110,14 @@ async function saveTask(){
       title:title,
 
       assignee_name:
-        $("taskAssignee")
-          .value
-          .trim(),
+        $("taskAssignee").value.trim(),
 
       due_date:
-        $("taskDueDate").value ||
-        null,
+        $("taskDueDate").value||null,
 
       completed:false,
 
-      created_by:
-        currentUser.id
+      created_by:currentUser.id
 
     });
 
@@ -2142,6 +2125,7 @@ async function saveTask(){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2152,10 +2136,7 @@ async function saveTask(){
 }
 
 
-async function toggleTask(
-  id,
-  completed
-){
+async function toggleTask(id,completed){
 
   const {
     error
@@ -2171,6 +2152,7 @@ async function toggleTask(
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2181,10 +2163,9 @@ async function toggleTask(
 
 async function deleteTask(id){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  if(!confirm("削除しますか？"))
-    return;
+  if(!confirm("削除しますか？"))return;
 
 
   const {
@@ -2199,6 +2180,7 @@ async function deleteTask(id){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2207,9 +2189,9 @@ async function deleteTask(id){
 }
 
 
-/* ==================================================
+/* ==================================
    EVENTS
-   ================================================== */
+================================== */
 
 async function loadEvents(){
 
@@ -2221,14 +2203,12 @@ async function loadEvents(){
     .from("family_events")
     .select("*")
     .eq("family_id",currentFamily.id)
-    .order("event_date",{
-      ascending:true
-    });
+    .order("event_date",{ascending:true});
 
 
-  if(error || !data.length){
+  if(error||!data.length){
 
-    $("eventsList").innerHTML =
+    $("eventsList").innerHTML=
       `<div class="card empty">
       予定はありません。
       </div>`;
@@ -2237,8 +2217,8 @@ async function loadEvents(){
   }
 
 
-  $("eventsList").innerHTML =
-  data.map(item => `
+  $("eventsList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
@@ -2247,11 +2227,11 @@ async function loadEvents(){
     </div>
 
     <div class="item-meta">
-      ${escapeHTML(item.event_date || "")}
+      ${escapeHTML(item.event_date||"")}
     </div>
 
     <p>
-      ${escapeHTML(item.description || "")}
+      ${escapeHTML(item.description||"")}
     </p>
 
     ${
@@ -2263,7 +2243,7 @@ async function loadEvents(){
       削除
       </button>
       `
-      : ""
+      :""
     }
 
   </div>
@@ -2275,42 +2255,42 @@ async function loadEvents(){
 
 function openEventModal(){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  currentForm = "event";
+  currentForm="event";
 
-  $("modalTitle").textContent =
+  $("modalTitle").textContent=
     "予定を追加";
 
 
-  $("modalContent").innerHTML = `
+  $("modalContent").innerHTML=`
 
   <div class="field">
 
-    <label>予定名</label>
+  <label>予定名</label>
 
-    <input
-    id="eventTitle"
-    placeholder="授業参観">
+  <input
+  id="eventTitle"
+  placeholder="授業参観">
 
   </div>
 
   <div class="field">
 
-    <label>日時</label>
+  <label>日時</label>
 
-    <input
-    id="eventDate"
-    type="datetime-local">
+  <input
+  id="eventDate"
+  type="datetime-local">
 
   </div>
 
   <div class="field">
 
-    <label>内容</label>
+  <label>内容</label>
 
-    <textarea
-    id="eventDescription"></textarea>
+  <textarea
+  id="eventDescription"></textarea>
 
   </div>
 
@@ -2322,17 +2302,13 @@ function openEventModal(){
 
 async function saveEvent(){
 
-  const title =
-    $("eventTitle")
-      .value
-      .trim();
+  const title=
+    $("eventTitle").value.trim();
 
 
   if(!title){
 
-    alert(
-      "予定名を入力してください。"
-    );
+    alert("予定名を入力してください。");
 
     return;
   }
@@ -2350,16 +2326,13 @@ async function saveEvent(){
       title:title,
 
       event_date:
-        $("eventDate").value ||
-        null,
+        $("eventDate").value||null,
 
       description:
         $("eventDescription")
-          .value
-          .trim(),
+          .value.trim(),
 
-      created_by:
-        currentUser.id
+      created_by:currentUser.id
 
     });
 
@@ -2367,6 +2340,7 @@ async function saveEvent(){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2379,10 +2353,9 @@ async function saveEvent(){
 
 async function deleteEvent(id){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  if(!confirm("削除しますか？"))
-    return;
+  if(!confirm("削除しますか？"))return;
 
 
   const {
@@ -2397,6 +2370,7 @@ async function deleteEvent(id){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2405,9 +2379,9 @@ async function deleteEvent(id){
 }
 
 
-/* ==================================================
+/* ==================================
    MESSAGES
-   ================================================== */
+================================== */
 
 async function loadMessages(){
 
@@ -2419,14 +2393,12 @@ async function loadMessages(){
     .from("family_messages")
     .select("*")
     .eq("family_id",currentFamily.id)
-    .order("created_at",{
-      ascending:false
-    });
+    .order("created_at",{ascending:false});
 
 
-  if(error || !data.length){
+  if(error||!data.length){
 
-    $("messagesList").innerHTML =
+    $("messagesList").innerHTML=
       `<div class="card empty">
       メッセージはありません。
       </div>`;
@@ -2435,8 +2407,8 @@ async function loadMessages(){
   }
 
 
-  $("messagesList").innerHTML =
-  data.map(item => `
+  $("messagesList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
@@ -2457,7 +2429,7 @@ async function loadMessages(){
       削除
       </button>
       `
-      : ""
+      :""
     }
 
   </div>
@@ -2469,33 +2441,32 @@ async function loadMessages(){
 
 function openMessageModal(){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  currentForm = "message";
+  currentForm="message";
 
-  $("modalTitle").textContent =
+  $("modalTitle").textContent=
     "親からのメッセージ";
 
 
-  $("modalContent").innerHTML = `
+  $("modalContent").innerHTML=`
 
   <div class="field">
 
-    <label>タイトル</label>
+  <label>タイトル</label>
 
-    <input
-    id="messageTitle"
-    placeholder="明日の予定">
+  <input
+  id="messageTitle"
+  placeholder="明日の予定">
 
   </div>
 
   <div class="field">
 
-    <label>メッセージ</label>
+  <label>メッセージ</label>
 
-    <textarea
-    id="messageBody"
-    placeholder="メッセージを入力"></textarea>
+  <textarea
+  id="messageBody"></textarea>
 
   </div>
 
@@ -2507,18 +2478,14 @@ function openMessageModal(){
 
 async function saveMessage(){
 
-  const title =
-    $("messageTitle")
-      .value
-      .trim();
+  const title=
+    $("messageTitle").value.trim();
 
-  const body =
-    $("messageBody")
-      .value
-      .trim();
+  const body=
+    $("messageBody").value.trim();
 
 
-  if(!title || !body){
+  if(!title||!body){
 
     alert(
       "タイトルと内容を入力してください。"
@@ -2541,8 +2508,7 @@ async function saveMessage(){
 
       body:body,
 
-      created_by:
-        currentUser.id
+      created_by:currentUser.id
 
     });
 
@@ -2550,6 +2516,7 @@ async function saveMessage(){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2562,10 +2529,9 @@ async function saveMessage(){
 
 async function deleteMessage(id){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  if(!confirm("削除しますか？"))
-    return;
+  if(!confirm("削除しますか？"))return;
 
 
   const {
@@ -2580,6 +2546,7 @@ async function deleteMessage(id){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2588,9 +2555,9 @@ async function deleteMessage(id){
 }
 
 
-/* ==================================================
+/* ==================================
    LAWS
-   ================================================== */
+================================== */
 
 async function loadLaws(){
 
@@ -2602,14 +2569,12 @@ async function loadLaws(){
     .from("family_laws")
     .select("*")
     .eq("family_id",currentFamily.id)
-    .order("created_at",{
-      ascending:false
-    });
+    .order("created_at",{ascending:false});
 
 
   if(error){
 
-    $("lawsList").innerHTML =
+    $("lawsList").innerHTML=
       `<div class="card empty">
       法律情報を読み込めませんでした。
       </div>`;
@@ -2618,14 +2583,12 @@ async function loadLaws(){
   }
 
 
-  $("homeLaws")
-    .textContent =
-      data.length;
+  $("homeLaws").textContent=data.length;
 
 
   if(!data.length){
 
-    $("lawsList").innerHTML =
+    $("lawsList").innerHTML=
       `<div class="card empty">
       まだありません。
       </div>`;
@@ -2634,8 +2597,8 @@ async function loadLaws(){
   }
 
 
-  $("lawsList").innerHTML =
-  data.map(item => `
+  $("lawsList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
@@ -2644,33 +2607,33 @@ async function loadLaws(){
     </div>
 
     <div class="item-meta">
-      ${escapeHTML(item.category || "法律")}
+      ${escapeHTML(item.category||"法律")}
     </div>
 
     <p>
-      ${escapeHTML(item.description || "")}
+      ${escapeHTML(item.description||"")}
     </p>
 
     ${
       item.penalty
       ? `
       <div class="item-meta">
-        罰金：
-        ${escapeHTML(item.penalty)}
+      罰金：
+      ${escapeHTML(item.penalty)}
       </div>
       `
-      : ""
+      :""
     }
 
     ${
       item.source
       ? `
       <div class="item-meta">
-        出典：
-        ${escapeHTML(item.source)}
+      出典：
+      ${escapeHTML(item.source)}
       </div>
       `
-      : ""
+      :""
     }
 
     ${
@@ -2678,34 +2641,28 @@ async function loadLaws(){
       ? `
       <div class="actions">
 
-        <a
-        href="${escapeHTML(item.source_url)}"
-        target="_blank"
-        rel="noopener noreferrer">
-
-        情報源を見る
-
-        </a>
+      <a
+      href="${escapeHTML(item.source_url)}"
+      target="_blank"
+      rel="noopener noreferrer">
+      情報源を見る
+      </a>
 
       </div>
       `
-      : ""
+      :""
     }
 
     ${
       isParent()
       ? `
-      <div class="actions">
-
-        <button
-        class="danger"
-        onclick="deleteLaw('${item.id}')">
-        削除
-        </button>
-
-      </div>
+      <button
+      class="danger"
+      onclick="deleteLaw('${item.id}')">
+      削除
+      </button>
       `
-      : ""
+      :""
     }
 
   </div>
@@ -2717,78 +2674,78 @@ async function loadLaws(){
 
 function openLawModal(){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  currentForm = "law";
+  currentForm="law";
 
-  $("modalTitle").textContent =
+  $("modalTitle").textContent=
     "法律・罰金を追加";
 
 
-  $("modalContent").innerHTML = `
+  $("modalContent").innerHTML=`
 
   <div class="field">
 
-    <label>タイトル</label>
+  <label>タイトル</label>
 
-    <input
-    id="lawTitle"
-    placeholder="法律・家族ルール">
+  <input
+  id="lawTitle"
+  placeholder="法律・家族ルール">
 
   </div>
 
   <div class="field">
 
-    <label>カテゴリー</label>
+  <label>カテゴリー</label>
 
-    <select id="lawCategory">
+  <select id="lawCategory">
 
-      <option>法律</option>
-      <option>罰金</option>
-      <option>反則金</option>
-      <option>家族ルール</option>
+  <option>法律</option>
+  <option>罰金</option>
+  <option>反則金</option>
+  <option>家族ルール</option>
 
-    </select>
-
-  </div>
-
-  <div class="field">
-
-    <label>内容</label>
-
-    <textarea
-    id="lawDescription"></textarea>
+  </select>
 
   </div>
 
   <div class="field">
 
-    <label>罰金・反則金</label>
+  <label>内容</label>
 
-    <input
-    id="lawPenalty"
-    placeholder="例：5000円">
-
-  </div>
-
-  <div class="field">
-
-    <label>出典</label>
-
-    <input
-    id="lawSource"
-    placeholder="警察庁など">
+  <textarea
+  id="lawDescription"></textarea>
 
   </div>
 
   <div class="field">
 
-    <label>情報源URL</label>
+  <label>罰金・反則金</label>
 
-    <input
-    id="lawSourceUrl"
-    type="url"
-    placeholder="https://example.com">
+  <input
+  id="lawPenalty"
+  placeholder="例：5000円">
+
+  </div>
+
+  <div class="field">
+
+  <label>出典</label>
+
+  <input
+  id="lawSource"
+  placeholder="警察庁など">
+
+  </div>
+
+  <div class="field">
+
+  <label>情報源URL</label>
+
+  <input
+  id="lawSourceUrl"
+  type="url"
+  placeholder="https://example.com">
 
   </div>
 
@@ -2800,18 +2757,14 @@ function openLawModal(){
 
 async function saveLaw(){
 
-  const title =
-    $("lawTitle")
-      .value
-      .trim();
+  const title=
+    $("lawTitle").value.trim();
 
-  const description =
-    $("lawDescription")
-      .value
-      .trim();
+  const description=
+    $("lawDescription").value.trim();
 
 
-  if(!title || !description){
+  if(!title||!description){
 
     alert(
       "タイトルと内容を入力してください。"
@@ -2838,22 +2791,15 @@ async function saveLaw(){
       description:description,
 
       penalty:
-        $("lawPenalty")
-          .value
-          .trim(),
+        $("lawPenalty").value.trim(),
 
       source:
-        $("lawSource")
-          .value
-          .trim(),
+        $("lawSource").value.trim(),
 
       source_url:
-        $("lawSourceUrl")
-          .value
-          .trim(),
+        $("lawSourceUrl").value.trim(),
 
-      created_by:
-        currentUser.id
+      created_by:currentUser.id
 
     });
 
@@ -2861,6 +2807,7 @@ async function saveLaw(){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2873,11 +2820,11 @@ async function saveLaw(){
 
 async function deleteLaw(id){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
   if(!confirm(
     "この法律情報を削除しますか？"
-  )) return;
+  ))return;
 
 
   const {
@@ -2892,6 +2839,7 @@ async function deleteLaw(id){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -2900,9 +2848,9 @@ async function deleteLaw(id){
 }
 
 
-/* ==================================================
+/* ==================================
    NEWS
-   ================================================== */
+================================== */
 
 async function loadNews(){
 
@@ -2914,14 +2862,12 @@ async function loadNews(){
     .from("family_news")
     .select("*")
     .eq("family_id",currentFamily.id)
-    .order("created_at",{
-      ascending:false
-    });
+    .order("created_at",{ascending:false});
 
 
   if(error){
 
-    $("newsList").innerHTML =
+    $("newsList").innerHTML=
       `<div class="card empty">
       ニュースを読み込めませんでした。
       </div>`;
@@ -2930,14 +2876,12 @@ async function loadNews(){
   }
 
 
-  $("homeNews")
-    .textContent =
-      data.length;
+  $("homeNews").textContent=data.length;
 
 
   if(!data.length){
 
-    $("newsList").innerHTML =
+    $("newsList").innerHTML=
       `<div class="card empty">
       まだニュースがありません。
       </div>`;
@@ -2946,8 +2890,8 @@ async function loadNews(){
   }
 
 
-  $("newsList").innerHTML =
-  data.map(item => `
+  $("newsList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
@@ -2956,22 +2900,22 @@ async function loadNews(){
     </div>
 
     <div class="item-meta">
-      ${escapeHTML(item.category || "ニュース")}
+      ${escapeHTML(item.category||"ニュース")}
     </div>
 
     <p>
-      ${escapeHTML(item.body || "")}
+      ${escapeHTML(item.body||"")}
     </p>
 
     ${
       item.source
       ? `
       <div class="item-meta">
-        出典：
-        ${escapeHTML(item.source)}
+      出典：
+      ${escapeHTML(item.source)}
       </div>
       `
-      : ""
+      :""
     }
 
     ${
@@ -2979,34 +2923,28 @@ async function loadNews(){
       ? `
       <div class="actions">
 
-        <a
-        href="${escapeHTML(item.source_url)}"
-        target="_blank"
-        rel="noopener noreferrer">
-
-        情報源を見る
-
-        </a>
+      <a
+      href="${escapeHTML(item.source_url)}"
+      target="_blank"
+      rel="noopener noreferrer">
+      情報源を見る
+      </a>
 
       </div>
       `
-      : ""
+      :""
     }
 
     ${
       isParent()
       ? `
-      <div class="actions">
-
-        <button
-        class="danger"
-        onclick="deleteNews('${item.id}')">
-        削除
-        </button>
-
-      </div>
+      <button
+      class="danger"
+      onclick="deleteNews('${item.id}')">
+      削除
+      </button>
       `
-      : ""
+      :""
     }
 
   </div>
@@ -3018,68 +2956,68 @@ async function loadNews(){
 
 function openNewsModal(){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
-  currentForm = "news";
+  currentForm="news";
 
-  $("modalTitle").textContent =
+  $("modalTitle").textContent=
     "家族ニュースを追加";
 
 
-  $("modalContent").innerHTML = `
+  $("modalContent").innerHTML=`
 
   <div class="field">
 
-    <label>タイトル</label>
+  <label>タイトル</label>
 
-    <input
-    id="newsTitle"
-    placeholder="学校からのお知らせ">
+  <input
+  id="newsTitle"
+  placeholder="学校からのお知らせ">
 
   </div>
 
   <div class="field">
 
-    <label>カテゴリー</label>
+  <label>カテゴリー</label>
 
-    <select id="newsCategory">
+  <select id="newsCategory">
 
-      <option>家族ニュース</option>
-      <option>学校</option>
-      <option>地域</option>
-      <option>重要</option>
+  <option>家族ニュース</option>
+  <option>学校</option>
+  <option>地域</option>
+  <option>重要</option>
 
-    </select>
-
-  </div>
-
-  <div class="field">
-
-    <label>内容</label>
-
-    <textarea
-    id="newsBody"></textarea>
+  </select>
 
   </div>
 
   <div class="field">
 
-    <label>出典</label>
+  <label>内容</label>
 
-    <input
-    id="newsSource"
-    placeholder="学校・自治体など">
+  <textarea
+  id="newsBody"></textarea>
 
   </div>
 
   <div class="field">
 
-    <label>情報源URL</label>
+  <label>出典</label>
 
-    <input
-    id="newsSourceUrl"
-    type="url"
-    placeholder="https://example.com">
+  <input
+  id="newsSource"
+  placeholder="学校・自治体など">
+
+  </div>
+
+  <div class="field">
+
+  <label>情報源URL</label>
+
+  <input
+  id="newsSourceUrl"
+  type="url"
+  placeholder="https://example.com">
 
   </div>
 
@@ -3091,18 +3029,14 @@ function openNewsModal(){
 
 async function saveNews(){
 
-  const title =
-    $("newsTitle")
-      .value
-      .trim();
+  const title=
+    $("newsTitle").value.trim();
 
-  const body =
-    $("newsBody")
-      .value
-      .trim();
+  const body=
+    $("newsBody").value.trim();
 
 
-  if(!title || !body){
+  if(!title||!body){
 
     alert(
       "タイトルと内容を入力してください。"
@@ -3129,17 +3063,12 @@ async function saveNews(){
         $("newsCategory").value,
 
       source:
-        $("newsSource")
-          .value
-          .trim(),
+        $("newsSource").value.trim(),
 
       source_url:
-        $("newsSourceUrl")
-          .value
-          .trim(),
+        $("newsSourceUrl").value.trim(),
 
-      created_by:
-        currentUser.id
+      created_by:currentUser.id
 
     });
 
@@ -3147,6 +3076,7 @@ async function saveNews(){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -3159,11 +3089,11 @@ async function saveNews(){
 
 async function deleteNews(id){
 
-  if(!isParent()) return;
+  if(!isParent())return;
 
   if(!confirm(
     "このニュースを削除しますか？"
-  )) return;
+  ))return;
 
 
   const {
@@ -3178,6 +3108,7 @@ async function deleteNews(id){
   if(error){
 
     alert(error.message);
+
     return;
   }
 
@@ -3186,9 +3117,471 @@ async function deleteNews(id){
 }
 
 
-/* ==================================================
+/* ==================================
+   CONTACTS
+================================== */
+
+async function loadContacts(){
+
+  if(!currentFamily)return;
+
+
+  let query =
+    supabaseClient
+      .from("family_contacts")
+      .select("*")
+      .eq("family_id",currentFamily.id)
+      .order("created_at",{ascending:false});
+
+
+  /*
+    子ども：
+    自分のお問い合わせだけ表示
+
+    親：
+    家族のお問い合わせをすべて表示
+  */
+
+  if(!isParent()){
+
+    query =
+      query.eq(
+        "user_id",
+        currentUser.id
+      );
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+  await query;
+
+
+  if(error){
+
+    $("contactsList").innerHTML=`
+
+    <div class="card">
+
+      <h3>お問い合わせを読み込めませんでした</h3>
+
+      <p style="white-space:pre-wrap">
+      ${escapeHTML(error.message)}
+      </p>
+
+    </div>
+
+    `;
+
+    return;
+  }
+
+
+  if(!data.length){
+
+    $("contactsList").innerHTML=`
+
+    <div class="card empty">
+
+      ${
+        isParent()
+        ? "お問い合わせはありません。"
+        : "まだお問い合わせを送っていません。"
+      }
+
+    </div>
+
+    `;
+
+    return;
+  }
+
+
+  $("contactsList").innerHTML=
+  data.map(item=>{
+
+    let badgeClass="badge-new";
+
+    if(item.status==="対応中")
+      badgeClass="badge-work";
+
+    if(item.status==="解決済み")
+      badgeClass="badge-done";
+
+
+    return `
+
+    <div class="item">
+
+      <div class="item-title">
+
+        📩 ${escapeHTML(item.subject)}
+
+      </div>
+
+      <div class="item-meta">
+
+        ${escapeHTML(item.sender_name)}
+
+        ・
+
+        ${formatDate(item.created_at)}
+
+      </div>
+
+      <div style="margin-top:10px">
+
+        <span class="badge ${badgeClass}">
+
+          ${escapeHTML(item.status)}
+
+        </span>
+
+      </div>
+
+      <p>
+
+        ${escapeHTML(item.message)}
+
+      </p>
+
+
+      ${
+        item.admin_reply
+        ? `
+
+        <div class="reply-box">
+
+          <div class="reply-title">
+            💬 親からの返信
+          </div>
+
+          <div>
+            ${escapeHTML(item.admin_reply)}
+          </div>
+
+        </div>
+
+        `
+        : ""
+      }
+
+
+      ${
+        isParent()
+        ? `
+
+        <div class="actions">
+
+          <button
+          class="secondary"
+          onclick="editContact('${item.id}')">
+          対応する
+          </button>
+
+        </div>
+
+        `
+        : ""
+      }
+
+    </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+function formatDate(value){
+
+  if(!value)return "";
+
+  const d=new Date(value);
+
+  if(Number.isNaN(d.getTime()))
+    return "";
+
+  return d.toLocaleString(
+    "ja-JP",
+    {
+      year:"numeric",
+      month:"2-digit",
+      day:"2-digit",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+}
+
+
+function openContactModal(){
+
+  currentForm="contact";
+
+  $("modalTitle").textContent=
+    "📩 お問い合わせ";
+
+
+  $("modalContent").innerHTML=`
+
+  <div class="field">
+
+    <label>件名</label>
+
+    <input
+    id="contactSubject"
+    placeholder="お問い合わせの件名">
+
+  </div>
+
+
+  <div class="field">
+
+    <label>お問い合わせ内容</label>
+
+    <textarea
+    id="contactMessage"
+    placeholder="質問・相談などを入力してください。"></textarea>
+
+  </div>
+
+  `;
+
+  openModal();
+}
+
+
+async function saveContact(){
+
+  const subject=
+    $("contactSubject")
+      .value
+      .trim();
+
+  const message=
+    $("contactMessage")
+      .value
+      .trim();
+
+
+  if(!subject||!message){
+
+    alert(
+      "件名とお問い合わせ内容を入力してください。"
+    );
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("family_contacts")
+    .insert({
+
+      family_id:currentFamily.id,
+
+      user_id:currentUser.id,
+
+      sender_name:
+        currentMember.name ||
+        currentUser.email,
+
+      subject:subject,
+
+      message:message,
+
+      status:"未対応",
+
+      admin_reply:null
+
+    });
+
+
+  if(error){
+
+    alert(
+      "お問い合わせを送信できませんでした。\n\n"+
+      error.message
+    );
+
+    return;
+  }
+
+
+  closeModal();
+
+  alert(
+    "お問い合わせを送信しました！"
+  );
+
+  await loadContacts();
+}
+
+
+function editContact(id){
+
+  if(!isParent())return;
+
+  currentForm="contactEdit";
+
+  $("modalTitle").textContent=
+    "📩 お問い合わせに対応";
+
+
+  loadContactForEdit(id);
+}
+
+
+async function loadContactForEdit(id){
+
+  const {
+    data,
+    error
+  } =
+  await supabaseClient
+    .from("family_contacts")
+    .select("*")
+    .eq("id",id)
+    .single();
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  $("modalContent").innerHTML=`
+
+  <div class="card"
+  style="box-shadow:none;background:#f4f7fb">
+
+    <strong>
+    ${escapeHTML(data.subject)}
+    </strong>
+
+    <p>
+    ${escapeHTML(data.message)}
+    </p>
+
+  </div>
+
+
+  <div class="field">
+
+    <label>対応状況</label>
+
+    <select id="contactStatus">
+
+      <option
+      ${data.status==="未対応"?"selected":""}>
+      未対応
+      </option>
+
+      <option
+      ${data.status==="対応中"?"selected":""}>
+      対応中
+      </option>
+
+      <option
+      ${data.status==="解決済み"?"selected":""}>
+      解決済み
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="field">
+
+    <label>返信</label>
+
+    <textarea
+    id="contactReply"
+    placeholder="返信を入力してください。">${escapeHTML(
+      data.admin_reply||""
+    )}</textarea>
+
+  </div>
+
+  <input
+  type="hidden"
+  id="editContactId"
+  value="${escapeHTML(data.id)}">
+
+  `;
+
+  openModal();
+}
+
+
+async function saveContactEdit(){
+
+  if(!isParent())return;
+
+
+  const id=
+    $("editContactId").value;
+
+  const status=
+    $("contactStatus").value;
+
+  const reply=
+    $("contactReply")
+      .value
+      .trim();
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("family_contacts")
+    .update({
+
+      status:status,
+
+      admin_reply:
+        reply||null,
+
+      updated_at:
+        new Date().toISOString()
+
+    })
+    .eq("id",id);
+
+
+  if(error){
+
+    alert(
+      "更新できませんでした。\n\n"+
+      error.message
+    );
+
+    return;
+  }
+
+
+  closeModal();
+
+  await loadContacts();
+}
+
+
+/* ==================================
    MEMBERS
-   ================================================== */
+================================== */
 
 async function loadMembers(){
 
@@ -3204,7 +3597,7 @@ async function loadMembers(){
 
   if(error){
 
-    $("membersList").innerHTML =
+    $("membersList").innerHTML=
       `<div class="card">
       メンバーを取得できません。
       </div>`;
@@ -3213,21 +3606,21 @@ async function loadMembers(){
   }
 
 
-  $("membersList").innerHTML =
-  data.map(item => `
+  $("membersList").innerHTML=
+  data.map(item=>`
 
   <div class="item">
 
     <div class="item-title">
 
       ${
-        item.role === "parent"
+        item.role==="parent"
         ? "👑"
         : "🧒"
       }
 
       ${escapeHTML(
-        item.name || "名前なし"
+        item.name||"名前なし"
       )}
 
     </div>
@@ -3235,7 +3628,7 @@ async function loadMembers(){
     <div class="item-meta">
 
       ${
-        item.role === "parent"
+        item.role==="parent"
         ? "親"
         : "子ども"
       }
@@ -3249,9 +3642,9 @@ async function loadMembers(){
 }
 
 
-/* ==================================================
+/* ==================================
    MODAL
-   ================================================== */
+================================== */
 
 function openModal(){
 
@@ -3265,36 +3658,42 @@ function closeModal(){
   $("modalBg")
     .classList.remove("show");
 
-  currentForm = null;
+  currentForm=null;
 }
 
 
 async function saveModal(){
 
-  if(currentForm === "duty")
+  if(currentForm==="duty")
     return saveDuty();
 
-  if(currentForm === "task")
+  if(currentForm==="task")
     return saveTask();
 
-  if(currentForm === "event")
+  if(currentForm==="event")
     return saveEvent();
 
-  if(currentForm === "message")
+  if(currentForm==="message")
     return saveMessage();
 
-  if(currentForm === "law")
+  if(currentForm==="law")
     return saveLaw();
 
-  if(currentForm === "news")
+  if(currentForm==="news")
     return saveNews();
+
+  if(currentForm==="contact")
+    return saveContact();
+
+  if(currentForm==="contactEdit")
+    return saveContactEdit();
 
 }
 
 
-/* ==================================================
+/* ==================================
    AUTH STATE
-   ================================================== */
+================================== */
 
 supabaseClient
 .auth
@@ -3314,9 +3713,9 @@ async function(event,session){
 });
 
 
-/* ==================================================
+/* ==================================
    START
-   ================================================== */
+================================== */
 
 (async function(){
 
