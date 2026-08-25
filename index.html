@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>家族ホーム V2</title>
+<title>家族ホーム</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -29,57 +29,59 @@ button{
   display:none!important;
 }
 
-button.primary{
+.primary{
   background:#536dfe;
-  color:#fff;
+  color:white;
   border:0;
   border-radius:12px;
-  padding:11px 17px;
+  padding:12px 17px;
   font-weight:bold;
 }
 
-button.gray{
+.gray{
   background:#e9edf5;
   border:0;
   border-radius:12px;
-  padding:11px 17px;
+  padding:12px 17px;
 }
 
-button.danger{
-  background:#ef4444;
-  color:white;
-  border:0;
-  border-radius:9px;
-  padding:7px 11px;
-}
-
-button.green{
+.green{
   background:#16a34a;
   color:white;
   border:0;
   border-radius:10px;
-  padding:9px 13px;
+  padding:10px 14px;
   font-weight:bold;
 }
 
-/* login */
+.danger{
+  background:#ef4444;
+  color:white;
+  border:0;
+  border-radius:9px;
+  padding:8px 12px;
+}
+
+/* =========================
+   AUTH
+========================= */
 
 #auth{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   padding:20px;
   background:linear-gradient(135deg,#5578ff,#8b5cf6);
 }
 
 .authBox{
   width:100%;
-  max-width:520px;
+  max-width:540px;
   background:white;
+  padding:30px;
   border-radius:25px;
-  padding:28px;
-  box-shadow:0 20px 70px #0003;
+  box-shadow:0 20px 70px #0004;
 }
 
 .logo{
@@ -88,28 +90,33 @@ button.green{
   font-weight:900;
 }
 
-.tabs{
+.sub{
+  text-align:center;
+  color:#6b7280;
+}
+
+.authTabs{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
   margin:22px 0;
 }
 
-.tabs button{
+.authTabs button{
   border:0;
-  padding:12px;
-  border-radius:10px;
   background:#edf1f7;
+  padding:11px 5px;
+  border-radius:10px;
   font-weight:bold;
 }
 
-.tabs button.active{
+.authTabs button.active{
   background:#536dfe;
   color:white;
 }
 
 .field{
-  margin-bottom:13px;
+  margin-bottom:14px;
 }
 
 .field label{
@@ -122,9 +129,16 @@ button.green{
 .field textarea,
 .field select{
   width:100%;
-  padding:11px;
-  border:1px solid #d8dfeb;
+  padding:12px;
+  border:1px solid #d7deea;
   border-radius:10px;
+  outline:none;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:#536dfe;
 }
 
 .field textarea{
@@ -134,10 +148,20 @@ button.green{
 .authError{
   color:#dc2626;
   font-weight:bold;
-  margin-top:10px;
+  margin-top:14px;
 }
 
-/* app */
+.authSuccess{
+  color:#15803d;
+  background:#f0fdf4;
+  padding:12px;
+  border-radius:10px;
+  margin-top:14px;
+}
+
+/* =========================
+   APP
+========================= */
 
 #app{
   display:none;
@@ -168,10 +192,10 @@ header{
 }
 
 .badge{
-  padding:6px 11px;
-  border-radius:20px;
+  padding:7px 12px;
   background:#eef2ff;
   color:#4f46e5;
+  border-radius:20px;
   font-size:12px;
   font-weight:bold;
 }
@@ -189,11 +213,11 @@ nav{
 }
 
 nav button{
-  display:block;
   width:100%;
+  display:block;
   background:transparent;
-  color:#dce3ef;
   border:0;
+  color:#dbe3ef;
   text-align:left;
   padding:12px;
   border-radius:10px;
@@ -201,16 +225,16 @@ nav button{
   font-weight:bold;
 }
 
-nav button:hover,
-nav button.active{
+nav button.active,
+nav button:hover{
   background:#293548;
   color:white;
 }
 
 main{
-  padding:24px;
   width:100%;
   max-width:1450px;
+  padding:24px;
 }
 
 .page{
@@ -221,13 +245,9 @@ main{
   display:block;
 }
 
-h1{
-  margin-top:0;
-}
-
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:15px;
 }
 
@@ -235,8 +255,8 @@ h1{
   background:white;
   border-radius:18px;
   padding:19px;
-  box-shadow:0 3px 15px #26344a0c;
   margin-bottom:16px;
+  box-shadow:0 3px 15px #26344a0c;
 }
 
 .item{
@@ -248,25 +268,18 @@ h1{
 }
 
 .itemTitle{
-  font-weight:900;
   font-size:17px;
+  font-weight:900;
 }
 
 .meta{
   color:#6b7280;
   font-size:13px;
-  margin-top:5px;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
+  margin-top:6px;
 }
 
 .stat{
-  font-size:27px;
+  font-size:28px;
   font-weight:900;
 }
 
@@ -276,12 +289,18 @@ h1{
   color:#7b8495;
 }
 
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
 .successBox{
   background:#ecfdf5;
   border:1px solid #bbf7d0;
   padding:15px;
   border-radius:13px;
-  margin-top:12px;
 }
 
 .warning{
@@ -291,6 +310,31 @@ h1{
   border-radius:12px;
 }
 
+/* calendar */
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.day{
+  min-height:80px;
+  background:#f8fafc;
+  border:1px solid #e3e8f0;
+  border-radius:8px;
+  padding:6px;
+}
+
+.eventMini{
+  background:#e0e7ff;
+  color:#3730a3;
+  border-radius:5px;
+  padding:3px;
+  font-size:11px;
+  margin-top:4px;
+}
+
 /* modal */
 
 #modal{
@@ -298,18 +342,18 @@ h1{
   position:fixed;
   inset:0;
   background:#0008;
+  z-index:100;
   align-items:center;
   justify-content:center;
   padding:20px;
-  z-index:100;
 }
 
 .modalBox{
-  background:white;
   width:100%;
   max-width:600px;
   max-height:90vh;
   overflow:auto;
+  background:white;
   border-radius:20px;
   padding:22px;
 }
@@ -329,51 +373,24 @@ h1{
   font-size:20px;
 }
 
-.calendar{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:5px;
-}
-
-.day{
-  min-height:80px;
-  background:#f8fafc;
-  border:1px solid #e3e8f0;
-  border-radius:8px;
-  padding:6px;
-}
-
-.day strong{
-  display:block;
-}
-
-.eventMini{
-  background:#e0e7ff;
-  color:#3730a3;
-  border-radius:5px;
-  padding:3px;
-  font-size:11px;
-  margin-top:4px;
-}
-
 @media(max-width:800px){
 
-  nav{
-    width:68px;
-  }
+nav{
+  width:68px;
+}
 
-  nav button{
-    font-size:0;
-    text-align:center;
-  }
+nav button{
+  font-size:0;
+  text-align:center;
+}
 
-  nav button:first-letter{
-    font-size:21px;
-  }
+main{
+  padding:13px;
+}
 
-  main{
-    padding:13px;
-  }
+.authTabs{
+  grid-template-columns:1fr;
+}
 
 }
 </style>
@@ -394,47 +411,98 @@ h1{
 👨‍👩‍👧 家族ホーム
 </div>
 
-<p style="text-align:center;color:#6b7280">
+<p class="sub">
 家族専用管理アプリ
 </p>
 
-<div class="tabs">
 
-<button id="tabCreate"
+<div class="authTabs">
+
+<button id="loginTab"
+onclick="authMode('login')">
+🔐 ログイン
+</button>
+
+<button id="createTab"
 onclick="authMode('create')">
 🏠 家族を作る
 </button>
 
-<button id="tabJoin"
+<button id="joinTab"
 onclick="authMode('join')">
-👨‍👩‍👧 家族に参加
+👨‍👩‍👧 参加
 </button>
 
 </div>
 
 
-<div id="createForm">
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div id="loginForm">
+
+<div class="field">
+<label>メールアドレス</label>
+<input
+id="loginEmail"
+type="email"
+autocomplete="email"
+placeholder="example@email.com">
+</div>
+
+<div class="field">
+<label>パスワード</label>
+<input
+id="loginPassword"
+type="password"
+autocomplete="current-password">
+</div>
+
+<button
+class="primary"
+style="width:100%"
+onclick="login()">
+🔐 ログイン
+</button>
+
+</div>
+
+
+<!-- =========================
+     CREATE FAMILY
+========================= -->
+
+<div id="createForm" class="hidden">
 
 <div class="field">
 <label>家族名</label>
-<input id="createFamilyName"
+<input
+id="createFamilyName"
 placeholder="例：山田家">
 </div>
 
 <div class="field">
 <label>あなたの名前</label>
-<input id="createName"
+<input
+id="createName"
 placeholder="例：お父さん">
 </div>
 
 <div class="field">
 <label>メールアドレス</label>
-<input id="createEmail" type="email">
+<input
+id="createEmail"
+type="email"
+autocomplete="email">
 </div>
 
 <div class="field">
 <label>パスワード</label>
-<input id="createPassword" type="password">
+<input
+id="createPassword"
+type="password"
+autocomplete="new-password">
 </div>
 
 <button
@@ -447,52 +515,73 @@ onclick="createFamily()">
 </div>
 
 
+<!-- =========================
+     JOIN FAMILY
+========================= -->
+
 <div id="joinForm" class="hidden">
 
 <div class="field">
 <label>家族コード</label>
-<input id="joinFamilyCode"
+<input
+id="joinFamilyCode"
 placeholder="例：A1B2C3D4">
 </div>
 
 <div class="field">
 <label>あなたの名前</label>
-<input id="joinName">
+<input
+id="joinName"
+placeholder="例：太郎">
 </div>
 
 <div class="field">
 <label>メールアドレス</label>
-<input id="joinEmail" type="email">
+<input
+id="joinEmail"
+type="email"
+autocomplete="email">
 </div>
 
 <div class="field">
 <label>パスワード</label>
-<input id="joinPassword" type="password">
+<input
+id="joinPassword"
+type="password"
+autocomplete="new-password">
 </div>
 
 <div class="field">
-<label>参加方法</label>
+
+<label>参加する立場</label>
 
 <select id="joinRole">
 
 <option value="child">
-🧒 子どもとして参加
+🧒 子ども
 </option>
 
 <option value="parent">
-👨‍👩‍👧 親として参加
+👨‍👩‍👧 親
 </option>
 
 </select>
 
 </div>
 
+
 <div class="field">
-<label>親招待コード</label>
+
+<label>
+親の場合：親招待コード
+</label>
+
 <input
 id="parentInvite"
-placeholder="親の場合のみ">
+placeholder="PARENT-XXXXXXXX">
+
 </div>
+
 
 <button
 class="primary"
@@ -506,7 +595,10 @@ onclick="joinFamily()">
 
 <div id="authError" class="authError"></div>
 
+<div id="authSuccess" class="authSuccess hidden"></div>
+
 </div>
+
 </div>
 
 
@@ -543,7 +635,8 @@ onclick="logout()">
 
 <nav>
 
-<button class="active"
+<button
+class="active"
 onclick="showPage('home',this)">
 🏠 ホーム
 </button>
@@ -576,25 +669,38 @@ onclick="showPage('president',this)">
 
 <!-- HOME -->
 
-<section id="page-home" class="page active">
+<section
+id="page-home"
+class="page active">
 
 <h1>🏠 家族ホーム</h1>
 
 <div class="grid">
 
 <div class="card">
+
 <h2>👨‍👩‍👧 家族</h2>
+
 <div id="homeFamily"></div>
+
 </div>
 
+
 <div class="card">
+
 <h2>📅 今日の予定</h2>
+
 <div id="todayEvents"></div>
+
 </div>
 
+
 <div class="card">
+
 <h2>👑 大統領</h2>
+
 <div id="homePresident"></div>
+
 </div>
 
 </div>
@@ -604,7 +710,9 @@ onclick="showPage('president',this)">
 
 <!-- MEMBERS -->
 
-<section id="page-members" class="page">
+<section
+id="page-members"
+class="page">
 
 <h1>👨‍👩‍👧 家族メンバー</h1>
 
@@ -615,12 +723,14 @@ onclick="showPage('president',this)">
 </div>
 
 
-<div class="card" id="parentInviteCard">
+<div
+id="parentInviteCard"
+class="card">
 
 <h2>👨‍👩‍👧 親を追加</h2>
 
 <p>
-現在の親が招待コードを作成できます。
+親が招待コードを発行できます。
 </p>
 
 <button
@@ -638,7 +748,9 @@ onclick="createParentInvite()">
 
 <!-- CALENDAR -->
 
-<section id="page-calendar" class="page">
+<section
+id="page-calendar"
+class="page">
 
 <h1>📅 家族カレンダー</h1>
 
@@ -660,9 +772,13 @@ onclick="downloadICS()">
 
 </div>
 
-<div id="calendarBox" style="margin-top:20px"></div>
+<div
+id="calendarBox"
+style="margin-top:20px">
+</div>
 
 </div>
+
 
 <div class="card">
 
@@ -677,9 +793,12 @@ onclick="downloadICS()">
 
 <!-- CHILDREN -->
 
-<section id="page-children" class="page">
+<section
+id="page-children"
+class="page">
 
 <h1>🧒 子どもページ</h1>
+
 
 <div class="card">
 
@@ -716,7 +835,7 @@ onclick="downloadICS()">
 
 <div class="card">
 
-<h2>📝 子どもページのお知らせ</h2>
+<h2>📢 子どもページのお知らせ</h2>
 
 <div id="childPageList"></div>
 
@@ -729,9 +848,12 @@ onclick="downloadICS()">
 
 <!-- PRESIDENT -->
 
-<section id="page-president" class="page">
+<section
+id="page-president"
+class="page">
 
 <h1>🗳️ 子ども大統領</h1>
+
 
 <div class="card">
 
@@ -744,14 +866,16 @@ onclick="downloadICS()">
 
 <div class="card">
 
-<h2>🗳️ 候補者・支持率</h2>
+<h2>📊 候補者・支持率</h2>
 
 <div id="candidateList"></div>
 
 </div>
 
 
-<div class="card" id="candidateAddBox">
+<div
+id="candidateAddBox"
+class="card">
 
 <h2>候補者を登録</h2>
 
@@ -845,7 +969,7 @@ let modalType=null;
 
 
 /* =====================================================
-   HELPER
+   HELPERS
 ===================================================== */
 
 function $(id){
@@ -861,20 +985,16 @@ return String(v ?? "")
 .replace(/'/g,"&#39;");
 }
 
-function parent(){
+function isParent(){
 return member?.role==="parent";
 }
 
-function president(){
+function isPresident(){
 return member?.role==="president";
 }
 
-function editor(){
-return parent() || president();
-}
-
-function errorMessage(msg){
-$("authError").textContent=msg;
+function isEditor(){
+return isParent() || isPresident();
 }
 
 
@@ -883,6 +1003,12 @@ $("authError").textContent=msg;
 ===================================================== */
 
 function authMode(mode){
+
+$("loginForm")
+.classList.toggle(
+"hidden",
+mode!=="login"
+);
 
 $("createForm")
 .classList.toggle(
@@ -896,19 +1022,71 @@ $("joinForm")
 mode!=="join"
 );
 
-$("tabCreate")
+$("loginTab")
+.classList.toggle(
+"active",
+mode==="login"
+);
+
+$("createTab")
 .classList.toggle(
 "active",
 mode==="create"
 );
 
-$("tabJoin")
+$("joinTab")
 .classList.toggle(
 "active",
 mode==="join"
 );
 
 $("authError").textContent="";
+$("authSuccess").classList.add("hidden");
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+async function login(){
+
+$("authError").textContent="";
+$("authSuccess").classList.add("hidden");
+
+const email=
+$("loginEmail").value.trim();
+
+const password=
+$("loginPassword").value;
+
+if(!email || !password){
+
+$("authError").textContent=
+"メールアドレスとパスワードを入力してください。";
+
+return;
+}
+
+const {data,error} =
+await db.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(error){
+
+$("authError").textContent=
+"ログインできませんでした："+
+error.message;
+
+return;
+}
+
+user=data.user;
+
+await loadUser();
 
 }
 
@@ -919,52 +1097,75 @@ $("authError").textContent="";
 
 async function createFamily(){
 
-const familyName =
+$("authError").textContent="";
+
+const familyName=
 $("createFamilyName").value.trim();
 
-const name =
+const name=
 $("createName").value.trim();
 
-const email =
+const email=
 $("createEmail").value.trim();
 
-const password =
+const password=
 $("createPassword").value;
 
-if(!familyName || !name || !email || !password){
+if(
+!familyName ||
+!name ||
+!email ||
+!password
+){
 
-errorMessage(
-"全部入力してください。"
-);
+$("authError").textContent=
+"全部入力してください。";
 
 return;
 }
 
+if(password.length<6){
+
+$("authError").textContent=
+"パスワードは6文字以上にしてください。";
+
+return;
+}
+
+
 const {data,error} =
 await db.auth.signUp({
-
 email,
 password
-
 });
 
 if(error){
 
-errorMessage(error.message);
-return;
+$("authError").textContent=
+error.message;
 
+return;
 }
+
+
+/*
+  メール確認がONの場合
+*/
 
 if(!data.session){
 
-errorMessage(
-"登録しました。メール確認が必要な設定の場合、メールを確認してからログインしてください。"
-);
+$("authSuccess").classList.remove("hidden");
+
+$("authSuccess").innerHTML=
+"登録しました。<br>" +
+"確認メールが届いている場合は、メールを確認してからログインしてください。";
 
 return;
 }
 
+
 user=data.user;
+
 
 const {data:result,error:rpcError} =
 await db.rpc(
@@ -977,17 +1178,19 @@ p_name:name
 
 if(rpcError){
 
-errorMessage(rpcError.message);
-return;
+$("authError").textContent=
+rpcError.message;
 
+return;
 }
 
+
 alert(
-"家族を作成しました！\n\n" +
-"家族コード：" +
-result.family_code +
-"\n\n" +
-"親招待コード：" +
+"家族を作成しました！\n\n"+
+"家族コード："+
+result.family_code+
+"\n\n"+
+"親招待コード："+
 result.parent_invite_code
 );
 
@@ -1002,32 +1205,58 @@ await loadUser();
 
 async function joinFamily(){
 
-const code =
+$("authError").textContent="";
+
+const code=
 $("joinFamilyCode").value.trim();
 
-const name =
+const name=
 $("joinName").value.trim();
 
-const email =
+const email=
 $("joinEmail").value.trim();
 
-const password =
+const password=
 $("joinPassword").value;
 
-const role =
+const role=
 $("joinRole").value;
 
-const invite =
+const invite=
 $("parentInvite").value.trim();
 
-if(!code || !name || !email || !password){
 
-errorMessage(
-"全部入力してください。"
-);
+if(
+!code ||
+!name ||
+!email ||
+!password
+){
+
+$("authError").textContent=
+"全部入力してください。";
 
 return;
 }
+
+
+if(password.length<6){
+
+$("authError").textContent=
+"パスワードは6文字以上にしてください。";
+
+return;
+}
+
+
+if(role==="parent" && !invite){
+
+$("authError").textContent=
+"親として参加する場合は親招待コードを入力してください。";
+
+return;
+}
+
 
 const {data,error} =
 await db.auth.signUp({
@@ -1037,37 +1266,31 @@ password
 
 if(error){
 
-errorMessage(error.message);
-return;
+$("authError").textContent=
+error.message;
 
+return;
 }
+
 
 if(!data.session){
 
-errorMessage(
-"登録しました。メール確認後にログインしてください。"
-);
+$("authSuccess").classList.remove("hidden");
+
+$("authSuccess").innerHTML=
+"登録しました。<br>"+
+"確認メールが届いている場合は、メール確認後にログインしてください。";
 
 return;
-
 }
+
 
 user=data.user;
 
-let result;
 
 if(role==="parent"){
 
-if(!invite){
-
-errorMessage(
-"親として参加する場合は親招待コードが必要です。"
-);
-
-return;
-}
-
-const r =
+const {data:result,error} =
 await db.rpc(
 "family_app_v2_join_as_parent",
 {
@@ -1076,18 +1299,17 @@ p_name:name
 }
 );
 
-result=r.data;
+if(error){
 
-if(r.error){
+$("authError").textContent=
+error.message;
 
-errorMessage(r.error.message);
 return;
-
 }
 
 }else{
 
-const r =
+const {data:result,error} =
 await db.rpc(
 "family_app_v2_join_family",
 {
@@ -1097,16 +1319,16 @@ p_role:"child"
 }
 );
 
-result=r.data;
+if(error){
 
-if(r.error){
+$("authError").textContent=
+error.message;
 
-errorMessage(r.error.message);
 return;
-
 }
 
 }
+
 
 await loadUser();
 
@@ -1119,22 +1341,25 @@ await loadUser();
 
 async function loadUser(){
 
-const session =
+const {data}=
 await db.auth.getSession();
 
-if(!session.data.session){
+if(!data.session){
+
+showLogin();
 
 return;
 }
 
-user =
-session.data.session.user;
+user=data.session.user;
+
 
 const {data:members,error} =
 await db
 .from("family_app_v2_members")
 .select("*")
 .eq("user_id",user.id);
+
 
 if(error){
 
@@ -1143,23 +1368,54 @@ return;
 
 }
 
-if(!members?.length){
+
+if(!members || members.length===0){
+
+showLogin();
+
+$("authError").textContent=
+"このアカウントには家族が登録されていません。";
 
 return;
 }
 
+
 member=members[0];
 
-const {data:families} =
+
+const {data:families,error:familyError} =
 await db
 .from("family_app_v2_families")
 .select("*")
 .eq("id",member.family_id)
 .single();
 
+
+if(familyError){
+
+alert(familyError.message);
+return;
+
+}
+
+
 family=families;
 
 openApp();
+
+}
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+function showLogin(){
+
+$("app").style.display="none";
+$("auth").style.display="flex";
+
+authMode("login");
 
 }
 
@@ -1173,20 +1429,23 @@ function openApp(){
 $("auth").style.display="none";
 $("app").style.display="block";
 
-$("familyNameHeader").textContent =
+$("familyNameHeader").textContent=
 family.family_name;
 
-$("roleBadge").textContent =
-parent()
+$("roleBadge").textContent=
+isParent()
 ?"👨‍👩‍👧 親"
-:president()
+:
+isPresident()
 ?"👑 子ども大統領"
-:"🧒 子ども";
+:
+"🧒 子ども";
+
 
 $("parentInviteCard")
 .classList.toggle(
 "hidden",
-!parent()
+!isParent()
 );
 
 loadHome();
@@ -1206,14 +1465,19 @@ function showPage(name,button){
 
 document
 .querySelectorAll(".page")
-.forEach(x=>x.classList.remove("active"));
+.forEach(x=>
+x.classList.remove("active")
+);
 
 $("page-"+name)
 .classList.add("active");
 
+
 document
 .querySelectorAll("nav button")
-.forEach(x=>x.classList.remove("active"));
+.forEach(x=>
+x.classList.remove("active")
+);
 
 button.classList.add("active");
 
@@ -1227,49 +1491,98 @@ button.classList.add("active");
 async function loadHome(){
 
 $("homeFamily").innerHTML=`
-<div class="stat">${esc(family.family_name)}</div>
+
+<div class="stat">
+${esc(family.family_name)}
+</div>
+
 <div class="meta">
 家族コード：
 ${esc(family.family_code)}
 </div>
+
 `;
 
-const {data:events} =
+
+const today=
+new Date()
+.toISOString()
+.slice(0,10);
+
+
+const {data:events}=
 await db
 .from("family_app_v2_events")
 .select("*")
 .eq("family_id",family.id)
-.eq(
-"event_date",
-new Date().toISOString().slice(0,10)
-);
+.eq("event_date",today)
+.order("start_time");
+
 
 if(!events?.length){
 
 $("todayEvents").innerHTML=
-`<div class="empty">
+`
+<div class="empty">
 今日の予定はありません
-</div>`;
+</div>
+`;
 
 }else{
 
 $("todayEvents").innerHTML=
 events.map(x=>`
+
 <div class="item">
+
 <div class="itemTitle">
 📅 ${esc(x.title)}
 </div>
+
 <div class="meta">
 ${esc(x.start_time||"")}
 ～
 ${esc(x.end_time||"")}
 </div>
+
 </div>
+
 `).join("");
 
 }
 
-await loadPresident();
+
+const {data:candidates}=
+await db
+.from("family_app_v2_candidates")
+.select("*")
+.eq("family_id",family.id)
+.eq("is_president",true)
+.limit(1);
+
+
+if(candidates?.length){
+
+$("homePresident").innerHTML=
+`
+<div class="stat">
+👑 ${esc(candidates[0].candidate_name)}
+</div>
+<div class="meta">
+子ども大統領
+</div>
+`;
+
+}else{
+
+$("homePresident").innerHTML=
+`
+<div class="empty">
+まだ大統領はいません
+</div>
+`;
+
+}
 
 }
 
@@ -1280,22 +1593,25 @@ await loadPresident();
 
 async function loadMembers(){
 
-const {data,error} =
+const {data,error}=
 await db
 .from("family_app_v2_members")
 .select("*")
 .eq("family_id",family.id)
 .order("created_at");
 
+
 if(error){
 
-$("memberList").innerHTML=
-esc(error.message);
+$("memberList").textContent=
+error.message;
 
 return;
+
 }
 
-$("memberList").innerHTML =
+
+$("memberList").innerHTML=
 data.map(x=>`
 
 <div class="item">
@@ -1305,9 +1621,11 @@ data.map(x=>`
 ${
 x.role==="parent"
 ?"👨‍👩‍👧 "
-:x.role==="president"
+:
+x.role==="president"
 ?"👑 "
-:"🧒 "
+:
+"🧒 "
 }
 
 ${esc(x.name)}
@@ -1315,13 +1633,17 @@ ${esc(x.name)}
 </div>
 
 <div class="meta">
+
 ${
 x.role==="parent"
 ?"親"
-:x.role==="president"
+:
+x.role==="president"
 ?"子ども大統領"
-:"子ども"
+:
+"子ども"
 }
+
 </div>
 
 </div>
@@ -1337,15 +1659,20 @@ x.role==="parent"
 
 async function createParentInvite(){
 
-if(!parent()) return;
+if(!isParent()){
 
-const {data,error} =
+return;
+}
+
+
+const {data,error}=
 await db.rpc(
 "family_app_v2_create_parent_invite",
 {
 p_family_id:family.id
 }
 );
+
 
 if(error){
 
@@ -1354,8 +1681,10 @@ return;
 
 }
 
+
 $("inviteResult").innerHTML=`
-<div class="successBox">
+
+<div class="successBox" style="margin-top:12px">
 
 <b>親招待コード</b>
 
@@ -1368,6 +1697,7 @@ ${esc(data)}
 </p>
 
 </div>
+
 `;
 
 }
@@ -1379,7 +1709,7 @@ ${esc(data)}
 
 async function loadEvents(){
 
-const {data,error} =
+const {data,error}=
 await db
 .from("family_app_v2_events")
 .select("*")
@@ -1387,21 +1717,25 @@ await db
 .order("event_date")
 .order("start_time");
 
+
 if(error){
 
-$("eventList").innerHTML=
-esc(error.message);
+$("eventList").textContent=
+error.message;
 
 return;
 
 }
 
+
 if(!data?.length){
 
 $("eventList").innerHTML=
-`<div class="empty">
+`
+<div class="empty">
 予定はありません
-</div>`;
+</div>
+`;
 
 }else{
 
@@ -1435,8 +1769,9 @@ onclick='downloadOneICS(${JSON.stringify(x)})'>
 </button>
 
 ${
-editor()
-?`
+isEditor()
+?
+`
 <button
 class="danger"
 onclick="deleteEvent('${x.id}')">
@@ -1453,6 +1788,7 @@ onclick="deleteEvent('${x.id}')">
 `).join("");
 
 }
+
 
 renderCalendar(data||[]);
 
@@ -1472,14 +1808,16 @@ new Date(year,month,1);
 const last=
 new Date(year,month+1,0);
 
-let html=
-`<div style="font-weight:900;margin-bottom:10px">
-${year}年 ${month+1}月
-</div>`;
 
-html+=`
+let html=`
+
+<div style="font-weight:900;margin-bottom:10px">
+${year}年 ${month+1}月
+</div>
+
 <div class="calendar">
 `;
+
 
 for(
 let i=0;
@@ -1491,6 +1829,7 @@ html+=`<div></div>`;
 
 }
 
+
 for(
 let day=1;
 day<=last.getDate();
@@ -1500,28 +1839,36 @@ day++
 const date=
 `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
-const today=
+const todays=
 events.filter(
 e=>e.event_date===date
 );
 
+
 html+=`
+
 <div class="day">
 
-<strong>${day}</strong>
+<strong>
+${day}
+</strong>
 
 ${
-today.map(e=>`
+todays.map(e=>`
+
 <div class="eventMini">
 ${esc(e.title)}
 </div>
+
 `).join("")
 }
 
 </div>
+
 `;
 
 }
+
 
 html+=`</div>`;
 
@@ -1540,6 +1887,7 @@ modalType="event";
 
 $("modalTitle").textContent=
 "📅 予定を追加";
+
 
 $("modalContent").innerHTML=`
 
@@ -1570,6 +1918,7 @@ $("modalContent").innerHTML=`
 
 `;
 
+
 openModal();
 
 }
@@ -1577,10 +1926,12 @@ openModal();
 
 async function saveEvent(){
 
-if(!editor()) return;
+if(!isEditor())return;
+
 
 const title=
 $("eventTitle").value.trim();
+
 
 if(!title){
 
@@ -1589,7 +1940,8 @@ return;
 
 }
 
-const {error} =
+
+const {error}=
 await db
 .from("family_app_v2_events")
 .insert({
@@ -1604,12 +1956,14 @@ created_by:user.id
 
 });
 
+
 if(error){
 
 alert(error.message);
 return;
 
 }
+
 
 closeModal();
 loadEvents();
@@ -1619,15 +1973,17 @@ loadEvents();
 
 async function deleteEvent(id){
 
-if(!editor()) return;
+if(!isEditor())return;
 
-if(!confirm("削除しますか？")) return;
+if(!confirm("削除しますか？"))return;
 
-const {error} =
+
+const {error}=
 await db
 .from("family_app_v2_events")
 .delete()
 .eq("id",id);
+
 
 if(error){
 
@@ -1647,12 +2003,13 @@ loadEvents();
 
 function icsDate(date,time){
 
-const d=
-(date+" "+(time||"00:00"))
-.replace(/[-:]/g,"")
-.replace(" ","T");
-
-return d+"00";
+return (
+date+
+"T"+
+(time||"00:00")+
+":00"
+)
+.replace(/[-:]/g,"");
 
 }
 
@@ -1660,10 +2017,17 @@ return d+"00";
 function downloadOneICS(e){
 
 const start=
-icsDate(e.event_date,e.start_time);
+icsDate(
+e.event_date,
+e.start_time
+);
 
 const end=
-icsDate(e.event_date,e.end_time||e.start_time);
+icsDate(
+e.event_date,
+e.end_time||e.start_time
+);
+
 
 const text=
 `BEGIN:VCALENDAR
@@ -1671,10 +2035,6 @@ VERSION:2.0
 PRODID:-//FamilyHome//JP
 BEGIN:VEVENT
 UID:${e.id}@familyhome
-DTSTAMP:${icsDate(
-new Date().toISOString().slice(0,10),
-new Date().toTimeString().slice(0,5)
-)}
 DTSTART:${start}
 DTEND:${end}
 SUMMARY:${(e.title||"").replace(/\n/g," ")}
@@ -1682,18 +2042,25 @@ DESCRIPTION:${(e.description||"").replace(/\n/g," ")}
 END:VEVENT
 END:VCALENDAR`;
 
+
 const blob=
-new Blob([text],{
+new Blob(
+[text],
+{
 type:"text/calendar;charset=utf-8"
-});
+}
+);
+
 
 const url=
 URL.createObjectURL(blob);
+
 
 const a=
 document.createElement("a");
 
 a.href=url;
+
 a.download=
 (e.title||"family-event")+".ics";
 
@@ -1706,11 +2073,12 @@ URL.revokeObjectURL(url);
 
 async function downloadICS(){
 
-const {data} =
+const {data}=
 await db
 .from("family_app_v2_events")
 .select("*")
 .eq("family_id",family.id);
+
 
 if(!data?.length){
 
@@ -1719,11 +2087,13 @@ return;
 
 }
 
+
 const parts=[
 "BEGIN:VCALENDAR",
 "VERSION:2.0",
 "PRODID:-//FamilyHome//JP"
 ];
+
 
 data.forEach(e=>{
 
@@ -1734,14 +2104,16 @@ parts.push(
 );
 
 parts.push(
-"DTSTART:"+icsDate(
+"DTSTART:"+
+icsDate(
 e.event_date,
 e.start_time
 )
 );
 
 parts.push(
-"DTEND:"+icsDate(
+"DTEND:"+
+icsDate(
 e.event_date,
 e.end_time||e.start_time
 )
@@ -1756,7 +2128,9 @@ parts.push("END:VEVENT");
 
 });
 
+
 parts.push("END:VCALENDAR");
+
 
 const blob=
 new Blob(
@@ -1766,6 +2140,7 @@ type:"text/calendar;charset=utf-8"
 }
 );
 
+
 const url=
 URL.createObjectURL(blob);
 
@@ -1773,7 +2148,10 @@ const a=
 document.createElement("a");
 
 a.href=url;
-a.download="家族カレンダー.ics";
+
+a.download=
+"家族カレンダー.ics";
+
 a.click();
 
 URL.revokeObjectURL(url);
@@ -1792,11 +2170,15 @@ loadGames();
 loadViolations();
 loadChildPages();
 
-const canEdit=editor();
+
+const edit=
+isEditor();
+
 
 $("childEditorButtons").innerHTML=
-canEdit
-?`
+edit
+?
+`
 <button
 class="primary"
 onclick="openChildNewsModal()">
@@ -1805,9 +2187,11 @@ onclick="openChildNewsModal()">
 `
 :"";
 
+
 $("gameEditorButtons").innerHTML=
-canEdit
-?`
+edit
+?
+`
 <button
 class="primary"
 onclick="openGameModal()">
@@ -1816,9 +2200,11 @@ onclick="openGameModal()">
 `
 :"";
 
+
 $("violationButtons").innerHTML=
-parent()
-?`
+isParent()
+?
+`
 <button
 class="primary"
 onclick="openViolationModal()">
@@ -1827,13 +2213,15 @@ onclick="openViolationModal()">
 `
 :"";
 
+
 $("childPageButtons").innerHTML=
-canEdit
-?`
+edit
+?
+`
 <button
 class="primary"
 onclick="openChildPageModal()">
-＋ お知らせ編集
+＋ お知らせ追加
 </button>
 `
 :"";
@@ -1847,31 +2235,46 @@ onclick="openChildPageModal()">
 
 async function loadChildNews(){
 
-const {data} =
+const {data}=
 await db
 .from("family_app_v2_child_news")
 .select("*")
 .eq("family_id",family.id)
 .order("created_at",{ascending:false});
 
+
 $("childNewsList").innerHTML=
 !data?.length
-?`<div class="empty">ニュースなし</div>`
-:data.map(x=>`
+?
+`
+<div class="empty">
+ニュースはありません
+</div>
+`
+:
+data.map(x=>`
+
 <div class="item">
 
 <div class="itemTitle">
 📰 ${esc(x.title)}
 </div>
 
-<p>${esc(x.body)}</p>
+<p>
+${esc(x.body)}
+</p>
 
 ${
-editor()
-?`
+isEditor()
+?
+`
 <button
 class="danger"
-onclick="deleteRow('family_app_v2_child_news','${x.id}',loadChildNews)">
+onclick="deleteRow(
+'family_app_v2_child_news',
+'${x.id}',
+loadChildNews
+)">
 削除
 </button>
 `
@@ -1879,6 +2282,7 @@ onclick="deleteRow('family_app_v2_child_news','${x.id}',loadChildNews)">
 }
 
 </div>
+
 `).join("");
 
 }
@@ -1891,6 +2295,7 @@ modalType="childNews";
 $("modalTitle").textContent=
 "📰 子どもニュース";
 
+
 $("modalContent").innerHTML=`
 
 <div class="field">
@@ -1902,6 +2307,7 @@ $("modalContent").innerHTML=`
 <label>内容</label>
 <textarea id="childNewsBody"></textarea>
 </div>
+
 `;
 
 openModal();
@@ -1922,6 +2328,7 @@ body:$("childNewsBody").value.trim(),
 created_by:user.id
 
 });
+
 
 if(error){
 
@@ -1949,10 +2356,17 @@ await db
 .eq("family_id",family.id)
 .order("game_date");
 
+
 $("gameList").innerHTML=
 !data?.length
-?`<div class="empty">ゲーム予定なし</div>`
-:data.map(x=>`
+?
+`
+<div class="empty">
+ゲーム予定なし
+</div>
+`
+:
+data.map(x=>`
 
 <div class="item">
 
@@ -1974,11 +2388,16 @@ ${esc(x.end_time||"")}
 </div>
 
 ${
-editor()
-?`
+isEditor()
+?
+`
 <button
 class="danger"
-onclick="deleteRow('family_app_v2_games','${x.id}',loadGames)">
+onclick="deleteRow(
+'family_app_v2_games',
+'${x.id}',
+loadGames
+)">
 削除
 </button>
 `
@@ -1999,6 +2418,7 @@ modalType="game";
 $("modalTitle").textContent=
 "🎮 ゲーム予定";
 
+
 $("modalContent").innerHTML=`
 
 <div class="field">
@@ -2008,7 +2428,9 @@ $("modalContent").innerHTML=`
 
 <div class="field">
 <label>誰がゲームする？</label>
-<input id="gamePlayers">
+<input
+id="gamePlayers"
+placeholder="例：太郎、次郎">
 </div>
 
 <div class="field">
@@ -2050,6 +2472,7 @@ created_by:user.id
 
 });
 
+
 if(error){
 
 alert(error.message);
@@ -2076,10 +2499,17 @@ await db
 .eq("family_id",family.id)
 .order("created_at",{ascending:false});
 
+
 $("violationList").innerHTML=
 !data?.length
-?`<div class="empty">違反記録なし</div>`
-:data.map(x=>`
+?
+`
+<div class="empty">
+違反記録はありません
+</div>
+`
+:
+data.map(x=>`
 
 <div class="item">
 
@@ -2096,11 +2526,16 @@ ${esc(x.description)}
 </p>
 
 ${
-parent()
-?`
+isParent()
+?
+`
 <button
 class="danger"
-onclick="deleteRow('family_app_v2_violations','${x.id}',loadViolations)">
+onclick="deleteRow(
+'family_app_v2_violations',
+'${x.id}',
+loadViolations
+)">
 削除
 </button>
 `
@@ -2121,6 +2556,7 @@ modalType="violation";
 $("modalTitle").textContent=
 "🚨 違反を記録";
 
+
 $("modalContent").innerHTML=`
 
 <div class="field">
@@ -2137,6 +2573,7 @@ $("modalContent").innerHTML=`
 <label>詳細</label>
 <textarea id="violationBody"></textarea>
 </div>
+
 `;
 
 openModal();
@@ -2158,6 +2595,7 @@ description:$("violationBody").value.trim(),
 created_by:user.id
 
 });
+
 
 if(error){
 
@@ -2185,10 +2623,17 @@ await db
 .eq("family_id",family.id)
 .order("created_at",{ascending:false});
 
+
 $("childPageList").innerHTML=
 !data?.length
-?`<div class="empty">お知らせなし</div>`
-:data.map(x=>`
+?
+`
+<div class="empty">
+お知らせはありません
+</div>
+`
+:
+data.map(x=>`
 
 <div class="item">
 
@@ -2213,6 +2658,7 @@ modalType="childPage";
 
 $("modalTitle").textContent=
 "📢 子どもページのお知らせ";
+
 
 $("modalContent").innerHTML=`
 
@@ -2247,6 +2693,7 @@ created_by:user.id
 
 });
 
+
 if(error){
 
 alert(error.message);
@@ -2273,24 +2720,33 @@ await db
 .eq("family_id",family.id)
 .order("votes",{ascending:false});
 
+
 if(!candidates?.length){
 
 $("presidentBox").innerHTML=
-`<div class="empty">
+`
+<div class="empty">
 まだ大統領はいません
-</div>`;
+</div>
+`;
 
 $("candidateList").innerHTML=
-`<div class="empty">
+`
+<div class="empty">
 候補者はいません
-</div>`;
+</div>
+`;
 
 return;
 
 }
 
+
 const winner=
-candidates.find(x=>x.is_president);
+candidates.find(
+x=>x.is_president
+);
+
 
 if(winner){
 
@@ -2317,11 +2773,14 @@ $("presidentBox").innerHTML=`
 }else{
 
 $("presidentBox").innerHTML=
-`<div class="empty">
+`
+<div class="empty">
 まだ大統領が決まっていません
-</div>`;
+</div>
+`;
 
 }
+
 
 const total=
 candidates.reduce(
@@ -2329,15 +2788,19 @@ candidates.reduce(
 0
 );
 
+
 $("candidateList").innerHTML=
-candidates.map((x,i)=>{
+candidates.map(x=>{
 
 const rate=
 total
-?Math.round(
+?
+Math.round(
 x.votes/total*100
 )
-:0;
+:
+0;
+
 
 return `
 
@@ -2365,7 +2828,8 @@ ${x.votes}票 / ${total}票
 
 ${
 member.role==="child"
-?`
+?
+`
 <button
 class="green"
 onclick="vote('${x.id}')">
@@ -2376,11 +2840,16 @@ onclick="vote('${x.id}')">
 }
 
 ${
-parent()
-?`
+isParent()
+?
+`
 <button
 class="danger"
-onclick="deleteRow('family_app_v2_candidates','${x.id}',loadPresident)">
+onclick="deleteRow(
+'family_app_v2_candidates',
+'${x.id}',
+loadPresident
+)">
 削除
 </button>
 `
@@ -2396,9 +2865,13 @@ onclick="deleteRow('family_app_v2_candidates','${x.id}',loadPresident)">
 }
 
 
+/* =====================================================
+   VOTE
+===================================================== */
+
 async function vote(id){
 
-const {data,error}=
+const {error}=
 await db.rpc(
 "family_app_v2_vote",
 {
@@ -2407,6 +2880,7 @@ p_candidate_id:id
 }
 );
 
+
 if(error){
 
 alert(error.message);
@@ -2414,9 +2888,8 @@ return;
 
 }
 
-alert(
-"投票しました！"
-);
+
+alert("投票しました！");
 
 await loadUser();
 
@@ -2434,17 +2907,32 @@ modalType="candidate";
 $("modalTitle").textContent=
 "🗳️ 候補者を追加";
 
+
 $("modalContent").innerHTML=`
 
 <div class="field">
-<label>候補者名</label>
-<input id="candidateName">
+
+<label>
+候補者名
+</label>
+
+<input
+id="candidateName"
+placeholder="家族に登録されている子ども">
 </div>
 
 <div class="field">
-<label>スローガン</label>
-<input id="candidateSlogan">
+
+<label>
+スローガン
+</label>
+
+<input
+id="candidateSlogan"
+placeholder="例：みんなが楽しい家族に！">
+
 </div>
+
 `;
 
 openModal();
@@ -2457,6 +2945,15 @@ async function saveCandidate(){
 const name=
 $("candidateName").value.trim();
 
+
+if(!name){
+
+alert("候補者名を入力してください");
+return;
+
+}
+
+
 const {data:children}=
 await db
 .from("family_app_v2_members")
@@ -2464,10 +2961,12 @@ await db
 .eq("family_id",family.id)
 .eq("role","child");
 
+
 const child=
 children?.find(
 x=>x.name===name
 );
+
 
 if(!child){
 
@@ -2478,6 +2977,7 @@ alert(
 return;
 
 }
+
 
 const {error}=
 await db
@@ -2491,6 +2991,7 @@ slogan:$("candidateSlogan").value.trim()
 
 });
 
+
 if(error){
 
 alert(error.message);
@@ -2498,7 +2999,9 @@ return;
 
 }
 
+
 closeModal();
+
 loadPresident();
 
 }
@@ -2521,6 +3024,7 @@ $("modal").style.display="none";
 modalType=null;
 
 }
+
 
 async function saveModal(){
 
@@ -2549,12 +3053,19 @@ return saveCandidate();
    DELETE
 ===================================================== */
 
-async function deleteRow(table,id,reload){
+async function deleteRow(
+table,
+id,
+reload
+){
 
-if(!editor()) return;
+if(!isEditor())
+return;
+
 
 if(!confirm("削除しますか？"))
 return;
+
 
 const {error}=
 await db
@@ -2562,12 +3073,14 @@ await db
 .delete()
 .eq("id",id);
 
+
 if(error){
 
 alert(error.message);
 return;
 
 }
+
 
 reload();
 
@@ -2582,30 +3095,51 @@ async function logout(){
 
 await db.auth.signOut();
 
-location.reload();
+user=null;
+family=null;
+member=null;
+
+showLogin();
 
 }
 
 
 /* =====================================================
-   SESSION
+   AUTH STATE
 ===================================================== */
 
 db.auth.onAuthStateChange(
 async(event,session)=>{
 
+if(event==="SIGNED_OUT"){
+
+showLogin();
+
+return;
+
+}
+
 if(session){
 
-await loadUser();
+setTimeout(
+()=>{
+loadUser();
+},
+0
+);
 
 }
 
 });
 
 
+/* =====================================================
+   START
+===================================================== */
+
 (async()=>{
 
-const {data} =
+const {data}=
 await db.auth.getSession();
 
 if(data.session){
@@ -2614,7 +3148,7 @@ await loadUser();
 
 }else{
 
-authMode("create");
+showLogin();
 
 }
 
