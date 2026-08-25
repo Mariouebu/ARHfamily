@@ -13,7 +13,7 @@
 body{
   margin:0;
   font-family:Arial,"Noto Sans JP",sans-serif;
-  background:#f3f6fb;
+  background:#f4f7fb;
   color:#172033;
 }
 
@@ -29,7 +29,10 @@ button{
   display:none!important;
 }
 
-/* 認証 */
+/* =========================
+   認証
+========================= */
+
 #auth{
   min-height:100vh;
   display:flex;
@@ -42,7 +45,7 @@ button{
 .authBox{
   width:100%;
   max-width:520px;
-  background:white;
+  background:#fff;
   padding:30px;
   border-radius:24px;
   box-shadow:0 20px 60px #0004;
@@ -76,7 +79,7 @@ button{
 
 .tabs button.active{
   background:#536dfe;
-  color:white;
+  color:#fff;
   font-weight:bold;
 }
 
@@ -106,7 +109,7 @@ button{
   border:0;
   border-radius:11px;
   background:#536dfe;
-  color:white;
+  color:#fff;
   font-weight:bold;
 }
 
@@ -134,14 +137,17 @@ button{
   border-radius:10px;
 }
 
-/* アプリ */
+/* =========================
+   アプリ
+========================= */
+
 #app{
   display:none;
 }
 
 header{
   height:65px;
-  background:white;
+  background:#fff;
   border-bottom:1px solid #ddd;
   display:flex;
   justify-content:space-between;
@@ -205,7 +211,7 @@ nav button{
 nav button.active,
 nav button:hover{
   background:#293548;
-  color:white;
+  color:#fff;
 }
 
 main{
@@ -223,7 +229,7 @@ main{
 }
 
 .card{
-  background:white;
+  background:#fff;
   border-radius:17px;
   padding:20px;
   margin-bottom:16px;
@@ -274,15 +280,6 @@ main{
   margin-top:12px;
 }
 
-.danger{
-  border:0;
-  background:#ef4444;
-  color:white;
-  padding:8px 12px;
-  border-radius:8px;
-}
-
-/* スマホ */
 @media(max-width:700px){
 
   .layout{
@@ -314,15 +311,16 @@ main{
   .badge{
     display:none;
   }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================================
-     ログイン・登録
-========================================= -->
+<!-- =========================
+     認証画面
+========================= -->
 
 <div id="auth">
 
@@ -333,7 +331,7 @@ main{
 </div>
 
 <div class="subtitle">
-家族専用の管理アプリ
+家族専用管理アプリ
 </div>
 
 <div class="tabs">
@@ -362,7 +360,6 @@ onclick="mode('join')">
 
 <div class="field">
 <label>メールアドレス</label>
-
 <input
 id="loginEmail"
 type="email"
@@ -372,12 +369,10 @@ placeholder="example@email.com">
 
 <div class="field">
 <label>パスワード</label>
-
 <input
 id="loginPassword"
 type="password"
-autocomplete="current-password"
-placeholder="パスワード">
+autocomplete="current-password">
 </div>
 
 <button
@@ -395,7 +390,6 @@ onclick="login()">
 
 <div class="field">
 <label>家族名</label>
-
 <input
 id="newFamilyName"
 placeholder="例：山田家">
@@ -403,7 +397,6 @@ placeholder="例：山田家">
 
 <div class="field">
 <label>あなたの名前</label>
-
 <input
 id="newName"
 placeholder="例：お父さん">
@@ -411,7 +404,6 @@ placeholder="例：お父さん">
 
 <div class="field">
 <label>メールアドレス</label>
-
 <input
 id="newEmail"
 type="email"
@@ -420,18 +412,16 @@ autocomplete="email">
 
 <div class="field">
 <label>パスワード</label>
-
 <input
 id="newPassword"
 type="password"
-autocomplete="new-password"
-placeholder="6文字以上">
+autocomplete="new-password">
 </div>
 
 <button
 class="primary"
 onclick="register()">
-🏠 家族を作成して登録
+🏠 家族を作成
 </button>
 
 </div>
@@ -443,45 +433,47 @@ onclick="register()">
 
 <div class="field">
 <label>家族コード</label>
-
 <input
 id="joinFamilyCode"
-placeholder="例：A1B2C3D4">
+placeholder="家族コード">
 </div>
 
 <div class="field">
 <label>名前</label>
-
 <input
 id="joinUserName"
-placeholder="例：太郎">
+placeholder="あなたの名前">
 </div>
 
 <div class="field">
 <label>メールアドレス</label>
-
 <input
 id="joinUserEmail"
-type="email"
-autocomplete="email">
+type="email">
 </div>
 
 <div class="field">
 <label>パスワード</label>
-
 <input
 id="joinUserPassword"
-type="password"
-autocomplete="new-password">
+type="password">
 </div>
 
 <div class="field">
 <label>立場</label>
 
 <select id="joinRole">
-<option value="child">🧒 子ども</option>
-<option value="parent">👨‍👩‍👧 親</option>
+
+<option value="child">
+🧒 子ども
+</option>
+
+<option value="parent">
+👨‍👩‍👧 親
+</option>
+
 </select>
+
 </div>
 
 <div
@@ -493,7 +485,8 @@ class="hidden">
 
 <input
 id="parentInvite"
-placeholder="PARENT-XXXXXXXX">
+placeholder="親招待コード">
+
 </div>
 
 </div>
@@ -517,9 +510,9 @@ class="error hidden">
 </div>
 
 
-<!-- =========================================
-     メインアプリ
-========================================= -->
+<!-- =========================
+     アプリ
+========================= -->
 
 <div id="app">
 
@@ -531,9 +524,7 @@ class="error hidden">
 
 <div class="headerRight">
 
-<span
-id="familyNameHeader">
-</span>
+<span id="familyNameHeader"></span>
 
 <span
 id="roleBadge"
@@ -592,8 +583,6 @@ onclick="page('news',this)">
 <main>
 
 
-<!-- ホーム -->
-
 <section
 id="home"
 class="page active">
@@ -618,7 +607,6 @@ class="stat">
 
 </div>
 
-
 <div class="card">
 
 <h2>ログイン中</h2>
@@ -628,9 +616,7 @@ id="homeUser"
 class="stat">
 </div>
 
-<div
-id="homeRole">
-</div>
+<div id="homeRole"></div>
 
 </div>
 
@@ -638,8 +624,6 @@ id="homeRole">
 
 </section>
 
-
-<!-- 家族 -->
 
 <section
 id="members"
@@ -647,14 +631,15 @@ class="page">
 
 <h1>👨‍👩‍👧 家族メンバー</h1>
 
-<div
-class="card">
+<div class="card">
 
 <div id="membersList">
+<div class="empty">
+読み込み中...
+</div>
 </div>
 
 </div>
-
 
 <div
 id="parentArea"
@@ -662,26 +647,18 @@ class="card hidden">
 
 <h2>👨‍👩‍👧 親を追加</h2>
 
-<p>
-親招待コードを発行して、追加したい親に渡してください。
-</p>
-
 <button
 class="primary"
 onclick="createParentInvite()">
 ＋ 親招待コードを発行
 </button>
 
-<div
-id="inviteResult">
-</div>
+<div id="inviteResult"></div>
 
 </div>
 
 </section>
 
-
-<!-- カレンダー -->
 
 <section
 id="calendar"
@@ -697,16 +674,16 @@ onclick="addCalendarEvent()">
 ＋ 予定を追加
 </button>
 
-<div
-id="calendarList">
+<div id="calendarList">
+<div class="empty">
+読み込み中...
+</div>
 </div>
 
 </div>
 
 </section>
 
-
-<!-- 子ども -->
 
 <section
 id="children"
@@ -716,7 +693,7 @@ class="page">
 
 <div class="card">
 
-<h2>🚨 子どもの違反</h2>
+<h2>🚨 違反</h2>
 
 <div id="childViolations">
 <div class="empty">
@@ -725,7 +702,6 @@ class="page">
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -739,10 +715,9 @@ class="page">
 
 </div>
 
-
 <div class="card">
 
-<h2>🎮 誰がゲームをする？</h2>
+<h2>🎮 ゲーム予定</h2>
 
 <div id="gameList">
 <div class="empty">
@@ -751,7 +726,6 @@ class="page">
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -768,8 +742,6 @@ class="page">
 </section>
 
 
-<!-- 法律 -->
-
 <section
 id="law"
 class="page">
@@ -777,8 +749,6 @@ class="page">
 <h1>⚖️ 家族の法律</h1>
 
 <div class="card">
-
-<h2>家族ルール</h2>
 
 <div id="lawList">
 <div class="empty">
@@ -791,8 +761,6 @@ class="page">
 </section>
 
 
-<!-- ニュース -->
-
 <section
 id="news"
 class="page">
@@ -801,11 +769,9 @@ class="page">
 
 <div class="card">
 
-<h2>家族ニュース</h2>
-
 <div id="newsList">
 <div class="empty">
-ニュースはまだありません。
+家族ニュースはまだありません。
 </div>
 </div>
 
@@ -823,9 +789,9 @@ class="page">
 
 <script>
 
-/* =========================================
-   Supabase
-========================================= */
+/* =====================================
+   Supabase設定
+===================================== */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -835,23 +801,23 @@ const SUPABASE_KEY =
 
 const supabaseClient =
 supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
-/* =========================================
+/* =====================================
    状態
-========================================= */
+===================================== */
 
 let user = null;
 let member = null;
 let family = null;
 
 
-/* =========================================
+/* =====================================
    共通
-========================================= */
+===================================== */
 
 function $(id){
   return document.getElementById(id);
@@ -861,11 +827,11 @@ function $(id){
 function escapeHTML(value){
 
   return String(value ?? "")
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
@@ -874,9 +840,7 @@ function showMessage(text,type="error"){
 
   const box=$("message");
 
-  box.classList.remove("hidden");
-
-  box.className=
+  box.className =
     type==="success"
     ? "success"
     : "error";
@@ -888,49 +852,43 @@ function showMessage(text,type="error"){
 
 function clearMessage(){
 
-  $("message").classList.add("hidden");
+  $("message").className="error hidden";
   $("message").textContent="";
 
 }
 
 
-/* =========================================
-   認証画面切替
-========================================= */
+/* =====================================
+   モード切替
+===================================== */
 
 function mode(type){
 
   clearMessage();
 
-  $("loginBox").classList.toggle(
-    "hidden",
-    type!=="login"
-  );
+  $("loginBox")
+    .classList
+    .toggle("hidden",type!=="login");
 
-  $("createBox").classList.toggle(
-    "hidden",
-    type!=="create"
-  );
+  $("createBox")
+    .classList
+    .toggle("hidden",type!=="create");
 
-  $("joinBox").classList.toggle(
-    "hidden",
-    type!=="join"
-  );
+  $("joinBox")
+    .classList
+    .toggle("hidden",type!=="join");
 
-  $("loginTab").classList.toggle(
-    "active",
-    type==="login"
-  );
+  $("loginTab")
+    .classList
+    .toggle("active",type==="login");
 
-  $("createTab").classList.toggle(
-    "active",
-    type==="create"
-  );
+  $("createTab")
+    .classList
+    .toggle("active",type==="create");
 
-  $("joinTab").classList.toggle(
-    "active",
-    type==="join"
-  );
+  $("joinTab")
+    .classList
+    .toggle("active",type==="join");
 
 }
 
@@ -939,17 +897,19 @@ $("joinRole").addEventListener(
 "change",
 function(){
 
-  $("parentInviteArea").classList.toggle(
-    "hidden",
-    this.value!=="parent"
-  );
+  $("parentInviteArea")
+    .classList
+    .toggle(
+      "hidden",
+      this.value!=="parent"
+    );
 
 });
 
 
-/* =========================================
+/* =====================================
    ログイン
-========================================= */
+===================================== */
 
 async function login(){
 
@@ -968,16 +928,14 @@ async function login(){
     );
 
     return;
-
   }
 
 
   const result=
-    await supabaseClient.auth
-    .signInWithPassword({
+    await supabaseClient.auth.signInWithPassword({
 
-      email:email,
-      password:password
+      email,
+      password
 
     });
 
@@ -990,27 +948,169 @@ async function login(){
     );
 
     return;
-
   }
 
 
   user=result.data.user;
-
-
-  /*
-   * Auth成功。
-   * 家族情報がなくても
-   * エラー画面で止めずに案内する。
-   */
 
   await loadUserFamily();
 
 }
 
 
-/* =========================================
+/* =====================================
+   家族情報取得
+===================================== */
+
+async function loadUserFamily(){
+
+  try{
+
+    const sessionResult=
+      await supabaseClient.auth.getSession();
+
+    if(sessionResult.error){
+
+      showMessage(
+        "認証情報を取得できませんでした。\n\n"+
+        sessionResult.error.message
+      );
+
+      return;
+    }
+
+
+    const session=
+      sessionResult.data.session;
+
+
+    if(!session){
+
+      showLogin();
+
+      return;
+    }
+
+
+    user=session.user;
+
+
+    /*
+     * ここでは
+     *
+     * family_app_v2_members
+     *
+     * を直接SELECTするだけ。
+     *
+     * 家族全員を取得するRLSを
+     * 使わないので、
+     * 無限再帰ポリシーの影響を
+     * 受けにくい構成。
+     */
+
+    const result=
+      await supabaseClient
+        .from("family_app_v2_members")
+        .select(
+          "id,family_id,user_id,name,role,created_at"
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .maybeSingle();
+
+
+    if(result.error){
+
+      showMessage(
+        "ログインは成功しましたが、"+
+        "家族情報の取得に失敗しました。\n\n"+
+        result.error.message+
+        "\n\n"+
+        "Supabase SQL EditorでRLS修正版SQLを実行してください。"
+      );
+
+      return;
+    }
+
+
+    if(!result.data){
+
+      $("app").style.display="none";
+      $("auth").style.display="flex";
+
+      mode("join");
+
+      showMessage(
+        "ログインは成功しました。\n\n"+
+        "このアカウントはまだ家族に参加していません。\n"+
+        "「家族参加」から家族コードを入力してください。",
+        "success"
+      );
+
+      return;
+    }
+
+
+    member=result.data;
+
+
+    /*
+     * 家族情報取得
+     */
+
+    const familyResult=
+      await supabaseClient
+        .from("family_app_v2_families")
+        .select("*")
+        .eq("id",member.family_id)
+        .maybeSingle();
+
+
+    if(familyResult.error){
+
+      showMessage(
+        "家族情報の取得に失敗しました。\n\n"+
+        familyResult.error.message
+      );
+
+      return;
+    }
+
+
+    if(!familyResult.data){
+
+      showMessage(
+        "家族情報が見つかりません。\n\n"+
+        "family_id:\n"+
+        member.family_id
+      );
+
+      return;
+    }
+
+
+    family=familyResult.data;
+
+
+    openApp();
+
+  }catch(error){
+
+    showMessage(
+      "予期しないエラーが発生しました。\n\n"+
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================
    新規登録
-========================================= */
+===================================== */
 
 async function register(){
 
@@ -1041,7 +1141,6 @@ async function register(){
     );
 
     return;
-
   }
 
 
@@ -1052,16 +1151,14 @@ async function register(){
     );
 
     return;
-
   }
 
 
   const result=
-    await supabaseClient.auth
-    .signUp({
+    await supabaseClient.auth.signUp({
 
-      email:email,
-      password:password
+      email,
+      password
 
     });
 
@@ -1074,26 +1171,19 @@ async function register(){
     );
 
     return;
-
   }
 
-
-  /*
-   * メール確認がONの場合
-   */
 
   if(!result.data.session){
 
     showMessage(
       "アカウント登録が完了しました。\n\n"+
-      "Supabaseのメール確認が有効です。\n"+
-      "届いた確認メールを開いて認証してください。\n\n"+
-      "認証後、この画面の「ログイン」からログインしてください。",
+      "メール確認が必要な設定の場合は、"+
+      "確認メールを開いてからログインしてください。",
       "success"
     );
 
     return;
-
   }
 
 
@@ -1119,7 +1209,6 @@ async function register(){
     );
 
     return;
-
   }
 
 
@@ -1138,9 +1227,9 @@ async function register(){
 }
 
 
-/* =========================================
+/* =====================================
    家族参加
-========================================= */
+===================================== */
 
 async function join(){
 
@@ -1173,34 +1262,28 @@ async function join(){
   ){
 
     showMessage(
-      "すべて入力してください。"
+      "必要な項目を入力してください。"
     );
 
     return;
-
   }
 
 
-  if(
-    role==="parent" &&
-    !invite
-  ){
+  if(role==="parent" && !invite){
 
     showMessage(
       "親招待コードを入力してください。"
     );
 
     return;
-
   }
 
 
   const result=
-    await supabaseClient.auth
-    .signUp({
+    await supabaseClient.auth.signUp({
 
-      email:email,
-      password:password
+      email,
+      password
 
     });
 
@@ -1213,7 +1296,6 @@ async function join(){
     );
 
     return;
-
   }
 
 
@@ -1221,13 +1303,11 @@ async function join(){
 
     showMessage(
       "アカウントを登録しました。\n\n"+
-      "メール確認を完了してから、"+
-      "ログインしてください。",
+      "メール確認後にログインしてください。",
       "success"
     );
 
     return;
-
   }
 
 
@@ -1270,7 +1350,6 @@ async function join(){
     );
 
     return;
-
   }
 
 
@@ -1279,120 +1358,9 @@ async function join(){
 }
 
 
-/* =========================================
-   ユーザーの家族を取得
-========================================= */
-
-async function loadUserFamily(){
-
-  const session=
-    await supabaseClient.auth.getSession();
-
-
-  if(
-    !session.data.session
-  ){
-
-    showLogin();
-
-    return;
-
-  }
-
-
-  user=session.data.session.user;
-
-
-  const members=
-    await supabaseClient
-    .from("family_app_v2_members")
-    .select("*")
-    .eq("user_id",user.id);
-
-
-  if(members.error){
-
-    showMessage(
-      "ログインは成功しましたが、"+
-      "家族情報の取得に失敗しました。\n\n"+
-      members.error.message
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * 家族未参加の場合
-   */
-
-  if(
-    !members.data ||
-    members.data.length===0
-  ){
-
-    $("app").style.display="none";
-    $("auth").style.display="flex";
-
-    mode("join");
-
-    showMessage(
-      "ログインは成功しました。\n\n"+
-      "まだ家族に参加していません。\n"+
-      "「家族参加」から家族コードを入力してください。"
-    );
-
-    return;
-
-  }
-
-
-  member=members.data[0];
-
-
-  const familyResult=
-    await supabaseClient
-    .from("family_app_v2_families")
-    .select("*")
-    .eq("id",member.family_id)
-    .maybeSingle();
-
-
-  if(familyResult.error){
-
-    showMessage(
-      "家族情報を取得できませんでした。\n\n"+
-      familyResult.error.message
-    );
-
-    return;
-
-  }
-
-
-  if(!familyResult.data){
-
-    showMessage(
-      "家族情報が見つかりません。"
-    );
-
-    return;
-
-  }
-
-
-  family=familyResult.data;
-
-
-  openApp();
-
-}
-
-
-/* =========================================
+/* =====================================
    アプリ表示
-========================================= */
+===================================== */
 
 function openApp(){
 
@@ -1442,12 +1410,6 @@ function openApp(){
       .classList
       .remove("hidden");
 
-  }else{
-
-    $("parentArea")
-      .classList
-      .add("hidden");
-
   }
 
 
@@ -1457,69 +1419,49 @@ function openApp(){
 }
 
 
-/* =========================================
-   ページ
-========================================= */
-
-function page(id,button){
-
-  document
-  .querySelectorAll(".page")
-  .forEach(
-    x=>x.classList.remove("active")
-  );
-
-
-  $(id).classList.add("active");
-
-
-  document
-  .querySelectorAll("nav button")
-  .forEach(
-    x=>x.classList.remove("active")
-  );
-
-
-  button.classList.add("active");
-
-}
-
-
-/* =========================================
-   家族メンバー
-========================================= */
+/* =====================================
+   家族一覧
+   ★ RPCを使用
+===================================== */
 
 async function loadMembers(){
 
+  if(!family){
+    return;
+  }
+
+
   const result=
-    await supabaseClient
-    .from("family_app_v2_members")
-    .select("*")
-    .eq("family_id",family.id)
-    .order("created_at");
+    await supabaseClient.rpc(
+      "family_app_v2_get_members",
+      {
+        p_family_id:family.id
+      }
+    );
 
 
   if(result.error){
 
     $("membersList").innerHTML=
       `<div class="error">
-      ${escapeHTML(result.error.message)}
+        ${escapeHTML(result.error.message)}
       </div>`;
 
     return;
-
   }
 
 
-  if(!result.data.length){
+  if(
+    !result.data ||
+    result.data.length===0
+  ){
 
     $("membersList").innerHTML=
       `<div class="empty">
-      メンバーはいません。
+        メンバーはいません。
       </div>`;
 
     return;
-
   }
 
 
@@ -1529,28 +1471,36 @@ async function loadMembers(){
       let icon="🧒";
       let role="子ども";
 
+
       if(x.role==="parent"){
+
         icon="👨‍👩‍👧";
         role="親";
+
       }
+
 
       if(x.role==="president"){
+
         icon="👑";
         role="子ども大統領";
+
       }
 
+
       return `
-      <div class="item">
+        <div class="item">
 
-        <div class="itemTitle">
-          ${icon} ${escapeHTML(x.name)}
+          <div class="itemTitle">
+            ${icon}
+            ${escapeHTML(x.name)}
+          </div>
+
+          <div class="meta">
+            ${escapeHTML(role)}
+          </div>
+
         </div>
-
-        <div class="meta">
-          ${role}
-        </div>
-
-      </div>
       `;
 
     }).join("");
@@ -1558,11 +1508,28 @@ async function loadMembers(){
 }
 
 
-/* =========================================
-   親追加
-========================================= */
+/* =====================================
+   親招待コード
+===================================== */
 
 async function createParentInvite(){
+
+  if(!family){
+    return;
+  }
+
+
+  if(
+    member.role!=="parent"
+  ){
+
+    alert(
+      "親だけが親招待コードを発行できます。"
+    );
+
+    return;
+  }
+
 
   const result=
     await supabaseClient.rpc(
@@ -1578,7 +1545,6 @@ async function createParentInvite(){
     alert(result.error.message);
 
     return;
-
   }
 
 
@@ -1593,7 +1559,7 @@ async function createParentInvite(){
       </div>
 
       <p>
-        このコードを親になる人に渡してください。
+        このコードを追加する親に渡してください。
       </p>
 
     </div>
@@ -1603,29 +1569,33 @@ async function createParentInvite(){
 }
 
 
-/* =========================================
+/* =====================================
    カレンダー
-========================================= */
+===================================== */
 
 async function loadCalendar(){
 
+  if(!family){
+    return;
+  }
+
+
   const result=
     await supabaseClient
-    .from("family_app_v2_events")
-    .select("*")
-    .eq("family_id",family.id)
-    .order("event_date");
+      .from("family_app_v2_events")
+      .select("*")
+      .eq("family_id",family.id)
+      .order("event_date");
 
 
   if(result.error){
 
     $("calendarList").innerHTML=
       `<div class="empty">
-      予定データはまだ設定されていません。
+        カレンダー機能のSQLがまだ設定されていません。
       </div>`;
 
     return;
-
   }
 
 
@@ -1633,11 +1603,10 @@ async function loadCalendar(){
 
     $("calendarList").innerHTML=
       `<div class="empty">
-      予定はありません。
+        予定はありません。
       </div>`;
 
     return;
-
   }
 
 
@@ -1652,7 +1621,6 @@ async function loadCalendar(){
 
         <div class="meta">
           ${escapeHTML(x.event_date || "")}
-          ${escapeHTML(x.start_time || "")}
         </div>
 
       </div>
@@ -1662,9 +1630,9 @@ async function loadCalendar(){
 }
 
 
-/* =========================================
-   予定追加
-========================================= */
+/* =====================================
+   カレンダー追加
+===================================== */
 
 async function addCalendarEvent(){
 
@@ -1678,48 +1646,40 @@ async function addCalendarEvent(){
     );
 
     return;
-
   }
 
 
   const title=
-    prompt("予定名を入力してください");
+    prompt("予定名");
 
 
   if(!title){
-
     return;
-
   }
 
 
   const date=
     prompt(
-      "日付を入力してください\n例：2026-08-25"
+      "日付\n例：2026-08-25"
     );
 
 
   if(!date){
-
     return;
-
   }
 
 
   const result=
     await supabaseClient
-    .from("family_app_v2_events")
-    .insert({
+      .from("family_app_v2_events")
+      .insert({
 
-      family_id:family.id,
+        family_id:family.id,
+        title:title,
+        event_date:date,
+        created_by:user.id
 
-      title:title,
-
-      event_date:date,
-
-      created_by:user.id
-
-    });
+      });
 
 
   if(result.error){
@@ -1730,7 +1690,6 @@ async function addCalendarEvent(){
     );
 
     return;
-
   }
 
 
@@ -1739,9 +1698,37 @@ async function addCalendarEvent(){
 }
 
 
-/* =========================================
+/* =====================================
+   ページ切替
+===================================== */
+
+function page(id,button){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      x=>x.classList.remove("active")
+    );
+
+
+  $(id).classList.add("active");
+
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(
+      x=>x.classList.remove("active")
+    );
+
+
+  button.classList.add("active");
+
+}
+
+
+/* =====================================
    ログアウト
-========================================= */
+===================================== */
 
 async function logout(){
 
@@ -1756,9 +1743,9 @@ async function logout(){
 }
 
 
-/* =========================================
+/* =====================================
    ログイン画面
-========================================= */
+===================================== */
 
 function showLogin(){
 
@@ -1770,26 +1757,9 @@ function showLogin(){
 }
 
 
-/* =========================================
-   認証状態監視
-========================================= */
-
-supabaseClient.auth.onAuthStateChange(
-  (event,session)=>{
-
-    if(event==="SIGNED_OUT"){
-
-      showLogin();
-
-    }
-
-  }
-);
-
-
-/* =========================================
+/* =====================================
    起動
-========================================= */
+===================================== */
 
 (async function(){
 
@@ -1797,7 +1767,10 @@ supabaseClient.auth.onAuthStateChange(
     await supabaseClient.auth.getSession();
 
 
-  if(result.data.session){
+  if(
+    result.data &&
+    result.data.session
+  ){
 
     user=result.data.session.user;
 
@@ -1811,8 +1784,6 @@ supabaseClient.auth.onAuthStateChange(
 
 })();
 
-
-/* 初期タブ */
 
 mode("login");
 
