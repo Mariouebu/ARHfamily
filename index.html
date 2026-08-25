@@ -2,406 +2,373 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
 <title>家族ホーム</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
 
-body{
-  margin:0;
-  font-family:Arial,"Noto Sans JP",sans-serif;
-  background:#f4f7fb;
-  color:#172033;
+*{
+ box-sizing:border-box;
 }
 
-button,input,textarea,select{
-  font:inherit;
+body{
+ margin:0;
+ font-family:
+ Arial,
+ "Noto Sans JP",
+ sans-serif;
+ background:#f4f7fb;
+ color:#172033;
+}
+
+button,input,select{
+ font:inherit;
 }
 
 button{
-  cursor:pointer;
+ cursor:pointer;
 }
 
 .hidden{
-  display:none!important;
+ display:none!important;
 }
-
-.primary{
-  background:#536dfe;
-  color:white;
-  border:0;
-  border-radius:12px;
-  padding:12px 17px;
-  font-weight:bold;
-}
-
-.gray{
-  background:#e9edf5;
-  border:0;
-  border-radius:12px;
-  padding:12px 17px;
-}
-
-.green{
-  background:#16a34a;
-  color:white;
-  border:0;
-  border-radius:10px;
-  padding:10px 14px;
-  font-weight:bold;
-}
-
-.danger{
-  background:#ef4444;
-  color:white;
-  border:0;
-  border-radius:9px;
-  padding:8px 12px;
-}
-
-/* =========================
-   AUTH
-========================= */
 
 #auth{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:linear-gradient(135deg,#5578ff,#8b5cf6);
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
+ background:
+ linear-gradient(
+ 135deg,
+ #536dfe,
+ #8b5cf6
+ );
 }
 
 .authBox{
-  width:100%;
-  max-width:540px;
-  background:white;
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 20px 70px #0004;
+ width:100%;
+ max-width:500px;
+ background:white;
+ padding:30px;
+ border-radius:25px;
+ box-shadow:0 20px 60px #0004;
 }
 
 .logo{
-  text-align:center;
-  font-size:32px;
-  font-weight:900;
+ text-align:center;
+ font-size:30px;
+ font-weight:900;
 }
 
-.sub{
-  text-align:center;
-  color:#6b7280;
+.subtitle{
+ text-align:center;
+ color:#6b7280;
+ margin-bottom:25px;
 }
 
-.authTabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin:22px 0;
+.tabs{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:6px;
+ margin-bottom:20px;
 }
 
-.authTabs button{
-  border:0;
-  background:#edf1f7;
-  padding:11px 5px;
-  border-radius:10px;
-  font-weight:bold;
+.tabs button{
+ border:0;
+ background:#edf1f7;
+ padding:11px 5px;
+ border-radius:10px;
 }
 
-.authTabs button.active{
-  background:#536dfe;
-  color:white;
+.tabs button.active{
+ background:#536dfe;
+ color:white;
+ font-weight:bold;
 }
 
 .field{
-  margin-bottom:14px;
+ margin-bottom:14px;
 }
 
 .field label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:6px;
+ display:block;
+ font-weight:bold;
+ margin-bottom:6px;
 }
 
 .field input,
-.field textarea,
 .field select{
-  width:100%;
-  padding:12px;
-  border:1px solid #d7deea;
-  border-radius:10px;
-  outline:none;
+ width:100%;
+ padding:12px;
+ border:1px solid #d7deea;
+ border-radius:10px;
+ outline:none;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:#536dfe;
+.primary{
+ width:100%;
+ background:#536dfe;
+ color:white;
+ border:0;
+ border-radius:11px;
+ padding:13px;
+ font-weight:bold;
 }
 
-.field textarea{
-  min-height:100px;
+.error{
+ color:#dc2626;
+ margin-top:14px;
+ font-weight:bold;
 }
 
-.authError{
-  color:#dc2626;
-  font-weight:bold;
-  margin-top:14px;
+.success{
+ margin-top:14px;
+ background:#ecfdf5;
+ color:#166534;
+ padding:13px;
+ border-radius:10px;
 }
-
-.authSuccess{
-  color:#15803d;
-  background:#f0fdf4;
-  padding:12px;
-  border-radius:10px;
-  margin-top:14px;
-}
-
-/* =========================
-   APP
-========================= */
 
 #app{
-  display:none;
+ display:none;
 }
 
 header{
-  height:68px;
-  background:white;
-  border-bottom:1px solid #e3e8f0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  position:sticky;
-  top:0;
-  z-index:20;
+ height:65px;
+ background:white;
+ border-bottom:1px solid #ddd;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:0 20px;
+ position:sticky;
+ top:0;
+ z-index:10;
 }
 
 .headerTitle{
-  font-size:21px;
-  font-weight:900;
+ font-size:20px;
+ font-weight:900;
 }
 
 .headerRight{
-  display:flex;
-  align-items:center;
-  gap:10px;
+ display:flex;
+ align-items:center;
+ gap:10px;
 }
 
 .badge{
-  padding:7px 12px;
-  background:#eef2ff;
-  color:#4f46e5;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
+ background:#eef2ff;
+ color:#4338ca;
+ border-radius:20px;
+ padding:7px 12px;
+ font-size:12px;
+ font-weight:bold;
+}
+
+.logout{
+ border:0;
+ background:#edf1f7;
+ padding:9px 12px;
+ border-radius:9px;
 }
 
 .layout{
-  display:flex;
-  min-height:calc(100vh - 68px);
+ display:flex;
+ min-height:calc(100vh - 65px);
 }
 
 nav{
-  width:240px;
-  background:#111827;
-  padding:13px;
-  flex-shrink:0;
+ width:220px;
+ background:#111827;
+ padding:12px;
 }
 
 nav button{
-  width:100%;
-  display:block;
-  background:transparent;
-  border:0;
-  color:#dbe3ef;
-  text-align:left;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:4px;
-  font-weight:bold;
+ width:100%;
+ border:0;
+ background:transparent;
+ color:#dbe3ef;
+ padding:12px;
+ border-radius:9px;
+ text-align:left;
+ margin-bottom:4px;
+ font-weight:bold;
 }
 
 nav button.active,
 nav button:hover{
-  background:#293548;
-  color:white;
+ background:#293548;
+ color:white;
 }
 
 main{
-  width:100%;
-  max-width:1450px;
-  padding:24px;
+ flex:1;
+ padding:25px;
+ max-width:1400px;
 }
 
 .page{
-  display:none;
+ display:none;
 }
 
 .page.active{
-  display:block;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:15px;
+ display:block;
 }
 
 .card{
-  background:white;
-  border-radius:18px;
-  padding:19px;
-  margin-bottom:16px;
-  box-shadow:0 3px 15px #26344a0c;
+ background:white;
+ padding:20px;
+ border-radius:17px;
+ margin-bottom:16px;
+ box-shadow:0 3px 15px #0000000b;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:
+ repeat(auto-fit,minmax(230px,1fr));
+ gap:15px;
 }
 
 .item{
-  background:#f8fafc;
-  border:1px solid #e3e8f0;
-  padding:14px;
-  border-radius:13px;
-  margin-top:10px;
+ background:#f8fafc;
+ border:1px solid #e3e8f0;
+ border-radius:12px;
+ padding:13px;
+ margin-top:10px;
 }
 
 .itemTitle{
-  font-size:17px;
-  font-weight:900;
+ font-size:17px;
+ font-weight:900;
 }
 
 .meta{
-  color:#6b7280;
-  font-size:13px;
-  margin-top:6px;
-}
-
-.stat{
-  font-size:28px;
-  font-weight:900;
+ color:#6b7280;
+ font-size:13px;
+ margin-top:5px;
 }
 
 .empty{
-  text-align:center;
-  padding:20px;
-  color:#7b8495;
+ text-align:center;
+ padding:20px;
+ color:#7b8495;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
+.gray{
+ border:0;
+ background:#edf1f7;
+ border-radius:10px;
+ padding:10px 14px;
+}
+
+.danger{
+ border:0;
+ background:#ef4444;
+ color:white;
+ border-radius:8px;
+ padding:8px 12px;
 }
 
 .successBox{
-  background:#ecfdf5;
-  border:1px solid #bbf7d0;
-  padding:15px;
-  border-radius:13px;
+ background:#ecfdf5;
+ border:1px solid #bbf7d0;
+ padding:15px;
+ border-radius:12px;
+ margin-top:12px;
 }
 
-.warning{
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  padding:12px;
-  border-radius:12px;
+.stat{
+ font-size:27px;
+ font-weight:900;
 }
-
-/* calendar */
-
-.calendar{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:5px;
-}
-
-.day{
-  min-height:80px;
-  background:#f8fafc;
-  border:1px solid #e3e8f0;
-  border-radius:8px;
-  padding:6px;
-}
-
-.eventMini{
-  background:#e0e7ff;
-  color:#3730a3;
-  border-radius:5px;
-  padding:3px;
-  font-size:11px;
-  margin-top:4px;
-}
-
-/* modal */
 
 #modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ z-index:100;
 }
 
 .modalBox{
-  width:100%;
-  max-width:600px;
-  max-height:90vh;
-  overflow:auto;
-  background:white;
-  border-radius:20px;
-  padding:22px;
+ background:white;
+ width:100%;
+ max-width:550px;
+ padding:22px;
+ border-radius:20px;
 }
 
 .modalHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
 
 .close{
-  border:0;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#edf1f6;
-  font-size:20px;
+ border:0;
+ background:#edf1f7;
+ width:35px;
+ height:35px;
+ border-radius:50%;
+ font-size:20px;
 }
 
-@media(max-width:800px){
+.actions{
+ display:flex;
+ gap:8px;
+ margin-top:12px;
+ flex-wrap:wrap;
+}
+
+@media(max-width:700px){
+
+.layout{
+ flex-direction:column;
+}
 
 nav{
-  width:68px;
+ width:100%;
+ display:flex;
+ overflow:auto;
 }
 
 nav button{
-  font-size:0;
-  text-align:center;
+ min-width:120px;
 }
 
 main{
-  padding:13px;
+ padding:13px;
 }
 
-.authTabs{
-  grid-template-columns:1fr;
+.tabs{
+ grid-template-columns:1fr;
+}
+
+.headerRight{
+ gap:4px;
 }
 
 }
+
 </style>
 </head>
 
 <body>
 
-
-<!-- =====================================================
+<!-- =================================
      AUTH
-===================================================== -->
+================================= -->
 
 <div id="auth">
 
@@ -411,149 +378,214 @@ main{
 👨‍👩‍👧 家族ホーム
 </div>
 
-<p class="sub">
+<div class="subtitle">
 家族専用管理アプリ
-</p>
+</div>
 
+<div class="tabs">
 
-<div class="authTabs">
-
-<button id="loginTab"
-onclick="authMode('login')">
+<button
+id="tabLogin"
+onclick="changeMode('login')">
 🔐 ログイン
 </button>
 
-<button id="createTab"
-onclick="authMode('create')">
-🏠 家族を作る
+<button
+id="tabCreate"
+onclick="changeMode('create')">
+🏠 家族作成
 </button>
 
-<button id="joinTab"
-onclick="authMode('join')">
+<button
+id="tabJoin"
+onclick="changeMode('join')">
 👨‍👩‍👧 参加
 </button>
 
 </div>
 
 
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <div id="loginForm">
 
 <div class="field">
-<label>メールアドレス</label>
+
+<label>
+メールアドレス
+</label>
+
 <input
 id="loginEmail"
 type="email"
 autocomplete="email"
-placeholder="example@email.com">
+placeholder="メールアドレス">
+
 </div>
 
+
 <div class="field">
-<label>パスワード</label>
+
+<label>
+パスワード
+</label>
+
 <input
 id="loginPassword"
 type="password"
-autocomplete="current-password">
+autocomplete="current-password"
+placeholder="パスワード">
+
 </div>
+
 
 <button
 class="primary"
-style="width:100%"
 onclick="login()">
+
 🔐 ログイン
+
 </button>
 
 </div>
 
 
-<!-- =========================
-     CREATE FAMILY
-========================= -->
+<!-- CREATE -->
 
-<div id="createForm" class="hidden">
+<div
+id="createForm"
+class="hidden">
 
 <div class="field">
-<label>家族名</label>
+
+<label>
+家族名
+</label>
+
 <input
-id="createFamilyName"
+id="familyName"
 placeholder="例：山田家">
+
 </div>
 
+
 <div class="field">
-<label>あなたの名前</label>
+
+<label>
+あなたの名前
+</label>
+
 <input
 id="createName"
 placeholder="例：お父さん">
+
 </div>
 
+
 <div class="field">
-<label>メールアドレス</label>
+
+<label>
+メールアドレス
+</label>
+
 <input
 id="createEmail"
 type="email"
 autocomplete="email">
+
 </div>
 
+
 <div class="field">
-<label>パスワード</label>
+
+<label>
+パスワード
+</label>
+
 <input
 id="createPassword"
 type="password"
 autocomplete="new-password">
+
 </div>
+
 
 <button
 class="primary"
-style="width:100%"
 onclick="createFamily()">
-🏠 家族を作って登録
+
+🏠 家族を作る
+
 </button>
 
 </div>
 
 
-<!-- =========================
-     JOIN FAMILY
-========================= -->
+<!-- JOIN -->
 
-<div id="joinForm" class="hidden">
+<div
+id="joinForm"
+class="hidden">
 
 <div class="field">
-<label>家族コード</label>
+
+<label>
+家族コード
+</label>
+
 <input
-id="joinFamilyCode"
+id="familyCode"
 placeholder="例：A1B2C3D4">
+
 </div>
 
+
 <div class="field">
-<label>あなたの名前</label>
+
+<label>
+名前
+</label>
+
 <input
 id="joinName"
 placeholder="例：太郎">
+
 </div>
 
+
 <div class="field">
-<label>メールアドレス</label>
+
+<label>
+メールアドレス
+</label>
+
 <input
 id="joinEmail"
 type="email"
 autocomplete="email">
+
 </div>
 
+
 <div class="field">
-<label>パスワード</label>
+
+<label>
+パスワード
+</label>
+
 <input
 id="joinPassword"
 type="password"
 autocomplete="new-password">
+
 </div>
+
 
 <div class="field">
 
-<label>参加する立場</label>
+<label>
+参加する立場
+</label>
 
 <select id="joinRole">
 
@@ -570,14 +602,16 @@ autocomplete="new-password">
 </div>
 
 
-<div class="field">
+<div
+id="parentCodeBox"
+class="field hidden">
 
 <label>
-親の場合：親招待コード
+親招待コード
 </label>
 
 <input
-id="parentInvite"
+id="parentCode"
 placeholder="PARENT-XXXXXXXX">
 
 </div>
@@ -585,26 +619,33 @@ placeholder="PARENT-XXXXXXXX">
 
 <button
 class="primary"
-style="width:100%"
 onclick="joinFamily()">
+
 👨‍👩‍👧 家族に参加
+
 </button>
 
 </div>
 
 
-<div id="authError" class="authError"></div>
+<div
+id="error"
+class="error">
+</div>
 
-<div id="authSuccess" class="authSuccess hidden"></div>
-
+<div
+id="success"
+class="success hidden">
 </div>
 
 </div>
 
+</div>
 
-<!-- =====================================================
+
+<!-- =================================
      APP
-===================================================== -->
+================================= -->
 
 <div id="app">
 
@@ -616,12 +657,15 @@ onclick="joinFamily()">
 
 <div class="headerRight">
 
-<span id="familyNameHeader"></span>
+<span id="familyHeader"></span>
 
-<span id="roleBadge" class="badge"></span>
+<span
+id="roleHeader"
+class="badge">
+</span>
 
 <button
-class="gray"
+class="logout"
 onclick="logout()">
 ログアウト
 </button>
@@ -643,7 +687,7 @@ onclick="showPage('home',this)">
 
 <button
 onclick="showPage('members',this)">
-👨‍👩‍👧 メンバー
+👨‍👩‍👧 家族
 </button>
 
 <button
@@ -653,12 +697,7 @@ onclick="showPage('calendar',this)">
 
 <button
 onclick="showPage('children',this)">
-🧒 子どもページ
-</button>
-
-<button
-onclick="showPage('president',this)">
-🗳️ 大統領
+🧒 子ども
 </button>
 
 </nav>
@@ -666,40 +705,34 @@ onclick="showPage('president',this)">
 
 <main>
 
-
 <!-- HOME -->
 
 <section
-id="page-home"
+id="home"
 class="page active">
 
-<h1>🏠 家族ホーム</h1>
+<h1>🏠 ホーム</h1>
 
 <div class="grid">
 
 <div class="card">
 
-<h2>👨‍👩‍👧 家族</h2>
+<h2>家族</h2>
 
-<div id="homeFamily"></div>
+<div
+id="homeFamily">
+</div>
 
 </div>
 
 
 <div class="card">
 
-<h2>📅 今日の予定</h2>
+<h2>アカウント</h2>
 
-<div id="todayEvents"></div>
-
+<div
+id="homeUser">
 </div>
-
-
-<div class="card">
-
-<h2>👑 大統領</h2>
-
-<div id="homePresident"></div>
 
 </div>
 
@@ -711,32 +744,29 @@ class="page active">
 <!-- MEMBERS -->
 
 <section
-id="page-members"
+id="members"
 class="page">
 
 <h1>👨‍👩‍👧 家族メンバー</h1>
 
-<div class="card">
-
-<div id="memberList"></div>
-
+<div
+class="card"
+id="membersList">
 </div>
 
 
 <div
-id="parentInviteCard"
-class="card">
+class="card"
+id="parentInviteBox">
 
 <h2>👨‍👩‍👧 親を追加</h2>
 
-<p>
-親が招待コードを発行できます。
-</p>
-
 <button
 class="primary"
-onclick="createParentInvite()">
+onclick="makeInvite()">
+
 ＋ 親招待コードを発行
+
 </button>
 
 <div id="inviteResult"></div>
@@ -749,42 +779,25 @@ onclick="createParentInvite()">
 <!-- CALENDAR -->
 
 <section
-id="page-calendar"
+id="calendar"
 class="page">
 
-<h1>📅 家族カレンダー</h1>
+<h1>📅 カレンダー</h1>
 
 <div class="card">
-
-<div class="actions">
 
 <button
 class="primary"
-onclick="openEventModal()">
+onclick="addEvent()">
+
 ＋ 予定を追加
-</button>
 
-<button
-class="gray"
-onclick="downloadICS()">
-📥 カレンダーに追加
 </button>
-
-</div>
 
 <div
-id="calendarBox"
-style="margin-top:20px">
+id="events"
+style="margin-top:15px">
 </div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📋 予定一覧</h2>
-
-<div id="eventList"></div>
 
 </div>
 
@@ -794,96 +807,59 @@ style="margin-top:20px">
 <!-- CHILDREN -->
 
 <section
-id="page-children"
+id="children"
 class="page">
 
 <h1>🧒 子どもページ</h1>
-
 
 <div class="card">
 
 <h2>📰 子どもニュース</h2>
 
-<div id="childNewsList"></div>
-
-<div id="childEditorButtons"></div>
+<div id="childNews">
+<div class="empty">
+準備中
+</div>
+</div>
 
 </div>
 
 
 <div class="card">
 
-<h2>🎮 ゲーム予定</h2>
+<h2>🎮 ゲーム</h2>
 
-<div id="gameList"></div>
-
-<div id="gameEditorButtons"></div>
+<div id="games">
+<div class="empty">
+準備中
+</div>
+</div>
 
 </div>
 
 
 <div class="card">
 
-<h2>🚨 違反記録</h2>
+<h2>🚨 違反</h2>
 
-<div id="violationList"></div>
-
-<div id="violationButtons"></div>
+<div id="violations">
+<div class="empty">
+準備中
+</div>
+</div>
 
 </div>
 
 
 <div class="card">
 
-<h2>📢 子どもページのお知らせ</h2>
+<h2>🗳️ 子ども大統領</h2>
 
-<div id="childPageList"></div>
-
-<div id="childPageButtons"></div>
-
+<div id="president">
+<div class="empty">
+準備中
 </div>
-
-</section>
-
-
-<!-- PRESIDENT -->
-
-<section
-id="page-president"
-class="page">
-
-<h1>🗳️ 子ども大統領</h1>
-
-
-<div class="card">
-
-<h2>👑 現在の大統領</h2>
-
-<div id="presidentBox"></div>
-
 </div>
-
-
-<div class="card">
-
-<h2>📊 候補者・支持率</h2>
-
-<div id="candidateList"></div>
-
-</div>
-
-
-<div
-id="candidateAddBox"
-class="card">
-
-<h2>候補者を登録</h2>
-
-<button
-class="primary"
-onclick="openCandidateModal()">
-＋ 候補者を追加
-</button>
 
 </div>
 
@@ -896,9 +872,7 @@ onclick="openCandidateModal()">
 </div>
 
 
-<!-- =====================================================
-     MODAL
-===================================================== -->
+<!-- MODAL -->
 
 <div id="modal">
 
@@ -906,7 +880,8 @@ onclick="openCandidateModal()">
 
 <div class="modalHead">
 
-<h2 id="modalTitle"></h2>
+<h2 id="modalTitle">
+</h2>
 
 <button
 class="close"
@@ -916,20 +891,25 @@ onclick="closeModal()">
 
 </div>
 
-<div id="modalContent"></div>
+<div id="modalContent">
+</div>
 
 <div class="actions">
 
 <button
 class="primary"
 onclick="saveModal()">
+
 保存
+
 </button>
 
 <button
 class="gray"
 onclick="closeModal()">
+
 キャンセル
+
 </button>
 
 </div>
@@ -941,9 +921,9 @@ onclick="closeModal()">
 
 <script>
 
-/* =====================================================
+/* =================================
    SUPABASE
-===================================================== */
+================================= */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -958,51 +938,68 @@ SUPABASE_KEY
 );
 
 
-/* =====================================================
+/* =================================
    STATE
-===================================================== */
+================================= */
 
-let user=null;
-let family=null;
-let member=null;
+let currentUser=null;
+let currentMember=null;
+let currentFamily=null;
 let modalType=null;
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* =================================
+   HELPER
+================================= */
 
 function $(id){
+
 return document.getElementById(id);
-}
 
-function esc(v){
-return String(v ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#39;");
-}
-
-function isParent(){
-return member?.role==="parent";
-}
-
-function isPresident(){
-return member?.role==="president";
-}
-
-function isEditor(){
-return isParent() || isPresident();
 }
 
 
-/* =====================================================
-   AUTH MODE
-===================================================== */
+function esc(value){
 
-function authMode(mode){
+return String(value ?? "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+function showError(message){
+
+$("error").textContent=
+message;
+
+$("success")
+.classList.add("hidden");
+
+}
+
+
+function showSuccess(message){
+
+$("error").textContent="";
+
+$("success")
+.classList.remove("hidden");
+
+$("success").innerHTML=
+message;
+
+}
+
+
+/* =================================
+   MODE
+================================= */
+
+function changeMode(mode){
 
 $("loginForm")
 .classList.toggle(
@@ -1022,94 +1019,141 @@ $("joinForm")
 mode!=="join"
 );
 
-$("loginTab")
+$("tabLogin")
 .classList.toggle(
 "active",
 mode==="login"
 );
 
-$("createTab")
+$("tabCreate")
 .classList.toggle(
 "active",
 mode==="create"
 );
 
-$("joinTab")
+$("tabJoin")
 .classList.toggle(
 "active",
 mode==="join"
 );
 
-$("authError").textContent="";
-$("authSuccess").classList.add("hidden");
+$("error").textContent="";
+
+$("success")
+.classList.add("hidden");
 
 }
 
 
-/* =====================================================
+/* =================================
+   ROLE CHANGE
+================================= */
+
+$("joinRole").addEventListener(
+"change",
+function(){
+
+$("parentCodeBox")
+.classList.toggle(
+"hidden",
+this.value!=="parent"
+);
+
+}
+);
+
+
+/* =================================
    LOGIN
-===================================================== */
+================================= */
 
 async function login(){
 
-$("authError").textContent="";
-$("authSuccess").classList.add("hidden");
+showError("");
 
 const email=
-$("loginEmail").value.trim();
+$("loginEmail")
+.value
+.trim();
 
 const password=
-$("loginPassword").value;
+$("loginPassword")
+.value;
+
 
 if(!email || !password){
 
-$("authError").textContent=
-"メールアドレスとパスワードを入力してください。";
+showError(
+"メールアドレスとパスワードを入力してください。"
+);
 
 return;
+
 }
 
-const {data,error} =
+
+const result=
 await db.auth.signInWithPassword({
+
 email:email,
 password:password
+
 });
 
-if(error){
 
-$("authError").textContent=
-"ログインできませんでした："+
-error.message;
+if(result.error){
+
+showError(
+"ログインできませんでした。\n"+
+result.error.message
+);
 
 return;
-}
-
-user=data.user;
-
-await loadUser();
 
 }
 
 
-/* =====================================================
-   CREATE FAMILY
-===================================================== */
+currentUser=
+result.data.user;
+
+
+/*
+ ログイン成功後、
+ 必ず家族メンバーを取得
+*/
+
+await loadAccount();
+
+}
+
+
+/* =================================
+   CREATE
+================================= */
 
 async function createFamily(){
 
-$("authError").textContent="";
+showError("");
 
 const familyName=
-$("createFamilyName").value.trim();
+$("familyName")
+.value
+.trim();
 
 const name=
-$("createName").value.trim();
+$("createName")
+.value
+.trim();
 
 const email=
-$("createEmail").value.trim();
+$("createEmail")
+.value
+.trim();
 
 const password=
-$("createPassword").value;
+$("createPassword")
+.value;
+
 
 if(
 !familyName ||
@@ -1118,56 +1162,73 @@ if(
 !password
 ){
 
-$("authError").textContent=
-"全部入力してください。";
+showError(
+"すべて入力してください。"
+);
 
 return;
+
 }
+
 
 if(password.length<6){
 
-$("authError").textContent=
-"パスワードは6文字以上にしてください。";
+showError(
+"パスワードは6文字以上にしてください。"
+);
 
 return;
+
 }
 
 
-const {data,error} =
+const result=
 await db.auth.signUp({
+
 email,
 password
+
 });
 
-if(error){
 
-$("authError").textContent=
-error.message;
+if(result.error){
+
+showError(
+result.error.message
+);
 
 return;
+
 }
 
 
 /*
-  メール確認がONの場合
+ メール確認が必要な場合
 */
 
-if(!data.session){
+if(!result.data.session){
 
-$("authSuccess").classList.remove("hidden");
-
-$("authSuccess").innerHTML=
-"登録しました。<br>" +
-"確認メールが届いている場合は、メールを確認してからログインしてください。";
+showSuccess(
+"登録しました。<br><br>"+
+"Supabaseでメール確認が有効になっています。<br>"+
+"確認メールを開いて認証したあと、"+
+"この画面の「ログイン」からログインしてください。"
+);
 
 return;
+
 }
 
 
-user=data.user;
+currentUser=
+result.data.user;
 
 
-const {data:result,error:rpcError} =
+/*
+ 家族を作成
+*/
+
+const rpc=
 await db.rpc(
 "family_app_v2_create_family",
 {
@@ -1176,443 +1237,438 @@ p_name:name
 }
 );
 
-if(rpcError){
 
-$("authError").textContent=
-rpcError.message;
+if(rpc.error){
+
+showError(
+"家族作成に失敗しました。\n"+
+rpc.error.message
+);
 
 return;
+
 }
+
+
+const resultData=
+rpc.data;
 
 
 alert(
 "家族を作成しました！\n\n"+
 "家族コード："+
-result.family_code+
+resultData.family_code+
 "\n\n"+
 "親招待コード："+
-result.parent_invite_code
+resultData.parent_invite_code
 );
 
-await loadUser();
+
+await loadAccount();
 
 }
 
 
-/* =====================================================
-   JOIN FAMILY
-===================================================== */
+/* =================================
+   JOIN
+================================= */
 
 async function joinFamily(){
 
-$("authError").textContent="";
+showError("");
 
-const code=
-$("joinFamilyCode").value.trim();
+const familyCode=
+$("familyCode")
+.value
+.trim();
 
 const name=
-$("joinName").value.trim();
+$("joinName")
+.value
+.trim();
 
 const email=
-$("joinEmail").value.trim();
+$("joinEmail")
+.value
+.trim();
 
 const password=
-$("joinPassword").value;
+$("joinPassword")
+.value;
 
 const role=
-$("joinRole").value;
+$("joinRole")
+.value;
 
-const invite=
-$("parentInvite").value.trim();
+const parentCode=
+$("parentCode")
+.value
+.trim();
 
 
 if(
-!code ||
+!familyCode ||
 !name ||
 !email ||
 !password
 ){
 
-$("authError").textContent=
-"全部入力してください。";
+showError(
+"すべて入力してください。"
+);
 
 return;
+
 }
 
 
-if(password.length<6){
+if(
+role==="parent" &&
+!parentCode
+){
 
-$("authError").textContent=
-"パスワードは6文字以上にしてください。";
+showError(
+"親招待コードを入力してください。"
+);
 
 return;
+
 }
 
 
-if(role==="parent" && !invite){
-
-$("authError").textContent=
-"親として参加する場合は親招待コードを入力してください。";
-
-return;
-}
-
-
-const {data,error} =
+const result=
 await db.auth.signUp({
+
 email,
 password
+
 });
 
-if(error){
 
-$("authError").textContent=
-error.message;
+if(result.error){
+
+showError(
+result.error.message
+);
 
 return;
+
 }
 
 
-if(!data.session){
+if(!result.data.session){
 
-$("authSuccess").classList.remove("hidden");
-
-$("authSuccess").innerHTML=
-"登録しました。<br>"+
-"確認メールが届いている場合は、メール確認後にログインしてください。";
+showSuccess(
+"登録しました。<br><br>"+
+"メール確認が必要です。<br>"+
+"確認後、「ログイン」からログインしてください。"
+);
 
 return;
+
 }
 
 
-user=data.user;
+currentUser=
+result.data.user;
 
 
-if(role==="parent"){
+if(role==="child"){
 
-const {data:result,error} =
+const rpc=
 await db.rpc(
-"family_app_v2_join_as_parent",
+"family_app_v2_join_family",
 {
-p_invite_code:invite,
+p_family_code:familyCode,
 p_name:name
 }
 );
 
-if(error){
 
-$("authError").textContent=
-error.message;
+if(rpc.error){
+
+showError(
+rpc.error.message
+);
 
 return;
+
 }
 
 }else{
 
-const {data:result,error} =
+const rpc=
 await db.rpc(
-"family_app_v2_join_family",
+"family_app_v2_join_as_parent",
 {
-p_family_code:code,
-p_name:name,
-p_role:"child"
+p_invite_code:parentCode,
+p_name:name
 }
 );
 
-if(error){
 
-$("authError").textContent=
-error.message;
+if(rpc.error){
+
+showError(
+rpc.error.message
+);
 
 return;
-}
 
 }
-
-
-await loadUser();
 
 }
 
 
-/* =====================================================
-   LOAD USER
-===================================================== */
+await loadAccount();
 
-async function loadUser(){
+}
 
-const {data}=
+
+/* =================================
+   ACCOUNT
+================================= */
+
+async function loadAccount(){
+
+const session=
 await db.auth.getSession();
 
-if(!data.session){
+
+if(
+!session.data.session
+){
 
 showLogin();
 
 return;
+
 }
 
-user=data.session.user;
+
+currentUser=
+session.data.session.user;
 
 
-const {data:members,error} =
+/*
+ メンバー情報
+*/
+
+const members=
 await db
 .from("family_app_v2_members")
 .select("*")
-.eq("user_id",user.id);
+.eq(
+"user_id",
+currentUser.id
+);
 
 
-if(error){
+if(members.error){
 
-alert(error.message);
+showError(
+members.error.message
+);
+
 return;
 
 }
 
 
-if(!members || members.length===0){
+if(
+!members.data ||
+members.data.length===0
+){
 
-showLogin();
-
-$("authError").textContent=
-"このアカウントには家族が登録されていません。";
+showError(
+"ログインは成功しましたが、家族情報がありません。"
+);
 
 return;
+
 }
 
 
-member=members[0];
+currentMember=
+members.data[0];
 
 
-const {data:families,error:familyError} =
+/*
+ 家族情報
+*/
+
+const family=
 await db
 .from("family_app_v2_families")
 .select("*")
-.eq("id",member.family_id)
+.eq(
+"id",
+currentMember.family_id
+)
 .single();
 
 
-if(familyError){
+if(family.error){
 
-alert(familyError.message);
+showError(
+family.error.message
+);
+
 return;
 
 }
 
 
-family=families;
+currentFamily=
+family.data;
+
 
 openApp();
 
 }
 
 
-/* =====================================================
-   SHOW LOGIN
-===================================================== */
-
-function showLogin(){
-
-$("app").style.display="none";
-$("auth").style.display="flex";
-
-authMode("login");
-
-}
-
-
-/* =====================================================
+/* =================================
    OPEN APP
-===================================================== */
+================================= */
 
 function openApp(){
 
 $("auth").style.display="none";
+
 $("app").style.display="block";
 
-$("familyNameHeader").textContent=
-family.family_name;
 
-$("roleBadge").textContent=
-isParent()
-?"👨‍👩‍👧 親"
-:
-isPresident()
-?"👑 子ども大統領"
-:
-"🧒 子ども";
+$("familyHeader")
+.textContent=
+currentFamily.family_name;
 
 
-$("parentInviteCard")
-.classList.toggle(
-"hidden",
-!isParent()
-);
+let roleText="🧒 子ども";
 
-loadHome();
-loadMembers();
-loadEvents();
-loadChildren();
-loadPresident();
+
+if(currentMember.role==="parent"){
+
+roleText="👨‍👩‍👧 親";
+
+}
+
+if(currentMember.role==="president"){
+
+roleText="👑 子ども大統領";
 
 }
 
 
-/* =====================================================
-   NAV
-===================================================== */
+$("roleHeader")
+.textContent=
+roleText;
+
+
+$("homeFamily").innerHTML=`
+
+<div class="stat">
+
+${esc(
+currentFamily.family_name
+)}
+
+</div>
+
+<p>
+家族コード：
+<b>
+${esc(
+currentFamily.family_code
+)}
+</b>
+</p>
+
+`;
+
+
+$("homeUser").innerHTML=`
+
+<div class="stat">
+
+${esc(
+currentMember.name
+)}
+
+</div>
+
+<div>
+${roleText}
+</div>
+
+`;
+
+
+loadMembers();
+
+}
+
+
+/* =================================
+   SHOW PAGE
+================================= */
 
 function showPage(name,button){
 
 document
 .querySelectorAll(".page")
-.forEach(x=>
-x.classList.remove("active")
+.forEach(
+x=>x.classList.remove("active")
 );
 
-$("page-"+name)
+
+$(name)
 .classList.add("active");
 
 
 document
 .querySelectorAll("nav button")
-.forEach(x=>
-x.classList.remove("active")
+.forEach(
+x=>x.classList.remove("active")
 );
+
 
 button.classList.add("active");
 
 }
 
 
-/* =====================================================
-   HOME
-===================================================== */
-
-async function loadHome(){
-
-$("homeFamily").innerHTML=`
-
-<div class="stat">
-${esc(family.family_name)}
-</div>
-
-<div class="meta">
-家族コード：
-${esc(family.family_code)}
-</div>
-
-`;
-
-
-const today=
-new Date()
-.toISOString()
-.slice(0,10);
-
-
-const {data:events}=
-await db
-.from("family_app_v2_events")
-.select("*")
-.eq("family_id",family.id)
-.eq("event_date",today)
-.order("start_time");
-
-
-if(!events?.length){
-
-$("todayEvents").innerHTML=
-`
-<div class="empty">
-今日の予定はありません
-</div>
-`;
-
-}else{
-
-$("todayEvents").innerHTML=
-events.map(x=>`
-
-<div class="item">
-
-<div class="itemTitle">
-📅 ${esc(x.title)}
-</div>
-
-<div class="meta">
-${esc(x.start_time||"")}
-～
-${esc(x.end_time||"")}
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-
-const {data:candidates}=
-await db
-.from("family_app_v2_candidates")
-.select("*")
-.eq("family_id",family.id)
-.eq("is_president",true)
-.limit(1);
-
-
-if(candidates?.length){
-
-$("homePresident").innerHTML=
-`
-<div class="stat">
-👑 ${esc(candidates[0].candidate_name)}
-</div>
-<div class="meta">
-子ども大統領
-</div>
-`;
-
-}else{
-
-$("homePresident").innerHTML=
-`
-<div class="empty">
-まだ大統領はいません
-</div>
-`;
-
-}
-
-}
-
-
-/* =====================================================
+/* =================================
    MEMBERS
-===================================================== */
+================================= */
 
 async function loadMembers(){
 
-const {data,error}=
+const result=
 await db
 .from("family_app_v2_members")
 .select("*")
-.eq("family_id",family.id)
+.eq(
+"family_id",
+currentFamily.id
+)
 .order("created_at");
 
 
-if(error){
+if(result.error){
 
-$("memberList").textContent=
-error.message;
+$("membersList")
+.textContent=
+result.error.message;
 
 return;
 
 }
 
 
-$("memberList").innerHTML=
-data.map(x=>`
+$("membersList").innerHTML=
+result.data
+.map(x=>`
 
 <div class="item">
 
@@ -1620,12 +1676,11 @@ data.map(x=>`
 
 ${
 x.role==="parent"
-?"👨‍👩‍👧 "
+?"👨‍👩‍👧"
 :
 x.role==="president"
-?"👑 "
-:
-"🧒 "
+?"👑"
+:"🧒"
 }
 
 ${esc(x.name)}
@@ -1640,43 +1695,45 @@ x.role==="parent"
 :
 x.role==="president"
 ?"子ども大統領"
-:
-"子ども"
+:"子ども"
 }
 
 </div>
 
 </div>
 
-`).join("");
+`)
+.join("");
+
+
+$("parentInviteBox")
+.classList.toggle(
+"hidden",
+currentMember.role!=="parent"
+);
 
 }
 
 
-/* =====================================================
-   PARENT INVITE
-===================================================== */
+/* =================================
+   INVITE
+================================= */
 
-async function createParentInvite(){
+async function makeInvite(){
 
-if(!isParent()){
-
-return;
-}
-
-
-const {data,error}=
+const result=
 await db.rpc(
 "family_app_v2_create_parent_invite",
 {
-p_family_id:family.id
+p_family_id:currentFamily.id
 }
 );
 
 
-if(error){
+if(result.error){
 
-alert(error.message);
+alert(result.error.message);
+
 return;
 
 }
@@ -1684,16 +1741,20 @@ return;
 
 $("inviteResult").innerHTML=`
 
-<div class="successBox" style="margin-top:12px">
+<div class="successBox">
 
-<b>親招待コード</b>
+<h3>
+親招待コード
+</h3>
 
 <div class="stat">
-${esc(data)}
+
+${esc(result.data)}
+
 </div>
 
 <p>
-このコードを新しい親に渡してください。
+このコードを親になる人に渡してください。
 </p>
 
 </div>
@@ -1703,44 +1764,116 @@ ${esc(data)}
 }
 
 
-/* =====================================================
-   EVENTS
-===================================================== */
+/* =================================
+   CALENDAR
+================================= */
+
+async function addEvent(){
+
+modalType="event";
+
+$("modalTitle")
+.textContent=
+"📅 予定を追加";
+
+
+$("modalContent")
+.innerHTML=`
+
+<div class="field">
+
+<label>予定名</label>
+
+<input id="eventTitle">
+
+</div>
+
+<div class="field">
+
+<label>日付</label>
+
+<input
+id="eventDate"
+type="date">
+
+</div>
+
+<div class="field">
+
+<label>開始時刻</label>
+
+<input
+id="eventStart"
+type="time">
+
+</div>
+
+<div class="field">
+
+<label>終了時刻</label>
+
+<input
+id="eventEnd"
+type="time">
+
+</div>
+
+`;
+
+
+$("modal").style.display="flex";
+
+}
+
 
 async function loadEvents(){
 
-const {data,error}=
+/*
+ 現在は既存の予定テーブルが
+ ある場合に読み込みます
+*/
+
+const result=
 await db
 .from("family_app_v2_events")
 .select("*")
-.eq("family_id",family.id)
-.order("event_date")
-.order("start_time");
+.eq(
+"family_id",
+currentFamily.id
+)
+.order("event_date");
 
 
-if(error){
+if(result.error){
 
-$("eventList").textContent=
-error.message;
+$("events").innerHTML=
+`
+<div class="empty">
+予定テーブルをまだ設定していません。
+</div>
+`;
 
 return;
 
 }
 
 
-if(!data?.length){
+if(!result.data.length){
 
-$("eventList").innerHTML=
+$("events").innerHTML=
 `
 <div class="empty">
 予定はありません
 </div>
 `;
 
-}else{
+return;
 
-$("eventList").innerHTML=
-data.map(x=>`
+}
+
+
+$("events").innerHTML=
+result.data.map(x=>`
 
 <div class="item">
 
@@ -1748,1230 +1881,30 @@ data.map(x=>`
 📅 ${esc(x.title)}
 </div>
 
-<div>
-${esc(x.description||"")}
-</div>
-
 <div class="meta">
 ${esc(x.event_date)}
-　
-${esc(x.start_time||"")}
-～
-${esc(x.end_time||"")}
-</div>
-
-<div class="actions">
-
-<button
-class="gray"
-onclick='downloadOneICS(${JSON.stringify(x)})'>
-📥 カレンダーへ
-</button>
-
-${
-isEditor()
-?
-`
-<button
-class="danger"
-onclick="deleteEvent('${x.id}')">
-削除
-</button>
-`
-:""
-}
-
+${x.start_time?
+" "+esc(x.start_time):
+""}
 </div>
 
 </div>
 
-`).join("");
-
-}
-
-
-renderCalendar(data||[]);
-
-}
-
-
-function renderCalendar(events){
-
-const now=new Date();
-
-const year=now.getFullYear();
-const month=now.getMonth();
-
-const first=
-new Date(year,month,1);
-
-const last=
-new Date(year,month+1,0);
-
-
-let html=`
-
-<div style="font-weight:900;margin-bottom:10px">
-${year}年 ${month+1}月
-</div>
-
-<div class="calendar">
-`;
-
-
-for(
-let i=0;
-i<first.getDay();
-i++
-){
-
-html+=`<div></div>`;
-
-}
-
-
-for(
-let day=1;
-day<=last.getDate();
-day++
-){
-
-const date=
-`${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-
-const todays=
-events.filter(
-e=>e.event_date===date
-);
-
-
-html+=`
-
-<div class="day">
-
-<strong>
-${day}
-</strong>
-
-${
-todays.map(e=>`
-
-<div class="eventMini">
-${esc(e.title)}
-</div>
-
-`).join("")
-}
-
-</div>
-
-`;
-
-}
-
-
-html+=`</div>`;
-
-$("calendarBox").innerHTML=html;
-
-}
-
-
-/* =====================================================
-   EVENT MODAL
-===================================================== */
-
-function openEventModal(){
-
-modalType="event";
-
-$("modalTitle").textContent=
-"📅 予定を追加";
-
-
-$("modalContent").innerHTML=`
-
-<div class="field">
-<label>タイトル</label>
-<input id="eventTitle">
-</div>
-
-<div class="field">
-<label>内容</label>
-<textarea id="eventBody"></textarea>
-</div>
-
-<div class="field">
-<label>日付</label>
-<input id="eventDate" type="date">
-</div>
-
-<div class="field">
-<label>開始</label>
-<input id="eventStart" type="time">
-</div>
-
-<div class="field">
-<label>終了</label>
-<input id="eventEnd" type="time">
-</div>
-
-`;
-
-
-openModal();
+`)
+.join("");
 
 }
 
 
 async function saveEvent(){
 
-if(!isEditor())return;
-
-
-const title=
-$("eventTitle").value.trim();
-
-
-if(!title){
-
-alert("タイトルを入力してください");
-return;
-
-}
-
-
-const {error}=
-await db
-.from("family_app_v2_events")
-.insert({
-
-family_id:family.id,
-title:title,
-description:$("eventBody").value,
-event_date:$("eventDate").value,
-start_time:$("eventStart").value||null,
-end_time:$("eventEnd").value||null,
-created_by:user.id
-
-});
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-
-closeModal();
-loadEvents();
-
-}
-
-
-async function deleteEvent(id){
-
-if(!isEditor())return;
-
-if(!confirm("削除しますか？"))return;
-
-
-const {error}=
-await db
-.from("family_app_v2_events")
-.delete()
-.eq("id",id);
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-loadEvents();
-
-}
-
-
-/* =====================================================
-   ICS
-===================================================== */
-
-function icsDate(date,time){
-
-return (
-date+
-"T"+
-(time||"00:00")+
-":00"
-)
-.replace(/[-:]/g,"");
-
-}
-
-
-function downloadOneICS(e){
-
-const start=
-icsDate(
-e.event_date,
-e.start_time
-);
-
-const end=
-icsDate(
-e.event_date,
-e.end_time||e.start_time
-);
-
-
-const text=
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//FamilyHome//JP
-BEGIN:VEVENT
-UID:${e.id}@familyhome
-DTSTART:${start}
-DTEND:${end}
-SUMMARY:${(e.title||"").replace(/\n/g," ")}
-DESCRIPTION:${(e.description||"").replace(/\n/g," ")}
-END:VEVENT
-END:VCALENDAR`;
-
-
-const blob=
-new Blob(
-[text],
-{
-type:"text/calendar;charset=utf-8"
-}
-);
-
-
-const url=
-URL.createObjectURL(blob);
-
-
-const a=
-document.createElement("a");
-
-a.href=url;
-
-a.download=
-(e.title||"family-event")+".ics";
-
-a.click();
-
-URL.revokeObjectURL(url);
-
-}
-
-
-async function downloadICS(){
-
-const {data}=
-await db
-.from("family_app_v2_events")
-.select("*")
-.eq("family_id",family.id);
-
-
-if(!data?.length){
-
-alert("予定がありません");
-return;
-
-}
-
-
-const parts=[
-"BEGIN:VCALENDAR",
-"VERSION:2.0",
-"PRODID:-//FamilyHome//JP"
-];
-
-
-data.forEach(e=>{
-
-parts.push("BEGIN:VEVENT");
-
-parts.push(
-"UID:"+e.id+"@familyhome"
-);
-
-parts.push(
-"DTSTART:"+
-icsDate(
-e.event_date,
-e.start_time
-)
-);
-
-parts.push(
-"DTEND:"+
-icsDate(
-e.event_date,
-e.end_time||e.start_time
-)
-);
-
-parts.push(
-"SUMMARY:"+
-(e.title||"").replace(/\n/g," ")
-);
-
-parts.push("END:VEVENT");
-
-});
-
-
-parts.push("END:VCALENDAR");
-
-
-const blob=
-new Blob(
-[parts.join("\r\n")],
-{
-type:"text/calendar;charset=utf-8"
-}
-);
-
-
-const url=
-URL.createObjectURL(blob);
-
-const a=
-document.createElement("a");
-
-a.href=url;
-
-a.download=
-"家族カレンダー.ics";
-
-a.click();
-
-URL.revokeObjectURL(url);
-
-}
-
-
-/* =====================================================
-   CHILDREN
-===================================================== */
-
-async function loadChildren(){
-
-loadChildNews();
-loadGames();
-loadViolations();
-loadChildPages();
-
-
-const edit=
-isEditor();
-
-
-$("childEditorButtons").innerHTML=
-edit
-?
-`
-<button
-class="primary"
-onclick="openChildNewsModal()">
-＋ ニュース追加
-</button>
-`
-:"";
-
-
-$("gameEditorButtons").innerHTML=
-edit
-?
-`
-<button
-class="primary"
-onclick="openGameModal()">
-＋ ゲーム予定追加
-</button>
-`
-:"";
-
-
-$("violationButtons").innerHTML=
-isParent()
-?
-`
-<button
-class="primary"
-onclick="openViolationModal()">
-＋ 違反を記録
-</button>
-`
-:"";
-
-
-$("childPageButtons").innerHTML=
-edit
-?
-`
-<button
-class="primary"
-onclick="openChildPageModal()">
-＋ お知らせ追加
-</button>
-`
-:"";
-
-}
-
-
-/* =====================================================
-   CHILD NEWS
-===================================================== */
-
-async function loadChildNews(){
-
-const {data}=
-await db
-.from("family_app_v2_child_news")
-.select("*")
-.eq("family_id",family.id)
-.order("created_at",{ascending:false});
-
-
-$("childNewsList").innerHTML=
-!data?.length
-?
-`
-<div class="empty">
-ニュースはありません
-</div>
-`
-:
-data.map(x=>`
-
-<div class="item">
-
-<div class="itemTitle">
-📰 ${esc(x.title)}
-</div>
-
-<p>
-${esc(x.body)}
-</p>
-
-${
-isEditor()
-?
-`
-<button
-class="danger"
-onclick="deleteRow(
-'family_app_v2_child_news',
-'${x.id}',
-loadChildNews
-)">
-削除
-</button>
-`
-:""
-}
-
-</div>
-
-`).join("");
-
-}
-
-
-function openChildNewsModal(){
-
-modalType="childNews";
-
-$("modalTitle").textContent=
-"📰 子どもニュース";
-
-
-$("modalContent").innerHTML=`
-
-<div class="field">
-<label>タイトル</label>
-<input id="childNewsTitle">
-</div>
-
-<div class="field">
-<label>内容</label>
-<textarea id="childNewsBody"></textarea>
-</div>
-
-`;
-
-openModal();
-
-}
-
-
-async function saveChildNews(){
-
-const {error}=
-await db
-.from("family_app_v2_child_news")
-.insert({
-
-family_id:family.id,
-title:$("childNewsTitle").value.trim(),
-body:$("childNewsBody").value.trim(),
-created_by:user.id
-
-});
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-closeModal();
-loadChildNews();
-
-}
-
-
-/* =====================================================
-   GAMES
-===================================================== */
-
-async function loadGames(){
-
-const {data}=
-await db
-.from("family_app_v2_games")
-.select("*")
-.eq("family_id",family.id)
-.order("game_date");
-
-
-$("gameList").innerHTML=
-!data?.length
-?
-`
-<div class="empty">
-ゲーム予定なし
-</div>
-`
-:
-data.map(x=>`
-
-<div class="item">
-
-<div class="itemTitle">
-🎮 ${esc(x.game_name)}
-</div>
-
-<div>
-参加：
-${esc(x.players)}
-</div>
-
-<div class="meta">
-${esc(x.game_date||"")}
-　
-${esc(x.start_time||"")}
-～
-${esc(x.end_time||"")}
-</div>
-
-${
-isEditor()
-?
-`
-<button
-class="danger"
-onclick="deleteRow(
-'family_app_v2_games',
-'${x.id}',
-loadGames
-)">
-削除
-</button>
-`
-:""
-}
-
-</div>
-
-`).join("");
-
-}
-
-
-function openGameModal(){
-
-modalType="game";
-
-$("modalTitle").textContent=
-"🎮 ゲーム予定";
-
-
-$("modalContent").innerHTML=`
-
-<div class="field">
-<label>ゲーム名</label>
-<input id="gameName">
-</div>
-
-<div class="field">
-<label>誰がゲームする？</label>
-<input
-id="gamePlayers"
-placeholder="例：太郎、次郎">
-</div>
-
-<div class="field">
-<label>日付</label>
-<input id="gameDate" type="date">
-</div>
-
-<div class="field">
-<label>開始</label>
-<input id="gameStart" type="time">
-</div>
-
-<div class="field">
-<label>終了</label>
-<input id="gameEnd" type="time">
-</div>
-
-`;
-
-openModal();
-
-}
-
-
-async function saveGame(){
-
-const {error}=
-await db
-.from("family_app_v2_games")
-.insert({
-
-family_id:family.id,
-game_name:$("gameName").value.trim(),
-players:$("gamePlayers").value.trim(),
-game_date:$("gameDate").value||null,
-start_time:$("gameStart").value||null,
-end_time:$("gameEnd").value||null,
-created_by:user.id
-
-});
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-closeModal();
-loadGames();
-
-}
-
-
-/* =====================================================
-   VIOLATIONS
-===================================================== */
-
-async function loadViolations(){
-
-const {data}=
-await db
-.from("family_app_v2_violations")
-.select("*")
-.eq("family_id",family.id)
-.order("created_at",{ascending:false});
-
-
-$("violationList").innerHTML=
-!data?.length
-?
-`
-<div class="empty">
-違反記録はありません
-</div>
-`
-:
-data.map(x=>`
-
-<div class="item">
-
-<div class="itemTitle">
-🚨 ${esc(x.child_name)}
-</div>
-
-<div>
-${esc(x.title)}
-</div>
-
-<p>
-${esc(x.description)}
-</p>
-
-${
-isParent()
-?
-`
-<button
-class="danger"
-onclick="deleteRow(
-'family_app_v2_violations',
-'${x.id}',
-loadViolations
-)">
-削除
-</button>
-`
-:""
-}
-
-</div>
-
-`).join("");
-
-}
-
-
-function openViolationModal(){
-
-modalType="violation";
-
-$("modalTitle").textContent=
-"🚨 違反を記録";
-
-
-$("modalContent").innerHTML=`
-
-<div class="field">
-<label>子どもの名前</label>
-<input id="violationChild">
-</div>
-
-<div class="field">
-<label>違反内容</label>
-<input id="violationTitle">
-</div>
-
-<div class="field">
-<label>詳細</label>
-<textarea id="violationBody"></textarea>
-</div>
-
-`;
-
-openModal();
-
-}
-
-
-async function saveViolation(){
-
-const {error}=
-await db
-.from("family_app_v2_violations")
-.insert({
-
-family_id:family.id,
-child_name:$("violationChild").value.trim(),
-title:$("violationTitle").value.trim(),
-description:$("violationBody").value.trim(),
-created_by:user.id
-
-});
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-closeModal();
-loadViolations();
-
-}
-
-
-/* =====================================================
-   CHILD PAGE
-===================================================== */
-
-async function loadChildPages(){
-
-const {data}=
-await db
-.from("family_app_v2_child_pages")
-.select("*")
-.eq("family_id",family.id)
-.order("created_at",{ascending:false});
-
-
-$("childPageList").innerHTML=
-!data?.length
-?
-`
-<div class="empty">
-お知らせはありません
-</div>
-`
-:
-data.map(x=>`
-
-<div class="item">
-
-<div class="itemTitle">
-📢 ${esc(x.title)}
-</div>
-
-<p>
-${esc(x.body)}
-</p>
-
-</div>
-
-`).join("");
-
-}
-
-
-function openChildPageModal(){
-
-modalType="childPage";
-
-$("modalTitle").textContent=
-"📢 子どもページのお知らせ";
-
-
-$("modalContent").innerHTML=`
-
-<div class="field">
-<label>タイトル</label>
-<input id="childPageTitle">
-</div>
-
-<div class="field">
-<label>内容</label>
-<textarea id="childPageBody"></textarea>
-</div>
-
-`;
-
-openModal();
-
-}
-
-
-async function saveChildPage(){
-
-const {error}=
-await db
-.from("family_app_v2_child_pages")
-.insert({
-
-family_id:family.id,
-title:$("childPageTitle").value.trim(),
-body:$("childPageBody").value.trim(),
-created_by:user.id
-
-});
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-closeModal();
-loadChildPages();
-
-}
-
-
-/* =====================================================
-   PRESIDENT
-===================================================== */
-
-async function loadPresident(){
-
-const {data:candidates}=
-await db
-.from("family_app_v2_candidates")
-.select("*")
-.eq("family_id",family.id)
-.order("votes",{ascending:false});
-
-
-if(!candidates?.length){
-
-$("presidentBox").innerHTML=
-`
-<div class="empty">
-まだ大統領はいません
-</div>
-`;
-
-$("candidateList").innerHTML=
-`
-<div class="empty">
-候補者はいません
-</div>
-`;
-
-return;
-
-}
-
-
-const winner=
-candidates.find(
-x=>x.is_president
-);
-
-
-if(winner){
-
-$("presidentBox").innerHTML=`
-
-<div class="successBox">
-
-<div class="stat">
-👑 ${esc(winner.candidate_name)}
-</div>
-
-<p>
-現在の子ども大統領です。
-</p>
-
-<b>
-子どもページ編集権限あり
-</b>
-
-</div>
-
-`;
-
-}else{
-
-$("presidentBox").innerHTML=
-`
-<div class="empty">
-まだ大統領が決まっていません
-</div>
-`;
-
-}
-
-
-const total=
-candidates.reduce(
-(a,b)=>a+(b.votes||0),
-0
-);
-
-
-$("candidateList").innerHTML=
-candidates.map(x=>{
-
-const rate=
-total
-?
-Math.round(
-x.votes/total*100
-)
-:
-0;
-
-
-return `
-
-<div class="item">
-
-<div class="itemTitle">
-
-${x.is_president?"👑 ":""}
-
-${esc(x.candidate_name)}
-
-</div>
-
-<div>
-${esc(x.slogan||"")}
-</div>
-
-<div class="stat">
-${rate}%
-</div>
-
-<div class="meta">
-${x.votes}票 / ${total}票
-</div>
-
-${
-member.role==="child"
-?
-`
-<button
-class="green"
-onclick="vote('${x.id}')">
-🗳️ 投票
-</button>
-`
-:""
-}
-
-${
-isParent()
-?
-`
-<button
-class="danger"
-onclick="deleteRow(
-'family_app_v2_candidates',
-'${x.id}',
-loadPresident
-)">
-削除
-</button>
-`
-:""
-}
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-/* =====================================================
-   VOTE
-===================================================== */
-
-async function vote(id){
-
-const {error}=
-await db.rpc(
-"family_app_v2_vote",
-{
-p_family_id:family.id,
-p_candidate_id:id
-}
-);
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-
-alert("投票しました！");
-
-await loadUser();
-
-}
-
-
-/* =====================================================
-   CANDIDATE
-===================================================== */
-
-function openCandidateModal(){
-
-modalType="candidate";
-
-$("modalTitle").textContent=
-"🗳️ 候補者を追加";
-
-
-$("modalContent").innerHTML=`
-
-<div class="field">
-
-<label>
-候補者名
-</label>
-
-<input
-id="candidateName"
-placeholder="家族に登録されている子ども">
-</div>
-
-<div class="field">
-
-<label>
-スローガン
-</label>
-
-<input
-id="candidateSlogan"
-placeholder="例：みんなが楽しい家族に！">
-
-</div>
-
-`;
-
-openModal();
-
-}
-
-
-async function saveCandidate(){
-
-const name=
-$("candidateName").value.trim();
-
-
-if(!name){
-
-alert("候補者名を入力してください");
-return;
-
-}
-
-
-const {data:children}=
-await db
-.from("family_app_v2_members")
-.select("*")
-.eq("family_id",family.id)
-.eq("role","child");
-
-
-const child=
-children?.find(
-x=>x.name===name
-);
-
-
-if(!child){
+if(
+currentMember.role!=="parent" &&
+currentMember.role!=="president"
+){
 
 alert(
-"家族に登録されている子どもの名前を入力してください。"
+"予定を追加できるのは親または大統領です。"
 );
 
 return;
@@ -2979,22 +1912,40 @@ return;
 }
 
 
-const {error}=
+const result=
 await db
-.from("family_app_v2_candidates")
+.from("family_app_v2_events")
 .insert({
 
-family_id:family.id,
-child_user_id:child.user_id,
-candidate_name:name,
-slogan:$("candidateSlogan").value.trim()
+family_id:currentFamily.id,
+
+title:
+$("eventTitle")
+.value
+.trim(),
+
+event_date:
+$("eventDate")
+.value,
+
+start_time:
+$("eventStart")
+.value||null,
+
+end_time:
+$("eventEnd")
+.value||null,
+
+created_by:
+currentUser.id
 
 });
 
 
-if(error){
+if(result.error){
 
-alert(error.message);
+alert(result.error.message);
+
 return;
 
 }
@@ -3002,20 +1953,14 @@ return;
 
 closeModal();
 
-loadPresident();
+loadEvents();
 
 }
 
 
-/* =====================================================
+/* =================================
    MODAL
-===================================================== */
-
-function openModal(){
-
-$("modal").style.display="flex";
-
-}
+================================= */
 
 function closeModal(){
 
@@ -3028,123 +1973,79 @@ modalType=null;
 
 async function saveModal(){
 
-if(modalType==="event")
-return saveEvent();
+if(modalType==="event"){
 
-if(modalType==="childNews")
-return saveChildNews();
+await saveEvent();
 
-if(modalType==="game")
-return saveGame();
-
-if(modalType==="violation")
-return saveViolation();
-
-if(modalType==="childPage")
-return saveChildPage();
-
-if(modalType==="candidate")
-return saveCandidate();
+}
 
 }
 
 
-/* =====================================================
-   DELETE
-===================================================== */
-
-async function deleteRow(
-table,
-id,
-reload
-){
-
-if(!isEditor())
-return;
-
-
-if(!confirm("削除しますか？"))
-return;
-
-
-const {error}=
-await db
-.from(table)
-.delete()
-.eq("id",id);
-
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-
-reload();
-
-}
-
-
-/* =====================================================
+/* =================================
    LOGOUT
-===================================================== */
+================================= */
 
 async function logout(){
 
 await db.auth.signOut();
 
-user=null;
-family=null;
-member=null;
+currentUser=null;
+currentMember=null;
+currentFamily=null;
 
 showLogin();
 
 }
 
 
-/* =====================================================
+/* =================================
+   SHOW LOGIN
+================================= */
+
+function showLogin(){
+
+$("app").style.display="none";
+
+$("auth").style.display="flex";
+
+changeMode("login");
+
+}
+
+
+/* =================================
    AUTH STATE
-===================================================== */
+================================= */
 
 db.auth.onAuthStateChange(
-async(event,session)=>{
+function(event,session){
 
 if(event==="SIGNED_OUT"){
 
 showLogin();
-
-return;
-
-}
-
-if(session){
-
-setTimeout(
-()=>{
-loadUser();
-},
-0
-);
 
 }
 
 });
 
 
-/* =====================================================
+/* =================================
    START
-===================================================== */
+================================= */
 
-(async()=>{
+(async function(){
 
-const {data}=
+const session=
 await db.auth.getSession();
 
-if(data.session){
 
-await loadUser();
+if(session.data.session){
+
+currentUser=
+session.data.session.user;
+
+await loadAccount();
 
 }else{
 
