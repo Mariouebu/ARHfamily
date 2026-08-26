@@ -5,15 +5,12 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
+<meta name="viewport"
 content="width=device-width,initial-scale=1">
 
 <title>家族管理アプリ</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
@@ -23,125 +20,68 @@ content="width=device-width,initial-scale=1">
 
 body{
  margin:0;
- font-family:
- Arial,
- "Noto Sans JP",
- sans-serif;
-
+ font-family:Arial,"Noto Sans JP",sans-serif;
  background:#f3f6fb;
- color:#182235;
-}
-
-button,
-input,
-textarea,
-select{
- font:inherit;
-}
-
-button{
- cursor:pointer;
-}
-
-.hidden{
- display:none!important;
+ color:#172033;
 }
 
 header{
-
  height:65px;
-
  background:white;
-
- display:flex;
-
- align-items:center;
-
- justify-content:space-between;
-
- padding:0 20px;
-
  border-bottom:1px solid #ddd;
-
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 20px;
  position:sticky;
-
  top:0;
-
- z-index:20;
+ z-index:10;
 }
 
 .logo{
- font-size:20px;
  font-weight:900;
+ font-size:20px;
 }
 
-.headerRight{
- display:flex;
- align-items:center;
- gap:10px;
+button{
+ border:0;
+ border-radius:10px;
+ padding:11px 15px;
+ cursor:pointer;
+ font-weight:bold;
 }
 
 .logout{
-
- border:0;
-
  background:#edf1f7;
-
- padding:9px 13px;
-
- border-radius:10px;
 }
 
 .layout{
-
  display:flex;
-
- min-height:
- calc(100vh - 65px);
+ min-height:calc(100vh - 65px);
 }
 
 nav{
-
  width:230px;
-
  background:#111827;
-
  padding:12px;
 }
 
 nav button{
-
  width:100%;
-
- border:0;
-
- background:transparent;
-
- color:#dbe3ef;
-
- padding:12px;
-
- margin-bottom:5px;
-
- border-radius:10px;
-
+ margin-bottom:6px;
  text-align:left;
+ background:transparent;
+ color:white;
 }
 
 nav button:hover,
 nav button.active{
-
- background:#293548;
-
- color:white;
+ background:#334155;
 }
 
 main{
-
  flex:1;
-
- padding:25px;
-
+ padding:24px;
  max-width:1300px;
 }
 
@@ -154,33 +94,22 @@ main{
 }
 
 .card{
-
  background:white;
-
- padding:20px;
-
  border-radius:18px;
-
+ padding:20px;
  margin-bottom:18px;
-
- box-shadow:
- 0 3px 15px rgba(0,0,0,.06);
+ box-shadow:0 3px 15px rgba(0,0,0,.06);
 }
 
 .grid{
-
  display:grid;
-
  grid-template-columns:
- repeat(auto-fit,minmax(220px,1fr));
-
+ repeat(auto-fit,minmax(210px,1fr));
  gap:15px;
 }
 
 .stat{
-
  font-size:30px;
-
  font-weight:900;
 }
 
@@ -189,28 +118,17 @@ main{
 }
 
 .field label{
-
  display:block;
-
  font-weight:bold;
-
  margin-bottom:6px;
 }
 
-.field input,
-.field textarea,
-.field select{
-
+input,textarea,select{
  width:100%;
-
  padding:11px;
-
- border:
- 1px solid #d5ddea;
-
+ border:1px solid #d5ddea;
  border-radius:10px;
-
- background:white;
+ font:inherit;
 }
 
 textarea{
@@ -218,68 +136,48 @@ textarea{
 }
 
 .primary{
-
- border:0;
-
  background:#536dfe;
-
  color:white;
-
- padding:11px 17px;
-
- border-radius:10px;
-
- font-weight:bold;
 }
 
 .green{
  background:#16a34a;
+ color:white;
 }
 
 .red{
  background:#dc2626;
+ color:white;
 }
 
 .orange{
  background:#f59e0b;
+ color:white;
 }
 
 .item{
-
  background:#f8fafc;
-
  border:1px solid #e1e7ef;
-
  padding:15px;
-
  border-radius:13px;
-
  margin-top:10px;
 }
 
 .itemTitle{
-
- font-size:17px;
-
  font-weight:900;
+ font-size:17px;
 }
 
 .meta{
-
- color:#697586;
-
+ color:#687386;
  font-size:13px;
-
  margin-top:5px;
 }
 
 .amount{
-
  font-size:21px;
-
  font-weight:900;
-
- margin-top:7px;
+ margin-top:8px;
 }
 
 .plus{
@@ -290,87 +188,50 @@ textarea{
  color:#dc2626;
 }
 
-.summary{
-
- display:grid;
-
- grid-template-columns:
- repeat(auto-fit,minmax(180px,1fr));
-
- gap:12px;
-}
-
-.summaryBox{
-
- background:#f8fafc;
-
- padding:15px;
-
- border-radius:13px;
-}
-
-.chartBox{
-
- height:320px;
-
- position:relative;
-}
-
-.empty{
-
- padding:20px;
-
- text-align:center;
-
- color:#7b8495;
-}
-
-.childHero{
-
- background:
- linear-gradient(135deg,#6366f1,#8b5cf6);
-
- color:white;
-
+.hero{
  padding:25px;
-
  border-radius:20px;
-
+ background:linear-gradient(135deg,#4f46e5,#8b5cf6);
+ color:white;
  margin-bottom:18px;
 }
 
-.childHero h1{
- margin-top:0;
+.president{
+ border:3px solid #f59e0b;
+ background:#fffbeb;
 }
 
-.badge{
-
- display:inline-block;
-
- padding:5px 9px;
-
- border-radius:20px;
-
- background:#eef2ff;
-
- color:#4338ca;
-
- font-size:12px;
-
- font-weight:bold;
+.candidate{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ padding:15px;
+ border:1px solid #ddd;
+ border-radius:13px;
+ margin-top:10px;
 }
 
-.scheduleDate{
-
- font-size:18px;
-
+.support{
+ font-size:24px;
  font-weight:900;
 }
 
-.scheduleTime{
+.game{
+ border-left:5px solid #6366f1;
+}
 
- color:#536dfe;
+.hidden{
+ display:none!important;
+}
 
+.badge{
+ display:inline-block;
+ padding:5px 9px;
+ border-radius:20px;
+ background:#eef2ff;
+ color:#4338ca;
+ font-size:12px;
  font-weight:bold;
 }
 
@@ -381,32 +242,18 @@ textarea{
  }
 
  nav{
-
   width:100%;
-
   display:flex;
-
   overflow-x:auto;
  }
 
  nav button{
-
-  min-width:120px;
-
+  min-width:130px;
   white-space:nowrap;
  }
 
  main{
-
   padding:13px;
- }
-
- header{
-  padding:0 12px;
- }
-
- .headerRight span{
-  display:none;
  }
 
 }
@@ -417,16 +264,15 @@ textarea{
 
 <body>
 
-
 <header>
 
 <div class="logo">
 👨‍👩‍👧 家族管理
 </div>
 
-<div class="headerRight">
+<div>
 
-<span id="familyNameHeader"></span>
+<span id="familyName"></span>
 
 <button
 class="logout"
@@ -443,71 +289,38 @@ onclick="logout()">
 
 <div class="layout">
 
-
 <nav>
 
-<button
-class="active"
-onclick="showPage('home',this)">
-
+<button class="active"
+onclick="page('home',this)">
 🏠 ホーム
-
 </button>
 
-
 <button
-onclick="showPage('members',this)">
-
+onclick="page('members',this)">
 👨‍👩‍👧 家族
-
 </button>
 
-
 <button
-onclick="showPage('child',this)">
-
+id="childNav"
+onclick="page('child',this)">
 🧒 子どもページ
-
 </button>
 
-
 <button
-onclick="showPage('schedule',this)">
-
-📅 予定表
-
+id="parentNav"
+onclick="page('parent',this)">
+👨 親ページ
 </button>
 
-
 <button
-onclick="showPage('news',this)">
-
-📰 家族ニュース
-
+onclick="page('games',this)">
+🎮 今日のゲーム
 </button>
 
-
 <button
-onclick="showPage('law',this)">
-
-⚖️ 家族の法律
-
-</button>
-
-
-<button
-onclick="showPage('fine',this)">
-
-💰 罰金
-
-</button>
-
-
-<button
-onclick="showPage('allowance',this)">
-
-🪙 お小遣い
-
+onclick="page('president',this)">
+🗳️ 子ども大統領
 </button>
 
 </nav>
@@ -516,9 +329,7 @@ onclick="showPage('allowance',this)">
 <main>
 
 
-<!-- =========================
- HOME
-========================= -->
+<!-- HOME -->
 
 <section
 id="home"
@@ -526,9 +337,7 @@ class="page active">
 
 <h1>🏠 ホーム</h1>
 
-
 <div class="grid">
-
 
 <div class="card">
 
@@ -537,21 +346,9 @@ class="page active">
 <div
 id="homeFamily"
 class="stat">
-
-読み込み中
-
-</div>
-
-<div class="meta">
-
-家族コード：
-
-<span id="familyCode"></span>
-
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -560,41 +357,30 @@ class="stat">
 <div
 id="homeUser"
 class="stat">
-
 </div>
 
-<div
-id="homeRole">
+<div id="homeRole"></div>
 
 </div>
-
-</div>
-
 
 <div class="card">
 
-<h2>📅 今日の予定</h2>
+<h2>🏆 子ども大統領</h2>
 
 <div
-id="todayCount"
+id="homePresident"
 class="stat">
-
-0
-
+未決定
 </div>
 
 </div>
-
 
 </div>
 
 </section>
 
 
-
-<!-- =========================
- MEMBERS
-========================= -->
+<!-- MEMBERS -->
 
 <section
 id="members"
@@ -611,220 +397,174 @@ class="page">
 </section>
 
 
+<!-- PARENT -->
 
-<!-- =========================
- CHILD PAGE
-========================= -->
+<section
+id="parent"
+class="page">
+
+<div class="hero">
+
+<h1>👨 親ページ</h1>
+
+<p>
+家族全体を管理できます。
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>📢 子どもページの管理</h2>
+
+<div class="field">
+
+<label>
+ページタイトル
+</label>
+
+<input
+id="childTitle">
+
+</div>
+
+<div class="field">
+
+<label>
+メッセージ
+</label>
+
+<textarea
+id="childMessage"></textarea>
+
+</div>
+
+<button
+class="primary"
+onclick="saveChildPage()">
+
+💾 子どもページを保存
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CHILD -->
 
 <section
 id="child"
 class="page">
 
 <div
-class="childHero">
+id="childHero"
+class="hero">
 
 <h1>🧒 子どもページ</h1>
 
-<div id="childWelcome"></div>
+<p id="childMessage"></p>
 
 </div>
 
 
 <div
-id="childOnlyContent">
+id="presidentEdit"
+class="card hidden">
 
+<h2>🏆 子ども大統領</h2>
 
-<div class="grid">
+<p>
+あなたは現在、支持率1位です。
+</p>
 
+<div class="field">
 
-<div class="card">
+<label>
+ページタイトル
+</label>
 
-<h2>🪙 お小遣い残高</h2>
-
-<div
-id="childBalance"
-class="stat">
-
-¥0
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>💰 罰金</h2>
-
-<div
-id="childFine"
-class="stat">
-
-¥0
+<input id="presidentTitle">
 
 </div>
 
-</div>
+<div class="field">
 
+<label>
+子どもページのメッセージ
+</label>
 
-<div class="card">
-
-<h2>🛍️ 今まで使った金額</h2>
-
-<div
-id="childSpent"
-class="stat">
-
-¥0
+<textarea id="presidentMessage"></textarea>
 
 </div>
 
-</div>
+<button
+class="primary orange"
+onclick="savePresidentPage()">
+
+✏️ 子どもページを編集
+
+</button>
 
 </div>
 
 
 <div class="card">
 
-<h2>📅 自分の予定</h2>
+<h2>🎮 今日のゲーム</h2>
 
-<div id="childSchedules"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📰 家族ニュース</h2>
-
-<div id="childNews"></div>
+<div id="childGames"></div>
 
 </div>
 
-
-<div class="card">
-
-<h2>📈 お小遣いグラフ</h2>
-
-<div class="chartBox">
-
-<canvas id="childMoneyChart"></canvas>
-
-</div>
-
-</div>
-
-
-</div>
 
 </section>
 
 
-
-<!-- =========================
- SCHEDULE
-========================= -->
+<!-- GAMES -->
 
 <section
-id="schedule"
+id="games"
 class="page">
 
-<h1>📅 家族予定表</h1>
+<h1>🎮 今日のゲーム</h1>
 
+<div
+id="gameInput"
+class="card">
 
-<div class="card">
-
-<h2>➕ 予定を追加</h2>
-
+<h2>➕ 今日やるゲームを登録</h2>
 
 <div class="field">
 
 <label>
-予定名
+ゲーム名
 </label>
 
 <input
-id="scheduleTitle"
-placeholder="例：家族で買い物">
+id="gameName"
+placeholder="例：マリオカート">
 
 </div>
 
-
 <div class="field">
 
 <label>
-日付
+開始時間
 </label>
 
 <input
-id="scheduleDate"
-type="date">
-
-</div>
-
-
-<div class="field">
-
-<label>
-時間
-</label>
-
-<input
-id="scheduleTime"
+id="gameTime"
 type="time">
 
 </div>
 
-
-<div class="field">
-
-<label>
-場所
-</label>
-
-<input
-id="scheduleLocation"
-placeholder="例：イオン">
-
-</div>
-
-
-<div class="field">
-
-<label>
-内容
-</label>
-
-<textarea
-id="scheduleDescription"
-placeholder="予定の内容"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label>
-誰の予定？
-
-</label>
-
-<select id="scheduleMember">
-
-<option value="">
-家族全員
-</option>
-
-</select>
-
-</div>
-
-
 <button
 class="primary"
-onclick="addSchedule()">
+onclick="addGame()">
 
-📅 予定を追加
+🎮 登録する
 
 </button>
 
@@ -833,395 +573,50 @@ onclick="addSchedule()">
 
 <div class="card">
 
-<h2>📋 予定一覧</h2>
+<h2>📋 今日の予定</h2>
 
-<div id="scheduleList"></div>
+<div id="gameList"></div>
 
 </div>
 
 </section>
 
 
-
-<!-- =========================
- NEWS
-========================= -->
+<!-- PRESIDENT -->
 
 <section
-id="news"
+id="president"
 class="page">
 
-<h1>📰 家族ニュース</h1>
+<h1>🗳️ 子ども大統領</h1>
 
+<div class="card">
+
+<h2>🏆 現在の子ども大統領</h2>
+
+<div id="presidentWinner"></div>
+
+</div>
 
 <div
-id="parentNews"
+id="voteArea"
 class="card">
 
-<h2>➕ ニュース追加</h2>
-
-<div class="field">
-
-<label>タイトル</label>
-
-<input
-id="newsTitle">
-
-</div>
-
-<div class="field">
-
-<label>内容</label>
-
-<textarea
-id="newsContent"></textarea>
-
-</div>
-
-<button
-class="primary"
-onclick="addNews()">
-
-ニュースを追加
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div id="newsList"></div>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
- LAW
-========================= -->
-
-<section
-id="law"
-class="page">
-
-<h1>⚖️ 家族の法律</h1>
-
-
-<div
-id="parentLaw"
-class="card">
-
-<h2>➕ 法律を追加</h2>
-
-<div class="field">
-
-<label>タイトル</label>
-
-<input
-id="lawTitle">
-
-</div>
-
-<div class="field">
-
-<label>内容</label>
-
-<textarea
-id="lawContent"></textarea>
-
-</div>
-
-<div class="field">
-
-<label>違反時の罰金</label>
-
-<input
-id="lawFine"
-type="number"
-min="0">
-
-</div>
-
-<button
-class="primary"
-onclick="addLaw()">
-
-法律を追加
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div id="lawList"></div>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
- FINE
-========================= -->
-
-<section
-id="fine"
-class="page">
-
-<h1>💰 罰金</h1>
-
-
-<div
-id="parentFine"
-class="card">
-
-<h2>➕ 罰金を登録</h2>
-
-
-<div class="field">
-
-<label>
-対象
-</label>
-
-<select id="fineMember"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>
-金額
-</label>
-
-<input
-id="fineAmount"
-type="number"
-min="1">
-
-</div>
-
-
-<div class="field">
-
-<label>
-理由
-</label>
-
-<input
-id="fineReason">
-
-</div>
-
-
-<button
-class="primary red"
-onclick="addFine()">
-
-罰金を登録
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>📈 罰金の推移</h2>
-
-<div class="chartBox">
-
-<canvas id="fineChart"></canvas>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📋 罰金一覧</h2>
-
-<div id="fineList"></div>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
- ALLOWANCE
-========================= -->
-
-<section
-id="allowance"
-class="page">
-
-<h1>🪙 お小遣い</h1>
-
-
-<div
-id="parentAllowance"
-class="card">
-
-<h2>➕ お小遣いを渡す</h2>
-
-
-<div class="field">
-
-<label>誰に？</label>
-
-<select id="allowanceMember"></select>
-
-</div>
-
-
-<div class="field">
-
-<label>金額</label>
-
-<input
-id="allowanceAmount"
-type="number"
-min="1">
-
-</div>
-
-
-<div class="field">
-
-<label>理由</label>
-
-<input
-id="allowanceReason"
-placeholder="お手伝いをした">
-
-</div>
-
-
-<button
-class="primary green"
-onclick="addAllowance()">
-
-お小遣いを追加
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>📊 お小遣い推移</h2>
-
-<div class="chartBox">
-
-<canvas id="allowanceChart"></canvas>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📊 支出推移</h2>
-
-<div class="chartBox">
-
-<canvas id="spendingChart"></canvas>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📊 残高推移</h2>
-
-<div class="chartBox">
-
-<canvas id="balanceChart"></canvas>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>💰 現在の残高</h2>
-
-<div
-id="allowanceSummary"
-class="summary">
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>🛍️ お小遣いを使った</h2>
+<h2>🗳️ 投票</h2>
 
 <p>
-子どもは自分が使ったお金を記録できます。
+子どもは1人1票です。
 </p>
 
-
-<div class="field">
-
-<label>
-何に使った？
-</label>
-
-<input
-id="spendingItem"
-placeholder="例：ゲーム">
+<div id="candidateList"></div>
 
 </div>
-
-
-<div class="field">
-
-<label>
-いくら？
-</label>
-
-<input
-id="spendingAmount"
-type="number"
-min="1">
-
-</div>
-
-
-<button
-class="primary"
-onclick="addSpending()">
-
-🛍️ 支出を記録
-
-</button>
-
-</div>
-
 
 <div class="card">
 
-<h2>📋 履歴</h2>
+<h2>📊 支持率</h2>
 
-<div id="allowanceList"></div>
+<div id="supportList"></div>
 
 </div>
 
@@ -1233,12 +628,12 @@ onclick="addSpending()">
 </div>
 
 
-
 <script>
 
-/* =========================================
+
+/* ===============================
  SUPABASE
-========================================= */
+================================ */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -1253,89 +648,74 @@ supabase.createClient(
 );
 
 
-/* =========================================
+/* ===============================
  STATE
-========================================= */
+================================ */
 
-let user = null;
+let user=null;
 
-let member = null;
+let member=null;
 
-let family = null;
+let family=null;
 
-let members = [];
+let members=[];
 
-let fineChart = null;
+let votes=[];
 
-let allowanceChart = null;
-
-let spendingChart = null;
-
-let balanceChart = null;
-
-let childMoneyChart = null;
+let pageData=null;
 
 
-/* =========================================
- UTILS
-========================================= */
+/* ===============================
+ UTIL
+================================ */
 
 function $(id){
-
  return document.getElementById(id);
-
 }
 
-
-function esc(value){
-
- return String(value ?? "")
+function esc(x){
+ return String(x ?? "")
  .replaceAll("&","&amp;")
  .replaceAll("<","&lt;")
  .replaceAll(">","&gt;")
  .replaceAll('"',"&quot;")
  .replaceAll("'","&#039;");
-
 }
 
 
-/* =========================================
+/* ===============================
  PAGE
-========================================= */
+================================ */
 
-function showPage(id,button){
+function page(id,btn){
 
  document
  .querySelectorAll(".page")
- .forEach(p=>{
-  p.classList.remove("active");
+ .forEach(x=>{
+  x.classList.remove("active");
  });
-
 
  $(id).classList.add("active");
 
-
  document
  .querySelectorAll("nav button")
- .forEach(b=>{
-  b.classList.remove("active");
+ .forEach(x=>{
+  x.classList.remove("active");
  });
 
-
- button.classList.add("active");
+ btn.classList.add("active");
 
 }
 
 
-/* =========================================
+/* ===============================
  START
-========================================= */
+================================ */
 
 async function start(){
 
  const session =
  await db.auth.getSession();
-
 
  if(!session.data.session){
 
@@ -1345,12 +725,11 @@ async function start(){
 
  }
 
-
  user =
  session.data.session.user;
 
 
- const result =
+ const m =
  await db
  .from("family_app_v2_members")
  .select("*")
@@ -1358,19 +737,15 @@ async function start(){
  .maybeSingle();
 
 
- if(result.error){
+ if(m.error){
 
-  alert(
-   "家族情報の取得に失敗しました。\n"+
-   result.error.message
-  );
+  alert(m.error.message);
 
   return;
 
  }
 
-
- if(!result.data){
+ if(!m.data){
 
   alert(
    "このアカウントはまだ家族に参加していません。"
@@ -1381,11 +756,10 @@ async function start(){
  }
 
 
- member =
- result.data;
+ member=m.data;
 
 
- const familyResult =
+ const f =
  await db
  .from("family_app_v2_families")
  .select("*")
@@ -1393,20 +767,19 @@ async function start(){
  .single();
 
 
- if(familyResult.error){
+ if(f.error){
 
-  alert(familyResult.error.message);
+  alert(f.error.message);
 
   return;
 
  }
 
 
- family =
- familyResult.data;
+ family=f.data;
 
 
- $("familyNameHeader").textContent =
+ $("familyName").textContent =
  family.family_name;
 
 
@@ -1414,75 +787,120 @@ async function start(){
  family.family_name;
 
 
- $("familyCode").textContent =
- family.family_code;
-
-
  $("homeUser").textContent =
  member.name;
 
 
  $("homeRole").textContent =
- member.role === "parent"
- ? "👨‍👩‍👧 親"
+ member.role==="parent"
+ ? "👨 親"
  : "🧒 子ども";
 
 
- $("childWelcome").textContent =
- `${member.name}さんのページ`;
+ /*
+  親と子どものページを分離
+ */
 
+ if(member.role==="parent"){
 
- if(member.role !== "parent"){
-
-  $("parentFine")
+  $("childNav")
    .classList.add("hidden");
 
-  $("parentAllowance")
+  $("parentNav")
+   .classList.remove("hidden");
+
+ }else{
+
+  $("parentNav")
    .classList.add("hidden");
 
-  $("parentNews")
-   .classList.add("hidden");
-
-  $("parentLaw")
-   .classList.add("hidden");
+  $("childNav")
+   .classList.remove("hidden");
 
  }
 
 
  await loadMembers();
 
- await loadNews();
-
- await loadLaws();
-
- await loadSchedules();
-
- await loadFine();
-
- await loadAllowance();
-
  await loadChildPage();
+
+ await loadGames();
+
+ await loadPresident();
 
 }
 
 
-/* =========================================
+/* ===============================
  MEMBERS
-========================================= */
+================================ */
 
 async function loadMembers(){
 
- /*
-  既存の家族メンバー取得RPCを使用
- */
+ const result =
+ await db
+ .from("family_app_v2_members")
+ .select("*")
+ .eq("family_id",family.id);
+
+
+ if(result.error){
+
+  console.error(result.error);
+
+  return;
+
+ }
+
+ members=result.data || [];
+
+
+ $("membersList").innerHTML =
+ members.map(m=>`
+
+ <div class="item">
+
+  <div class="itemTitle">
+
+   ${
+    m.role==="parent"
+    ? "👨 "
+    : "🧒 "
+   }
+
+   ${esc(m.name)}
+
+  </div>
+
+  <div class="meta">
+
+   ${
+    m.role==="parent"
+    ? "親"
+    : "子ども"
+   }
+
+  </div>
+
+ </div>
+
+ `).join("");
+
+}
+
+
+/* ===============================
+ CHILD PAGE
+================================ */
+
+async function loadChildPage(){
 
  const result =
- await db.rpc(
-  "family_app_v2_get_members",
-  {
-   p_family_id:family.id
-  }
- );
+ await db
+ .from("family_app_v2_child_page")
+ .select("*")
+ .eq("family_id",family.id)
+ .maybeSingle();
 
 
  if(result.error){
@@ -1494,143 +912,137 @@ async function loadMembers(){
  }
 
 
- members =
- result.data || [];
+ pageData=result.data;
 
 
- $("membersList").innerHTML =
- members.map(m=>`
+ if(!pageData){
 
- <div class="item">
+  /*
+   最初のページ
+  */
 
-  <div class="itemTitle">
+  const insert =
+  await db
+  .from("family_app_v2_child_page")
+  .insert({
 
-   ${m.role === "parent"
-    ? "👨‍👩‍👧"
-    : "🧒"}
+   family_id:family.id,
 
-   ${esc(m.name)}
+   title:"子どもページ",
 
-  </div>
+   message:"みんなの子どもページです。"
 
-  <div class="meta">
-
-   ${m.role === "parent"
-    ? "親"
-    : "子ども"}
-
-  </div>
-
- </div>
-
- `).join("");
+  })
+  .select()
+  .single();
 
 
- const children =
- members.filter(
-  m=>m.role !== "parent"
- );
+  if(!insert.error){
+
+   pageData=insert.data;
+
+  }
+
+ }
 
 
- $("fineMember").innerHTML =
- children.map(m=>`
-
- <option value="${m.id}">
- ${esc(m.name)}
- </option>
-
- `).join("");
+ if(!pageData)
+  return;
 
 
- $("allowanceMember").innerHTML =
- children.map(m=>`
-
- <option value="${m.id}">
- ${esc(m.name)}
- </option>
-
- `).join("");
+ $("childHero")
+ .querySelector("h1")
+ .textContent =
+ pageData.title;
 
 
- $("scheduleMember").innerHTML =
- `<option value="">
- 家族全員
- </option>`
- +
- members.map(m=>`
+ $("childMessage").textContent =
+ pageData.message;
 
- <option value="${m.id}">
- ${esc(m.name)}
- </option>
 
- `).join("");
+ /*
+  親なら親ページに情報を表示
+ */
+
+ if(member.role==="parent"){
+
+  $("childTitle").value =
+   pageData.title || "";
+
+  $("childMessage").value =
+   pageData.message || "";
+
+ }
+
 
 }
 
 
-/* =========================================
- SCHEDULE
-========================================= */
+/* ===============================
+ PARENT EDIT
+================================ */
 
-async function addSchedule(){
+async function saveChildPage(){
 
- const title =
- $("scheduleTitle").value.trim();
+ if(member.role!=="parent"){
 
- const date =
- $("scheduleDate").value;
-
- const time =
- $("scheduleTime").value || null;
-
- const location =
- $("scheduleLocation").value.trim();
-
- const description =
- $("scheduleDescription").value.trim();
-
- const memberId =
- $("scheduleMember").value || null;
-
-
- if(!title || !date){
-
-  alert("予定名と日付を入力してください。");
+  alert("親だけが編集できます。");
 
   return;
 
  }
 
 
+ const title =
+ $("childTitle").value.trim();
+
+ const message =
+ $("childMessage").value.trim();
+
+
  const result =
  await db
- .from("family_app_v2_schedules")
- .insert({
+ .from("family_app_v2_child_page")
+ .update({
 
-  family_id:family.id,
+  title:title || "子どもページ",
 
-  member_id:memberId,
+  message:message,
 
-  title:title,
+  updated_by:user.id,
 
-  event_date:date,
+  updated_at:new Date().toISOString()
 
-  event_time:time,
-
-  location:location,
-
-  description:description,
-
-  created_by:user.id
-
- });
+ })
+ .eq("family_id",family.id);
 
 
  if(result.error){
 
+  alert(result.error.message);
+
+  return;
+
+ }
+
+
+ alert("子どもページを更新しました。");
+
+ await loadChildPage();
+
+}
+
+
+/* ===============================
+ GAMES
+================================ */
+
+async function addGame(){
+
+ if(member.role==="parent"){
+
   alert(
-   "予定の追加に失敗しました。\n"+
-   result.error.message
+   "ゲーム予定は子どもページから子どもが登録できます。"
   );
 
   return;
@@ -1638,58 +1050,16 @@ async function addSchedule(){
  }
 
 
- $("scheduleTitle").value="";
+ const name =
+ $("gameName").value.trim();
 
- $("scheduleDate").value="";
-
- $("scheduleTime").value="";
-
- $("scheduleLocation").value="";
-
- $("scheduleDescription").value="";
-
- $("scheduleMember").value="";
+ const time =
+ $("gameTime").value || null;
 
 
- await loadSchedules();
+ if(!name){
 
-
- alert("予定を追加しました！");
-
-}
-
-
-async function loadSchedules(){
-
- const result =
- await db
- .from("family_app_v2_schedules")
- .select("*")
- .eq("family_id",family.id)
- .order("event_date",{ascending:true})
- .order("event_time",{ascending:true});
-
-
- if(result.error){
-
-  $("scheduleList").innerHTML =
-  `<div class="empty">
-   ${esc(result.error.message)}
-  </div>`;
-
-  return;
-
- }
-
-
- if(!result.data.length){
-
-  $("scheduleList").innerHTML =
-  `<div class="empty">
-   予定はありません。
-  </div>`;
-
-  $("todayCount").textContent="0";
+  alert("ゲーム名を入力してください。");
 
   return;
 
@@ -1702,1427 +1072,624 @@ async function loadSchedules(){
  .slice(0,10);
 
 
- const todayEvents =
- result.data.filter(
-  x=>x.event_date === today
- );
+ const result =
+ await db
+ .from("family_app_v2_game_schedule")
+ .insert({
+
+  family_id:family.id,
+
+  member_id:member.id,
+
+  game_name:name,
+
+  game_time:time,
+
+  game_date:today
+
+ });
 
 
- $("todayCount").textContent =
- todayEvents.length;
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
 
 
- $("scheduleList").innerHTML =
- result.data.map(s=>{
+ $("gameName").value="";
 
-  const person =
+ $("gameTime").value="";
+
+
+ await loadGames();
+
+ alert("今日のゲーム予定を登録しました！");
+
+}
+
+
+async function loadGames(){
+
+ const today =
+ new Date()
+ .toISOString()
+ .slice(0,10);
+
+
+ const result =
+ await db
+ .from("family_app_v2_game_schedule")
+ .select("*")
+ .eq("family_id",family.id)
+ .eq("game_date",today)
+ .order("game_time");
+
+
+ if(result.error){
+
+  console.error(result.error);
+
+  return;
+
+ }
+
+
+ const data=result.data || [];
+
+
+ $("gameList").innerHTML =
+ data.length
+ ? data.map(g=>{
+
+   const m=
    members.find(
-    m=>m.id === s.member_id
+    x=>x.id===g.member_id
    );
 
 
-  return`
+   return`
 
-  <div class="item">
+   <div class="item game">
 
-   <div class="scheduleDate">
+    <div class="itemTitle">
 
-    📅 ${esc(s.event_date)}
+     🧒 ${esc(
+      m?.name || "子ども"
+     )}
+
+    </div>
+
+    <div>
+
+     🎮 ${esc(g.game_name)}
+
+    </div>
+
+    ${
+     g.game_time
+     ? `<div class="meta">
+         ⏰ ${esc(g.game_time)}
+        </div>`
+     : ""
+    }
+
+    ${
+     g.member_id===member.id
+     ? `<button
+          class="red"
+          style="color:white;margin-top:10px"
+          onclick="deleteGame('${g.id}')">
+          削除
+        </button>`
+     : ""
+    }
 
    </div>
 
-   ${
-    s.event_time
-    ? `<div class="scheduleTime">
-        🕐 ${esc(s.event_time)}
-       </div>`
-    :""
-   }
+   `;
 
-   <div class="itemTitle">
+  }).join("")
+  : `<div class="meta">
+      今日のゲーム予定はありません。
+     </div>`;
 
-    ${esc(s.title)}
+
+ $("childGames").innerHTML =
+ data.length
+ ? data.map(g=>{
+
+   const m=
+   members.find(
+    x=>x.id===g.member_id
+   );
+
+   return`
+
+   <div class="item game">
+
+    <b>
+     🧒 ${esc(m?.name)}
+    </b>
+
+    <div>
+     🎮 ${esc(g.game_name)}
+    </div>
+
+    ${
+     g.game_time
+     ? `<div class="meta">
+        ⏰ ${esc(g.game_time)}
+        </div>`
+     :""
+    }
 
    </div>
 
-   ${
-    person
-    ? `<div class="meta">
-       👤 ${esc(person.name)}
-       </div>`
-    : `<div class="meta">
-       👨‍👩‍👧 家族全員
-       </div>`
-   }
+   `;
 
-   ${
-    s.location
-    ? `<div>
-       📍 ${esc(s.location)}
-       </div>`
-    :""
-   }
+  }).join("")
+  : `<div class="meta">
+     今日のゲーム予定はありません。
+     </div>`;
 
-   ${
-    s.description
-    ? `<p>
-       ${esc(s.description)
-        .replaceAll("\n","<br>")}
-       </p>`
-    :""
-   }
+}
 
-   ${
-    member.role === "parent"
-    ? `<button
-        class="primary red"
-        onclick="deleteSchedule('${s.id}')">
-        削除
-       </button>`
-    :""
-   }
 
-  </div>
+async function deleteGame(id){
+
+ const result =
+ await db
+ .from("family_app_v2_game_schedule")
+ .delete()
+ .eq("id",id)
+ .eq("member_id",member.id);
+
+
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
+
+
+ await loadGames();
+
+}
+
+
+/* ===============================
+ PRESIDENT
+================================ */
+
+async function loadPresident(){
+
+ const children =
+ members.filter(
+  m=>m.role!=="parent"
+ );
+
+
+ if(!children.length){
+
+  $("presidentWinner").innerHTML=
+   `<div class="meta">
+    子どもがまだいません。
+    </div>`;
+
+  $("candidateList").innerHTML="";
+
+  $("supportList").innerHTML="";
+
+  return;
+
+ }
+
+
+ const result =
+ await db
+ .from("family_app_v2_president_votes")
+ .select("*")
+ .eq("family_id",family.id);
+
+
+ if(result.error){
+
+  console.error(result.error);
+
+  return;
+
+ }
+
+
+ votes=result.data || [];
+
+
+ /*
+  支持率計算
+ */
+
+ const counts={};
+
+ children.forEach(c=>{
+  counts[c.id]=0;
+ });
+
+
+ votes.forEach(v=>{
+
+  if(counts[v.candidate_member_id]
+     !==undefined){
+
+   counts[v.candidate_member_id]++;
+
+  }
+
+ });
+
+
+ const totalVotes =
+ votes.length;
+
+
+ const ranking =
+ children
+ .map(c=>({
+
+  member:c,
+
+  votes:counts[c.id] || 0,
+
+  rate:
+   totalVotes
+   ? ((counts[c.id] || 0)
+      /totalVotes*100)
+   : 0
+
+ }))
+ .sort(
+  (a,b)=>b.votes-a.votes
+ );
+
+
+ const winner =
+ ranking[0];
+
+
+ /*
+  支持率1位
+ */
+
+ if(winner){
+
+  $("homePresident").textContent =
+   winner.member.name;
+
+
+  $("presidentWinner").innerHTML=`
+
+   <div class="candidate president">
+
+    <div>
+
+     <div class="itemTitle">
+      🏆 ${esc(winner.member.name)}
+     </div>
+
+     <div class="meta">
+      子ども大統領
+     </div>
+
+    </div>
+
+    <div class="support">
+
+     ${winner.rate.toFixed(1)}%
+
+    </div>
+
+   </div>
 
   `;
 
- }).join("");
 
-}
+  /*
+   支持率1位だけ編集可能
+  */
 
+  if(
+   member.role!=="parent" &&
+   member.id===winner.member.id
+  ){
 
-async function deleteSchedule(id){
+   $("presidentEdit")
+    .classList.remove("hidden");
 
- if(member.role !== "parent"){
+   $("presidentTitle").value =
+    pageData?.title || "";
 
-  alert("予定を削除できるのは親です。");
+   $("presidentMessage").value =
+    pageData?.message || "";
 
-  return;
+  }else{
 
- }
-
-
- if(!confirm("この予定を削除しますか？")){
-
-  return;
-
- }
-
-
- const result =
- await db
- .from("family_app_v2_schedules")
- .delete()
- .eq("id",id);
-
-
- if(result.error){
-
-  alert(result.error.message);
-
-  return;
-
- }
-
-
- await loadSchedules();
-
-}
-
-
-/* =========================================
- NEWS
-========================================= */
-
-async function addNews(){
-
- const title =
- $("newsTitle").value.trim();
-
- const content =
- $("newsContent").value.trim();
-
-
- if(!title || !content){
-
-  alert("タイトルと内容を入力してください。");
-
-  return;
-
- }
-
-
- const result =
- await db.rpc(
-  "family_app_v2_add_news",
-  {
-   p_family_id:family.id,
-   p_title:title,
-   p_content:content
-  }
- );
-
-
- if(result.error){
-
-  alert(result.error.message);
-
-  return;
-
- }
-
-
- $("newsTitle").value="";
-
- $("newsContent").value="";
-
-
- await loadNews();
-
-}
-
-
-async function loadNews(){
-
- const result =
- await db
- .from("family_app_v2_news")
- .select("*")
- .eq("family_id",family.id)
- .order("created_at",{ascending:false});
-
-
- if(result.error){
-
-  $("newsList").innerHTML =
-  `<div class="empty">
-   ${esc(result.error.message)}
-  </div>`;
-
-  return;
-
- }
-
-
- $("newsList").innerHTML =
- result.data.length
- ? result.data.map(n=>`
-
-  <div class="item">
-
-   <div class="itemTitle">
-    📰 ${esc(n.title)}
-   </div>
-
-   <div class="meta">
-    ${new Date(n.created_at)
-     .toLocaleString("ja-JP")}
-   </div>
-
-   <p>
-    ${esc(n.content)
-     .replaceAll("\n","<br>")}
-   </p>
-
-  </div>
-
- `).join("")
- : `<div class="empty">
-    ニュースはありません。
-   </div>`;
-
-}
-
-
-/* =========================================
- LAW
-========================================= */
-
-async function addLaw(){
-
- const title =
- $("lawTitle").value.trim();
-
- const content =
- $("lawContent").value.trim();
-
- const fine =
- Number($("lawFine").value) || 0;
-
-
- if(!title || !content){
-
-  alert("タイトルと内容を入力してください。");
-
-  return;
-
- }
-
-
- const result =
- await db.rpc(
-  "family_app_v2_add_law",
-  {
-   p_family_id:family.id,
-   p_title:title,
-   p_content:content,
-   p_fine_amount:fine
-  }
- );
-
-
- if(result.error){
-
-  alert(result.error.message);
-
-  return;
-
- }
-
-
- $("lawTitle").value="";
-
- $("lawContent").value="";
-
- $("lawFine").value="";
-
-
- await loadLaws();
-
-}
-
-
-async function loadLaws(){
-
- const result =
- await db
- .from("family_app_v2_laws")
- .select("*")
- .eq("family_id",family.id)
- .order("created_at",{ascending:false});
-
-
- if(result.error){
-
-  $("lawList").innerHTML =
-  `<div class="empty">
-   ${esc(result.error.message)}
-  </div>`;
-
-  return;
-
- }
-
-
- $("lawList").innerHTML =
- result.data.length
- ? result.data.map(l=>`
-
-  <div class="item">
-
-   <div class="itemTitle">
-    ⚖️ ${esc(l.title)}
-   </div>
-
-   <p>
-    ${esc(l.content)
-     .replaceAll("\n","<br>")}
-   </p>
-
-   <div class="meta">
-
-    違反時：
-
-    <b>
-    ¥${Number(l.fine_amount)
-     .toLocaleString()}
-    </b>
-
-   </div>
-
-  </div>
-
- `).join("")
- : `<div class="empty">
-    法律はありません。
-   </div>`;
-
-}
-
-
-/* =========================================
- FINE
-========================================= */
-
-async function addFine(){
-
- const memberId =
- $("fineMember").value;
-
- const amount =
- Number($("fineAmount").value);
-
- const reason =
- $("fineReason").value.trim();
-
-
- if(!memberId || !amount || !reason){
-
-  alert("すべて入力してください。");
-
-  return;
-
- }
-
-
- const result =
- await db.rpc(
-  "family_app_v2_add_fine",
-  {
-   p_family_id:family.id,
-   p_member_id:memberId,
-   p_amount:amount,
-   p_reason:reason
-  }
- );
-
-
- if(result.error){
-
-  alert(result.error.message);
-
-  return;
-
- }
-
-
- $("fineAmount").value="";
-
- $("fineReason").value="";
-
-
- await loadFine();
-
-}
-
-
-async function loadFine(){
-
- const result =
- await db
- .from("family_app_v2_fines")
- .select(
-  "*,family_app_v2_members(name)"
- )
- .eq("family_id",family.id)
- .order("created_at",{ascending:true});
-
-
- if(result.error){
-
-  $("fineList").innerHTML =
-  `<div class="empty">
-   ${esc(result.error.message)}
-  </div>`;
-
-  return;
-
- }
-
-
- $("fineList").innerHTML =
- result.data.length
- ? result.data.slice().reverse().map(f=>`
-
-  <div class="item">
-
-   <div class="itemTitle">
-    ⚖️ ${esc(
-     f.family_app_v2_members?.name
-    )}
-   </div>
-
-   <div>
-    ${esc(f.reason)}
-   </div>
-
-   <div class="amount minus">
-    -¥${Number(f.amount)
-     .toLocaleString()}
-   </div>
-
-  </div>
-
- `).join("")
- : `<div class="empty">
-    罰金はありません。
-   </div>`;
-
-
- drawFineChart(result.data);
-
-}
-
-
-/* =========================================
- ALLOWANCE
-========================================= */
-
-async function addAllowance(){
-
- const memberId =
- $("allowanceMember").value;
-
- const amount =
- Number($("allowanceAmount").value);
-
- const reason =
- $("allowanceReason").value.trim();
-
-
- if(!memberId || !amount || !reason){
-
-  alert("すべて入力してください。");
-
-  return;
-
- }
-
-
- const result =
- await db.rpc(
-  "family_app_v2_add_allowance",
-  {
-   p_family_id:family.id,
-   p_member_id:memberId,
-   p_amount:amount,
-   p_reason:reason
-  }
- );
-
-
- if(result.error){
-
-  alert(result.error.message);
-
-  return;
-
- }
-
-
- $("allowanceAmount").value="";
-
- $("allowanceReason").value="";
-
-
- await loadAllowance();
-
-}
-
-
-async function addSpending(){
-
- const item =
- $("spendingItem").value.trim();
-
- const amount =
- Number($("spendingAmount").value);
-
-
- if(!item || !amount){
-
-  alert("内容と金額を入力してください。");
-
-  return;
-
- }
-
-
- const result =
- await db.rpc(
-  "family_app_v2_add_spending",
-  {
-   p_family_id:family.id,
-   p_member_id:member.id,
-   p_amount:amount,
-   p_item:item
-  }
- );
-
-
- if(result.error){
-
-  alert(result.error.message);
-
-  return;
-
- }
-
-
- $("spendingItem").value="";
-
- $("spendingAmount").value="";
-
-
- await loadAllowance();
-
-}
-
-
-/* =========================================
- ALLOWANCE DATA
-========================================= */
-
-async function loadAllowance(){
-
- const a =
- await db
- .from("family_app_v2_allowances")
- .select(
-  "*,family_app_v2_members(name)"
- )
- .eq("family_id",family.id)
- .order("created_at",{ascending:true});
-
-
- const s =
- await db
- .from("family_app_v2_spending")
- .select(
-  "*,family_app_v2_members(name)"
- )
- .eq("family_id",family.id)
- .order("created_at",{ascending:true});
-
-
- if(a.error){
-
-  console.error(a.error);
-
-  return;
-
- }
-
-
- if(s.error){
-
-  console.error(s.error);
-
-  return;
-
- }
-
-
- const totals={};
-
-
- members.forEach(m=>{
-
-  totals[m.id]={
-   name:m.name,
-   allowance:0,
-   spending:0
-  };
-
- });
-
-
- a.data.forEach(x=>{
-
-  if(totals[x.member_id]){
-
-   totals[x.member_id]
-    .allowance += Number(x.amount);
+   $("presidentEdit")
+    .classList.add("hidden");
 
   }
 
- });
+ }
 
 
- s.data.forEach(x=>{
+ /*
+  子どもの投票
+ */
 
-  if(totals[x.member_id]){
+ if(member.role==="parent"){
 
-   totals[x.member_id]
-    .spending += Number(x.amount);
+  $("voteArea")
+   .classList.add("hidden");
 
-  }
+ }else{
 
- });
-
-
- $("allowanceSummary").innerHTML =
- Object.values(totals)
- .filter(x=>
-  x.allowance ||
-  x.spending
- )
- .map(x=>{
-
-  const balance =
-   x.allowance-x.spending;
+  $("voteArea")
+   .classList.remove("hidden");
 
 
-  return`
+  const already =
+   votes.find(
+    v=>v.voter_member_id===member.id
+   );
 
-  <div class="summaryBox">
+
+  $("candidateList").innerHTML =
+   ranking.map(x=>`
+
+   <div class="candidate">
+
+    <div>
+
+     <div class="itemTitle">
+      🧒 ${esc(x.member.name)}
+     </div>
+
+     <div class="meta">
+      支持率 ${x.rate.toFixed(1)}%
+     </div>
+
+    </div>
+
+    <button
+     class="primary"
+     ${
+      already
+      ? "disabled"
+      : ""
+     }
+     onclick="vote('${x.member.id}')">
+
+     ${
+      already
+      ? (
+       already.candidate_member_id===x.member.id
+       ? "投票済み"
+       : "投票済み"
+      )
+      : "この人に投票"
+     }
+
+    </button>
+
+   </div>
+
+   `).join("");
+
+ }
+
+
+ $("supportList").innerHTML =
+ ranking.map((x,i)=>`
+
+ <div class="candidate">
+
+  <div>
 
    <b>
-    🧒 ${esc(x.name)}
+    ${i+1}位　
+    ${esc(x.member.name)}
    </b>
 
    <div class="meta">
-    もらった
-    ¥${x.allowance.toLocaleString()}
-   </div>
-
-   <div class="meta">
-    使った
-    ¥${x.spending.toLocaleString()}
-   </div>
-
-   <div class="amount
-    ${balance>=0
-      ?"plus"
-      :"minus"}">
-
-    残り
-    ¥${balance.toLocaleString()}
-
+    ${x.votes}票
    </div>
 
   </div>
 
-  `;
+  <div class="support">
 
- }).join("");
+   ${x.rate.toFixed(1)}%
 
+  </div>
 
- const rows=[];
+ </div>
 
-
- a.data.forEach(x=>{
-
-  rows.push({
-
-   date:x.created_at,
-
-   html:`
-
-   <div class="item">
-
-    <div class="itemTitle">
-     🪙
-     ${esc(
-      x.family_app_v2_members?.name
-     )}
-    </div>
-
-    <div>
-     ${esc(x.reason)}
-    </div>
-
-    <div class="amount plus">
-     +¥${Number(x.amount)
-       .toLocaleString()}
-    </div>
-
-   </div>
-
-   `
-
-  });
-
- });
-
-
- s.data.forEach(x=>{
-
-  rows.push({
-
-   date:x.created_at,
-
-   html:`
-
-   <div class="item">
-
-    <div class="itemTitle">
-     🛍️
-     ${esc(
-      x.family_app_v2_members?.name
-     )}
-    </div>
-
-    <div>
-     ${esc(x.item)}
-    </div>
-
-    <div class="amount minus">
-     -¥${Number(x.amount)
-       .toLocaleString()}
-    </div>
-
-   </div>
-
-   `
-
-  });
-
- });
-
-
- rows.sort(
-  (a,b)=>
-  new Date(b.date)-new Date(a.date)
- );
-
-
- $("allowanceList").innerHTML =
- rows.length
- ? rows.map(x=>x.html).join("")
- : `<div class="empty">
-    記録はありません。
-   </div>`;
-
-
- drawMoneyCharts(
-  a.data,
-  s.data
- );
-
+ `).join("");
 
 }
 
 
-/* =========================================
- CHART HELPERS
-========================================= */
+async function vote(candidateId){
 
-function monthKey(date){
+ if(member.role==="parent"){
 
- const d =
- new Date(date);
-
- return d.getFullYear()
- + "-"
- + String(d.getMonth()+1)
-   .padStart(2,"0");
-
-}
-
-
-function makeMonths(){
-
- const months=[];
-
- const now=new Date();
-
- for(let i=11;i>=0;i--){
-
-  const d =
-  new Date(
-   now.getFullYear(),
-   now.getMonth()-i,
-   1
-  );
-
-  months.push(
-   d.getFullYear()
-   + "-"
-   + String(d.getMonth()+1)
-     .padStart(2,"0")
-  );
-
- }
-
- return months;
-
-}
-
-
-function makeMonthLabels(months){
-
- return months.map(m=>{
-
-  const p=m.split("-");
-
-  return p[0]+"年"+Number(p[1])+"月";
-
- });
-
-}
-
-
-/* =========================================
- FINE CHART
-========================================= */
-
-function drawFineChart(data){
-
- const months =
- makeMonths();
-
- const values =
- months.map(m=>{
-
-  return data
-   .filter(x=>
-    monthKey(x.created_at)===m
-   )
-   .reduce(
-    (sum,x)=>
-    sum+Number(x.amount),
-    0
-   );
-
- });
-
-
- if(fineChart)
-  fineChart.destroy();
-
-
- fineChart =
- new Chart(
-  $("fineChart"),
-  {
-   type:"line",
-
-   data:{
-    labels:
-     makeMonthLabels(months),
-
-    datasets:[{
-
-     label:"罰金",
-
-     data:values,
-
-     tension:.3,
-
-     fill:false,
-
-     borderWidth:3
-
-    }]
-
-   },
-
-   options:{
-    responsive:true,
-
-    maintainAspectRatio:false,
-
-    scales:{
-     y:{
-      beginAtZero:true
-     }
-    }
-   }
-
-  }
- );
-
-}
-
-
-/* =========================================
- MONEY CHARTS
-========================================= */
-
-function drawMoneyCharts(
- allowance,
- spending
-){
-
- const months =
- makeMonths();
-
-
- const allowanceValues =
- months.map(m=>
-  allowance
-  .filter(x=>
-   monthKey(x.created_at)===m
-  )
-  .reduce(
-   (sum,x)=>
-   sum+Number(x.amount),
-   0
-  )
- );
-
-
- const spendingValues =
- months.map(m=>
-  spending
-  .filter(x=>
-   monthKey(x.created_at)===m
-  )
-  .reduce(
-   (sum,x)=>
-   sum+Number(x.amount),
-   0
-  )
- );
-
-
- let balance=0;
-
- const balanceValues =
- months.map((m,i)=>{
-
-  balance +=
-   allowanceValues[i]
-   -
-   spendingValues[i];
-
-  return balance;
-
- });
-
-
- const labels =
- makeMonthLabels(months);
-
-
- if(allowanceChart)
-  allowanceChart.destroy();
-
-
- allowanceChart =
- new Chart(
-  $("allowanceChart"),
-  {
-   type:"line",
-
-   data:{
-    labels:labels,
-
-    datasets:[{
-
-     label:"もらったお小遣い",
-
-     data:allowanceValues,
-
-     tension:.3,
-
-     fill:false,
-
-     borderWidth:3
-
-    }]
-
-   },
-
-   options:{
-    responsive:true,
-
-    maintainAspectRatio:false,
-
-    scales:{
-     y:{
-      beginAtZero:true
-     }
-    }
-   }
-
-  }
- );
-
-
- if(spendingChart)
-  spendingChart.destroy();
-
-
- spendingChart =
- new Chart(
-  $("spendingChart"),
-  {
-   type:"line",
-
-   data:{
-    labels:labels,
-
-    datasets:[{
-
-     label:"使ったお金",
-
-     data:spendingValues,
-
-     tension:.3,
-
-     fill:false,
-
-     borderWidth:3
-
-    }]
-
-   },
-
-   options:{
-    responsive:true,
-
-    maintainAspectRatio:false,
-
-    scales:{
-     y:{
-      beginAtZero:true
-     }
-    }
-   }
-
-  }
- );
-
-
- if(balanceChart)
-  balanceChart.destroy();
-
-
- balanceChart =
- new Chart(
-  $("balanceChart"),
-  {
-   type:"line",
-
-   data:{
-    labels:labels,
-
-    datasets:[{
-
-     label:"お小遣い残高",
-
-     data:balanceValues,
-
-     tension:.3,
-
-     fill:false,
-
-     borderWidth:3
-
-    }]
-
-   },
-
-   options:{
-    responsive:true,
-
-    maintainAspectRatio:false
-   }
-
-  }
- );
-
-}
-
-
-/* =========================================
- CHILD PAGE
-========================================= */
-
-async function loadChildPage(){
-
- /*
-  親でも確認できるようにしておく。
-  子どもの場合は自分のデータを表示。
- */
-
- const targetId =
- member.role === "parent"
- ? null
- : member.id;
-
-
- const fineResult =
- await db
- .from("family_app_v2_fines")
- .select("*")
- .eq("family_id",family.id);
-
-
- const allowanceResult =
- await db
- .from("family_app_v2_allowances")
- .select("*")
- .eq("family_id",family.id);
-
-
- const spendingResult =
- await db
- .from("family_app_v2_spending")
- .select("*")
- .eq("family_id",family.id);
-
-
- if(fineResult.error ||
-    allowanceResult.error ||
-    spendingResult.error){
+  alert("投票できるのは子どもです。");
 
   return;
 
  }
 
 
- const fines =
- targetId
- ? fineResult.data.filter(
-    x=>x.member_id===targetId
-   )
- : fineResult.data;
-
-
- const allowances =
- targetId
- ? allowanceResult.data.filter(
-    x=>x.member_id===targetId
-   )
- : allowanceResult.data;
-
-
- const spending =
- targetId
- ? spendingResult.data.filter(
-    x=>x.member_id===targetId
-   )
- : spendingResult.data;
-
-
- const fineTotal =
- fines.reduce(
-  (a,x)=>a+Number(x.amount),
-  0
+ const existing =
+ votes.find(
+  v=>v.voter_member_id===member.id
  );
 
 
- const allowanceTotal =
- allowances.reduce(
-  (a,x)=>a+Number(x.amount),
-  0
- );
+ if(existing){
 
+  alert("すでに投票しています。");
 
- const spendingTotal =
- spending.reduce(
-  (a,x)=>a+Number(x.amount),
-  0
- );
-
-
- const balance =
- allowanceTotal-
- spendingTotal;
-
-
- $("childBalance").textContent =
- "¥"+balance.toLocaleString();
-
-
- $("childFine").textContent =
- "¥"+fineTotal.toLocaleString();
-
-
- $("childSpent").textContent =
- "¥"+spendingTotal.toLocaleString();
-
-
- /*
-  自分の予定
- */
-
- const schedules =
- await db
- .from("family_app_v2_schedules")
- .select("*")
- .eq("family_id",family.id)
- .order("event_date");
-
-
- if(!schedules.error){
-
-  const mine =
-   targetId
-   ? schedules.data.filter(
-      x=>
-      x.member_id===targetId ||
-      x.member_id===null
-     )
-   : schedules.data;
-
-
-  $("childSchedules").innerHTML =
-   mine.length
-   ? mine.map(s=>`
-
-    <div class="item">
-
-     <div class="scheduleDate">
-      📅 ${esc(s.event_date)}
-     </div>
-
-     ${
-      s.event_time
-      ? `<div class="scheduleTime">
-          🕐 ${esc(s.event_time)}
-         </div>`
-      :""
-     }
-
-     <div class="itemTitle">
-      ${esc(s.title)}
-     </div>
-
-     ${
-      s.location
-      ? `<div>
-          📍 ${esc(s.location)}
-         </div>`
-      :""
-     }
-
-    </div>
-
-   `).join("")
-   : `<div class="empty">
-      予定はありません。
-     </div>`;
+  return;
 
  }
 
 
- /*
-  ニュース
- */
-
- const news =
+ const result =
  await db
- .from("family_app_v2_news")
- .select("*")
- .eq("family_id",family.id)
- .order("created_at",{ascending:false})
- .limit(5);
+ .from("family_app_v2_president_votes")
+ .insert({
 
+  family_id:family.id,
 
- if(!news.error){
+  voter_member_id:member.id,
 
-  $("childNews").innerHTML =
-   news.data.length
-   ? news.data.map(n=>`
-
-    <div class="item">
-
-     <div class="itemTitle">
-      📰 ${esc(n.title)}
-     </div>
-
-     <p>
-      ${esc(n.content)
-       .replaceAll("\n","<br>")}
-     </p>
-
-    </div>
-
-   `).join("")
-   : `<div class="empty">
-      ニュースはありません。
-     </div>`;
-
- }
-
-
- /*
-  子どもページのグラフ
- */
-
- const months =
- makeMonths();
-
-
- const moneyValues =
- months.map(m=>{
-
-  const plus =
-   allowances
-   .filter(x=>
-    monthKey(x.created_at)===m
-   )
-   .reduce(
-    (a,x)=>a+Number(x.amount),
-    0
-   );
-
-
-  const minus =
-   spending
-   .filter(x=>
-    monthKey(x.created_at)===m
-   )
-   .reduce(
-    (a,x)=>a+Number(x.amount),
-    0
-   );
-
-
-  return plus-minus;
+  candidate_member_id:candidateId
 
  });
 
 
- if(childMoneyChart)
-  childMoneyChart.destroy();
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
 
 
- childMoneyChart =
- new Chart(
-  $("childMoneyChart"),
-  {
+ alert("投票しました！");
 
-   type:"line",
-
-   data:{
-
-    labels:
-     makeMonthLabels(months),
-
-    datasets:[{
-
-     label:"月ごとの収支",
-
-     data:moneyValues,
-
-     tension:.3,
-
-     fill:false,
-
-     borderWidth:3
-
-    }]
-
-   },
-
-   options:{
-
-    responsive:true,
-
-    maintainAspectRatio:false,
-
-    scales:{
-     y:{
-      beginAtZero:true
-     }
-    }
-
-   }
-
-  }
- );
+ await loadPresident();
 
 }
 
 
-/* =========================================
+/* ===============================
+ PRESIDENT EDIT
+================================ */
+
+async function savePresidentPage(){
+
+ if(member.role==="parent"){
+
+  alert("親は親ページから編集してください。");
+
+  return;
+
+ }
+
+
+ /*
+  現在の支持率1位か確認
+ */
+
+ const children =
+ members.filter(
+  m=>m.role!=="parent"
+ );
+
+
+ const count={};
+
+ children.forEach(c=>{
+  count[c.id]=0;
+ });
+
+
+ votes.forEach(v=>{
+
+  if(count[v.candidate_member_id]
+     !==undefined){
+
+   count[v.candidate_member_id]++;
+
+  }
+
+ });
+
+
+ const winner =
+ children
+ .slice()
+ .sort(
+  (a,b)=>
+  (count[b.id]||0)-
+  (count[a.id]||0)
+ )[0];
+
+
+ if(!winner ||
+    winner.id!==member.id){
+
+  alert(
+   "支持率1位の子どもだけが編集できます。"
+  );
+
+  return;
+
+ }
+
+
+ const title =
+ $("presidentTitle").value.trim();
+
+ const message =
+ $("presidentMessage").value.trim();
+
+
+ const result =
+ await db
+ .from("family_app_v2_child_page")
+ .update({
+
+  title:title || "子どもページ",
+
+  message:message,
+
+  updated_by:user.id,
+
+  updated_at:new Date().toISOString()
+
+ })
+ .eq("family_id",family.id);
+
+
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
+
+
+ alert(
+  "子ども大統領としてページを編集しました！"
+ );
+
+
+ await loadChildPage();
+
+}
+
+
+/* ===============================
  LOGOUT
-========================================= */
+================================ */
 
 async function logout(){
 
@@ -3133,14 +1700,17 @@ async function logout(){
 }
 
 
-/* =========================================
+/* ===============================
  AUTH
-========================================= */
+================================ */
 
 db.auth.onAuthStateChange(
  (event,session)=>{
 
-  if(session && !user){
+  if(
+   session &&
+   !user
+  ){
 
    start();
 
@@ -3150,9 +1720,9 @@ db.auth.onAuthStateChange(
 );
 
 
-/* =========================================
+/* ===============================
  START
-========================================= */
+================================ */
 
 start();
 
