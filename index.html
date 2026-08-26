@@ -2,330 +2,289 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>みんなの家族アプリ</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  background:#f3f6fb;
-  color:#222;
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#f3f6fb;
+color:#222;
 }
 
 header{
-  background:linear-gradient(135deg,#4f7cff,#7957ff);
-  color:white;
-  padding:20px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 3px 15px #0002;
+background:linear-gradient(135deg,#4f7cff,#7957ff);
+color:white;
+padding:18px;
+position:sticky;
+top:0;
+z-index:20;
+box-shadow:0 3px 15px #0002;
 }
 
 .header-inner{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+max-width:1100px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
 }
 
 .logo{
-  font-size:23px;
-  font-weight:bold;
+font-size:22px;
+font-weight:bold;
 }
 
 .user-badge{
-  background:#ffffff22;
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:13px;
+background:#ffffff22;
+padding:8px 12px;
+border-radius:20px;
+font-size:13px;
 }
 
 nav{
-  max-width:1100px;
-  margin:15px auto 0;
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:3px;
+max-width:1100px;
+margin:14px auto 0;
+display:flex;
+gap:8px;
+overflow-x:auto;
 }
 
 nav button{
-  flex:none;
-  border:0;
-  background:white;
-  color:#333;
-  padding:10px 14px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-nav button.active{
-  background:#222;
-  color:white;
+flex:none;
+border:0;
+background:white;
+color:#333;
+padding:10px 14px;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
 }
 
 main{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
+max-width:1100px;
+margin:auto;
+padding:20px;
 }
 
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
+.page{display:none}
+.page.active{display:block}
 
 .hero{
-  background:white;
-  border-radius:22px;
-  padding:25px;
-  margin-bottom:20px;
-  box-shadow:0 4px 20px #0000000b;
-}
-
-.hero h1{
-  margin-top:0;
+background:white;
+border-radius:22px;
+padding:25px;
+margin-bottom:20px;
+box-shadow:0 4px 20px #0000000b;
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:15px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:15px;
 }
 
 .card{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 4px 18px #0000000b;
-}
-
-.card h2,
-.card h3{
-  margin-top:0;
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:0 4px 18px #0000000b;
 }
 
 .big-number{
-  font-size:38px;
-  font-weight:bold;
-  color:#4f7cff;
+font-size:38px;
+font-weight:bold;
+color:#4f7cff;
 }
 
-.member{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px;
-  border-radius:14px;
-  background:#f5f7fc;
-  margin:8px 0;
-}
-
-.avatar{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:24px;
-  background:#e7edff;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #d8dce8;
-  border-radius:10px;
-  margin:6px 0 12px;
-  font-size:15px;
-  background:white;
+input,select,textarea{
+width:100%;
+padding:12px;
+border:1px solid #d8dce8;
+border-radius:10px;
+margin:6px 0 12px;
+font-size:15px;
+background:white;
 }
 
 textarea{
-  min-height:90px;
-  resize:vertical;
+min-height:90px;
+resize:vertical;
 }
 
-button.primary{
-  background:#4f7cff;
-  color:white;
-  border:0;
-  padding:11px 16px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
+button{
+cursor:pointer;
 }
 
-button.success{
-  background:#21a366;
-  color:white;
-  border:0;
-  padding:9px 13px;
-  border-radius:9px;
-  cursor:pointer;
+.primary{
+background:#4f7cff;
+color:white;
+border:0;
+padding:11px 16px;
+border-radius:10px;
+font-weight:bold;
 }
 
-button.danger{
-  background:#e74c3c;
-  color:white;
-  border:0;
-  padding:9px 13px;
-  border-radius:9px;
-  cursor:pointer;
+.success{
+background:#21a366;
+color:white;
+border:0;
+padding:9px 13px;
+border-radius:9px;
 }
 
-button.gray{
-  background:#eef1f6;
-  color:#333;
-  border:0;
-  padding:9px 13px;
-  border-radius:9px;
-  cursor:pointer;
+.danger{
+background:#e74c3c;
+color:white;
+border:0;
+padding:9px 13px;
+border-radius:9px;
+}
+
+.gray{
+background:#eef1f6;
+color:#333;
+border:0;
+padding:9px 13px;
+border-radius:9px;
 }
 
 .item{
-  background:#f7f9fc;
-  padding:15px;
-  border-radius:13px;
-  margin:10px 0;
+background:#f7f9fc;
+padding:15px;
+border-radius:13px;
+margin:10px 0;
 }
 
 .item-title{
-  font-weight:bold;
-  font-size:17px;
+font-weight:bold;
+font-size:17px;
 }
 
 .small{
-  color:#777;
-  font-size:13px;
+color:#777;
+font-size:13px;
 }
 
 .tag{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  background:#e8edff;
-  color:#435dd7;
-  font-size:12px;
-  margin:3px;
+display:inline-block;
+padding:5px 9px;
+border-radius:20px;
+background:#e8edff;
+color:#435dd7;
+font-size:12px;
+margin:3px;
+}
+
+.member{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px;
+border-radius:14px;
+background:#f5f7fc;
+margin:8px 0;
+}
+
+.avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:24px;
+background:#e7edff;
 }
 
 .progress{
-  height:14px;
-  background:#e9edf5;
-  border-radius:20px;
-  overflow:hidden;
-  margin:10px 0;
+height:14px;
+background:#e9edf5;
+border-radius:20px;
+overflow:hidden;
+margin:10px 0;
 }
 
 .progress-bar{
-  height:100%;
-  background:linear-gradient(90deg,#4f7cff,#8c5cff);
-  width:0;
-}
-
-.vote-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin:10px 0;
-}
-
-.vote-row .name{
-  width:100px;
-}
-
-.vote-bar{
-  flex:1;
+height:100%;
+background:linear-gradient(90deg,#4f7cff,#8c5cff);
 }
 
 .notice{
-  background:#fff8d8;
-  border:1px solid #f2df82;
-  padding:12px;
-  border-radius:12px;
-  margin-bottom:15px;
+background:#fff8d8;
+border:1px solid #f2df82;
+padding:12px;
+border-radius:12px;
+margin-bottom:15px;
 }
 
-footer{
-  text-align:center;
-  padding:30px;
-  color:#888;
+.president{
+background:linear-gradient(135deg,#fff7c2,#ffe68a);
+border:2px solid #e4bd35;
+padding:20px;
+border-radius:20px;
+text-align:center;
 }
 
-.modal{
-  position:fixed;
-  inset:0;
-  background:#0008;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:100;
-  padding:20px;
+.president-icon{
+font-size:65px;
 }
 
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  background:white;
-  width:min(500px,100%);
-  border-radius:20px;
-  padding:25px;
+.study-total{
+font-size:32px;
+font-weight:bold;
+color:#4f7cff;
 }
 
 .empty{
-  text-align:center;
-  color:#999;
-  padding:20px;
+text-align:center;
+color:#999;
+padding:20px;
 }
 
-.stat{
-  text-align:center;
-  padding:10px;
+footer{
+text-align:center;
+padding:30px;
+color:#888;
 }
 
-.stat strong{
-  display:block;
-  font-size:30px;
+.modal{
+position:fixed;
+inset:0;
+background:#0008;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:100;
+padding:20px;
+}
+
+.modal.show{display:flex}
+
+.modal-box{
+background:white;
+width:min(500px,100%);
+border-radius:20px;
+padding:25px;
+}
+
+.lock{
+background:#ffe9e9;
+border:1px solid #ffb4b4;
+padding:12px;
+border-radius:12px;
+color:#b52626;
 }
 
 @media(max-width:600px){
-  main{
-    padding:12px;
-  }
-
-  .hero{
-    padding:18px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  nav{
-    margin-left:5px;
-    margin-right:5px;
-  }
+main{padding:12px}
+.hero{padding:18px}
+.grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -333,1971 +292,2542 @@ footer{
 <body>
 
 <header>
-  <div class="header-inner">
-    <div class="logo">🏠 みんなの家族アプリ</div>
-    <div class="user-badge" id="currentUserBadge">未ログイン</div>
-  </div>
 
-  <nav id="nav">
-    <button onclick="showPage('home')" class="active">🏠 ホーム</button>
-    <button onclick="showPage('schedule')">📅 予定</button>
-    <button onclick="showPage('tasks')">✅ 当番</button>
-    <button onclick="showPage('messages')">💬 メッセージ</button>
-    <button onclick="showPage('games')">🎮 ゲーム</button>
-    <button onclick="showPage('money')">💰 お金</button>
-    <button onclick="showPage('rules')">⚖️ ルール</button>
-    <button onclick="showPage('children')">👶 子ども</button>
-    <button onclick="showPage('admin')">⚙️ 管理</button>
-  </nav>
+<div class="header-inner">
+<div class="logo">🏠 みんなの家族アプリ</div>
+<div class="user-badge" id="userBadge">未ログイン</div>
+</div>
+
+<nav>
+<button onclick="showPage('home')">🏠 ホーム</button>
+<button onclick="showPage('schedule')">📅 予定</button>
+<button onclick="showPage('tasks')">✅ 当番</button>
+<button onclick="showPage('messages')">💬 メッセージ</button>
+<button onclick="showPage('games')">🎮 ゲーム</button>
+<button onclick="showPage('money')">💰 お金</button>
+<button onclick="showPage('rules')">⚖️ ルール</button>
+<button onclick="showPage('children')">👶 子ども</button>
+<button onclick="showPage('admin')">⚙️ 管理</button>
+</nav>
+
 </header>
 
 <main>
 
-<!-- HOME -->
 <section id="home" class="page active">
 
-  <div class="hero">
-    <h1>🏠 家族ホーム</h1>
-    <p id="welcomeText">家族のみんなで使おう！</p>
-  </div>
+<div class="hero">
+<h1>🏠 家族ホーム</h1>
+<p id="welcome">家族のみんなで使おう！</p>
+<div class="small" id="connectionStatus">☁️ Supabase接続中...</div>
+</div>
 
-  <div class="grid">
+<div class="grid">
 
-    <div class="card">
-      <h3>👨‍👩‍👧‍👦 家族</h3>
-      <div class="big-number" id="memberCount">0</div>
-      <p>人の家族</p>
-    </div>
+<div class="card">
+<h3>👨‍👩‍👧‍👦 家族</h3>
+<div class="big-number" id="memberCount">0</div>
+</div>
 
-    <div class="card">
-      <h3>📅 今日の予定</h3>
-      <div class="big-number" id="todayScheduleCount">0</div>
-      <p>件</p>
-    </div>
+<div class="card">
+<h3>📅 今日の予定</h3>
+<div class="big-number" id="scheduleCount">0</div>
+</div>
 
-    <div class="card">
-      <h3>✅ 未完了タスク</h3>
-      <div class="big-number" id="todoCount">0</div>
-      <p>件</p>
-    </div>
+<div class="card">
+<h3>✅ 未完了</h3>
+<div class="big-number" id="taskCount">0</div>
+</div>
 
-    <div class="card">
-      <h3>💰 家族のお金</h3>
-      <div class="big-number">¥<span id="totalMoney">0</span></div>
-      <p>合計残高</p>
-    </div>
+<div class="card">
+<h3>📚 今日の勉強</h3>
+<div class="big-number" id="studyToday">0分</div>
+</div>
 
-  </div>
+</div>
 
-  <br>
+<br>
 
-  <div class="grid">
+<div class="grid">
 
-    <div class="card">
-      <h2>📢 家族からのお知らせ</h2>
-      <div id="homeMessages"></div>
-    </div>
+<div class="card">
+<h2>💬 最新メッセージ</h2>
+<div id="homeMessages"></div>
+</div>
 
-    <div class="card">
-      <h2>🎮 今日のゲーム</h2>
-      <div id="homeGames"></div>
-    </div>
+<div class="card">
+<h2>🎮 今日のゲーム</h2>
+<div id="homeGames"></div>
+</div>
 
-  </div>
+</div>
 
 </section>
 
 
-<!-- SCHEDULE -->
 <section id="schedule" class="page">
 
-  <div class="hero">
-    <h1>📅 家族の予定表</h1>
-    <p>家族みんなの予定を登録できます。</p>
-  </div>
+<div class="hero">
+<h1>📅 家族の予定表</h1>
+<p>家族みんなの予定を共有できます。</p>
+</div>
 
-  <div class="card">
-    <h2>予定を追加</h2>
+<div class="card">
 
-    <input id="scheduleTitle" placeholder="予定名">
+<h2>予定を追加</h2>
 
-    <input id="scheduleDate" type="date">
+<input id="scheduleTitle" placeholder="予定名">
 
-    <input id="scheduleTime" type="time">
+<input id="scheduleDate" type="date">
 
-    <select id="schedulePerson"></select>
+<input id="scheduleTime" type="time">
 
-    <button class="primary" onclick="addSchedule()">予定を追加</button>
-  </div>
+<select id="schedulePerson"></select>
 
-  <br>
+<button class="primary" onclick="addSchedule()">予定を追加</button>
 
-  <div class="card">
-    <h2>📋 予定一覧</h2>
-    <div id="scheduleList"></div>
-  </div>
+</div>
+
+<br>
+
+<div class="card">
+<h2>📋 予定一覧</h2>
+<div id="scheduleList"></div>
+</div>
 
 </section>
 
 
-<!-- TASKS -->
 <section id="tasks" class="page">
 
-  <div class="hero">
-    <h1>✅ 当番・やること</h1>
-    <p>家族の仕事や宿題などを管理できます。</p>
-  </div>
+<div class="hero">
+<h1>✅ 当番・やること</h1>
+</div>
 
-  <div class="card">
-    <h2>当番を追加</h2>
+<div class="card">
 
-    <input id="taskTitle" placeholder="例：皿洗い">
+<input id="taskTitle" placeholder="例：皿洗い">
 
-    <select id="taskPerson"></select>
+<select id="taskPerson"></select>
 
-    <input id="taskDate" type="date">
+<input id="taskDate" type="date">
 
-    <button class="primary" onclick="addTask()">追加</button>
-  </div>
+<button class="primary" onclick="addTask()">追加</button>
 
-  <br>
+</div>
 
-  <div class="card">
-    <h2>📋 当番一覧</h2>
-    <div id="taskList"></div>
-  </div>
+<br>
+
+<div class="card">
+<h2>📋 当番一覧</h2>
+<div id="taskList"></div>
+</div>
 
 </section>
 
 
-<!-- MESSAGES -->
 <section id="messages" class="page">
 
-  <div class="hero">
-    <h1>💬 家族メッセージ</h1>
-    <p>家族のみんなにメッセージを送れます。</p>
-  </div>
+<div class="hero">
+<h1>💬 家族メッセージ</h1>
+</div>
 
-  <div class="card">
-    <textarea id="messageText" placeholder="家族へのメッセージ"></textarea>
+<div class="card">
 
-    <button class="primary" onclick="addMessage()">送信</button>
-  </div>
+<textarea id="messageText" placeholder="家族へのメッセージ"></textarea>
 
-  <br>
+<button class="primary" onclick="addMessage()">送信</button>
 
-  <div class="card">
-    <h2>📨 メッセージ一覧</h2>
-    <div id="messageList"></div>
-  </div>
+</div>
+
+<br>
+
+<div class="card">
+<div id="messageList"></div>
+</div>
 
 </section>
 
 
-<!-- GAMES -->
 <section id="games" class="page">
 
-  <div class="hero">
-    <h1>🎮 今日のゲーム予定</h1>
-    <p>「今日は誰が何のゲームをするか」を家族で共有できます。</p>
-  </div>
+<div class="hero">
+<h1>🎮 今日のゲーム予定</h1>
+</div>
 
-  <div class="card">
-    <h2>🎮 ゲーム予定を追加</h2>
+<div class="card">
 
-    <select id="gamePerson"></select>
+<select id="gamePerson"></select>
 
-    <input id="gameName" placeholder="ゲーム名">
+<input id="gameName" placeholder="ゲーム名">
 
-    <input id="gameTime" type="time">
+<input id="gameTime" type="time">
 
-    <button class="primary" onclick="addGame()">追加</button>
-  </div>
+<button class="primary" onclick="addGame()">追加</button>
 
-  <br>
+</div>
 
-  <div class="card">
-    <h2>今日のゲーム予定</h2>
-    <div id="gameList"></div>
-  </div>
+<br>
+
+<div class="card">
+<div id="gameList"></div>
+</div>
 
 </section>
 
 
-<!-- MONEY -->
 <section id="money" class="page">
 
-  <div class="hero">
-    <h1>💰 お金管理</h1>
-    <p>お小遣いや家族のお金を管理します。</p>
-  </div>
+<div class="hero">
+<h1>💰 お金管理</h1>
+</div>
 
-  <div class="grid">
+<div class="grid">
 
-    <div class="card">
-      <h2>💵 お金を追加</h2>
+<div class="card">
 
-      <select id="moneyPerson"></select>
+<h2>お金を記録</h2>
 
-      <input id="moneyAmount" type="number" placeholder="金額">
+<select id="moneyPerson"></select>
 
-      <select id="moneyType">
-        <option value="income">もらった</option>
-        <option value="expense">使った</option>
-      </select>
+<input id="moneyAmount" type="number" placeholder="金額">
 
-      <input id="moneyMemo" placeholder="内容">
+<select id="moneyType">
+<option value="income">もらった</option>
+<option value="expense">使った</option>
+</select>
 
-      <button class="primary" onclick="addMoney()">記録する</button>
-    </div>
+<input id="moneyMemo" placeholder="内容">
 
-    <div class="card">
-      <h2>💰 残高</h2>
-      <div id="moneyBalances"></div>
-    </div>
+<button class="primary" onclick="addMoney()">記録</button>
 
-  </div>
+</div>
 
-  <br>
+<div class="card">
+<h2>💰 残高</h2>
+<div id="moneyBalances"></div>
+</div>
 
-  <div class="card">
-    <h2>📋 お金の履歴</h2>
-    <div id="moneyList"></div>
-  </div>
+</div>
+
+<br>
+
+<div class="card">
+<h2>履歴</h2>
+<div id="moneyList"></div>
+</div>
 
 </section>
 
 
-<!-- RULES -->
 <section id="rules" class="page">
 
-  <div class="hero">
-    <h1>⚖️ 家族ルール</h1>
-    <p>家族で決めたルールと罰金を管理できます。</p>
-  </div>
+<div class="hero">
+<h1>⚖️ 家族ルール</h1>
+</div>
 
-  <div class="card">
-    <h2>ルールを追加</h2>
+<div class="card">
 
-    <input id="ruleTitle" placeholder="例：ゲームは宿題の後">
+<input id="ruleTitle" placeholder="ルール">
 
-    <input id="ruleFine" type="number" placeholder="違反した場合の罰金（円）">
+<input id="ruleFine" type="number" placeholder="違反時の罰金">
 
-    <button class="primary" onclick="addRule()">ルール追加</button>
-  </div>
+<button class="primary" onclick="addRule()">ルール追加</button>
 
-  <br>
+</div>
 
-  <div class="card">
-    <h2>📜 家族ルール一覧</h2>
-    <div id="ruleList"></div>
-  </div>
+<br>
+
+<div class="card">
+<div id="ruleList"></div>
+</div>
 
 </section>
 
 
-<!-- CHILDREN -->
 <section id="children" class="page">
 
-  <div class="hero">
-    <h1>👶 子どもページ</h1>
-    <p>子どもたちのページです。</p>
-  </div>
+<div class="hero">
+<h1>👶 子どもページ</h1>
+<p>子どもたちの情報を確認できます。</p>
+</div>
 
-  <div class="grid">
+<div id="presidentBox"></div>
 
-    <div class="card">
-      <h2>🗳️ 子供大統領</h2>
-      <p>一番支持率が高い人が現在の子供大統領です。</p>
-      <div id="presidentResult"></div>
-    </div>
+<br>
 
-    <div class="card">
-      <h2>📰 子どもニュース</h2>
-      <div id="childNews"></div>
-    </div>
+<div id="presidentEditor"></div>
 
-  </div>
+<br>
 
-  <br>
+<div class="grid">
 
-  <div class="card">
-    <h2>🗳️ 投票</h2>
-    <p>好きな子どもに投票できます。</p>
-    <div id="voteList"></div>
-  </div>
+<div class="card">
 
-  <br>
+<h2>💸 罰金一覧</h2>
 
-  <div class="card">
-    <h2>🎮 今日やるゲーム</h2>
-    <div id="childGames"></div>
-  </div>
+<div id="childFines"></div>
+
+</div>
+
+<div class="card">
+
+<h2>📚 勉強時間</h2>
+
+<div id="childStudy"></div>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>🗳️ 子供大統領 投票</h2>
+
+<div id="voteList"></div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>🎮 今日のゲーム</h2>
+
+<div id="childGames"></div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>📰 子どもニュース</h2>
+
+<div id="childNews"></div>
+
+</div>
 
 </section>
 
 
-<!-- ADMIN -->
 <section id="admin" class="page">
 
-  <div class="hero">
-    <h1>⚙️ 管理画面</h1>
-    <p>家族アプリの設定を変更できます。</p>
-  </div>
+<div class="hero">
+<h1>⚙️ 管理画面</h1>
+</div>
 
-  <div class="notice">
-    🔐 このサンプル版の管理画面には簡易パスワードを使用しています。<br>
-    本格的な家族間共有・安全な認証にはSupabase等のサーバー側認証が必要です。
-  </div>
+<div class="notice">
+家族コード：
+<strong id="familyCodeText"></strong>
+</div>
 
-  <div class="card">
-    <h2>👤 現在の利用者</h2>
+<div class="card">
 
-    <select id="loginPerson" onchange="changeUser()"></select>
+<h2>👤 利用者</h2>
 
-    <select id="loginRole">
-      <option value="parent">親</option>
-      <option value="child">子ども</option>
-    </select>
+<select id="loginPerson"></select>
 
-    <button class="primary" onclick="saveUser()">利用者を変更</button>
-  </div>
+<select id="loginRole">
+<option value="parent">親</option>
+<option value="child">子ども</option>
+</select>
 
-  <br>
+<button class="primary" onclick="saveUser()">変更</button>
 
-  <div class="card">
-    <h2>👨‍👩‍👧‍👦 家族メンバーを追加</h2>
+</div>
 
-    <input id="newMemberName" placeholder="名前">
+<br>
 
-    <select id="newMemberRole">
-      <option value="parent">親</option>
-      <option value="child">子ども</option>
-    </select>
+<div class="card">
 
-    <select id="newMemberIcon">
-      <option>👨</option>
-      <option>👩</option>
-      <option>👦</option>
-      <option>👧</option>
-      <option>🧑</option>
-      <option>👶</option>
-    </select>
+<h2>👨‍👩‍👧‍👦 家族追加</h2>
 
-    <button class="primary" onclick="addMember()">家族を追加</button>
-  </div>
+<input id="newMemberName" placeholder="名前">
 
-  <br>
+<select id="newMemberRole">
+<option value="parent">親</option>
+<option value="child">子ども</option>
+</select>
 
-  <div class="card">
-    <h2>👨‍👩‍👧‍👦 家族メンバー</h2>
-    <div id="memberList"></div>
-  </div>
+<select id="newMemberIcon">
+<option>👨</option>
+<option>👩</option>
+<option>👦</option>
+<option>👧</option>
+<option>🧑</option>
+<option>👶</option>
+</select>
 
-  <br>
+<button class="primary" onclick="addMember()">追加</button>
 
-  <div class="card">
-    <h2>📰 子どもニュースを追加</h2>
+</div>
 
-    <input id="newsTitle" placeholder="ニュースタイトル">
+<br>
 
-    <textarea id="newsText" placeholder="ニュース内容"></textarea>
+<div class="card">
+<h2>家族メンバー</h2>
+<div id="memberList"></div>
+</div>
 
-    <button class="primary" onclick="addNews()">ニュース追加</button>
+<br>
 
-    <div id="adminNewsList"></div>
-  </div>
+<div class="card">
 
-  <br>
+<h2>💸 罰金登録</h2>
 
-  <div class="card">
-    <h2>💾 データ</h2>
+<select id="finePerson"></select>
 
-    <button class="gray" onclick="exportData()">データを書き出す</button>
+<input id="fineAmount" type="number" placeholder="罰金額">
 
-    <button class="danger" onclick="resetData()">すべてのデータを初期化</button>
-  </div>
+<input id="fineReason" placeholder="理由">
+
+<button class="primary" onclick="addFine()">登録</button>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>📚 勉強時間を記録</h2>
+
+<select id="studyPerson"></select>
+
+<input id="studyDate" type="date">
+
+<input id="studyMinutes" type="number" placeholder="勉強した時間（分）">
+
+<input id="studySubject" placeholder="教科（例：数学）">
+
+<button class="primary" onclick="addStudy()">記録する</button>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>📰 子どもニュース</h2>
+
+<input id="newsTitle" placeholder="タイトル">
+
+<textarea id="newsText" placeholder="内容"></textarea>
+
+<button class="primary" onclick="addNews()">追加</button>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>☁️ データ</h2>
+
+<button class="primary" onclick="loadData()">🔄 最新データを取得</button>
+
+</div>
 
 </section>
 
 </main>
 
 <footer>
-  🏠 みんなの家族アプリ
+🏠 みんなの家族アプリ
 </footer>
 
 
-<!-- LOGIN MODAL -->
-<div class="modal" id="loginModal">
+<div class="modal show" id="loginModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <h2>🔐 家族アプリ</h2>
+<h2>🏠 家族アプリへようこそ</h2>
 
-    <p>利用する人を選んでください。</p>
+<p>家族コードを入力してください。</p>
 
-    <select id="startUser"></select>
+<input id="familyCodeInput" placeholder="例：MYFAMILY2026">
 
-    <select id="startRole">
-      <option value="parent">親</option>
-      <option value="child">子ども</option>
-    </select>
+<p>利用者</p>
 
-    <button class="primary" onclick="startApp()">開始</button>
+<select id="startUser"></select>
 
-  </div>
+<select id="startRole">
+<option value="parent">親</option>
+<option value="child">子ども</option>
+</select>
+
+<button class="primary" onclick="startApp()">開始</button>
+
+</div>
 
 </div>
 
 
 <script>
 
-/* =========================
-   DATA
-========================= */
+const SUPABASE_URL =
+"https://cxwdndlbtdagvvcuvopm.supabase.co";
 
-const STORAGE_KEY = "family_app_v1";
+const SUPABASE_KEY =
+"sb_publishable_qux36ew_JkABxzXCQEgW1A_ijJRoraO";
 
-let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
-  members:[
-    {
-      id:1,
-      name:"お父さん",
-      role:"parent",
-      icon:"👨"
-    },
-    {
-      id:2,
-      name:"お母さん",
-      role:"parent",
-      icon:"👩"
-    },
-    {
-      id:3,
-      name:"長男",
-      role:"child",
-      icon:"👦"
-    },
-    {
-      id:4,
-      name:"弟",
-      role:"child",
-      icon:"👦"
-    },
-    {
-      id:5,
-      name:"妹",
-      role:"child",
-      icon:"👧"
-    }
-  ],
+let familyCode =
+localStorage.getItem("familyCode") || "";
 
-  schedules:[],
-  tasks:[],
-  messages:[],
-  games:[],
-  money:[],
-  rules:[],
-  news:[],
+let currentUser =
+Number(localStorage.getItem("currentUser")) || null;
 
-  votes:{},
+let currentRole =
+localStorage.getItem("currentRole") || "";
 
-  currentUser:null,
-  currentRole:null
-
-};
+let members=[];
+let schedules=[];
+let tasks=[];
+let messages=[];
+let games=[];
+let money=[];
+let rules=[];
+let fines=[];
+let votes=[];
+let news=[];
+let study=[];
 
 
 /* =========================
-   SAVE
+INIT
 ========================= */
 
-function save(){
+window.addEventListener("load",async()=>{
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(data)
-  );
+setupDates();
 
-  refreshAll();
+if(familyCode){
+
+document.getElementById("familyCodeInput").value =
+familyCode;
+
+await loadData();
+
+document.getElementById("loginModal")
+.classList.remove("show");
+
+}else{
+
+document.getElementById("loginModal")
+.classList.add("show");
 
 }
-
-
-/* =========================
-   PAGE
-========================= */
-
-function showPage(id){
-
-  document.querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
-
-  document.getElementById(id)
-    .classList.add("active");
-
-  document.querySelectorAll("nav button")
-    .forEach(b=>b.classList.remove("active"));
-
-}
-
-
-/* =========================
-   INIT
-========================= */
-
-window.addEventListener("load",()=>{
-
-  setupSelects();
-
-  if(!data.currentUser){
-
-    document.getElementById("loginModal")
-      .classList.add("show");
-
-  }
-
-  refreshAll();
 
 });
 
 
+function setupDates(){
+
+const today =
+new Date().toISOString().slice(0,10);
+
+document.getElementById("scheduleDate").value=today;
+document.getElementById("taskDate").value=today;
+document.getElementById("studyDate").value=today;
+
+}
+
+
 /* =========================
-   SELECTS
+PAGE
+========================= */
+
+function showPage(id){
+
+document.querySelectorAll(".page")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+if(id==="children"){
+renderChildren();
+}
+
+}
+
+
+/* =========================
+START
+========================= */
+
+async function startApp(){
+
+const code =
+document.getElementById("familyCodeInput")
+.value.trim();
+
+if(!code){
+
+alert("家族コードを入力してください");
+
+return;
+
+}
+
+familyCode=code;
+
+localStorage.setItem(
+"familyCode",
+familyCode
+);
+
+await loadData();
+
+document.getElementById("loginModal")
+.classList.remove("show");
+
+}
+
+
+/* =========================
+LOAD DATA
+========================= */
+
+async function loadData(){
+
+if(!familyCode)return;
+
+document.getElementById("connectionStatus")
+.textContent="☁️ データ取得中...";
+
+try{
+
+const results=await Promise.all([
+
+supabaseClient
+.from("family_members")
+.select("*")
+.eq("family_code",familyCode)
+.order("id"),
+
+supabaseClient
+.from("family_schedules")
+.select("*")
+.eq("family_code",familyCode)
+.order("schedule_date"),
+
+supabaseClient
+.from("family_tasks")
+.select("*")
+.eq("family_code",familyCode)
+.order("id"),
+
+supabaseClient
+.from("family_messages")
+.select("*")
+.eq("family_code",familyCode)
+.order("created_at",{ascending:false}),
+
+supabaseClient
+.from("family_games")
+.select("*")
+.eq("family_code",familyCode)
+.order("game_time"),
+
+supabaseClient
+.from("family_money")
+.select("*")
+.eq("family_code",familyCode)
+.order("created_at",{ascending:false}),
+
+supabaseClient
+.from("family_rules")
+.select("*")
+.eq("family_code",familyCode)
+.order("id"),
+
+supabaseClient
+.from("family_fines")
+.select("*")
+.eq("family_code",familyCode)
+.order("created_at",{ascending:false}),
+
+supabaseClient
+.from("family_votes")
+.select("*")
+.eq("family_code",familyCode),
+
+supabaseClient
+.from("family_news")
+.select("*")
+.eq("family_code",familyCode)
+.order("created_at",{ascending:false}),
+
+supabaseClient
+.from("family_study")
+.select("*")
+.eq("family_code",familyCode)
+.order("study_date",{ascending:false})
+
+]);
+
+results.forEach((r,i)=>{
+
+if(r.error)throw r.error;
+
+const d=r.data||[];
+
+if(i===0)members=d;
+if(i===1)schedules=d;
+if(i===2)tasks=d;
+if(i===3)messages=d;
+if(i===4)games=d;
+if(i===5)money=d;
+if(i===6)rules=d;
+if(i===7)fines=d;
+if(i===8)votes=d;
+if(i===9)news=d;
+if(i===10)study=d;
+
+});
+
+setupSelects();
+
+refresh();
+
+document.getElementById("connectionStatus")
+.textContent="🟢 Supabase接続済み";
+
+}catch(error){
+
+console.error(error);
+
+document.getElementById("connectionStatus")
+.textContent="🔴 Supabaseエラー";
+
+alert(
+"Supabaseに接続できませんでした。\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =========================
+SELECTS
 ========================= */
 
 function setupSelects(){
 
-  const selects=[
-    "schedulePerson",
-    "taskPerson",
-    "gamePerson",
-    "moneyPerson",
-    "loginPerson",
-    "startUser"
-  ];
+const ids=[
+"schedulePerson",
+"taskPerson",
+"gamePerson",
+"moneyPerson",
+"finePerson",
+"studyPerson",
+"loginPerson",
+"startUser"
+];
 
-  selects.forEach(id=>{
+ids.forEach(id=>{
 
-    const el=document.getElementById(id);
+const el=document.getElementById(id);
 
-    if(!el) return;
+if(!el)return;
 
-    el.innerHTML="";
+el.innerHTML="";
 
-    data.members.forEach(m=>{
+members.forEach(m=>{
 
-      const option=document.createElement("option");
+const o=document.createElement("option");
 
-      option.value=m.id;
+o.value=m.id;
 
-      option.textContent=
-        m.icon+" "+m.name;
+o.textContent=
+m.icon+" "+m.name;
 
-      el.appendChild(option);
+el.appendChild(o);
 
-    });
+});
 
-  });
+});
+
+if(currentUser){
+
+const lp=document.getElementById("loginPerson");
+
+if(lp)lp.value=currentUser;
+
+}
 
 }
 
 
 /* =========================
-   START
+CURRENT USER
 ========================= */
-
-function startApp(){
-
-  const id=
-    Number(document.getElementById("startUser").value);
-
-  const role=
-    document.getElementById("startRole").value;
-
-  data.currentUser=id;
-  data.currentRole=role;
-
-  document.getElementById("loginModal")
-    .classList.remove("show");
-
-  save();
-
-}
-
-
-/* =========================
-   USER
-========================= */
-
-function changeUser(){
-
-}
 
 function saveUser(){
 
-  data.currentUser=
-    Number(document.getElementById("loginPerson").value);
+const id =
+Number(document.getElementById("loginPerson").value);
 
-  data.currentRole=
-    document.getElementById("loginRole").value;
+const role =
+document.getElementById("loginRole").value;
 
-  save();
+currentUser=id;
+currentRole=role;
+
+localStorage.setItem(
+"currentUser",
+id
+);
+
+localStorage.setItem(
+"currentRole",
+role
+);
+
+refresh();
+
+alert("利用者を変更しました");
 
 }
 
 
 /* =========================
-   MEMBER
+MEMBER
 ========================= */
 
-function addMember(){
+async function addMember(){
 
-  const name=
-    document.getElementById("newMemberName").value.trim();
+const name=
+document.getElementById("newMemberName")
+.value.trim();
 
-  const role=
-    document.getElementById("newMemberRole").value;
+const role=
+document.getElementById("newMemberRole").value;
 
-  const icon=
-    document.getElementById("newMemberIcon").value;
+const icon=
+document.getElementById("newMemberIcon").value;
 
-  if(!name){
+if(!name){
 
-    alert("名前を入力してください");
+alert("名前を入力してください");
 
-    return;
+return;
 
-  }
+}
 
-  data.members.push({
+const {error}=await supabaseClient
+.from("family_members")
+.insert({
 
-    id:Date.now(),
+family_code:familyCode,
+name,
+role,
+icon
 
-    name,
+});
 
-    role,
+if(error){
 
-    icon
+alert(error.message);
+return;
 
-  });
+}
 
-  document.getElementById("newMemberName").value="";
+document.getElementById("newMemberName").value="";
 
-  save();
+await loadData();
 
 }
 
 
-function deleteMember(id){
+async function deleteMember(id){
 
-  if(!confirm("この家族メンバーを削除しますか？"))
-    return;
+if(!confirm("削除しますか？"))return;
 
-  data.members=
-    data.members.filter(m=>m.id!==id);
+const {error}=await supabaseClient
+.from("family_members")
+.delete()
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  save();
+if(error){
+
+alert(error.message);
+return;
+
+}
+
+await loadData();
 
 }
 
 
 /* =========================
-   SCHEDULE
+SCHEDULE
 ========================= */
 
-function addSchedule(){
+async function addSchedule(){
 
-  const title=
-    document.getElementById("scheduleTitle").value.trim();
+const title=
+document.getElementById("scheduleTitle").value.trim();
 
-  const date=
-    document.getElementById("scheduleDate").value;
+const date=
+document.getElementById("scheduleDate").value;
 
-  const time=
-    document.getElementById("scheduleTime").value;
+const time=
+document.getElementById("scheduleTime").value;
 
-  const person=
-    Number(document.getElementById("schedulePerson").value);
+const person=
+Number(document.getElementById("schedulePerson").value);
 
-  if(!title || !date){
+if(!title||!date){
 
-    alert("予定名と日付を入力してください");
+alert("予定名と日付を入力してください");
 
-    return;
+return;
 
-  }
+}
 
-  data.schedules.push({
+const {error}=await supabaseClient
+.from("family_schedules")
+.insert({
 
-    id:Date.now(),
+family_code:familyCode,
+title,
+schedule_date:date,
+schedule_time:time,
+person_id:person
 
-    title,
+});
 
-    date,
+if(error){
 
-    time,
+alert(error.message);
+return;
 
-    person
+}
 
-  });
+document.getElementById("scheduleTitle").value="";
 
-  document.getElementById("scheduleTitle").value="";
-
-  save();
+await loadData();
 
 }
 
 
-function deleteSchedule(id){
+async function deleteSchedule(id){
 
-  data.schedules=
-    data.schedules.filter(x=>x.id!==id);
+await supabaseClient
+.from("family_schedules")
+.delete()
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  save();
+await loadData();
 
 }
 
 
 /* =========================
-   TASK
+TASK
 ========================= */
 
-function addTask(){
+async function addTask(){
 
-  const title=
-    document.getElementById("taskTitle").value.trim();
+const title=
+document.getElementById("taskTitle").value.trim();
 
-  const person=
-    Number(document.getElementById("taskPerson").value);
+const person=
+Number(document.getElementById("taskPerson").value);
 
-  const date=
-    document.getElementById("taskDate").value;
+const date=
+document.getElementById("taskDate").value;
 
-  if(!title){
+if(!title)return;
 
-    alert("当番名を入力してください");
+const {error}=await supabaseClient
+.from("family_tasks")
+.insert({
 
-    return;
+family_code:familyCode,
+title,
+person_id:person,
+task_date:date
 
-  }
+});
 
-  data.tasks.push({
+if(error){
 
-    id:Date.now(),
+alert(error.message);
+return;
 
-    title,
+}
 
-    person,
+document.getElementById("taskTitle").value="";
 
-    date,
-
-    done:false
-
-  });
-
-  document.getElementById("taskTitle").value="";
-
-  save();
+await loadData();
 
 }
 
 
-function toggleTask(id){
+async function toggleTask(id,done){
 
-  const task=
-    data.tasks.find(x=>x.id===id);
+await supabaseClient
+.from("family_tasks")
+.update({done:!done})
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  if(task){
-
-    task.done=!task.done;
-
-    save();
-
-  }
+await loadData();
 
 }
 
 
-function deleteTask(id){
+async function deleteTask(id){
 
-  data.tasks=
-    data.tasks.filter(x=>x.id!==id);
+await supabaseClient
+.from("family_tasks")
+.delete()
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  save();
+await loadData();
 
 }
 
 
 /* =========================
-   MESSAGE
+MESSAGE
 ========================= */
 
-function addMessage(){
+async function addMessage(){
 
-  const text=
-    document.getElementById("messageText")
-      .value.trim();
+const text=
+document.getElementById("messageText")
+.value.trim();
 
-  if(!text){
+if(!text)return;
 
-    alert("メッセージを入力してください");
+await supabaseClient
+.from("family_messages")
+.insert({
 
-    return;
+family_code:familyCode,
+text,
+user_id:currentUser
 
-  }
+});
 
-  data.messages.push({
+document.getElementById("messageText").value="";
 
-    id:Date.now(),
-
-    text,
-
-    user:data.currentUser,
-
-    date:new Date().toLocaleString("ja-JP")
-
-  });
-
-  document.getElementById("messageText").value="";
-
-  save();
+await loadData();
 
 }
 
 
-function deleteMessage(id){
+async function deleteMessage(id){
 
-  data.messages=
-    data.messages.filter(x=>x.id!==id);
+await supabaseClient
+.from("family_messages")
+.delete()
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  save();
+await loadData();
 
 }
 
 
 /* =========================
-   GAME
+GAME
 ========================= */
 
-function addGame(){
+async function addGame(){
 
-  const person=
-    Number(document.getElementById("gamePerson").value);
+const person=
+Number(document.getElementById("gamePerson").value);
 
-  const name=
-    document.getElementById("gameName").value.trim();
+const name=
+document.getElementById("gameName")
+.value.trim();
 
-  const time=
-    document.getElementById("gameTime").value;
+const time=
+document.getElementById("gameTime").value;
 
-  if(!name){
+if(!name)return;
 
-    alert("ゲーム名を入力してください");
+await supabaseClient
+.from("family_games")
+.insert({
 
-    return;
+family_code:familyCode,
+person_id:person,
+game_name:name,
+game_time:time,
+game_date:new Date()
+.toISOString()
+.slice(0,10)
 
-  }
+});
 
-  data.games.push({
+document.getElementById("gameName").value="";
 
-    id:Date.now(),
-
-    person,
-
-    name,
-
-    time,
-
-    date:new Date().toISOString().slice(0,10)
-
-  });
-
-  document.getElementById("gameName").value="";
-
-  save();
+await loadData();
 
 }
 
 
-function deleteGame(id){
+async function deleteGame(id){
 
-  data.games=
-    data.games.filter(x=>x.id!==id);
+await supabaseClient
+.from("family_games")
+.delete()
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  save();
+await loadData();
 
 }
 
 
 /* =========================
-   MONEY
+MONEY
 ========================= */
 
-function addMoney(){
+async function addMoney(){
 
-  const person=
-    Number(document.getElementById("moneyPerson").value);
+const person=
+Number(document.getElementById("moneyPerson").value);
 
-  const amount=
-    Number(document.getElementById("moneyAmount").value);
+const amount=
+Number(document.getElementById("moneyAmount").value);
 
-  const type=
-    document.getElementById("moneyType").value;
+const type=
+document.getElementById("moneyType").value;
 
-  const memo=
-    document.getElementById("moneyMemo").value;
+const memo=
+document.getElementById("moneyMemo").value;
 
-  if(!amount || amount<=0){
+if(!amount)return;
 
-    alert("金額を入力してください");
+await supabaseClient
+.from("family_money")
+.insert({
 
-    return;
+family_code:familyCode,
+person_id:person,
+amount,
+type,
+memo
 
-  }
+});
 
-  data.money.push({
+document.getElementById("moneyAmount").value="";
+document.getElementById("moneyMemo").value="";
 
-    id:Date.now(),
-
-    person,
-
-    amount,
-
-    type,
-
-    memo,
-
-    date:new Date().toLocaleString("ja-JP")
-
-  });
-
-  document.getElementById("moneyAmount").value="";
-
-  document.getElementById("moneyMemo").value="";
-
-  save();
+await loadData();
 
 }
 
 
-function deleteMoney(id){
+async function deleteMoney(id){
 
-  data.money=
-    data.money.filter(x=>x.id!==id);
+await supabaseClient
+.from("family_money")
+.delete()
+.eq("id",id)
+.eq("family_code",familyCode);
 
-  save();
+await loadData();
 
 }
 
 
 /* =========================
-   RULES
+RULE
 ========================= */
 
-function addRule(){
+async function addRule(){
 
-  const title=
-    document.getElementById("ruleTitle")
-      .value.trim();
+const title=
+document.getElementById("ruleTitle")
+.value.trim();
 
-  const fine=
-    Number(
-      document.getElementById("ruleFine").value
-    ) || 0;
+const fine=
+Number(document.getElementById("ruleFine").value)||0;
 
-  if(!title){
+if(!title)return;
 
-    alert("ルールを入力してください");
+await supabaseClient
+.from("family_rules")
+.insert({
 
-    return;
+family_code:familyCode,
+title,
+fine
 
-  }
+});
 
-  data.rules.push({
+document.getElementById("ruleTitle").value="";
 
-    id:Date.now(),
-
-    title,
-
-    fine
-
-  });
-
-  document.getElementById("ruleTitle").value="";
-
-  document.getElementById("ruleFine").value="";
-
-  save();
-
-}
-
-
-function deleteRule(id){
-
-  data.rules=
-    data.rules.filter(x=>x.id!==id);
-
-  save();
+await loadData();
 
 }
 
 
 /* =========================
-   VOTE
+FINE
 ========================= */
 
-function vote(id){
+async function addFine(){
 
-  if(!data.votes[id])
-    data.votes[id]=0;
+const person=
+Number(document.getElementById("finePerson").value);
 
-  data.votes[id]++;
+const amount=
+Number(document.getElementById("fineAmount").value);
 
-  save();
+const reason=
+document.getElementById("fineReason")
+.value.trim();
+
+if(!amount||!reason){
+
+alert("金額と理由を入力してください");
+
+return;
+
+}
+
+await supabaseClient
+.from("family_fines")
+.insert({
+
+family_code:familyCode,
+person_id:person,
+amount,
+reason
+
+});
+
+document.getElementById("fineAmount").value="";
+document.getElementById("fineReason").value="";
+
+await loadData();
 
 }
 
 
 /* =========================
-   NEWS
+STUDY
 ========================= */
 
-function addNews(){
+async function addStudy(){
 
-  const title=
-    document.getElementById("newsTitle")
-      .value.trim();
+const person=
+Number(document.getElementById("studyPerson").value);
 
-  const text=
-    document.getElementById("newsText")
-      .value.trim();
+const date=
+document.getElementById("studyDate").value;
 
-  if(!title){
+const minutes=
+Number(document.getElementById("studyMinutes").value);
 
-    alert("タイトルを入力してください");
+const subject=
+document.getElementById("studySubject").value.trim();
 
-    return;
+if(!minutes||minutes<=0){
 
-  }
+alert("勉強時間を入力してください");
 
-  data.news.push({
-
-    id:Date.now(),
-
-    title,
-
-    text,
-
-    date:new Date().toLocaleDateString("ja-JP")
-
-  });
-
-  document.getElementById("newsTitle").value="";
-
-  document.getElementById("newsText").value="";
-
-  save();
+return;
 
 }
 
+const {error}=await supabaseClient
+.from("family_study")
+.insert({
 
-function deleteNews(id){
+family_code:familyCode,
+person_id:person,
+study_date:date,
+minutes,
+subject
 
-  data.news=
-    data.news.filter(x=>x.id!==id);
+});
 
-  save();
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+document.getElementById("studyMinutes").value="";
+document.getElementById("studySubject").value="";
+
+await loadData();
 
 }
 
 
 /* =========================
-   PERSON
+VOTE
 ========================= */
 
-function getPerson(id){
+async function vote(personId){
 
-  return data.members.find(m=>m.id===id);
+if(!currentUser){
+
+alert("利用者を選択してください");
+
+return;
+
+}
+
+const voterKey=
+familyCode+"_"+currentUser;
+
+const {error}=await supabaseClient
+.from("family_votes")
+.insert({
+
+family_code:familyCode,
+person_id:personId,
+voter_key:voterKey
+
+});
+
+if(error){
+
+if(error.code==="23505"){
+
+alert("あなたはすでに投票しています");
+
+}else{
+
+alert(error.message);
+
+}
+
+return;
+
+}
+
+await loadData();
 
 }
 
 
 /* =========================
-   REFRESH
+NEWS
 ========================= */
 
-function refreshAll(){
+async function addNews(){
 
-  setupSelects();
+if(!isPresident()){
 
-  renderHeader();
+alert("子供大統領だけが子どもニュースを編集できます。");
 
-  renderMembers();
+return;
 
-  renderSchedules();
+}
 
-  renderTasks();
+const title=
+document.getElementById("newsTitle")
+.value.trim();
 
-  renderMessages();
+const text=
+document.getElementById("newsText")
+.value.trim();
 
-  renderGames();
+if(!title)return;
 
-  renderMoney();
+await supabaseClient
+.from("family_news")
+.insert({
 
-  renderRules();
+family_code:familyCode,
+title,
+text
 
-  renderChildren();
+});
 
-  renderNews();
+document.getElementById("newsTitle").value="";
+document.getElementById("newsText").value="";
 
-  renderHome();
+await loadData();
 
 }
 
 
 /* =========================
-   HEADER
+PRESIDENT
 ========================= */
 
-function renderHeader(){
+function getChildren(){
 
-  const person=
-    getPerson(data.currentUser);
+return members.filter(
+m=>m.role==="child"
+);
 
-  const badge=
-    document.getElementById("currentUserBadge");
+}
 
-  if(person){
 
-    badge.textContent=
-      person.icon+" "+person.name+
-      "（"+(data.currentRole==="parent"?"親":"子ども")+"）";
+function getVoteCount(personId){
 
-    document.getElementById("welcomeText")
-      .textContent=
-      "こんにちは、"+person.name+"！";
+return votes.filter(
+v=>v.person_id===personId
+).length;
 
-  }else{
+}
 
-    badge.textContent="未ログイン";
 
-  }
+function getPresident(){
+
+const children=
+getChildren();
+
+if(!children.length)return null;
+
+let winner=children[0];
+
+children.forEach(child=>{
+
+if(
+getVoteCount(child.id)>
+getVoteCount(winner.id)
+){
+
+winner=child;
+
+}
+
+});
+
+return winner;
+
+}
+
+
+function isPresident(){
+
+const president=
+getPresident();
+
+return president &&
+Number(currentUser)===Number(president.id);
 
 }
 
 
 /* =========================
-   MEMBERS
-========================= */
-
-function renderMembers(){
-
-  const box=
-    document.getElementById("memberList");
-
-  box.innerHTML="";
-
-  data.members.forEach(m=>{
-
-    box.innerHTML+=`
-
-      <div class="member">
-
-        <div class="avatar">${m.icon}</div>
-
-        <div style="flex:1">
-
-          <strong>${escapeHTML(m.name)}</strong>
-
-          <div class="small">
-            ${m.role==="parent"?"親":"子ども"}
-          </div>
-
-        </div>
-
-        <button
-          class="danger"
-          onclick="deleteMember(${m.id})">
-          削除
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* =========================
-   SCHEDULE RENDER
-========================= */
-
-function renderSchedules(){
-
-  const box=
-    document.getElementById("scheduleList");
-
-  box.innerHTML="";
-
-  const list=
-    [...data.schedules]
-      .sort((a,b)=>
-        (a.date+a.time)
-        .localeCompare(b.date+b.time)
-      );
-
-  if(!list.length){
-
-    box.innerHTML=
-      `<div class="empty">予定はありません。</div>`;
-
-    return;
-
-  }
-
-  list.forEach(x=>{
-
-    const p=getPerson(x.person);
-
-    box.innerHTML+=`
-
-      <div class="item">
-
-        <div class="item-title">
-          📅 ${escapeHTML(x.title)}
-        </div>
-
-        <div>
-          ${x.date}
-          ${x.time||""}
-        </div>
-
-        <span class="tag">
-          ${p?p.icon+" "+escapeHTML(p.name):"不明"}
-        </span>
-
-        <br><br>
-
-        <button
-          class="danger"
-          onclick="deleteSchedule(${x.id})">
-          削除
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* =========================
-   TASK RENDER
-========================= */
-
-function renderTasks(){
-
-  const box=
-    document.getElementById("taskList");
-
-  box.innerHTML="";
-
-  if(!data.tasks.length){
-
-    box.innerHTML=
-      `<div class="empty">当番はありません。</div>`;
-
-    return;
-
-  }
-
-  data.tasks.forEach(x=>{
-
-    const p=getPerson(x.person);
-
-    box.innerHTML+=`
-
-      <div class="item">
-
-        <div class="item-title"
-          style="${x.done?'text-decoration:line-through;color:#999':''}">
-
-          ${x.done?"☑️":"⬜"} 
-          ${escapeHTML(x.title)}
-
-        </div>
-
-        <div>
-          ${p?p.icon+" "+escapeHTML(p.name):"不明"}
-        </div>
-
-        <div class="small">
-          ${x.date||""}
-        </div>
-
-        <br>
-
-        <button
-          class="${x.done?"gray":"success"}"
-          onclick="toggleTask(${x.id})">
-
-          ${x.done?"未完了に戻す":"完了"}
-
-        </button>
-
-        <button
-          class="danger"
-          onclick="deleteTask(${x.id})">
-          削除
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* =========================
-   MESSAGE RENDER
-========================= */
-
-function renderMessages(){
-
-  const box=
-    document.getElementById("messageList");
-
-  box.innerHTML="";
-
-  const home=
-    document.getElementById("homeMessages");
-
-  home.innerHTML="";
-
-  const list=
-    [...data.messages].reverse();
-
-  if(!list.length){
-
-    box.innerHTML=
-      `<div class="empty">メッセージはありません。</div>`;
-
-    home.innerHTML=
-      `<div class="empty">まだありません。</div>`;
-
-    return;
-
-  }
-
-  list.forEach(x=>{
-
-    const p=getPerson(x.user);
-
-    const html=`
-
-      <div class="item">
-
-        <div class="item-title">
-          ${p?p.icon+" "+escapeHTML(p.name):"家族"}
-        </div>
-
-        <p>${escapeHTML(x.text)}</p>
-
-        <div class="small">${x.date}</div>
-
-        <br>
-
-        <button
-          class="danger"
-          onclick="deleteMessage(${x.id})">
-          削除
-        </button>
-
-      </div>
-
-    `;
-
-    box.innerHTML+=html;
-
-  });
-
-  list.slice(0,3).forEach(x=>{
-
-    const p=getPerson(x.user);
-
-    home.innerHTML+=`
-
-      <div class="item">
-
-        <strong>
-          ${p?p.icon+" "+escapeHTML(p.name):"家族"}
-        </strong>
-
-        <p>${escapeHTML(x.text)}</p>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* =========================
-   GAME RENDER
-========================= */
-
-function renderGames(){
-
-  const box=
-    document.getElementById("gameList");
-
-  const child=
-    document.getElementById("childGames");
-
-  const home=
-    document.getElementById("homeGames");
-
-  box.innerHTML="";
-  child.innerHTML="";
-  home.innerHTML="";
-
-  const today=
-    new Date().toISOString().slice(0,10);
-
-  const list=
-    data.games.filter(x=>x.date===today);
-
-  if(!list.length){
-
-    box.innerHTML=
-      `<div class="empty">今日のゲーム予定はありません。</div>`;
-
-    child.innerHTML=
-      `<div class="empty">まだ予定はありません。</div>`;
-
-    home.innerHTML=
-      `<div class="empty">まだありません。</div>`;
-
-    return;
-
-  }
-
-  list.forEach(x=>{
-
-    const p=getPerson(x.person);
-
-    const html=`
-
-      <div class="item">
-
-        <div class="item-title">
-          🎮 ${escapeHTML(x.name)}
-        </div>
-
-        <div>
-          ${p?p.icon+" "+escapeHTML(p.name):"不明"}
-        </div>
-
-        <div class="small">
-          ${x.time?x.time+"〜":""}
-        </div>
-
-        <br>
-
-        <button
-          class="danger"
-          onclick="deleteGame(${x.id})">
-          削除
-        </button>
-
-      </div>
-
-    `;
-
-    box.innerHTML+=html;
-
-    child.innerHTML+=html;
-
-    home.innerHTML+=`
-
-      <div class="item">
-
-        🎮 <strong>
-        ${p?escapeHTML(p.name):"不明"}
-        </strong>
-
-        ：${escapeHTML(x.name)}
-
-        ${x.time?"（"+x.time+"）":""}
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* =========================
-   MONEY RENDER
-========================= */
-
-function renderMoney(){
-
-  const balances={};
-
-  data.members.forEach(m=>{
-    balances[m.id]=0;
-  });
-
-  data.money.forEach(x=>{
-
-    if(!(x.person in balances))
-      balances[x.person]=0;
-
-    if(x.type==="income")
-      balances[x.person]+=x.amount;
-    else
-      balances[x.person]-=x.amount;
-
-  });
-
-  const box=
-    document.getElementById("moneyBalances");
-
-  box.innerHTML="";
-
-  let total=0;
-
-  data.members.forEach(m=>{
-
-    const amount=balances[m.id]||0;
-
-    total+=amount;
-
-    box.innerHTML+=`
-
-      <div class="member">
-
-        <div class="avatar">${m.icon}</div>
-
-        <div style="flex:1">
-          ${escapeHTML(m.name)}
-        </div>
-
-        <strong>
-          ¥${amount.toLocaleString()}
-        </strong>
-
-      </div>
-
-    `;
-
-  });
-
-  document.getElementById("totalMoney")
-    .textContent=
-      total.toLocaleString();
-
-  const list=
-    document.getElementById("moneyList");
-
-  list.innerHTML="";
-
-  if(!data.money.length){
-
-    list.innerHTML=
-      `<div class="empty">履歴はありません。</div>`;
-
-    return;
-
-  }
-
-  [...data.money]
-    .reverse()
-    .forEach(x=>{
-
-      const p=getPerson(x.person);
-
-      list.innerHTML+=`
-
-        <div class="item">
-
-          <div class="item-title">
-
-            ${x.type==="income"?"💵":"💸"}
-
-            ${x.type==="income"?"+":"-"}
-            ¥${x.amount.toLocaleString()}
-
-          </div>
-
-          <div>
-            ${p?p.icon+" "+escapeHTML(p.name):"不明"}
-          </div>
-
-          <div>
-            ${escapeHTML(x.memo||"")}
-          </div>
-
-          <div class="small">${x.date}</div>
-
-          <br>
-
-          <button
-            class="danger"
-            onclick="deleteMoney(${x.id})">
-            削除
-          </button>
-
-        </div>
-
-      `;
-
-    });
-
-}
-
-
-/* =========================
-   RULE RENDER
-========================= */
-
-function renderRules(){
-
-  const box=
-    document.getElementById("ruleList");
-
-  box.innerHTML="";
-
-  if(!data.rules.length){
-
-    box.innerHTML=
-      `<div class="empty">ルールはありません。</div>`;
-
-    return;
-
-  }
-
-  data.rules.forEach(x=>{
-
-    box.innerHTML+=`
-
-      <div class="item">
-
-        <div class="item-title">
-          ⚖️ ${escapeHTML(x.title)}
-        </div>
-
-        <div>
-          罰金：
-          <strong>
-            ¥${x.fine.toLocaleString()}
-          </strong>
-        </div>
-
-        <br>
-
-        <button
-          class="danger"
-          onclick="deleteRule(${x.id})">
-          削除
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* =========================
-   CHILDREN
+CHILDREN
 ========================= */
 
 function renderChildren(){
 
-  const children=
-    data.members.filter(m=>m.role==="child");
+renderPresident();
+renderPresidentEditor();
+renderFines();
+renderStudy();
+renderVotes();
+renderChildGames();
+renderChildNews();
 
-  const box=
-    document.getElementById("voteList");
+}
 
-  box.innerHTML="";
 
-  children.forEach(m=>{
+function renderPresident(){
 
-    const votes=
-      data.votes[m.id]||0;
+const box=
+document.getElementById("presidentBox");
 
-    box.innerHTML+=`
+const president=
+getPresident();
 
-      <div class="vote-row">
+if(!president){
 
-        <div class="name">
-          ${m.icon} ${escapeHTML(m.name)}
-        </div>
+box.innerHTML=
+`<div class="card">子どもが登録されていません。</div>`;
 
-        <div class="vote-bar">
+return;
 
-          <div class="progress">
+}
 
-            <div
-              class="progress-bar"
-              style="width:${Math.min(votes*10,100)}%">
-            </div>
+const total=
+getChildren()
+.reduce(
+(sum,c)=>sum+getVoteCount(c.id),
+0
+);
 
-          </div>
+const rate=
+total?
+Math.round(
+getVoteCount(president.id)/total*100
+):0;
 
-        </div>
+box.innerHTML=`
 
-        <strong>${votes}</strong>
+<div class="president">
 
-        <button
-          class="primary"
-          onclick="vote(${m.id})">
-          投票
-        </button>
+<div class="president-icon">
+${president.icon}
+</div>
 
-      </div>
+<h2>👑 現在の子供大統領</h2>
 
-    `;
+<h1>${escapeHTML(president.name)}</h1>
 
-  });
+<div class="big-number">
+${rate}%
+</div>
 
-  const result=
-    document.getElementById("presidentResult");
+<p>
+支持率 ${rate}% ・
+${getVoteCount(president.id)}票
+</p>
 
-  if(!children.length){
+</div>
 
-    result.innerHTML=
-      "子どもが登録されていません。";
+`;
 
-    return;
+}
 
-  }
 
-  let winner=children[0];
+function renderPresidentEditor(){
 
-  children.forEach(m=>{
+const box=
+document.getElementById("presidentEditor");
 
-    if(
-      (data.votes[m.id]||0)>
-      (data.votes[winner.id]||0)
-    ){
+if(!isPresident()){
 
-      winner=m;
+box.innerHTML=`
 
-    }
+<div class="lock">
 
-  });
+🔒 子どもページ編集
 
-  const total=
-    children.reduce(
-      (sum,m)=>sum+(data.votes[m.id]||0),
-      0
-    );
+<br><br>
 
-  const winVotes=
-    data.votes[winner.id]||0;
+現在の子供大統領だけが
+このページを編集できます。
 
-  const rate=
-    total?
-      Math.round(winVotes/total*100):
-      0;
+</div>
 
-  result.innerHTML=`
+`;
 
-    <div style="text-align:center;padding:15px">
+return;
 
-      <div style="font-size:55px">
-        ${winner.icon}
-      </div>
+}
 
-      <h2>
-        ${escapeHTML(winner.name)}
-      </h2>
+box.innerHTML=`
 
-      <div class="big-number">
-        ${rate}%
-      </div>
+<div class="card">
 
-      <p>
-        現在の子供大統領支持率
-      </p>
+<h2>👑 子供大統領専用・編集</h2>
 
-    </div>
+<p>
+あなたは現在、支持率1位の子供大統領です。
+</p>
 
-  `;
+<div class="grid">
+
+<div>
+
+<h3>📰 ニュース</h3>
+
+<input id="presNewsTitle"
+placeholder="ニュースタイトル">
+
+<textarea id="presNewsText"
+placeholder="ニュース内容"></textarea>
+
+<button class="primary"
+onclick="addPresidentNews()">
+ニュースを公開
+</button>
+
+</div>
+
+<div>
+
+<h3>🎮 今日のゲーム予定</h3>
+
+<select id="presGamePerson"></select>
+
+<input id="presGameName"
+placeholder="ゲーム名">
+
+<input id="presGameTime"
+type="time">
+
+<button class="primary"
+onclick="addPresidentGame()">
+ゲーム予定を追加
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+const select=
+document.getElementById("presGamePerson");
+
+if(select){
+
+select.innerHTML="";
+
+getChildren().forEach(m=>{
+
+select.innerHTML+=`
+<option value="${m.id}">
+${m.icon} ${escapeHTML(m.name)}
+</option>
+`;
+
+});
+
+}
 
 }
 
 
 /* =========================
-   NEWS
+PRESIDENT EDIT
 ========================= */
 
-function renderNews(){
+async function addPresidentNews(){
 
-  const child=
-    document.getElementById("childNews");
+if(!isPresident()){
 
-  const admin=
-    document.getElementById("adminNewsList");
+alert("子供大統領ではありません");
 
-  child.innerHTML="";
-  admin.innerHTML="";
+return;
 
-  if(!data.news.length){
+}
 
-    child.innerHTML=
-      `<div class="empty">ニュースはありません。</div>`;
+const title=
+document.getElementById("presNewsTitle")
+.value.trim();
 
-    return;
+const text=
+document.getElementById("presNewsText")
+.value.trim();
 
-  }
+if(!title)return;
 
-  [...data.news]
-    .reverse()
-    .forEach(x=>{
+await supabaseClient
+.from("family_news")
+.insert({
 
-      const html=`
+family_code:familyCode,
+title,
+text
 
-        <div class="item">
+});
 
-          <div class="item-title">
-            📰 ${escapeHTML(x.title)}
-          </div>
+await loadData();
 
-          <p>${escapeHTML(x.text)}</p>
+}
 
-          <div class="small">
-            ${x.date}
-          </div>
 
-        </div>
+async function addPresidentGame(){
 
-      `;
+if(!isPresident()){
 
-      child.innerHTML+=html;
+alert("子供大統領ではありません");
 
-      admin.innerHTML+=`
+return;
 
-        ${html}
+}
 
-        <button
-          class="danger"
-          onclick="deleteNews(${x.id})">
-          削除
-        </button>
+const person=
+Number(
+document.getElementById("presGamePerson").value
+);
 
-      `;
+const name=
+document.getElementById("presGameName")
+.value.trim();
 
-    });
+const time=
+document.getElementById("presGameTime").value;
+
+if(!name)return;
+
+await supabaseClient
+.from("family_games")
+.insert({
+
+family_code:familyCode,
+person_id:person,
+game_name:name,
+game_time:time,
+game_date:new Date()
+.toISOString()
+.slice(0,10)
+
+});
+
+await loadData();
 
 }
 
 
 /* =========================
-   HOME
+FINE RENDER
 ========================= */
+
+function renderFines(){
+
+const box=
+document.getElementById("childFines");
+
+box.innerHTML="";
+
+if(!fines.length){
+
+box.innerHTML=
+`<div class="empty">罰金はありません。</div>`;
+
+return;
+
+}
+
+fines.forEach(f=>{
+
+const p=
+members.find(m=>m.id===f.person_id);
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-title">
+
+${p?p.icon:"👤"}
+${p?escapeHTML(p.name):"不明"}
+
+</div>
+
+<div style="
+font-size:28px;
+font-weight:bold;
+color:#e74c3c">
+
+💸 ¥${f.amount.toLocaleString()}
+
+</div>
+
+<div>
+理由：${escapeHTML(f.reason)}
+</div>
+
+<div class="small">
+${formatDate(f.created_at)}
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+STUDY RENDER
+========================= */
+
+function renderStudy(){
+
+const box=
+document.getElementById("childStudy");
+
+box.innerHTML="";
+
+const children=
+getChildren();
+
+if(!children.length){
+
+box.innerHTML=
+`<div class="empty">子どもがいません。</div>`;
+
+return;
+
+}
+
+children.forEach(person=>{
+
+const records=
+study.filter(
+s=>s.person_id===person.id
+);
+
+const total=
+records.reduce(
+(sum,r)=>sum+Number(r.minutes),
+0
+);
+
+const hours=
+Math.floor(total/60);
+
+const minutes=
+total%60;
+
+const percent=
+Math.min(
+Math.round(total/300*100),
+100
+);
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-title">
+
+${person.icon}
+${escapeHTML(person.name)}
+
+</div>
+
+<div class="study-total">
+
+${hours}時間 ${minutes}分
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:${percent}%">
+</div>
+
+</div>
+
+<div class="small">
+合計 ${total}分
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+VOTE RENDER
+========================= */
+
+function renderVotes(){
+
+const box=
+document.getElementById("voteList");
+
+box.innerHTML="";
+
+getChildren().forEach(person=>{
+
+const count=
+getVoteCount(person.id);
+
+box.innerHTML+=`
+
+<div class="item">
+
+<strong>
+${person.icon}
+${escapeHTML(person.name)}
+</strong>
+
+<span class="tag">
+${count}票
+</span>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="
+width:${Math.min(count*20,100)}%">
+</div>
+
+</div>
+
+<button
+class="primary"
+onclick="vote(${person.id})">
+この人に投票
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+GAME RENDER
+========================= */
+
+function renderChildGames(){
+
+const box=
+document.getElementById("childGames");
+
+const home=
+document.getElementById("homeGames");
+
+box.innerHTML="";
+home.innerHTML="";
+
+const today=
+new Date()
+.toISOString()
+.slice(0,10);
+
+const list=
+games.filter(g=>g.game_date===today);
+
+if(!list.length){
+
+box.innerHTML=
+`<div class="empty">今日のゲーム予定はありません。</div>`;
+
+home.innerHTML=
+`<div class="empty">なし</div>`;
+
+return;
+
+}
+
+list.forEach(g=>{
+
+const p=
+members.find(m=>m.id===g.person_id);
+
+box.innerHTML+=`
+
+<div class="item">
+
+🎮 <strong>
+${p?escapeHTML(p.name):"不明"}
+</strong>
+
+：${escapeHTML(g.game_name)}
+
+${g.game_time?
+"（"+g.game_time+"）":
+""}
+
+</div>
+
+`;
+
+home.innerHTML+=`
+
+<div class="item">
+
+🎮 ${p?escapeHTML(p.name):"不明"}
+：
+${escapeHTML(g.game_name)}
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+NEWS RENDER
+========================= */
+
+function renderChildNews(){
+
+const box=
+document.getElementById("childNews");
+
+box.innerHTML="";
+
+if(!news.length){
+
+box.innerHTML=
+`<div class="empty">ニュースはありません。</div>`;
+
+return;
+
+}
+
+news.forEach(n=>{
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-title">
+📰 ${escapeHTML(n.title)}
+</div>
+
+<p>
+${escapeHTML(n.text||"")}
+</p>
+
+<div class="small">
+${formatDate(n.created_at)}
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+SCHEDULE RENDER
+========================= */
+
+function renderSchedules(){
+
+const box=
+document.getElementById("scheduleList");
+
+box.innerHTML="";
+
+if(!schedules.length){
+
+box.innerHTML=
+`<div class="empty">予定はありません。</div>`;
+
+return;
+
+}
+
+schedules.forEach(s=>{
+
+const p=
+members.find(m=>m.id===s.person_id);
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-title">
+📅 ${escapeHTML(s.title)}
+</div>
+
+${s.schedule_date}
+
+${s.schedule_time||""}
+
+<br>
+
+<span class="tag">
+
+${p?p.icon:"👤"}
+${p?escapeHTML(p.name):"不明"}
+
+</span>
+
+<br><br>
+
+<button
+class="danger"
+onclick="deleteSchedule(${s.id})">
+削除
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+TASK RENDER
+========================= */
+
+function renderTasks(){
+
+const box=
+document.getElementById("taskList");
+
+box.innerHTML="";
+
+if(!tasks.length){
+
+box.innerHTML=
+`<div class="empty">当番はありません。</div>`;
+
+return;
+
+}
+
+tasks.forEach(t=>{
+
+const p=
+members.find(m=>m.id===t.person_id);
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-title"
+style="
+${t.done?
+"text-decoration:line-through;color:#999":
+""}">
+
+${t.done?"☑️":"⬜"}
+${escapeHTML(t.title)}
+
+</div>
+
+<div>
+
+${p?p.icon:"👤"}
+${p?escapeHTML(p.name):"不明"}
+
+</div>
+
+<div class="small">
+${t.task_date||""}
+</div>
+
+<br>
+
+<button
+class="success"
+onclick="toggleTask(${t.id},${t.done})">
+
+${t.done?"未完了に戻す":"完了"}
+
+</button>
+
+<button
+class="danger"
+onclick="deleteTask(${t.id})">
+削除
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+MESSAGE RENDER
+========================= */
+
+function renderMessages(){
+
+const box=
+document.getElementById("messageList");
+
+const home=
+document.getElementById("homeMessages");
+
+box.innerHTML="";
+home.innerHTML="";
+
+if(!messages.length){
+
+box.innerHTML=
+`<div class="empty">メッセージはありません。</div>`;
+
+return;
+
+}
+
+messages.forEach(m=>{
+
+const p=
+members.find(x=>x.id===m.user_id);
+
+box.innerHTML+=`
+
+<div class="item">
+
+<strong>
+${p?p.icon:"👤"}
+${p?escapeHTML(p.name):"家族"}
+</strong>
+
+<p>${escapeHTML(m.text)}</p>
+
+<div class="small">
+${formatDate(m.created_at)}
+</div>
+
+<button
+class="danger"
+onclick="deleteMessage(${m.id})">
+削除
+</button>
+
+</div>
+
+`;
+
+});
+
+messages.slice(0,3).forEach(m=>{
+
+const p=
+members.find(x=>x.id===m.user_id);
+
+home.innerHTML+=`
+
+<div class="item">
+
+<strong>
+${p?p.icon:"👤"}
+${p?escapeHTML(p.name):"家族"}
+</strong>
+
+<p>${escapeHTML(m.text)}</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+MONEY
+========================= */
+
+function renderMoney(){
+
+const box=
+document.getElementById("moneyBalances");
+
+const list=
+document.getElementById("moneyList");
+
+box.innerHTML="";
+list.innerHTML="";
+
+members.forEach(person=>{
+
+let total=0;
+
+money
+.filter(m=>m.person_id===person.id)
+.forEach(m=>{
+
+if(m.type==="income")
+total+=m.amount;
+else
+total-=m.amount;
+
+});
+
+box.innerHTML+=`
+
+<div class="member">
+
+<div class="avatar">
+${person.icon}
+</div>
+
+<div style="flex:1">
+${escapeHTML(person.name)}
+</div>
+
+<strong>
+¥${total.toLocaleString()}
+</strong>
+
+</div>
+
+`;
+
+});
+
+money.forEach(m=>{
+
+const p=
+members.find(x=>x.id===m.person_id);
+
+list.innerHTML+=`
+
+<div class="item">
+
+${m.type==="income"?"💵":"💸"}
+
+<strong>
+${m.type==="income"?"+":"-"}
+¥${m.amount.toLocaleString()}
+</strong>
+
+<br>
+
+${p?p.icon:"👤"}
+${p?escapeHTML(p.name):"不明"}
+
+<br>
+
+${escapeHTML(m.memo||"")}
+
+<br>
+
+<button
+class="danger"
+onclick="deleteMoney(${m.id})">
+削除
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+RULE
+========================= */
+
+function renderRules(){
+
+const box=
+document.getElementById("ruleList");
+
+box.innerHTML="";
+
+rules.forEach(r=>{
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-title">
+⚖️ ${escapeHTML(r.title)}
+</div>
+
+罰金：
+<strong>
+¥${Number(r.fine).toLocaleString()}
+</strong>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+MEMBERS
+========================= */
+
+function renderMembers(){
+
+const box=
+document.getElementById("memberList");
+
+box.innerHTML="";
+
+members.forEach(m=>{
+
+box.innerHTML+=`
+
+<div class="member">
+
+<div class="avatar">
+${m.icon}
+</div>
+
+<div style="flex:1">
+
+<strong>
+${escapeHTML(m.name)}
+</strong>
+
+<div class="small">
+${m.role==="parent"?"親":"子ども"}
+</div>
+
+</div>
+
+<button
+class="danger"
+onclick="deleteMember(${m.id})">
+削除
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+REFRESH
+========================= */
+
+function refresh(){
+
+setupSelects();
+
+renderHeader();
+
+renderMembers();
+
+renderSchedules();
+
+renderTasks();
+
+renderMessages();
+
+renderChildGames();
+
+renderMoney();
+
+renderRules();
+
+renderChildren();
+
+renderHome();
+
+document.getElementById("familyCodeText")
+.textContent=familyCode;
+
+}
+
+
+function renderHeader(){
+
+const p=
+members.find(m=>m.id===Number(currentUser));
+
+if(p){
+
+document.getElementById("userBadge")
+.textContent=
+p.icon+" "+p.name+
+"（"+
+(currentRole==="parent"?"親":"子ども")+
+"）";
+
+document.getElementById("welcome")
+.textContent=
+"こんにちは、"+p.name+"！";
+
+}
+
+}
+
 
 function renderHome(){
 
-  document.getElementById("memberCount")
-    .textContent=
-      data.members.length;
+const today=
+new Date()
+.toISOString()
+.slice(0,10);
 
-  const today=
-    new Date().toISOString().slice(0,10);
+document.getElementById("memberCount")
+.textContent=
+members.length;
 
-  document.getElementById("todayScheduleCount")
-    .textContent=
-      data.schedules.filter(x=>x.date===today).length;
+document.getElementById("scheduleCount")
+.textContent=
+schedules.filter(
+x=>x.schedule_date===today
+).length;
 
-  document.getElementById("todoCount")
-    .textContent=
-      data.tasks.filter(x=>!x.done).length;
+document.getElementById("taskCount")
+.textContent=
+tasks.filter(x=>!x.done).length;
 
-}
+const todayStudy=
+study
+.filter(x=>x.study_date===today)
+.reduce(
+(sum,x)=>sum+Number(x.minutes),
+0
+);
 
-
-/* =========================
-   EXPORT
-========================= */
-
-function exportData(){
-
-  const json=
-    JSON.stringify(data,null,2);
-
-  const blob=
-    new Blob(
-      [json],
-      {type:"application/json"}
-    );
-
-  const url=
-    URL.createObjectURL(blob);
-
-  const a=
-    document.createElement("a");
-
-  a.href=url;
-
-  a.download=
-    "family-app-backup.json";
-
-  a.click();
-
-  URL.revokeObjectURL(url);
+document.getElementById("studyToday")
+.textContent=
+todayStudy+"分";
 
 }
 
 
 /* =========================
-   RESET
+UTIL
 ========================= */
 
-function resetData(){
+function formatDate(date){
 
-  if(!confirm(
-    "本当にすべてのデータを削除しますか？"
-  ))
-    return;
+if(!date)return "";
 
-  localStorage.removeItem(STORAGE_KEY);
-
-  location.reload();
+return new Date(date)
+.toLocaleString("ja-JP");
 
 }
 
 
-/* =========================
-   ESCAPE
-========================= */
+function escapeHTML(value){
 
-function escapeHTML(str){
-
-  return String(str)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
