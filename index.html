@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>家族ホーム</title>
 
@@ -25,9 +21,7 @@ body{
  color:#172033;
 }
 
-button,
-input,
-select{
+button,input,textarea{
  font:inherit;
 }
 
@@ -39,123 +33,13 @@ button{
  display:none!important;
 }
 
-
-/* =========================
-   AUTH
-========================= */
-
-#auth{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px;
- background:linear-gradient(135deg,#536dfe,#8b5cf6);
-}
-
-.authBox{
- width:100%;
- max-width:520px;
- background:white;
- padding:30px;
- border-radius:24px;
- box-shadow:0 20px 60px #0004;
-}
-
-.logo{
- text-align:center;
- font-size:30px;
- font-weight:900;
-}
-
-.subtitle{
- text-align:center;
- color:#687386;
- margin:8px 0 25px;
-}
-
-.tabs{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:7px;
- margin-bottom:20px;
-}
-
-.tabs button{
- border:0;
- padding:11px 5px;
- border-radius:10px;
- background:#edf1f7;
-}
-
-.tabs button.active{
- background:#536dfe;
- color:white;
- font-weight:bold;
-}
-
-.field{
- margin-bottom:15px;
-}
-
-.field label{
- display:block;
- font-weight:bold;
- margin-bottom:6px;
-}
-
-.field input,
-.field select{
- width:100%;
- padding:12px;
- border:1px solid #d6ddea;
- border-radius:10px;
- outline:none;
-}
-
-.primary{
- width:100%;
- padding:13px;
- border:0;
- border-radius:11px;
- background:#536dfe;
- color:white;
- font-weight:bold;
-}
-
-.error{
- margin-top:15px;
- padding:12px;
- background:#fff1f2;
- color:#be123c;
- border-radius:10px;
- white-space:pre-wrap;
-}
-
-.success{
- margin-top:15px;
- padding:12px;
- background:#ecfdf5;
- color:#166534;
- border-radius:10px;
-}
-
-
-/* =========================
-   APP
-========================= */
-
-#app{
- display:none;
-}
-
 header{
  height:65px;
  background:white;
  border-bottom:1px solid #ddd;
  display:flex;
- justify-content:space-between;
  align-items:center;
+ justify-content:space-between;
  padding:0 20px;
  position:sticky;
  top:0;
@@ -167,26 +51,11 @@ header{
  font-weight:900;
 }
 
-.headerRight{
- display:flex;
- align-items:center;
- gap:8px;
-}
-
-.badge{
- padding:7px 12px;
- background:#eef2ff;
- color:#4338ca;
- border-radius:20px;
- font-size:12px;
- font-weight:bold;
-}
-
 .logout{
  border:0;
  background:#edf1f7;
+ padding:9px 13px;
  border-radius:9px;
- padding:9px 12px;
 }
 
 .layout{
@@ -221,7 +90,6 @@ nav button:hover{
 main{
  flex:1;
  padding:25px;
- max-width:1400px;
 }
 
 .page{
@@ -234,10 +102,10 @@ main{
 
 .card{
  background:white;
- border-radius:17px;
  padding:20px;
+ border-radius:17px;
  margin-bottom:16px;
- box-shadow:0 3px 15px #0000000b;
+ box-shadow:0 3px 15px #0001;
 }
 
 .grid{
@@ -246,94 +114,100 @@ main{
  gap:15px;
 }
 
-.item{
- padding:15px;
- margin-top:10px;
- background:#f8fafc;
- border:1px solid #e1e7ef;
- border-radius:12px;
-}
-
-.itemTitle{
- font-size:17px;
- font-weight:900;
-}
-
-.meta{
- margin-top:5px;
- color:#687386;
- font-size:13px;
-}
-
 .stat{
  font-size:28px;
  font-weight:900;
 }
 
-.moneyPositive{
+.field{
+ margin-bottom:14px;
+}
+
+.field label{
+ display:block;
+ font-weight:bold;
+ margin-bottom:6px;
+}
+
+.field input,
+.field textarea{
+ width:100%;
+ padding:11px;
+ border:1px solid #d6ddea;
+ border-radius:10px;
+}
+
+textarea{
+ min-height:110px;
+ resize:vertical;
+}
+
+.primary{
+ border:0;
+ background:#536dfe;
+ color:white;
+ padding:11px 16px;
+ border-radius:10px;
+ font-weight:bold;
+}
+
+.green{
+ background:#16a34a;
+}
+
+.red{
+ background:#dc2626;
+}
+
+.item{
+ background:#f8fafc;
+ border:1px solid #e1e7ef;
+ padding:15px;
+ border-radius:12px;
+ margin-top:10px;
+}
+
+.itemTitle{
+ font-weight:900;
+ font-size:17px;
+}
+
+.meta{
+ color:#687386;
+ font-size:13px;
+ margin-top:5px;
+}
+
+.amount{
+ font-size:21px;
+ font-weight:900;
+ margin-top:8px;
+}
+
+.plus{
  color:#15803d;
 }
 
-.moneyNegative{
+.minus{
  color:#dc2626;
-}
-
-.moneyCard{
- display:grid;
- grid-template-columns:1fr auto;
- gap:10px;
- align-items:center;
-}
-
-.moneyAmount{
- font-size:20px;
- font-weight:900;
-}
-
-.addButton{
- border:0;
- padding:9px 12px;
- border-radius:9px;
- background:#536dfe;
- color:white;
-}
-
-.empty{
- text-align:center;
- color:#7b8495;
- padding:20px;
 }
 
 .summary{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
  gap:12px;
- margin-bottom:15px;
 }
 
 .summaryBox{
+ padding:15px;
  background:#f8fafc;
  border-radius:12px;
- padding:15px;
 }
 
-.summaryLabel{
- font-size:13px;
- color:#687386;
-}
-
-.summaryValue{
- font-size:25px;
- font-weight:900;
- margin-top:5px;
-}
-
-.fine{
- border-left:5px solid #ef4444;
-}
-
-.allowance{
- border-left:5px solid #22c55e;
+.empty{
+ text-align:center;
+ padding:20px;
+ color:#7b8495;
 }
 
 @media(max-width:700px){
@@ -349,267 +223,21 @@ main{
  }
 
  nav button{
-  min-width:120px;
+  min-width:115px;
  }
 
  main{
   padding:13px;
  }
 
- .headerTitle{
-  font-size:16px;
- }
-
- .badge{
-  display:none;
- }
-
 }
 
 </style>
-
 </head>
 
 <body>
 
-
-<!-- =====================================================
-     AUTH
-===================================================== -->
-
-<div id="auth">
-
-<div class="authBox">
-
-<div class="logo">
-👨‍👩‍👧 家族ホーム
-</div>
-
-<div class="subtitle">
-家族の法律・罰金・お小遣い・予定を管理
-</div>
-
-
-<div class="tabs">
-
-<button
-id="loginTab"
-onclick="mode('login')">
-🔐 ログイン
-</button>
-
-<button
-id="createTab"
-onclick="mode('create')">
-🏠 新規登録
-</button>
-
-<button
-id="joinTab"
-onclick="mode('join')">
-👥 家族参加
-</button>
-
-</div>
-
-
-<!-- LOGIN -->
-
-<div id="loginBox">
-
-<div class="field">
-
-<label>
-メールアドレス
-</label>
-
-<input
-id="loginEmail"
-type="email"
-autocomplete="email">
-
-</div>
-
-
-<div class="field">
-
-<label>
-パスワード
-</label>
-
-<input
-id="loginPassword"
-type="password"
-autocomplete="current-password">
-
-</div>
-
-
-<button
-class="primary"
-onclick="login()">
-
-🔐 ログイン
-
-</button>
-
-</div>
-
-
-<!-- CREATE -->
-
-<div
-id="createBox"
-class="hidden">
-
-<div class="field">
-
-<label>
-家族名
-</label>
-
-<input
-id="newFamilyName"
-placeholder="例：山田家">
-
-</div>
-
-
-<div class="field">
-
-<label>
-あなたの名前
-</label>
-
-<input
-id="newName"
-placeholder="例：お父さん">
-
-</div>
-
-
-<div class="field">
-
-<label>
-メールアドレス
-</label>
-
-<input
-id="newEmail"
-type="email">
-
-</div>
-
-
-<div class="field">
-
-<label>
-パスワード
-</label>
-
-<input
-id="newPassword"
-type="password"
-autocomplete="new-password">
-
-</div>
-
-
-<button
-class="primary"
-onclick="register()">
-
-🏠 家族を作成して登録
-
-</button>
-
-</div>
-
-
-<!-- JOIN -->
-
-<div
-id="joinBox"
-class="hidden">
-
-<div class="field">
-
-<label>
-家族コード
-</label>
-
-<input
-id="joinFamilyCode">
-
-</div>
-
-
-<div class="field">
-
-<label>
-名前
-</label>
-
-<input
-id="joinUserName">
-
-</div>
-
-
-<div class="field">
-
-<label>
-メールアドレス
-</label>
-
-<input
-id="joinUserEmail"
-type="email">
-
-</div>
-
-
-<div class="field">
-
-<label>
-パスワード
-</label>
-
-<input
-id="joinUserPassword"
-type="password">
-
-</div>
-
-
-<button
-class="primary"
-onclick="joinFamily()">
-
-👥 家族に参加
-
-</button>
-
-</div>
-
-
-<div
-id="message"
-class="error hidden">
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     APP
-===================================================== -->
-
 <div id="app">
-
 
 <header>
 
@@ -617,21 +245,14 @@ class="error hidden">
 👨‍👩‍👧 家族ホーム
 </div>
 
-<div class="headerRight">
-
-<span id="familyNameHeader"></span>
-
-<span
-id="roleBadge"
-class="badge">
-</span>
+<div>
+<span id="familyHeader"></span>
 
 <button
 class="logout"
 onclick="logout()">
 ログアウト
 </button>
-
 </div>
 
 </header>
@@ -639,43 +260,35 @@ onclick="logout()">
 
 <div class="layout">
 
-
 <nav>
 
-<button
-class="active"
-onclick="page('home',this)">
+<button class="active"
+onclick="showPage('home',this)">
 🏠 ホーム
 </button>
 
-<button
-onclick="page('members',this)">
+<button onclick="showPage('members',this)">
 👨‍👩‍👧 家族
 </button>
 
-<button
-onclick="page('money',this)">
-💰 お金
+<button onclick="showPage('fine',this)">
+⚖️ 罰金
 </button>
 
-<button
-onclick="page('calendar',this)">
-📅 予定
+<button onclick="showPage('allowance',this)">
+🪙 お小遣い
 </button>
 
-<button
-onclick="page('law',this)">
+<button onclick="showPage('news',this)">
+📰 家族ニュース
+</button>
+
+<button onclick="showPage('law',this)">
 ⚖️ 家族の法律
 </button>
 
-<button
-onclick="page('news',this)">
-📰 ニュース
-</button>
-
-<button
-onclick="page('children',this)">
-🧒 子ども
+<button onclick="showPage('calendar',this)">
+📅 予定表
 </button>
 
 </nav>
@@ -686,67 +299,40 @@ onclick="page('children',this)">
 
 <!-- HOME -->
 
-<section
-id="home"
-class="page active">
+<section id="home" class="page active">
 
-<h1>
-🏠 ホーム
-</h1>
-
+<h1>🏠 ホーム</h1>
 
 <div class="grid">
 
-
 <div class="card">
 
-<h2>
-家族
-</h2>
+<h2>家族</h2>
 
 <div
 id="homeFamily"
 class="stat">
 </div>
 
-<p>
+<div class="meta">
 家族コード：
-<b id="homeCode"></b>
-</p>
+<span id="familyCode"></span>
+</div>
 
 </div>
 
 
 <div class="card">
 
-<h2>
-ログイン中
-</h2>
+<h2>ログイン中</h2>
 
 <div
 id="homeUser"
 class="stat">
 </div>
 
-<div
-id="homeRole">
-</div>
+<div id="homeRole"></div>
 
-</div>
-
-
-</div>
-
-
-<div class="card">
-
-<h2>
-💰 お金の概要
-</h2>
-
-<div
-id="homeMoney">
-読み込み中...
 </div>
 
 </div>
@@ -757,19 +343,13 @@ id="homeMoney">
 
 <!-- MEMBERS -->
 
-<section
-id="members"
-class="page">
+<section id="members" class="page">
 
-<h1>
-👨‍👩‍👧 家族メンバー
-</h1>
+<h1>👨‍👩‍👧 家族</h1>
 
 <div class="card">
 
-<div id="membersList">
-読み込み中...
-</div>
+<div id="membersList"></div>
 
 </div>
 
@@ -777,117 +357,183 @@ class="page">
 
 
 
-<!-- MONEY -->
+<!-- FINE -->
 
-<section
-id="money"
-class="page">
+<section id="fine" class="page">
 
-<h1>
-💰 お金管理
-</h1>
+<h1>⚖️ 罰金</h1>
+
+<div
+id="parentFine"
+class="card">
+
+<h2>➕ 罰金を追加</h2>
+
+<div class="field">
+
+<label>対象の子ども</label>
+
+<select id="fineMember"></select>
+
+</div>
+
+<div class="field">
+
+<label>金額</label>
+
+<input
+id="fineAmount"
+type="number"
+min="1"
+placeholder="500">
+
+</div>
+
+<div class="field">
+
+<label>理由</label>
+
+<input
+id="fineReason"
+placeholder="家族のルールを守らなかった">
+
+</div>
+
+<button
+class="primary red"
+onclick="addFine()">
+
+罰金を登録
+
+</button>
+
+</div>
 
 
 <div class="card">
 
-<h2>
-📊 家族のお金
-</h2>
+<h2>📋 罰金一覧</h2>
+
+<div id="fineList"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- ALLOWANCE -->
+
+<section id="allowance" class="page">
+
+<h1>🪙 お小遣い</h1>
+
 
 <div
-id="moneySummary"
+id="parentAllowance"
+class="card">
+
+<h2>➕ お小遣いを渡す</h2>
+
+<div class="field">
+
+<label>誰に？</label>
+
+<select id="allowanceMember"></select>
+
+</div>
+
+<div class="field">
+
+<label>金額</label>
+
+<input
+id="allowanceAmount"
+type="number"
+min="1"
+placeholder="1000">
+
+</div>
+
+<div class="field">
+
+<label>何をしたので？</label>
+
+<input
+id="allowanceReason"
+placeholder="お手伝いをした">
+
+</div>
+
+<button
+class="primary green"
+onclick="addAllowance()">
+
+お小遣いを登録
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>💰 お小遣い残高</h2>
+
+<div
+id="allowanceSummary"
 class="summary">
 </div>
 
 </div>
 
 
-<div
-id="moneyParentArea"
-class="card hidden">
+<div class="card">
 
-<h2>
-➕ お金を追加
-</h2>
+<h2>🛍️ お小遣いを使った</h2>
 
 <p>
-親が「罰金」または「お小遣い」を登録できます。
+自分が何にいくら使ったか記録できます。
 </p>
 
+<div class="field">
+
+<label>何に使った？</label>
+
+<input
+id="spendingItem"
+placeholder="例：ゲーム">
+
+</div>
+
+<div class="field">
+
+<label>いくら？</label>
+
+<input
+id="spendingAmount"
+type="number"
+min="1"
+placeholder="500">
+
+</div>
 
 <button
-class="addButton"
-onclick="addFine()">
+class="primary"
+onclick="addSpending()">
 
-⚖️ 罰金を追加
+🛍️ 支出を記録
 
 </button>
 
-
-<button
-class="addButton"
-onclick="addAllowance()">
-
-🪙 お小遣いを追加
-
-</button>
-
 </div>
 
 
 <div class="card">
 
-<h2>
-📋 明細
-</h2>
+<h2>📋 お小遣い・支出履歴</h2>
 
-<div id="moneyList">
-読み込み中...
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- CALENDAR -->
-
-<section
-id="calendar"
-class="page">
-
-<h1>
-📅 予定表
-</h1>
-
-<div class="card">
-
-<div id="calendarList">
-予定はありません。
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- LAW -->
-
-<section
-id="law"
-class="page">
-
-<h1>
-⚖️ 家族の法律
-</h1>
-
-<div class="card">
-
-<div class="empty">
-家族で決めたルールをここに表示できます。
-</div>
+<div id="allowanceList"></div>
 
 </div>
 
@@ -897,19 +543,53 @@ class="page">
 
 <!-- NEWS -->
 
-<section
-id="news"
-class="page">
+<section id="news" class="page">
 
-<h1>
-📰 家族ニュース
-</h1>
+<h1>📰 家族ニュース</h1>
+
+
+<div
+id="parentNews"
+class="card">
+
+<h2>➕ ニュースを追加</h2>
+
+<div class="field">
+
+<label>タイトル</label>
+
+<input
+id="newsTitle"
+placeholder="例：今週のお知らせ">
+
+</div>
+
+<div class="field">
+
+<label>内容</label>
+
+<textarea
+id="newsContent"
+placeholder="家族のみんなへ..."></textarea>
+
+</div>
+
+<button
+class="primary"
+onclick="addNews()">
+
+📰 ニュースを公開
+
+</button>
+
+</div>
+
 
 <div class="card">
 
-<div class="empty">
-家族ニュースはここに表示できます。
-</div>
+<h2>📰 ニュース一覧</h2>
+
+<div id="newsList"></div>
 
 </div>
 
@@ -917,37 +597,84 @@ class="page">
 
 
 
-<!-- CHILDREN -->
+<!-- LAW -->
 
-<section
-id="children"
-class="page">
+<section id="law" class="page">
 
-<h1>
-🧒 子どもページ
-</h1>
+<h1>⚖️ 家族の法律</h1>
+
+
+<div
+id="parentLaw"
+class="card">
+
+<h2>➕ 家族の法律を追加</h2>
+
+<div class="field">
+
+<label>ルール名</label>
+
+<input
+id="lawTitle"
+placeholder="例：ゲームは夜9時まで">
+
+</div>
+
+<div class="field">
+
+<label>内容</label>
+
+<textarea
+id="lawContent"
+placeholder="家族で決めたルール"></textarea>
+
+</div>
+
+<div class="field">
+
+<label>違反時の罰金</label>
+
+<input
+id="lawFine"
+type="number"
+min="0"
+placeholder="500">
+
+</div>
+
+<button
+class="primary"
+onclick="addLaw()">
+
+⚖️ 法律を追加
+
+</button>
+
+</div>
+
 
 <div class="card">
 
-<h2>
-💰 自分のお金
-</h2>
+<h2>📋 家族の法律一覧</h2>
 
-<div id="childMoney">
-読み込み中...
-</div>
+<div id="lawList"></div>
 
 </div>
 
+</section>
+
+
+
+<!-- CALENDAR -->
+
+<section id="calendar" class="page">
+
+<h1>📅 予定表</h1>
 
 <div class="card">
-
-<h2>
-🗳️ 子ども大統領
-</h2>
 
 <div class="empty">
-子ども大統領の情報はここに表示できます。
+予定表機能はここに追加できます。
 </div>
 
 </div>
@@ -956,9 +683,7 @@ class="page">
 
 
 </main>
-
 </div>
-
 </div>
 
 
@@ -966,7 +691,7 @@ class="page">
 <script>
 
 /* =====================================================
-   SUPABASE
+ SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -975,7 +700,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_qux36ew_JkABxzXCQEgW1A_ijJRoraO";
 
-const supabaseClient =
+const db =
 supabase.createClient(
  SUPABASE_URL,
  SUPABASE_KEY
@@ -983,342 +708,91 @@ supabase.createClient(
 
 
 /* =====================================================
-   STATE
+ STATE
 ===================================================== */
 
 let user=null;
 let member=null;
 let family=null;
+let members=[];
 
 
 /* =====================================================
-   UTIL
+ UTILS
 ===================================================== */
 
 function $(id){
  return document.getElementById(id);
 }
 
-
-function escapeHTML(value){
-
- return String(value ?? "")
+function esc(v){
+ return String(v ?? "")
  .replaceAll("&","&amp;")
  .replaceAll("<","&lt;")
  .replaceAll(">","&gt;")
  .replaceAll('"',"&quot;")
  .replaceAll("'","&#039;");
-
-}
-
-
-function message(text,type="error"){
-
- const box=$("message");
-
- box.className=
- type==="success"
- ? "success"
- : "error";
-
- box.textContent=text;
-
-}
-
-
-function clearMessage(){
-
- $("message").className=
- "error hidden";
-
- $("message").textContent="";
-
 }
 
 
 /* =====================================================
-   MODE
+ PAGE
 ===================================================== */
 
-function mode(type){
+function showPage(id,button){
 
- clearMessage();
-
- $("loginBox")
- .classList
- .toggle("hidden",type!=="login");
-
- $("createBox")
- .classList
- .toggle("hidden",type!=="create");
-
- $("joinBox")
- .classList
- .toggle("hidden",type!=="join");
-
-
- $("loginTab")
- .classList
- .toggle("active",type==="login");
-
- $("createTab")
- .classList
- .toggle("active",type==="create");
-
- $("joinTab")
- .classList
- .toggle("active",type==="join");
-
-}
-
-
-/* =====================================================
-   REGISTER
-===================================================== */
-
-async function register(){
-
- clearMessage();
-
-
- const familyName=
- $("newFamilyName").value.trim();
-
- const name=
- $("newName").value.trim();
-
- const email=
- $("newEmail").value.trim();
-
- const password=
- $("newPassword").value;
-
-
- if(
-  !familyName ||
-  !name ||
-  !email ||
-  !password
- ){
-
-  message(
-   "すべて入力してください。"
-  );
-
-  return;
-
- }
-
-
- if(password.length<6){
-
-  message(
-   "パスワードは6文字以上にしてください。"
-  );
-
-  return;
-
- }
-
-
- /*
-  * メール確認後に戻ってきても
-  * 家族作成情報を保持する
-  */
-
- localStorage.setItem(
-  "pending_family_name",
-  familyName
- );
-
- localStorage.setItem(
-  "pending_user_name",
-  name
- );
-
-
- const result=
- await supabaseClient.auth.signUp({
-
-  email,
-  password
-
+ document
+ .querySelectorAll(".page")
+ .forEach(x=>{
+  x.classList.remove("active");
  });
 
+ $(id).classList.add("active");
 
- if(result.error){
+ document
+ .querySelectorAll("nav button")
+ .forEach(x=>{
+  x.classList.remove("active");
+ });
 
-  message(
-   "登録できませんでした。\n\n"+
-   result.error.message
-  );
-
-  return;
-
- }
-
-
- /*
-  * メール確認OFFの場合
-  */
-
- if(result.data.session){
-
-  user=result.data.user;
-
-  await finishFamilyCreation();
-
-  return;
-
- }
-
-
- /*
-  * メール確認ON
-  */
-
- message(
-  "登録しました！\n\n"+
-  "確認メールを開いて認証してください。\n"+
-  "認証後、このメールアドレスとパスワードでログインしてください。\n\n"+
-  "ログインすると家族ホームへ自動的に進みます。",
-  "success"
- );
+ button.classList.add("active");
 
 }
 
 
 /* =====================================================
-   登録後の家族作成
+ START
 ===================================================== */
 
-async function finishFamilyCreation(){
+async function start(){
 
- const familyName=
- localStorage.getItem(
-  "pending_family_name"
- );
+ const session =
+ await db.auth.getSession();
 
- const name=
- localStorage.getItem(
-  "pending_user_name"
- );
+ if(!session.data.session){
+
+  alert("ログインしてください。");
+
+  return;
+
+ }
+
+ user=session.data.session.user;
 
 
- /*
-  * すでに家族があるか確認
-  */
-
- const existing=
- await supabaseClient
+ const m =
+ await db
  .from("family_app_v2_members")
- .select(
-  "id,family_id,user_id,name,role,created_at"
- )
- .eq(
-  "user_id",
-  user.id
- )
+ .select("*")
+ .eq("user_id",user.id)
  .maybeSingle();
 
 
- if(existing.data){
-
-  await loadFamily();
-
-  return;
-
- }
-
-
- if(!familyName || !name){
-
-  mode("create");
-
-  message(
-   "家族名と名前を入力してください。"
-  );
-
-  return;
-
- }
-
-
- const result=
- await supabaseClient.rpc(
-  "family_app_v2_create_family",
-  {
-   p_family_name:familyName,
-   p_name:name
-  }
- );
-
-
- if(result.error){
-
-  message(
-   "家族の作成に失敗しました。\n\n"+
-   result.error.message
-  );
-
-  return;
-
- }
-
-
- localStorage.removeItem(
-  "pending_family_name"
- );
-
- localStorage.removeItem(
-  "pending_user_name"
- );
-
-
- if(result.data){
+ if(m.error){
 
   alert(
-   "家族を作成しました！\n\n"+
-   "家族コード："+
-   result.data.family_code+
-   (
-    result.data.parent_invite_code
-    ?
-    "\n\n親招待コード："+
-    result.data.parent_invite_code
-    :
-    ""
-   )
-  );
-
- }
-
-
- await loadFamily();
-
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-async function login(){
-
- clearMessage();
-
-
- const email=
- $("loginEmail").value.trim();
-
- const password=
- $("loginPassword").value;
-
-
- if(!email || !password){
-
-  message(
-   "メールアドレスとパスワードを入力してください。"
+   "家族情報の取得に失敗しました。\n"+
+   m.error.message
   );
 
   return;
@@ -1326,20 +800,10 @@ async function login(){
  }
 
 
- const result=
- await supabaseClient.auth.signInWithPassword({
+ if(!m.data){
 
-  email,
-  password
-
- });
-
-
- if(result.error){
-
-  message(
-   "ログインできませんでした。\n\n"+
-   result.error.message
+  alert(
+   "このアカウントはまだ家族に参加していません。"
   );
 
   return;
@@ -1347,192 +811,41 @@ async function login(){
  }
 
 
- user=result.data.user;
+ member=m.data;
 
 
- /*
-  * 既存ユーザーで家族がない場合、
-  * 新規登録時の情報が残っていれば
-  * 自動的に家族を作る
-  */
-
- const existing=
- await supabaseClient
- .from("family_app_v2_members")
- .select(
-  "id,family_id,user_id,name,role,created_at"
- )
- .eq(
-  "user_id",
-  user.id
- )
- .maybeSingle();
-
-
- if(existing.error){
-
-  message(
-   "ログインは成功しましたが、"+
-   "家族情報の取得に失敗しました。\n\n"+
-   existing.error.message+
-   "\n\n"+
-   "SupabaseのRLS修正版SQLを実行してください。"
-  );
-
-  return;
-
- }
-
-
- if(!existing.data){
-
-  const pendingFamily=
-   localStorage.getItem(
-    "pending_family_name"
-   );
-
-  const pendingName=
-   localStorage.getItem(
-    "pending_user_name"
-   );
-
-
-  if(
-   pendingFamily &&
-   pendingName
-  ){
-
-   await finishFamilyCreation();
-
-   return;
-
-  }
-
-
-  /*
-   * 既存アカウントで家族未参加の場合
-   */
-
-  mode("join");
-
-  message(
-   "このアカウントはまだ家族に参加していません。\n\n"+
-   "家族コードを入力して参加するか、"+
-   "新規登録から家族を作成してください。",
-   "success"
-  );
-
-  return;
-
- }
-
-
- member=existing.data;
-
- await loadFamily();
-
-}
-
-
-/* =====================================================
-   FAMILY
-===================================================== */
-
-async function loadFamily(){
-
- const result=
- await supabaseClient
+ const f =
+ await db
  .from("family_app_v2_families")
  .select("*")
- .eq(
-  "id",
-  member.family_id
- )
- .maybeSingle();
+ .eq("id",member.family_id)
+ .single();
 
 
- if(result.error){
+ if(f.error){
 
-  message(
-   "家族情報を取得できませんでした。\n\n"+
-   result.error.message
-  );
+  alert(f.error.message);
 
   return;
 
  }
 
 
- if(!result.data){
+ family=f.data;
 
-  message(
-   "家族が見つかりません。"
-  );
-
-  return;
-
- }
-
-
- family=result.data;
-
-
- openApp();
-
-}
-
-
-/* =====================================================
-   JOIN
-===================================================== */
-
-async function joinFamily(){
-
- message(
-  "現在の完全版では、家族コード参加用の既存RPCを利用します。",
-  "success"
- );
-
-}
-
-
-/* =====================================================
-   APP
-===================================================== */
-
-function openApp(){
-
- $("auth").style.display="none";
 
  $("app").style.display="block";
 
 
- $("familyNameHeader").textContent=
+ $("familyHeader").textContent=
  family.family_name;
-
-
- let roleText="🧒 子ども";
-
-
- if(member.role==="parent"){
-  roleText="👨‍👩‍👧 親";
- }
-
-
- if(member.role==="president"){
-  roleText="👑 子ども大統領";
- }
-
-
- $("roleBadge").textContent=
- roleText;
 
 
  $("homeFamily").textContent=
  family.family_name;
 
 
- $("homeCode").textContent=
+ $("familyCode").textContent=
  family.family_code;
 
 
@@ -1541,66 +854,36 @@ function openApp(){
 
 
  $("homeRole").textContent=
- roleText;
+ member.role==="parent"
+ ?"👨‍👩‍👧 親"
+ :"🧒 子ども";
 
 
- if(member.role==="parent"){
+ if(member.role!=="parent"){
 
-  $("moneyParentArea")
-  .classList
-  .remove("hidden");
+  $("parentFine").classList.add("hidden");
+  $("parentAllowance").classList.add("hidden");
+  $("parentNews").classList.add("hidden");
+  $("parentLaw").classList.add("hidden");
 
  }
 
 
- loadMembers();
+ await loadMembers();
 
- loadMoney();
+ await loadAll();
 
 }
 
 
 /* =====================================================
-   PAGE
-===================================================== */
-
-function page(id,button){
-
- document
- .querySelectorAll(".page")
- .forEach(
-  x=>x.classList.remove("active")
- );
-
-
- $(id).classList.add("active");
-
-
- document
- .querySelectorAll("nav button")
- .forEach(
-  x=>x.classList.remove("active")
- );
-
-
- button.classList.add("active");
-
-
- if(id==="money"){
-  loadMoney();
- }
-
-}
-
-
-/* =====================================================
-   MEMBERS
+ MEMBERS
 ===================================================== */
 
 async function loadMembers(){
 
  const result=
- await supabaseClient.rpc(
+ await db.rpc(
   "family_app_v2_get_members",
   {
    p_family_id:family.id
@@ -1610,9 +893,108 @@ async function loadMembers(){
 
  if(result.error){
 
-  $("membersList").innerHTML=
-  `<div class="error">
-  ${escapeHTML(result.error.message)}
+  console.error(result.error);
+
+  return;
+
+ }
+
+
+ members=result.data || [];
+
+
+ $("membersList").innerHTML=
+ members.map(m=>`
+
+ <div class="item">
+
+  <div class="itemTitle">
+
+   ${m.role==="parent"?"👨‍👩‍👧":"🧒"}
+
+   ${esc(m.name)}
+
+  </div>
+
+  <div class="meta">
+
+   ${
+    m.role==="parent"
+    ?"親"
+    :"子ども"
+   }
+
+  </div>
+
+ </div>
+
+ `).join("");
+
+
+ const children=
+ members.filter(
+  m=>m.role!=="parent"
+ );
+
+
+ $("fineMember").innerHTML=
+ children.map(m=>`
+
+  <option value="${m.id}">
+   ${esc(m.name)}
+  </option>
+
+ `).join("");
+
+
+ $("allowanceMember").innerHTML=
+ children.map(m=>`
+
+  <option value="${m.id}">
+   ${esc(m.name)}
+  </option>
+
+ `).join("");
+
+}
+
+
+/* =====================================================
+ ALL
+===================================================== */
+
+async function loadAll(){
+
+ await loadNews();
+
+ await loadLaws();
+
+ await loadFine();
+
+ await loadAllowance();
+
+}
+
+
+/* =====================================================
+ NEWS
+===================================================== */
+
+async function loadNews(){
+
+ const result=
+ await db
+ .from("family_app_v2_news")
+ .select("*")
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:false});
+
+
+ if(result.error){
+
+  $("newsList").innerHTML=
+  `<div class="empty">
+   ${esc(result.error.message)}
   </div>`;
 
   return;
@@ -1620,525 +1002,263 @@ async function loadMembers(){
  }
 
 
- $("membersList").innerHTML=
- result.data.map(x=>{
+ if(!result.data.length){
 
-  let icon="🧒";
-  let role="子ども";
+  $("newsList").innerHTML=
+  `<div class="empty">
+   まだ家族ニュースはありません。
+  </div>`;
 
+  return;
 
-  if(x.role==="parent"){
-
-   icon="👨‍👩‍👧";
-   role="親";
-
-  }
+ }
 
 
-  if(x.role==="president"){
+ $("newsList").innerHTML=
+ result.data.map(n=>`
 
-   icon="👑";
-   role="子ども大統領";
+ <div class="item">
 
-  }
-
-
-  return`
-
-  <div class="item">
-
-   <div class="itemTitle">
-
-    ${icon}
-    ${escapeHTML(x.name)}
-
-   </div>
-
-   <div class="meta">
-
-    ${role}
-
-   </div>
-
+  <div class="itemTitle">
+   📰 ${esc(n.title)}
   </div>
 
-  `;
+  <div class="meta">
+   ${new Date(n.created_at).toLocaleString("ja-JP")}
+  </div>
 
- }).join("");
+  <p>
+   ${esc(n.content).replaceAll("\n","<br>")}
+  </p>
+
+ </div>
+
+ `).join("");
 
 }
 
 
-/* =====================================================
-   MONEY
-===================================================== */
+async function addNews(){
 
-async function loadMoney(){
+ if(member.role!=="parent"){
 
- if(!family){
+  alert("ニュースを追加できるのは親です。");
+
   return;
+
+ }
+
+
+ const title=
+ $("newsTitle").value.trim();
+
+ const content=
+ $("newsContent").value.trim();
+
+
+ if(!title || !content){
+
+  alert("タイトルと内容を入力してください。");
+
+  return;
+
  }
 
 
  const result=
- await supabaseClient.rpc(
-  "family_app_v2_get_money",
+ await db.rpc(
+  "family_app_v2_add_news",
   {
-   p_family_id:family.id
+   p_family_id:family.id,
+   p_title:title,
+   p_content:content
   }
  );
 
 
  if(result.error){
 
-  $("moneyList").innerHTML=
-  `<div class="error">
-  ${escapeHTML(result.error.message)}
-  </div>`;
+  alert(result.error.message);
 
   return;
 
  }
 
 
- const data=result.data || [];
+ $("newsTitle").value="";
+ $("newsContent").value="";
 
 
- /*
-  * 人ごとの残高
-  */
+ await loadNews();
 
- const balances={};
 
-
- data.forEach(x=>{
-
-  if(!balances[x.member_id]){
-
-   balances[x.member_id]={
-    name:x.member_name,
-    allowance:0,
-    fine:0
-   };
-
-  }
-
-
-  if(x.type==="allowance"){
-
-   balances[x.member_id].allowance+=
-   Number(x.amount);
-
-  }
-
-
-  if(x.type==="fine"){
-
-   balances[x.member_id].fine+=
-   Number(x.amount);
-
-  }
-
- });
-
-
- let totalAllowance=0;
- let totalFine=0;
-
-
- Object.values(balances)
- .forEach(x=>{
-
-  totalAllowance+=x.allowance;
-
-  totalFine+=x.fine;
-
- });
-
-
- /*
-  * HOME
-  */
-
- $("homeMoney").innerHTML=`
-
-  <div class="summary">
-
-   <div class="summaryBox">
-
-    <div class="summaryLabel">
-    お小遣い合計
-    </div>
-
-    <div class="summaryValue moneyPositive">
-    ¥${totalAllowance.toLocaleString()}
-    </div>
-
-   </div>
-
-
-   <div class="summaryBox">
-
-    <div class="summaryLabel">
-    罰金合計
-    </div>
-
-    <div class="summaryValue moneyNegative">
-    ¥${totalFine.toLocaleString()}
-    </div>
-
-   </div>
-
-  </div>
-
- `;
-
-
- /*
-  * MONEY SUMMARY
-  */
-
- $("moneySummary").innerHTML=
- Object.values(balances).map(x=>{
-
-  const balance=
-   x.allowance-x.fine;
-
-
-  return`
-
-   <div class="summaryBox">
-
-    <b>
-    ${escapeHTML(x.name)}
-    </b>
-
-    <div class="meta">
-    お小遣い：¥${x.allowance.toLocaleString()}
-    </div>
-
-    <div class="meta">
-    罰金：¥${x.fine.toLocaleString()}
-    </div>
-
-    <div
-    class="summaryValue ${
-      balance>=0
-      ?"moneyPositive"
-      :"moneyNegative"
-    }">
-
-    残高
-    ¥${balance.toLocaleString()}
-
-    </div>
-
-   </div>
-
-  `;
-
- }).join("");
-
-
- /*
-  * 明細
-  */
-
- if(!data.length){
-
-  $("moneyList").innerHTML=
-  `<div class="empty">
-  まだお金の記録はありません。
-  </div>`;
-
-  $("childMoney").innerHTML=
-  `<div class="empty">
-  まだ記録はありません。
-  </div>`;
-
-  return;
-
- }
-
-
- $("moneyList").innerHTML=
- data.map(x=>{
-
-  const isAllowance=
-   x.type==="allowance";
-
-
-  return`
-
-  <div
-  class="item ${
-   isAllowance
-   ?"allowance"
-   :"fine"
-  }">
-
-   <div class="moneyCard">
-
-    <div>
-
-     <div class="itemTitle">
-
-      ${
-       isAllowance
-       ?"🪙 お小遣い"
-       :"⚖️ 罰金"
-      }
-
-      ・
-      ${escapeHTML(x.member_name)}
-
-     </div>
-
-
-     <div class="meta">
-
-      ${escapeHTML(x.reason)}
-
-     </div>
-
-
-     <div class="meta">
-
-      ${new Date(x.created_at)
-       .toLocaleString("ja-JP")}
-
-     </div>
-
-    </div>
-
-
-    <div
-    class="moneyAmount ${
-      isAllowance
-      ?"moneyPositive"
-      :"moneyNegative"
-    }">
-
-    ${
-     isAllowance
-     ?"+"
-     :"-"
-    }
-
-    ¥${Number(x.amount)
-     .toLocaleString()}
-
-    </div>
-
-   </div>
-
-  </div>
-
-  `;
-
- }).join("");
-
-
- /*
-  * 子どもページ
-  */
-
- const mine=
- data.filter(
-  x=>x.member_id===member.id
- );
-
-
- if(!mine.length){
-
-  $("childMoney").innerHTML=
-  `<div class="empty">
-  自分のお金の記録はありません。
-  </div>`;
-
- }else{
-
-  $("childMoney").innerHTML=
-  mine.map(x=>{
-
-   const plus=
-    x.type==="allowance";
-
-
-   return`
-
-   <div
-   class="item ${
-    plus
-    ?"allowance"
-    :"fine"
-   }">
-
-    <div class="itemTitle">
-
-     ${
-      plus
-      ?"🪙 お小遣い"
-      :"⚖️ 罰金"
-     }
-
-    </div>
-
-    <div class="meta">
-
-     ${escapeHTML(x.reason)}
-
-    </div>
-
-    <div
-    class="moneyAmount ${
-     plus
-     ?"moneyPositive"
-     :"moneyNegative"
-    }">
-
-     ${
-      plus
-      ?"+"
-      :"-"
-     }
-
-     ¥${Number(x.amount)
-      .toLocaleString()}
-
-    </div>
-
-   </div>
-
-   `;
-
-  }).join("");
-
- }
+ alert("ニュースを追加しました！");
 
 }
 
 
 /* =====================================================
-   罰金追加
+ LAW
+===================================================== */
+
+async function loadLaws(){
+
+ const result=
+ await db
+ .from("family_app_v2_laws")
+ .select("*")
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:false});
+
+
+ if(result.error){
+
+  $("lawList").innerHTML=
+  `<div class="empty">
+   ${esc(result.error.message)}
+  </div>`;
+
+  return;
+
+ }
+
+
+ if(!result.data.length){
+
+  $("lawList").innerHTML=
+  `<div class="empty">
+   まだ家族の法律はありません。
+  </div>`;
+
+  return;
+
+ }
+
+
+ $("lawList").innerHTML=
+ result.data.map(l=>`
+
+ <div class="item">
+
+  <div class="itemTitle">
+   ⚖️ ${esc(l.title)}
+  </div>
+
+  <p>
+   ${esc(l.content).replaceAll("\n","<br>")}
+  </p>
+
+  <div class="meta">
+
+   違反時の罰金：
+   <b>
+   ¥${Number(l.fine_amount).toLocaleString()}
+   </b>
+
+  </div>
+
+ </div>
+
+ `).join("");
+
+}
+
+
+async function addLaw(){
+
+ if(member.role!=="parent"){
+
+  alert("法律を追加できるのは親です。");
+
+  return;
+
+ }
+
+
+ const title=
+ $("lawTitle").value.trim();
+
+ const content=
+ $("lawContent").value.trim();
+
+ const fine=
+ Number($("lawFine").value)||0;
+
+
+ if(!title || !content){
+
+  alert("ルール名と内容を入力してください。");
+
+  return;
+
+ }
+
+
+ const result=
+ await db.rpc(
+  "family_app_v2_add_law",
+  {
+   p_family_id:family.id,
+   p_title:title,
+   p_content:content,
+   p_fine_amount:fine
+  }
+ );
+
+
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
+
+
+ $("lawTitle").value="";
+ $("lawContent").value="";
+ $("lawFine").value="";
+
+
+ await loadLaws();
+
+
+ alert("家族の法律を追加しました！");
+
+}
+
+
+/* =====================================================
+ FINE
 ===================================================== */
 
 async function addFine(){
 
- if(member.role!=="parent"){
-
-  alert(
-   "罰金を追加できるのは親です。"
-  );
-
-  return;
-
- }
-
-
- const members=
- await supabaseClient.rpc(
-  "family_app_v2_get_members",
-  {
-   p_family_id:family.id
-  }
- );
-
-
- if(members.error){
-
-  alert(members.error.message);
-
-  return;
-
- }
-
-
- const childMembers=
- members.data.filter(
-  x=>x.role!=="parent"
- );
-
-
- if(!childMembers.length){
-
-  alert(
-   "子どもがまだ登録されていません。"
-  );
-
-  return;
-
- }
-
-
- const names=
- childMembers
- .map(
-  (x,i)=>
-  `${i+1}. ${x.name}`
- )
- .join("\n");
-
-
- const number=
- prompt(
-  "誰に罰金？\n\n"+
-  names+
-  "\n\n番号を入力してください。"
- );
-
-
- const index=
-  Number(number)-1;
-
-
- if(
-  !Number.isInteger(index) ||
-  !childMembers[index]
- ){
-
-  return;
-
- }
-
+ const memberId=
+ $("fineMember").value;
 
  const amount=
- Number(
-  prompt(
-   "罰金はいくら？\n例：500"
-  )
- );
-
-
- if(
-  !Number.isInteger(amount) ||
-  amount<=0
- ){
-
-  alert("正しい金額を入力してください。");
-
-  return;
-
- }
-
+ Number($("fineAmount").value);
 
  const reason=
- prompt(
-  "理由を入力してください。\n例：家族ルールを守らなかった"
- );
+ $("fineReason").value.trim();
 
 
- if(!reason){
+ if(!memberId || !amount || !reason){
+
+  alert("すべて入力してください。");
+
   return;
+
  }
 
 
  const result=
- await supabaseClient.rpc(
+ await db.rpc(
   "family_app_v2_add_fine",
   {
    p_family_id:family.id,
-   p_member_id:childMembers[index].id,
+   p_member_id:memberId,
    p_amount:amount,
    p_reason:reason
   }
@@ -2147,150 +1267,120 @@ async function addFine(){
 
  if(result.error){
 
-  alert(
-   "罰金を追加できませんでした。\n\n"+
-   result.error.message
-  );
+  alert(result.error.message);
 
   return;
 
  }
 
 
- alert(
-  `${childMembers[index].name}さんに\n`+
-  `¥${amount.toLocaleString()}の罰金を登録しました。`
- );
+ $("fineAmount").value="";
+ $("fineReason").value="";
 
 
- loadMoney();
+ await loadFine();
+
+
+ alert("罰金を登録しました。");
+
+}
+
+
+async function loadFine(){
+
+ const result=
+ await db
+ .from("family_app_v2_fines")
+ .select(
+  "*,family_app_v2_members(name)"
+ )
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:false});
+
+
+ if(result.error){
+
+  $("fineList").innerHTML=
+  `<div class="empty">
+   ${esc(result.error.message)}
+  </div>`;
+
+  return;
+
+ }
+
+
+ if(!result.data.length){
+
+  $("fineList").innerHTML=
+  `<div class="empty">
+   罰金はありません。
+  </div>`;
+
+  return;
+
+ }
+
+
+ $("fineList").innerHTML=
+ result.data.map(f=>`
+
+ <div class="item">
+
+  <div class="itemTitle">
+   ⚖️ ${esc(f.family_app_v2_members?.name)}
+  </div>
+
+  <div>
+   ${esc(f.reason)}
+  </div>
+
+  <div class="amount minus">
+   -¥${Number(f.amount).toLocaleString()}
+  </div>
+
+  <div class="meta">
+   ${new Date(f.created_at).toLocaleString("ja-JP")}
+  </div>
+
+ </div>
+
+ `).join("");
 
 }
 
 
 /* =====================================================
-   お小遣い追加
+ ALLOWANCE + SPENDING
 ===================================================== */
 
 async function addAllowance(){
 
- if(member.role!=="parent"){
-
-  alert(
-   "お小遣いを追加できるのは親です。"
-  );
-
-  return;
-
- }
-
-
- const members=
- await supabaseClient.rpc(
-  "family_app_v2_get_members",
-  {
-   p_family_id:family.id
-  }
- );
-
-
- if(members.error){
-
-  alert(members.error.message);
-
-  return;
-
- }
-
-
- const childMembers=
- members.data.filter(
-  x=>x.role!=="parent"
- );
-
-
- if(!childMembers.length){
-
-  alert(
-   "子どもがまだ登録されていません。"
-  );
-
-  return;
-
- }
-
-
- const names=
- childMembers
- .map(
-  (x,i)=>
-  `${i+1}. ${x.name}`
- )
- .join("\n");
-
-
- const number=
- prompt(
-  "誰にお小遣い？\n\n"+
-  names+
-  "\n\n番号を入力してください。"
- );
-
-
- const index=
-  Number(number)-1;
-
-
- if(
-  !Number.isInteger(index) ||
-  !childMembers[index]
- ){
-
-  return;
-
- }
-
+ const memberId=
+ $("allowanceMember").value;
 
  const amount=
- Number(
-  prompt(
-   "いくら入れる？\n例：1000"
-  )
- );
-
-
- if(
-  !Number.isInteger(amount) ||
-  amount<=0
- ){
-
-  alert(
-   "正しい金額を入力してください。"
-  );
-
-  return;
-
- }
-
+ Number($("allowanceAmount").value);
 
  const reason=
- prompt(
-  "何をしたので入った？\n"+
-  "例：お手伝いをした"
- );
+ $("allowanceReason").value.trim();
 
 
- if(!reason){
+ if(!memberId || !amount || !reason){
+
+  alert("すべて入力してください。");
+
   return;
+
  }
 
 
  const result=
- await supabaseClient.rpc(
+ await db.rpc(
   "family_app_v2_add_allowance",
   {
    p_family_id:family.id,
-   p_member_id:childMembers[index].id,
+   p_member_id:memberId,
    p_amount:amount,
    p_reason:reason
   }
@@ -2299,128 +1389,314 @@ async function addAllowance(){
 
  if(result.error){
 
-  alert(
-   "お小遣いを追加できませんでした。\n\n"+
-   result.error.message
-  );
+  alert(result.error.message);
 
   return;
 
  }
 
 
- alert(
-  `${childMembers[index].name}さんに\n`+
-  `¥${amount.toLocaleString()}のお小遣いを登録しました！`
+ $("allowanceAmount").value="";
+ $("allowanceReason").value="";
+
+
+ await loadAllowance();
+
+
+ alert("お小遣いを登録しました！");
+
+}
+
+
+async function addSpending(){
+
+ const item=
+ $("spendingItem").value.trim();
+
+ const amount=
+ Number($("spendingAmount").value);
+
+
+ if(!item || !amount){
+
+  alert("何に使ったかと金額を入力してください。");
+
+  return;
+
+ }
+
+
+ const result=
+ await db.rpc(
+  "family_app_v2_add_spending",
+  {
+   p_family_id:family.id,
+   p_member_id:member.id,
+   p_amount:amount,
+   p_item:item
+  }
  );
 
 
- loadMoney();
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
+
+
+ $("spendingItem").value="";
+ $("spendingAmount").value="";
+
+
+ await loadAllowance();
+
+
+ alert("お小遣いの支出を記録しました！");
+
+}
+
+
+async function loadAllowance(){
+
+ const allowance=
+ await db
+ .from("family_app_v2_allowances")
+ .select(
+  "*,family_app_v2_members(name)"
+ )
+ .eq("family_id",family.id);
+
+
+ const spending=
+ await db
+ .from("family_app_v2_spending")
+ .select(
+  "*,family_app_v2_members(name)"
+ )
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:false});
+
+
+ if(allowance.error){
+
+  console.error(allowance.error);
+
+  return;
+
+ }
+
+
+ if(spending.error){
+
+  console.error(spending.error);
+
+  return;
+
+ }
+
+
+ /*
+  人ごとの集計
+ */
+
+ const totals={};
+
+
+ members.forEach(m=>{
+
+  totals[m.id]={
+   name:m.name,
+   allowance:0,
+   spending:0
+  };
+
+ });
+
+
+ allowance.data.forEach(a=>{
+
+  if(totals[a.member_id]){
+
+   totals[a.member_id].allowance +=
+   Number(a.amount);
+
+  }
+
+ });
+
+
+ spending.data.forEach(s=>{
+
+  if(totals[s.member_id]){
+
+   totals[s.member_id].spending +=
+   Number(s.amount);
+
+  }
+
+ });
+
+
+ $("allowanceSummary").innerHTML=
+ Object.values(totals)
+ .filter(x=>
+  x.allowance>0 ||
+  x.spending>0
+ )
+ .map(x=>{
+
+  const balance=
+   x.allowance-x.spending;
+
+
+  return`
+
+  <div class="summaryBox">
+
+   <b>
+   🧒 ${esc(x.name)}
+   </b>
+
+   <div class="meta">
+   もらった：¥${x.allowance.toLocaleString()}
+   </div>
+
+   <div class="meta">
+   使った：¥${x.spending.toLocaleString()}
+   </div>
+
+   <div class="amount ${
+    balance>=0
+    ?"plus"
+    :"minus"
+   }">
+
+   残り
+   ¥${balance.toLocaleString()}
+
+   </div>
+
+  </div>
+
+  `;
+
+ }).join("");
+
+
+ /*
+  履歴
+ */
+
+ const rows=[];
+
+
+ allowance.data.forEach(a=>{
+
+  rows.push({
+
+   date:a.created_at,
+
+   html:`
+
+   <div class="item">
+
+    <div class="itemTitle">
+     🪙 ${esc(a.family_app_v2_members?.name)}
+    </div>
+
+    <div>
+     ${esc(a.reason)}
+    </div>
+
+    <div class="amount plus">
+     +¥${Number(a.amount).toLocaleString()}
+    </div>
+
+    <div class="meta">
+     ${new Date(a.created_at).toLocaleString("ja-JP")}
+    </div>
+
+   </div>
+
+   `
+
+  });
+
+ });
+
+
+ spending.data.forEach(s=>{
+
+  rows.push({
+
+   date:s.created_at,
+
+   html:`
+
+   <div class="item">
+
+    <div class="itemTitle">
+     🛍️ ${esc(s.family_app_v2_members?.name)}
+    </div>
+
+    <div>
+     ${esc(s.item)}
+    </div>
+
+    <div class="amount minus">
+     -¥${Number(s.amount).toLocaleString()}
+    </div>
+
+    <div class="meta">
+     ${new Date(s.created_at).toLocaleString("ja-JP")}
+    </div>
+
+   </div>
+
+   `
+
+  });
+
+ });
+
+
+ rows.sort(
+  (a,b)=>
+  new Date(b.date)-new Date(a.date)
+ );
+
+
+ $("allowanceList").innerHTML=
+ rows.length
+ ? rows.map(x=>x.html).join("")
+ : `<div class="empty">
+    まだ記録がありません。
+   </div>`;
 
 }
 
 
 /* =====================================================
-   LOGOUT
+ LOGOUT
 ===================================================== */
 
 async function logout(){
 
- await supabaseClient.auth.signOut();
+ await db.auth.signOut();
 
- user=null;
- member=null;
- family=null;
-
- $("app").style.display="none";
- $("auth").style.display="flex";
-
- mode("login");
+ location.reload();
 
 }
 
 
 /* =====================================================
-   AUTH STATE
+ START
 ===================================================== */
 
-supabaseClient.auth.onAuthStateChange(
- async(event,session)=>{
-
-  if(
-   event==="SIGNED_OUT"
-  ){
-
-   $("app").style.display="none";
-   $("auth").style.display="flex";
-
-  }
-
- }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-(async()=>{
-
- const result=
- await supabaseClient.auth.getSession();
-
-
- if(
-  result.data &&
-  result.data.session
- ){
-
-  user=
-  result.data.session.user;
-
-
-  /*
-   * メール確認後のログインでも
-   * ここから自動的に家族作成
-   */
-
-  const existing=
-  await supabaseClient
-  .from("family_app_v2_members")
-  .select(
-   "id,family_id,user_id,name,role,created_at"
-  )
-  .eq(
-   "user_id",
-   user.id
-  )
-  .maybeSingle();
-
-
-  if(
-   !existing.error &&
-   existing.data
-  ){
-
-   member=existing.data;
-
-   await loadFamily();
-
-  }else{
-
-   await finishFamilyCreation();
-
-  }
-
- }else{
-
-  mode("login");
-
- }
-
-})();
-
-mode("login");
+start();
 
 </script>
 
