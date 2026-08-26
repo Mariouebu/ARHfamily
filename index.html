@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>家族ホーム</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>家族管理アプリ</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
@@ -16,12 +23,19 @@
 
 body{
  margin:0;
- font-family:Arial,"Noto Sans JP",sans-serif;
+ font-family:
+ Arial,
+ "Noto Sans JP",
+ sans-serif;
+
  background:#f3f6fb;
- color:#172033;
+ color:#182235;
 }
 
-button,input,textarea{
+button,
+input,
+textarea,
+select{
  font:inherit;
 }
 
@@ -34,62 +48,101 @@ button{
 }
 
 header{
+
  height:65px;
+
  background:white;
- border-bottom:1px solid #ddd;
+
  display:flex;
+
  align-items:center;
+
  justify-content:space-between;
+
  padding:0 20px;
+
+ border-bottom:1px solid #ddd;
+
  position:sticky;
+
  top:0;
- z-index:10;
+
+ z-index:20;
 }
 
-.headerTitle{
+.logo{
  font-size:20px;
  font-weight:900;
 }
 
+.headerRight{
+ display:flex;
+ align-items:center;
+ gap:10px;
+}
+
 .logout{
+
  border:0;
+
  background:#edf1f7;
+
  padding:9px 13px;
- border-radius:9px;
+
+ border-radius:10px;
 }
 
 .layout{
+
  display:flex;
- min-height:calc(100vh - 65px);
+
+ min-height:
+ calc(100vh - 65px);
 }
 
 nav{
+
  width:230px;
+
  background:#111827;
+
  padding:12px;
 }
 
 nav button{
- display:block;
+
  width:100%;
+
  border:0;
+
  background:transparent;
+
  color:#dbe3ef;
+
  padding:12px;
- border-radius:9px;
+
+ margin-bottom:5px;
+
+ border-radius:10px;
+
  text-align:left;
- margin-bottom:4px;
 }
 
-nav button.active,
-nav button:hover{
+nav button:hover,
+nav button.active{
+
  background:#293548;
+
  color:white;
 }
 
 main{
+
  flex:1;
+
  padding:25px;
+
+ max-width:1300px;
 }
 
 .page{
@@ -101,21 +154,33 @@ main{
 }
 
 .card{
+
  background:white;
+
  padding:20px;
- border-radius:17px;
- margin-bottom:16px;
- box-shadow:0 3px 15px #0001;
+
+ border-radius:18px;
+
+ margin-bottom:18px;
+
+ box-shadow:
+ 0 3px 15px rgba(0,0,0,.06);
 }
 
 .grid{
+
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+ grid-template-columns:
+ repeat(auto-fit,minmax(220px,1fr));
+
  gap:15px;
 }
 
 .stat{
- font-size:28px;
+
+ font-size:30px;
+
  font-weight:900;
 }
 
@@ -124,30 +189,46 @@ main{
 }
 
 .field label{
+
  display:block;
+
  font-weight:bold;
+
  margin-bottom:6px;
 }
 
 .field input,
-.field textarea{
+.field textarea,
+.field select{
+
  width:100%;
+
  padding:11px;
- border:1px solid #d6ddea;
+
+ border:
+ 1px solid #d5ddea;
+
  border-radius:10px;
+
+ background:white;
 }
 
 textarea{
- min-height:110px;
- resize:vertical;
+ min-height:100px;
 }
 
 .primary{
+
  border:0;
+
  background:#536dfe;
+
  color:white;
- padding:11px 16px;
+
+ padding:11px 17px;
+
  border-radius:10px;
+
  font-weight:bold;
 }
 
@@ -159,29 +240,46 @@ textarea{
  background:#dc2626;
 }
 
+.orange{
+ background:#f59e0b;
+}
+
 .item{
+
  background:#f8fafc;
+
  border:1px solid #e1e7ef;
+
  padding:15px;
- border-radius:12px;
+
+ border-radius:13px;
+
  margin-top:10px;
 }
 
 .itemTitle{
- font-weight:900;
+
  font-size:17px;
+
+ font-weight:900;
 }
 
 .meta{
- color:#687386;
+
+ color:#697586;
+
  font-size:13px;
+
  margin-top:5px;
 }
 
 .amount{
+
  font-size:21px;
+
  font-weight:900;
- margin-top:8px;
+
+ margin-top:7px;
 }
 
 .plus{
@@ -193,21 +291,87 @@ textarea{
 }
 
 .summary{
+
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+ grid-template-columns:
+ repeat(auto-fit,minmax(180px,1fr));
+
  gap:12px;
 }
 
 .summaryBox{
- padding:15px;
+
  background:#f8fafc;
- border-radius:12px;
+
+ padding:15px;
+
+ border-radius:13px;
+}
+
+.chartBox{
+
+ height:320px;
+
+ position:relative;
 }
 
 .empty{
- text-align:center;
+
  padding:20px;
+
+ text-align:center;
+
  color:#7b8495;
+}
+
+.childHero{
+
+ background:
+ linear-gradient(135deg,#6366f1,#8b5cf6);
+
+ color:white;
+
+ padding:25px;
+
+ border-radius:20px;
+
+ margin-bottom:18px;
+}
+
+.childHero h1{
+ margin-top:0;
+}
+
+.badge{
+
+ display:inline-block;
+
+ padding:5px 9px;
+
+ border-radius:20px;
+
+ background:#eef2ff;
+
+ color:#4338ca;
+
+ font-size:12px;
+
+ font-weight:bold;
+}
+
+.scheduleDate{
+
+ font-size:18px;
+
+ font-weight:900;
+}
+
+.scheduleTime{
+
+ color:#536dfe;
+
+ font-weight:bold;
 }
 
 @media(max-width:700px){
@@ -217,42 +381,61 @@ textarea{
  }
 
  nav{
+
   width:100%;
+
   display:flex;
+
   overflow-x:auto;
  }
 
  nav button{
-  min-width:115px;
+
+  min-width:120px;
+
+  white-space:nowrap;
  }
 
  main{
+
   padding:13px;
+ }
+
+ header{
+  padding:0 12px;
+ }
+
+ .headerRight span{
+  display:none;
  }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="app">
 
 <header>
 
-<div class="headerTitle">
-👨‍👩‍👧 家族ホーム
+<div class="logo">
+👨‍👩‍👧 家族管理
 </div>
 
-<div>
-<span id="familyHeader"></span>
+<div class="headerRight">
+
+<span id="familyNameHeader"></span>
 
 <button
 class="logout"
 onclick="logout()">
+
 ログアウト
+
 </button>
+
 </div>
 
 </header>
@@ -260,35 +443,71 @@ onclick="logout()">
 
 <div class="layout">
 
+
 <nav>
 
-<button class="active"
+<button
+class="active"
 onclick="showPage('home',this)">
+
 🏠 ホーム
+
 </button>
 
-<button onclick="showPage('members',this)">
+
+<button
+onclick="showPage('members',this)">
+
 👨‍👩‍👧 家族
+
 </button>
 
-<button onclick="showPage('fine',this)">
-⚖️ 罰金
+
+<button
+onclick="showPage('child',this)">
+
+🧒 子どもページ
+
 </button>
 
-<button onclick="showPage('allowance',this)">
-🪙 お小遣い
-</button>
 
-<button onclick="showPage('news',this)">
-📰 家族ニュース
-</button>
+<button
+onclick="showPage('schedule',this)">
 
-<button onclick="showPage('law',this)">
-⚖️ 家族の法律
-</button>
-
-<button onclick="showPage('calendar',this)">
 📅 予定表
+
+</button>
+
+
+<button
+onclick="showPage('news',this)">
+
+📰 家族ニュース
+
+</button>
+
+
+<button
+onclick="showPage('law',this)">
+
+⚖️ 家族の法律
+
+</button>
+
+
+<button
+onclick="showPage('fine',this)">
+
+💰 罰金
+
+</button>
+
+
+<button
+onclick="showPage('allowance',this)">
+
+🪙 お小遣い
+
 </button>
 
 </nav>
@@ -297,13 +516,19 @@ onclick="showPage('home',this)">
 <main>
 
 
-<!-- HOME -->
+<!-- =========================
+ HOME
+========================= -->
 
-<section id="home" class="page active">
+<section
+id="home"
+class="page active">
 
 <h1>🏠 ホーム</h1>
 
+
 <div class="grid">
+
 
 <div class="card">
 
@@ -312,11 +537,17 @@ onclick="showPage('home',this)">
 <div
 id="homeFamily"
 class="stat">
+
+読み込み中
+
 </div>
 
 <div class="meta">
+
 家族コード：
+
 <span id="familyCode"></span>
+
 </div>
 
 </div>
@@ -329,11 +560,31 @@ class="stat">
 <div
 id="homeUser"
 class="stat">
-</div>
-
-<div id="homeRole"></div>
 
 </div>
+
+<div
+id="homeRole">
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📅 今日の予定</h2>
+
+<div
+id="todayCount"
+class="stat">
+
+0
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -341,9 +592,13 @@ class="stat">
 
 
 
-<!-- MEMBERS -->
+<!-- =========================
+ MEMBERS
+========================= -->
 
-<section id="members" class="page">
+<section
+id="members"
+class="page">
 
 <h1>👨‍👩‍👧 家族</h1>
 
@@ -357,47 +612,414 @@ class="stat">
 
 
 
-<!-- FINE -->
+<!-- =========================
+ CHILD PAGE
+========================= -->
 
-<section id="fine" class="page">
+<section
+id="child"
+class="page">
 
-<h1>⚖️ 罰金</h1>
+<div
+class="childHero">
+
+<h1>🧒 子どもページ</h1>
+
+<div id="childWelcome"></div>
+
+</div>
+
+
+<div
+id="childOnlyContent">
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>🪙 お小遣い残高</h2>
+
+<div
+id="childBalance"
+class="stat">
+
+¥0
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>💰 罰金</h2>
+
+<div
+id="childFine"
+class="stat">
+
+¥0
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🛍️ 今まで使った金額</h2>
+
+<div
+id="childSpent"
+class="stat">
+
+¥0
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📅 自分の予定</h2>
+
+<div id="childSchedules"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📰 家族ニュース</h2>
+
+<div id="childNews"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📈 お小遣いグラフ</h2>
+
+<div class="chartBox">
+
+<canvas id="childMoneyChart"></canvas>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+ SCHEDULE
+========================= -->
+
+<section
+id="schedule"
+class="page">
+
+<h1>📅 家族予定表</h1>
+
+
+<div class="card">
+
+<h2>➕ 予定を追加</h2>
+
+
+<div class="field">
+
+<label>
+予定名
+</label>
+
+<input
+id="scheduleTitle"
+placeholder="例：家族で買い物">
+
+</div>
+
+
+<div class="field">
+
+<label>
+日付
+</label>
+
+<input
+id="scheduleDate"
+type="date">
+
+</div>
+
+
+<div class="field">
+
+<label>
+時間
+</label>
+
+<input
+id="scheduleTime"
+type="time">
+
+</div>
+
+
+<div class="field">
+
+<label>
+場所
+</label>
+
+<input
+id="scheduleLocation"
+placeholder="例：イオン">
+
+</div>
+
+
+<div class="field">
+
+<label>
+内容
+</label>
+
+<textarea
+id="scheduleDescription"
+placeholder="予定の内容"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label>
+誰の予定？
+
+</label>
+
+<select id="scheduleMember">
+
+<option value="">
+家族全員
+</option>
+
+</select>
+
+</div>
+
+
+<button
+class="primary"
+onclick="addSchedule()">
+
+📅 予定を追加
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 予定一覧</h2>
+
+<div id="scheduleList"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+ NEWS
+========================= -->
+
+<section
+id="news"
+class="page">
+
+<h1>📰 家族ニュース</h1>
+
+
+<div
+id="parentNews"
+class="card">
+
+<h2>➕ ニュース追加</h2>
+
+<div class="field">
+
+<label>タイトル</label>
+
+<input
+id="newsTitle">
+
+</div>
+
+<div class="field">
+
+<label>内容</label>
+
+<textarea
+id="newsContent"></textarea>
+
+</div>
+
+<button
+class="primary"
+onclick="addNews()">
+
+ニュースを追加
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div id="newsList"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+ LAW
+========================= -->
+
+<section
+id="law"
+class="page">
+
+<h1>⚖️ 家族の法律</h1>
+
+
+<div
+id="parentLaw"
+class="card">
+
+<h2>➕ 法律を追加</h2>
+
+<div class="field">
+
+<label>タイトル</label>
+
+<input
+id="lawTitle">
+
+</div>
+
+<div class="field">
+
+<label>内容</label>
+
+<textarea
+id="lawContent"></textarea>
+
+</div>
+
+<div class="field">
+
+<label>違反時の罰金</label>
+
+<input
+id="lawFine"
+type="number"
+min="0">
+
+</div>
+
+<button
+class="primary"
+onclick="addLaw()">
+
+法律を追加
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div id="lawList"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+ FINE
+========================= -->
+
+<section
+id="fine"
+class="page">
+
+<h1>💰 罰金</h1>
+
 
 <div
 id="parentFine"
 class="card">
 
-<h2>➕ 罰金を追加</h2>
+<h2>➕ 罰金を登録</h2>
+
 
 <div class="field">
 
-<label>対象の子ども</label>
+<label>
+対象
+</label>
 
 <select id="fineMember"></select>
 
 </div>
 
+
 <div class="field">
 
-<label>金額</label>
+<label>
+金額
+</label>
 
 <input
 id="fineAmount"
 type="number"
-min="1"
-placeholder="500">
+min="1">
 
 </div>
+
 
 <div class="field">
 
-<label>理由</label>
+<label>
+理由
+</label>
 
 <input
-id="fineReason"
-placeholder="家族のルールを守らなかった">
+id="fineReason">
 
 </div>
+
 
 <button
 class="primary red"
@@ -406,6 +1028,19 @@ onclick="addFine()">
 罰金を登録
 
 </button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📈 罰金の推移</h2>
+
+<div class="chartBox">
+
+<canvas id="fineChart"></canvas>
+
+</div>
 
 </div>
 
@@ -422,9 +1057,13 @@ onclick="addFine()">
 
 
 
-<!-- ALLOWANCE -->
+<!-- =========================
+ ALLOWANCE
+========================= -->
 
-<section id="allowance" class="page">
+<section
+id="allowance"
+class="page">
 
 <h1>🪙 お小遣い</h1>
 
@@ -435,6 +1074,7 @@ class="card">
 
 <h2>➕ お小遣いを渡す</h2>
 
+
 <div class="field">
 
 <label>誰に？</label>
@@ -443,6 +1083,7 @@ class="card">
 
 </div>
 
+
 <div class="field">
 
 <label>金額</label>
@@ -450,14 +1091,14 @@ class="card">
 <input
 id="allowanceAmount"
 type="number"
-min="1"
-placeholder="1000">
+min="1">
 
 </div>
 
+
 <div class="field">
 
-<label>何をしたので？</label>
+<label>理由</label>
 
 <input
 id="allowanceReason"
@@ -465,11 +1106,12 @@ placeholder="お手伝いをした">
 
 </div>
 
+
 <button
 class="primary green"
 onclick="addAllowance()">
 
-お小遣いを登録
+お小遣いを追加
 
 </button>
 
@@ -478,11 +1120,51 @@ onclick="addAllowance()">
 
 <div class="card">
 
-<h2>💰 お小遣い残高</h2>
+<h2>📊 お小遣い推移</h2>
+
+<div class="chartBox">
+
+<canvas id="allowanceChart"></canvas>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📊 支出推移</h2>
+
+<div class="chartBox">
+
+<canvas id="spendingChart"></canvas>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📊 残高推移</h2>
+
+<div class="chartBox">
+
+<canvas id="balanceChart"></canvas>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>💰 現在の残高</h2>
 
 <div
 id="allowanceSummary"
 class="summary">
+
 </div>
 
 </div>
@@ -493,12 +1175,15 @@ class="summary">
 <h2>🛍️ お小遣いを使った</h2>
 
 <p>
-自分が何にいくら使ったか記録できます。
+子どもは自分が使ったお金を記録できます。
 </p>
+
 
 <div class="field">
 
-<label>何に使った？</label>
+<label>
+何に使った？
+</label>
 
 <input
 id="spendingItem"
@@ -506,17 +1191,20 @@ placeholder="例：ゲーム">
 
 </div>
 
+
 <div class="field">
 
-<label>いくら？</label>
+<label>
+いくら？
+</label>
 
 <input
 id="spendingAmount"
 type="number"
-min="1"
-placeholder="500">
+min="1">
 
 </div>
+
 
 <button
 class="primary"
@@ -531,7 +1219,7 @@ onclick="addSpending()">
 
 <div class="card">
 
-<h2>📋 お小遣い・支出履歴</h2>
+<h2>📋 履歴</h2>
 
 <div id="allowanceList"></div>
 
@@ -540,159 +1228,17 @@ onclick="addSpending()">
 </section>
 
 
-
-<!-- NEWS -->
-
-<section id="news" class="page">
-
-<h1>📰 家族ニュース</h1>
-
-
-<div
-id="parentNews"
-class="card">
-
-<h2>➕ ニュースを追加</h2>
-
-<div class="field">
-
-<label>タイトル</label>
-
-<input
-id="newsTitle"
-placeholder="例：今週のお知らせ">
-
-</div>
-
-<div class="field">
-
-<label>内容</label>
-
-<textarea
-id="newsContent"
-placeholder="家族のみんなへ..."></textarea>
-
-</div>
-
-<button
-class="primary"
-onclick="addNews()">
-
-📰 ニュースを公開
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>📰 ニュース一覧</h2>
-
-<div id="newsList"></div>
-
-</div>
-
-</section>
-
-
-
-<!-- LAW -->
-
-<section id="law" class="page">
-
-<h1>⚖️ 家族の法律</h1>
-
-
-<div
-id="parentLaw"
-class="card">
-
-<h2>➕ 家族の法律を追加</h2>
-
-<div class="field">
-
-<label>ルール名</label>
-
-<input
-id="lawTitle"
-placeholder="例：ゲームは夜9時まで">
-
-</div>
-
-<div class="field">
-
-<label>内容</label>
-
-<textarea
-id="lawContent"
-placeholder="家族で決めたルール"></textarea>
-
-</div>
-
-<div class="field">
-
-<label>違反時の罰金</label>
-
-<input
-id="lawFine"
-type="number"
-min="0"
-placeholder="500">
-
-</div>
-
-<button
-class="primary"
-onclick="addLaw()">
-
-⚖️ 法律を追加
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>📋 家族の法律一覧</h2>
-
-<div id="lawList"></div>
-
-</div>
-
-</section>
-
-
-
-<!-- CALENDAR -->
-
-<section id="calendar" class="page">
-
-<h1>📅 予定表</h1>
-
-<div class="card">
-
-<div class="empty">
-予定表機能はここに追加できます。
-</div>
-
-</div>
-
-</section>
-
-
 </main>
-</div>
+
 </div>
 
 
 
 <script>
 
-/* =====================================================
+/* =========================================
  SUPABASE
-===================================================== */
+========================================= */
 
 const SUPABASE_URL =
 "https://cxwdndlbtdagvvcuvopm.supabase.co";
@@ -707,67 +1253,89 @@ supabase.createClient(
 );
 
 
-/* =====================================================
+/* =========================================
  STATE
-===================================================== */
+========================================= */
 
-let user=null;
-let member=null;
-let family=null;
-let members=[];
+let user = null;
+
+let member = null;
+
+let family = null;
+
+let members = [];
+
+let fineChart = null;
+
+let allowanceChart = null;
+
+let spendingChart = null;
+
+let balanceChart = null;
+
+let childMoneyChart = null;
 
 
-/* =====================================================
+/* =========================================
  UTILS
-===================================================== */
+========================================= */
 
 function $(id){
+
  return document.getElementById(id);
+
 }
 
-function esc(v){
- return String(v ?? "")
+
+function esc(value){
+
+ return String(value ?? "")
  .replaceAll("&","&amp;")
  .replaceAll("<","&lt;")
  .replaceAll(">","&gt;")
  .replaceAll('"',"&quot;")
  .replaceAll("'","&#039;");
+
 }
 
 
-/* =====================================================
+/* =========================================
  PAGE
-===================================================== */
+========================================= */
 
 function showPage(id,button){
 
  document
  .querySelectorAll(".page")
- .forEach(x=>{
-  x.classList.remove("active");
+ .forEach(p=>{
+  p.classList.remove("active");
  });
+
 
  $(id).classList.add("active");
 
+
  document
  .querySelectorAll("nav button")
- .forEach(x=>{
-  x.classList.remove("active");
+ .forEach(b=>{
+  b.classList.remove("active");
  });
+
 
  button.classList.add("active");
 
 }
 
 
-/* =====================================================
+/* =========================================
  START
-===================================================== */
+========================================= */
 
 async function start(){
 
  const session =
  await db.auth.getSession();
+
 
  if(!session.data.session){
 
@@ -777,10 +1345,12 @@ async function start(){
 
  }
 
- user=session.data.session.user;
+
+ user =
+ session.data.session.user;
 
 
- const m =
+ const result =
  await db
  .from("family_app_v2_members")
  .select("*")
@@ -788,11 +1358,11 @@ async function start(){
  .maybeSingle();
 
 
- if(m.error){
+ if(result.error){
 
   alert(
    "家族情報の取得に失敗しました。\n"+
-   m.error.message
+   result.error.message
   );
 
   return;
@@ -800,7 +1370,7 @@ async function start(){
  }
 
 
- if(!m.data){
+ if(!result.data){
 
   alert(
    "このアカウントはまだ家族に参加していません。"
@@ -811,10 +1381,11 @@ async function start(){
  }
 
 
- member=m.data;
+ member =
+ result.data;
 
 
- const f =
+ const familyResult =
  await db
  .from("family_app_v2_families")
  .select("*")
@@ -822,67 +1393,90 @@ async function start(){
  .single();
 
 
- if(f.error){
+ if(familyResult.error){
 
-  alert(f.error.message);
+  alert(familyResult.error.message);
 
   return;
 
  }
 
 
- family=f.data;
+ family =
+ familyResult.data;
 
 
- $("app").style.display="block";
-
-
- $("familyHeader").textContent=
+ $("familyNameHeader").textContent =
  family.family_name;
 
 
- $("homeFamily").textContent=
+ $("homeFamily").textContent =
  family.family_name;
 
 
- $("familyCode").textContent=
+ $("familyCode").textContent =
  family.family_code;
 
 
- $("homeUser").textContent=
+ $("homeUser").textContent =
  member.name;
 
 
- $("homeRole").textContent=
- member.role==="parent"
- ?"👨‍👩‍👧 親"
- :"🧒 子ども";
+ $("homeRole").textContent =
+ member.role === "parent"
+ ? "👨‍👩‍👧 親"
+ : "🧒 子ども";
 
 
- if(member.role!=="parent"){
+ $("childWelcome").textContent =
+ `${member.name}さんのページ`;
 
-  $("parentFine").classList.add("hidden");
-  $("parentAllowance").classList.add("hidden");
-  $("parentNews").classList.add("hidden");
-  $("parentLaw").classList.add("hidden");
+
+ if(member.role !== "parent"){
+
+  $("parentFine")
+   .classList.add("hidden");
+
+  $("parentAllowance")
+   .classList.add("hidden");
+
+  $("parentNews")
+   .classList.add("hidden");
+
+  $("parentLaw")
+   .classList.add("hidden");
 
  }
 
 
  await loadMembers();
 
- await loadAll();
+ await loadNews();
+
+ await loadLaws();
+
+ await loadSchedules();
+
+ await loadFine();
+
+ await loadAllowance();
+
+ await loadChildPage();
 
 }
 
 
-/* =====================================================
+/* =========================================
  MEMBERS
-===================================================== */
+========================================= */
 
 async function loadMembers(){
 
- const result=
+ /*
+  既存の家族メンバー取得RPCを使用
+ */
+
+ const result =
  await db.rpc(
   "family_app_v2_get_members",
   {
@@ -900,17 +1494,20 @@ async function loadMembers(){
  }
 
 
- members=result.data || [];
+ members =
+ result.data || [];
 
 
- $("membersList").innerHTML=
+ $("membersList").innerHTML =
  members.map(m=>`
 
  <div class="item">
 
   <div class="itemTitle">
 
-   ${m.role==="parent"?"👨‍👩‍👧":"🧒"}
+   ${m.role === "parent"
+    ? "👨‍👩‍👧"
+    : "🧒"}
 
    ${esc(m.name)}
 
@@ -918,11 +1515,9 @@ async function loadMembers(){
 
   <div class="meta">
 
-   ${
-    m.role==="parent"
-    ?"親"
-    :"子ども"
-   }
+   ${m.role === "parent"
+    ? "親"
+    : "子ども"}
 
   </div>
 
@@ -931,68 +1526,153 @@ async function loadMembers(){
  `).join("");
 
 
- const children=
+ const children =
  members.filter(
-  m=>m.role!=="parent"
+  m=>m.role !== "parent"
  );
 
 
- $("fineMember").innerHTML=
+ $("fineMember").innerHTML =
  children.map(m=>`
 
-  <option value="${m.id}">
-   ${esc(m.name)}
-  </option>
+ <option value="${m.id}">
+ ${esc(m.name)}
+ </option>
 
  `).join("");
 
 
- $("allowanceMember").innerHTML=
+ $("allowanceMember").innerHTML =
  children.map(m=>`
 
-  <option value="${m.id}">
-   ${esc(m.name)}
-  </option>
+ <option value="${m.id}">
+ ${esc(m.name)}
+ </option>
+
+ `).join("");
+
+
+ $("scheduleMember").innerHTML =
+ `<option value="">
+ 家族全員
+ </option>`
+ +
+ members.map(m=>`
+
+ <option value="${m.id}">
+ ${esc(m.name)}
+ </option>
 
  `).join("");
 
 }
 
 
-/* =====================================================
- ALL
-===================================================== */
+/* =========================================
+ SCHEDULE
+========================================= */
 
-async function loadAll(){
+async function addSchedule(){
 
- await loadNews();
+ const title =
+ $("scheduleTitle").value.trim();
 
- await loadLaws();
+ const date =
+ $("scheduleDate").value;
 
- await loadFine();
+ const time =
+ $("scheduleTime").value || null;
 
- await loadAllowance();
+ const location =
+ $("scheduleLocation").value.trim();
 
-}
+ const description =
+ $("scheduleDescription").value.trim();
+
+ const memberId =
+ $("scheduleMember").value || null;
 
 
-/* =====================================================
- NEWS
-===================================================== */
+ if(!title || !date){
 
-async function loadNews(){
+  alert("予定名と日付を入力してください。");
 
- const result=
+  return;
+
+ }
+
+
+ const result =
  await db
- .from("family_app_v2_news")
- .select("*")
- .eq("family_id",family.id)
- .order("created_at",{ascending:false});
+ .from("family_app_v2_schedules")
+ .insert({
+
+  family_id:family.id,
+
+  member_id:memberId,
+
+  title:title,
+
+  event_date:date,
+
+  event_time:time,
+
+  location:location,
+
+  description:description,
+
+  created_by:user.id
+
+ });
 
 
  if(result.error){
 
-  $("newsList").innerHTML=
+  alert(
+   "予定の追加に失敗しました。\n"+
+   result.error.message
+  );
+
+  return;
+
+ }
+
+
+ $("scheduleTitle").value="";
+
+ $("scheduleDate").value="";
+
+ $("scheduleTime").value="";
+
+ $("scheduleLocation").value="";
+
+ $("scheduleDescription").value="";
+
+ $("scheduleMember").value="";
+
+
+ await loadSchedules();
+
+
+ alert("予定を追加しました！");
+
+}
+
+
+async function loadSchedules(){
+
+ const result =
+ await db
+ .from("family_app_v2_schedules")
+ .select("*")
+ .eq("family_id",family.id)
+ .order("event_date",{ascending:true})
+ .order("event_time",{ascending:true});
+
+
+ if(result.error){
+
+  $("scheduleList").innerHTML =
   `<div class="empty">
    ${esc(result.error.message)}
   </div>`;
@@ -1004,55 +1684,162 @@ async function loadNews(){
 
  if(!result.data.length){
 
-  $("newsList").innerHTML=
+  $("scheduleList").innerHTML =
   `<div class="empty">
-   まだ家族ニュースはありません。
+   予定はありません。
   </div>`;
+
+  $("todayCount").textContent="0";
 
   return;
 
  }
 
 
- $("newsList").innerHTML=
- result.data.map(n=>`
+ const today =
+ new Date()
+ .toISOString()
+ .slice(0,10);
 
- <div class="item">
 
-  <div class="itemTitle">
-   📰 ${esc(n.title)}
+ const todayEvents =
+ result.data.filter(
+  x=>x.event_date === today
+ );
+
+
+ $("todayCount").textContent =
+ todayEvents.length;
+
+
+ $("scheduleList").innerHTML =
+ result.data.map(s=>{
+
+  const person =
+   members.find(
+    m=>m.id === s.member_id
+   );
+
+
+  return`
+
+  <div class="item">
+
+   <div class="scheduleDate">
+
+    📅 ${esc(s.event_date)}
+
+   </div>
+
+   ${
+    s.event_time
+    ? `<div class="scheduleTime">
+        🕐 ${esc(s.event_time)}
+       </div>`
+    :""
+   }
+
+   <div class="itemTitle">
+
+    ${esc(s.title)}
+
+   </div>
+
+   ${
+    person
+    ? `<div class="meta">
+       👤 ${esc(person.name)}
+       </div>`
+    : `<div class="meta">
+       👨‍👩‍👧 家族全員
+       </div>`
+   }
+
+   ${
+    s.location
+    ? `<div>
+       📍 ${esc(s.location)}
+       </div>`
+    :""
+   }
+
+   ${
+    s.description
+    ? `<p>
+       ${esc(s.description)
+        .replaceAll("\n","<br>")}
+       </p>`
+    :""
+   }
+
+   ${
+    member.role === "parent"
+    ? `<button
+        class="primary red"
+        onclick="deleteSchedule('${s.id}')">
+        削除
+       </button>`
+    :""
+   }
+
   </div>
 
-  <div class="meta">
-   ${new Date(n.created_at).toLocaleString("ja-JP")}
-  </div>
+  `;
 
-  <p>
-   ${esc(n.content).replaceAll("\n","<br>")}
-  </p>
-
- </div>
-
- `).join("");
+ }).join("");
 
 }
 
 
-async function addNews(){
+async function deleteSchedule(id){
 
- if(member.role!=="parent"){
+ if(member.role !== "parent"){
 
-  alert("ニュースを追加できるのは親です。");
+  alert("予定を削除できるのは親です。");
 
   return;
 
  }
 
 
- const title=
+ if(!confirm("この予定を削除しますか？")){
+
+  return;
+
+ }
+
+
+ const result =
+ await db
+ .from("family_app_v2_schedules")
+ .delete()
+ .eq("id",id);
+
+
+ if(result.error){
+
+  alert(result.error.message);
+
+  return;
+
+ }
+
+
+ await loadSchedules();
+
+}
+
+
+/* =========================================
+ NEWS
+========================================= */
+
+async function addNews(){
+
+ const title =
  $("newsTitle").value.trim();
 
- const content=
+ const content =
  $("newsContent").value.trim();
 
 
@@ -1065,7 +1852,7 @@ async function addNews(){
  }
 
 
- const result=
+ const result =
  await db.rpc(
   "family_app_v2_add_news",
   {
@@ -1086,26 +1873,20 @@ async function addNews(){
 
 
  $("newsTitle").value="";
+
  $("newsContent").value="";
 
 
  await loadNews();
 
-
- alert("ニュースを追加しました！");
-
 }
 
 
-/* =====================================================
- LAW
-===================================================== */
+async function loadNews(){
 
-async function loadLaws(){
-
- const result=
+ const result =
  await db
- .from("family_app_v2_laws")
+ .from("family_app_v2_news")
  .select("*")
  .eq("family_id",family.id)
  .order("created_at",{ascending:false});
@@ -1113,7 +1894,7 @@ async function loadLaws(){
 
  if(result.error){
 
-  $("lawList").innerHTML=
+  $("newsList").innerHTML =
   `<div class="empty">
    ${esc(result.error.message)}
   </div>`;
@@ -1123,78 +1904,62 @@ async function loadLaws(){
  }
 
 
- if(!result.data.length){
+ $("newsList").innerHTML =
+ result.data.length
+ ? result.data.map(n=>`
 
-  $("lawList").innerHTML=
-  `<div class="empty">
-   まだ家族の法律はありません。
-  </div>`;
+  <div class="item">
 
-  return;
+   <div class="itemTitle">
+    📰 ${esc(n.title)}
+   </div>
 
- }
+   <div class="meta">
+    ${new Date(n.created_at)
+     .toLocaleString("ja-JP")}
+   </div>
 
-
- $("lawList").innerHTML=
- result.data.map(l=>`
-
- <div class="item">
-
-  <div class="itemTitle">
-   ⚖️ ${esc(l.title)}
-  </div>
-
-  <p>
-   ${esc(l.content).replaceAll("\n","<br>")}
-  </p>
-
-  <div class="meta">
-
-   違反時の罰金：
-   <b>
-   ¥${Number(l.fine_amount).toLocaleString()}
-   </b>
+   <p>
+    ${esc(n.content)
+     .replaceAll("\n","<br>")}
+   </p>
 
   </div>
 
- </div>
-
- `).join("");
+ `).join("")
+ : `<div class="empty">
+    ニュースはありません。
+   </div>`;
 
 }
 
 
+/* =========================================
+ LAW
+========================================= */
+
 async function addLaw(){
 
- if(member.role!=="parent"){
-
-  alert("法律を追加できるのは親です。");
-
-  return;
-
- }
-
-
- const title=
+ const title =
  $("lawTitle").value.trim();
 
- const content=
+ const content =
  $("lawContent").value.trim();
 
- const fine=
- Number($("lawFine").value)||0;
+ const fine =
+ Number($("lawFine").value) || 0;
 
 
  if(!title || !content){
 
-  alert("ルール名と内容を入力してください。");
+  alert("タイトルと内容を入力してください。");
 
   return;
 
  }
 
 
- const result=
+ const result =
  await db.rpc(
   "family_app_v2_add_law",
   {
@@ -1216,31 +1981,88 @@ async function addLaw(){
 
 
  $("lawTitle").value="";
+
  $("lawContent").value="";
+
  $("lawFine").value="";
 
 
  await loadLaws();
 
+}
 
- alert("家族の法律を追加しました！");
+
+async function loadLaws(){
+
+ const result =
+ await db
+ .from("family_app_v2_laws")
+ .select("*")
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:false});
+
+
+ if(result.error){
+
+  $("lawList").innerHTML =
+  `<div class="empty">
+   ${esc(result.error.message)}
+  </div>`;
+
+  return;
+
+ }
+
+
+ $("lawList").innerHTML =
+ result.data.length
+ ? result.data.map(l=>`
+
+  <div class="item">
+
+   <div class="itemTitle">
+    ⚖️ ${esc(l.title)}
+   </div>
+
+   <p>
+    ${esc(l.content)
+     .replaceAll("\n","<br>")}
+   </p>
+
+   <div class="meta">
+
+    違反時：
+
+    <b>
+    ¥${Number(l.fine_amount)
+     .toLocaleString()}
+    </b>
+
+   </div>
+
+  </div>
+
+ `).join("")
+ : `<div class="empty">
+    法律はありません。
+   </div>`;
 
 }
 
 
-/* =====================================================
+/* =========================================
  FINE
-===================================================== */
+========================================= */
 
 async function addFine(){
 
- const memberId=
+ const memberId =
  $("fineMember").value;
 
- const amount=
+ const amount =
  Number($("fineAmount").value);
 
- const reason=
+ const reason =
  $("fineReason").value.trim();
 
 
@@ -1253,7 +2075,7 @@ async function addFine(){
  }
 
 
- const result=
+ const result =
  await db.rpc(
   "family_app_v2_add_fine",
   {
@@ -1275,32 +2097,30 @@ async function addFine(){
 
 
  $("fineAmount").value="";
+
  $("fineReason").value="";
 
 
  await loadFine();
-
-
- alert("罰金を登録しました。");
 
 }
 
 
 async function loadFine(){
 
- const result=
+ const result =
  await db
  .from("family_app_v2_fines")
  .select(
   "*,family_app_v2_members(name)"
  )
  .eq("family_id",family.id)
- .order("created_at",{ascending:false});
+ .order("created_at",{ascending:true});
 
 
  if(result.error){
 
-  $("fineList").innerHTML=
+  $("fineList").innerHTML =
   `<div class="empty">
    ${esc(result.error.message)}
   </div>`;
@@ -1310,59 +2130,53 @@ async function loadFine(){
  }
 
 
- if(!result.data.length){
+ $("fineList").innerHTML =
+ result.data.length
+ ? result.data.slice().reverse().map(f=>`
 
-  $("fineList").innerHTML=
-  `<div class="empty">
-   罰金はありません。
-  </div>`;
+  <div class="item">
 
-  return;
+   <div class="itemTitle">
+    ⚖️ ${esc(
+     f.family_app_v2_members?.name
+    )}
+   </div>
 
- }
+   <div>
+    ${esc(f.reason)}
+   </div>
 
+   <div class="amount minus">
+    -¥${Number(f.amount)
+     .toLocaleString()}
+   </div>
 
- $("fineList").innerHTML=
- result.data.map(f=>`
-
- <div class="item">
-
-  <div class="itemTitle">
-   ⚖️ ${esc(f.family_app_v2_members?.name)}
   </div>
 
-  <div>
-   ${esc(f.reason)}
-  </div>
+ `).join("")
+ : `<div class="empty">
+    罰金はありません。
+   </div>`;
 
-  <div class="amount minus">
-   -¥${Number(f.amount).toLocaleString()}
-  </div>
 
-  <div class="meta">
-   ${new Date(f.created_at).toLocaleString("ja-JP")}
-  </div>
-
- </div>
-
- `).join("");
+ drawFineChart(result.data);
 
 }
 
 
-/* =====================================================
- ALLOWANCE + SPENDING
-===================================================== */
+/* =========================================
+ ALLOWANCE
+========================================= */
 
 async function addAllowance(){
 
- const memberId=
+ const memberId =
  $("allowanceMember").value;
 
- const amount=
+ const amount =
  Number($("allowanceAmount").value);
 
- const reason=
+ const reason =
  $("allowanceReason").value.trim();
 
 
@@ -1375,7 +2189,7 @@ async function addAllowance(){
  }
 
 
- const result=
+ const result =
  await db.rpc(
   "family_app_v2_add_allowance",
   {
@@ -1397,36 +2211,34 @@ async function addAllowance(){
 
 
  $("allowanceAmount").value="";
+
  $("allowanceReason").value="";
 
 
  await loadAllowance();
-
-
- alert("お小遣いを登録しました！");
 
 }
 
 
 async function addSpending(){
 
- const item=
+ const item =
  $("spendingItem").value.trim();
 
- const amount=
+ const amount =
  Number($("spendingAmount").value);
 
 
  if(!item || !amount){
 
-  alert("何に使ったかと金額を入力してください。");
+  alert("内容と金額を入力してください。");
 
   return;
 
  }
 
 
- const result=
+ const result =
  await db.rpc(
   "family_app_v2_add_spending",
   {
@@ -1448,59 +2260,58 @@ async function addSpending(){
 
 
  $("spendingItem").value="";
+
  $("spendingAmount").value="";
 
 
  await loadAllowance();
 
-
- alert("お小遣いの支出を記録しました！");
-
 }
 
 
+/* =========================================
+ ALLOWANCE DATA
+========================================= */
+
 async function loadAllowance(){
 
- const allowance=
+ const a =
  await db
  .from("family_app_v2_allowances")
  .select(
   "*,family_app_v2_members(name)"
  )
- .eq("family_id",family.id);
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:true});
 
 
- const spending=
+ const s =
  await db
  .from("family_app_v2_spending")
  .select(
   "*,family_app_v2_members(name)"
  )
  .eq("family_id",family.id)
- .order("created_at",{ascending:false});
+ .order("created_at",{ascending:true});
 
 
- if(allowance.error){
+ if(a.error){
 
-  console.error(allowance.error);
-
-  return;
-
- }
-
-
- if(spending.error){
-
-  console.error(spending.error);
+  console.error(a.error);
 
   return;
 
  }
 
 
- /*
-  人ごとの集計
- */
+ if(s.error){
+
+  console.error(s.error);
+
+  return;
+
+ }
+
 
  const totals={};
 
@@ -1516,39 +2327,39 @@ async function loadAllowance(){
  });
 
 
- allowance.data.forEach(a=>{
+ a.data.forEach(x=>{
 
-  if(totals[a.member_id]){
+  if(totals[x.member_id]){
 
-   totals[a.member_id].allowance +=
-   Number(a.amount);
-
-  }
-
- });
-
-
- spending.data.forEach(s=>{
-
-  if(totals[s.member_id]){
-
-   totals[s.member_id].spending +=
-   Number(s.amount);
+   totals[x.member_id]
+    .allowance += Number(x.amount);
 
   }
 
  });
 
 
- $("allowanceSummary").innerHTML=
+ s.data.forEach(x=>{
+
+  if(totals[x.member_id]){
+
+   totals[x.member_id]
+    .spending += Number(x.amount);
+
+  }
+
+ });
+
+
+ $("allowanceSummary").innerHTML =
  Object.values(totals)
  .filter(x=>
-  x.allowance>0 ||
-  x.spending>0
+  x.allowance ||
+  x.spending
  )
  .map(x=>{
 
-  const balance=
+  const balance =
    x.allowance-x.spending;
 
 
@@ -1557,25 +2368,26 @@ async function loadAllowance(){
   <div class="summaryBox">
 
    <b>
-   🧒 ${esc(x.name)}
+    🧒 ${esc(x.name)}
    </b>
 
    <div class="meta">
-   もらった：¥${x.allowance.toLocaleString()}
+    もらった
+    ¥${x.allowance.toLocaleString()}
    </div>
 
    <div class="meta">
-   使った：¥${x.spending.toLocaleString()}
+    使った
+    ¥${x.spending.toLocaleString()}
    </div>
 
-   <div class="amount ${
-    balance>=0
-    ?"plus"
-    :"minus"
-   }">
+   <div class="amount
+    ${balance>=0
+      ?"plus"
+      :"minus"}">
 
-   残り
-   ¥${balance.toLocaleString()}
+    残り
+    ¥${balance.toLocaleString()}
 
    </div>
 
@@ -1586,37 +2398,33 @@ async function loadAllowance(){
  }).join("");
 
 
- /*
-  履歴
- */
-
  const rows=[];
 
 
- allowance.data.forEach(a=>{
+ a.data.forEach(x=>{
 
   rows.push({
 
-   date:a.created_at,
+   date:x.created_at,
 
    html:`
 
    <div class="item">
 
     <div class="itemTitle">
-     🪙 ${esc(a.family_app_v2_members?.name)}
+     🪙
+     ${esc(
+      x.family_app_v2_members?.name
+     )}
     </div>
 
     <div>
-     ${esc(a.reason)}
+     ${esc(x.reason)}
     </div>
 
     <div class="amount plus">
-     +¥${Number(a.amount).toLocaleString()}
-    </div>
-
-    <div class="meta">
-     ${new Date(a.created_at).toLocaleString("ja-JP")}
+     +¥${Number(x.amount)
+       .toLocaleString()}
     </div>
 
    </div>
@@ -1628,30 +2436,30 @@ async function loadAllowance(){
  });
 
 
- spending.data.forEach(s=>{
+ s.data.forEach(x=>{
 
   rows.push({
 
-   date:s.created_at,
+   date:x.created_at,
 
    html:`
 
    <div class="item">
 
     <div class="itemTitle">
-     🛍️ ${esc(s.family_app_v2_members?.name)}
+     🛍️
+     ${esc(
+      x.family_app_v2_members?.name
+     )}
     </div>
 
     <div>
-     ${esc(s.item)}
+     ${esc(x.item)}
     </div>
 
     <div class="amount minus">
-     -¥${Number(s.amount).toLocaleString()}
-    </div>
-
-    <div class="meta">
-     ${new Date(s.created_at).toLocaleString("ja-JP")}
+     -¥${Number(x.amount)
+       .toLocaleString()}
     </div>
 
    </div>
@@ -1669,19 +2477,652 @@ async function loadAllowance(){
  );
 
 
- $("allowanceList").innerHTML=
+ $("allowanceList").innerHTML =
  rows.length
  ? rows.map(x=>x.html).join("")
  : `<div class="empty">
-    まだ記録がありません。
+    記録はありません。
    </div>`;
+
+
+ drawMoneyCharts(
+  a.data,
+  s.data
+ );
+
 
 }
 
 
-/* =====================================================
+/* =========================================
+ CHART HELPERS
+========================================= */
+
+function monthKey(date){
+
+ const d =
+ new Date(date);
+
+ return d.getFullYear()
+ + "-"
+ + String(d.getMonth()+1)
+   .padStart(2,"0");
+
+}
+
+
+function makeMonths(){
+
+ const months=[];
+
+ const now=new Date();
+
+ for(let i=11;i>=0;i--){
+
+  const d =
+  new Date(
+   now.getFullYear(),
+   now.getMonth()-i,
+   1
+  );
+
+  months.push(
+   d.getFullYear()
+   + "-"
+   + String(d.getMonth()+1)
+     .padStart(2,"0")
+  );
+
+ }
+
+ return months;
+
+}
+
+
+function makeMonthLabels(months){
+
+ return months.map(m=>{
+
+  const p=m.split("-");
+
+  return p[0]+"年"+Number(p[1])+"月";
+
+ });
+
+}
+
+
+/* =========================================
+ FINE CHART
+========================================= */
+
+function drawFineChart(data){
+
+ const months =
+ makeMonths();
+
+ const values =
+ months.map(m=>{
+
+  return data
+   .filter(x=>
+    monthKey(x.created_at)===m
+   )
+   .reduce(
+    (sum,x)=>
+    sum+Number(x.amount),
+    0
+   );
+
+ });
+
+
+ if(fineChart)
+  fineChart.destroy();
+
+
+ fineChart =
+ new Chart(
+  $("fineChart"),
+  {
+   type:"line",
+
+   data:{
+    labels:
+     makeMonthLabels(months),
+
+    datasets:[{
+
+     label:"罰金",
+
+     data:values,
+
+     tension:.3,
+
+     fill:false,
+
+     borderWidth:3
+
+    }]
+
+   },
+
+   options:{
+    responsive:true,
+
+    maintainAspectRatio:false,
+
+    scales:{
+     y:{
+      beginAtZero:true
+     }
+    }
+   }
+
+  }
+ );
+
+}
+
+
+/* =========================================
+ MONEY CHARTS
+========================================= */
+
+function drawMoneyCharts(
+ allowance,
+ spending
+){
+
+ const months =
+ makeMonths();
+
+
+ const allowanceValues =
+ months.map(m=>
+  allowance
+  .filter(x=>
+   monthKey(x.created_at)===m
+  )
+  .reduce(
+   (sum,x)=>
+   sum+Number(x.amount),
+   0
+  )
+ );
+
+
+ const spendingValues =
+ months.map(m=>
+  spending
+  .filter(x=>
+   monthKey(x.created_at)===m
+  )
+  .reduce(
+   (sum,x)=>
+   sum+Number(x.amount),
+   0
+  )
+ );
+
+
+ let balance=0;
+
+ const balanceValues =
+ months.map((m,i)=>{
+
+  balance +=
+   allowanceValues[i]
+   -
+   spendingValues[i];
+
+  return balance;
+
+ });
+
+
+ const labels =
+ makeMonthLabels(months);
+
+
+ if(allowanceChart)
+  allowanceChart.destroy();
+
+
+ allowanceChart =
+ new Chart(
+  $("allowanceChart"),
+  {
+   type:"line",
+
+   data:{
+    labels:labels,
+
+    datasets:[{
+
+     label:"もらったお小遣い",
+
+     data:allowanceValues,
+
+     tension:.3,
+
+     fill:false,
+
+     borderWidth:3
+
+    }]
+
+   },
+
+   options:{
+    responsive:true,
+
+    maintainAspectRatio:false,
+
+    scales:{
+     y:{
+      beginAtZero:true
+     }
+    }
+   }
+
+  }
+ );
+
+
+ if(spendingChart)
+  spendingChart.destroy();
+
+
+ spendingChart =
+ new Chart(
+  $("spendingChart"),
+  {
+   type:"line",
+
+   data:{
+    labels:labels,
+
+    datasets:[{
+
+     label:"使ったお金",
+
+     data:spendingValues,
+
+     tension:.3,
+
+     fill:false,
+
+     borderWidth:3
+
+    }]
+
+   },
+
+   options:{
+    responsive:true,
+
+    maintainAspectRatio:false,
+
+    scales:{
+     y:{
+      beginAtZero:true
+     }
+    }
+   }
+
+  }
+ );
+
+
+ if(balanceChart)
+  balanceChart.destroy();
+
+
+ balanceChart =
+ new Chart(
+  $("balanceChart"),
+  {
+   type:"line",
+
+   data:{
+    labels:labels,
+
+    datasets:[{
+
+     label:"お小遣い残高",
+
+     data:balanceValues,
+
+     tension:.3,
+
+     fill:false,
+
+     borderWidth:3
+
+    }]
+
+   },
+
+   options:{
+    responsive:true,
+
+    maintainAspectRatio:false
+   }
+
+  }
+ );
+
+}
+
+
+/* =========================================
+ CHILD PAGE
+========================================= */
+
+async function loadChildPage(){
+
+ /*
+  親でも確認できるようにしておく。
+  子どもの場合は自分のデータを表示。
+ */
+
+ const targetId =
+ member.role === "parent"
+ ? null
+ : member.id;
+
+
+ const fineResult =
+ await db
+ .from("family_app_v2_fines")
+ .select("*")
+ .eq("family_id",family.id);
+
+
+ const allowanceResult =
+ await db
+ .from("family_app_v2_allowances")
+ .select("*")
+ .eq("family_id",family.id);
+
+
+ const spendingResult =
+ await db
+ .from("family_app_v2_spending")
+ .select("*")
+ .eq("family_id",family.id);
+
+
+ if(fineResult.error ||
+    allowanceResult.error ||
+    spendingResult.error){
+
+  return;
+
+ }
+
+
+ const fines =
+ targetId
+ ? fineResult.data.filter(
+    x=>x.member_id===targetId
+   )
+ : fineResult.data;
+
+
+ const allowances =
+ targetId
+ ? allowanceResult.data.filter(
+    x=>x.member_id===targetId
+   )
+ : allowanceResult.data;
+
+
+ const spending =
+ targetId
+ ? spendingResult.data.filter(
+    x=>x.member_id===targetId
+   )
+ : spendingResult.data;
+
+
+ const fineTotal =
+ fines.reduce(
+  (a,x)=>a+Number(x.amount),
+  0
+ );
+
+
+ const allowanceTotal =
+ allowances.reduce(
+  (a,x)=>a+Number(x.amount),
+  0
+ );
+
+
+ const spendingTotal =
+ spending.reduce(
+  (a,x)=>a+Number(x.amount),
+  0
+ );
+
+
+ const balance =
+ allowanceTotal-
+ spendingTotal;
+
+
+ $("childBalance").textContent =
+ "¥"+balance.toLocaleString();
+
+
+ $("childFine").textContent =
+ "¥"+fineTotal.toLocaleString();
+
+
+ $("childSpent").textContent =
+ "¥"+spendingTotal.toLocaleString();
+
+
+ /*
+  自分の予定
+ */
+
+ const schedules =
+ await db
+ .from("family_app_v2_schedules")
+ .select("*")
+ .eq("family_id",family.id)
+ .order("event_date");
+
+
+ if(!schedules.error){
+
+  const mine =
+   targetId
+   ? schedules.data.filter(
+      x=>
+      x.member_id===targetId ||
+      x.member_id===null
+     )
+   : schedules.data;
+
+
+  $("childSchedules").innerHTML =
+   mine.length
+   ? mine.map(s=>`
+
+    <div class="item">
+
+     <div class="scheduleDate">
+      📅 ${esc(s.event_date)}
+     </div>
+
+     ${
+      s.event_time
+      ? `<div class="scheduleTime">
+          🕐 ${esc(s.event_time)}
+         </div>`
+      :""
+     }
+
+     <div class="itemTitle">
+      ${esc(s.title)}
+     </div>
+
+     ${
+      s.location
+      ? `<div>
+          📍 ${esc(s.location)}
+         </div>`
+      :""
+     }
+
+    </div>
+
+   `).join("")
+   : `<div class="empty">
+      予定はありません。
+     </div>`;
+
+ }
+
+
+ /*
+  ニュース
+ */
+
+ const news =
+ await db
+ .from("family_app_v2_news")
+ .select("*")
+ .eq("family_id",family.id)
+ .order("created_at",{ascending:false})
+ .limit(5);
+
+
+ if(!news.error){
+
+  $("childNews").innerHTML =
+   news.data.length
+   ? news.data.map(n=>`
+
+    <div class="item">
+
+     <div class="itemTitle">
+      📰 ${esc(n.title)}
+     </div>
+
+     <p>
+      ${esc(n.content)
+       .replaceAll("\n","<br>")}
+     </p>
+
+    </div>
+
+   `).join("")
+   : `<div class="empty">
+      ニュースはありません。
+     </div>`;
+
+ }
+
+
+ /*
+  子どもページのグラフ
+ */
+
+ const months =
+ makeMonths();
+
+
+ const moneyValues =
+ months.map(m=>{
+
+  const plus =
+   allowances
+   .filter(x=>
+    monthKey(x.created_at)===m
+   )
+   .reduce(
+    (a,x)=>a+Number(x.amount),
+    0
+   );
+
+
+  const minus =
+   spending
+   .filter(x=>
+    monthKey(x.created_at)===m
+   )
+   .reduce(
+    (a,x)=>a+Number(x.amount),
+    0
+   );
+
+
+  return plus-minus;
+
+ });
+
+
+ if(childMoneyChart)
+  childMoneyChart.destroy();
+
+
+ childMoneyChart =
+ new Chart(
+  $("childMoneyChart"),
+  {
+
+   type:"line",
+
+   data:{
+
+    labels:
+     makeMonthLabels(months),
+
+    datasets:[{
+
+     label:"月ごとの収支",
+
+     data:moneyValues,
+
+     tension:.3,
+
+     fill:false,
+
+     borderWidth:3
+
+    }]
+
+   },
+
+   options:{
+
+    responsive:true,
+
+    maintainAspectRatio:false,
+
+    scales:{
+     y:{
+      beginAtZero:true
+     }
+    }
+
+   }
+
+  }
+ );
+
+}
+
+
+/* =========================================
  LOGOUT
-===================================================== */
+========================================= */
 
 async function logout(){
 
@@ -1692,13 +3133,31 @@ async function logout(){
 }
 
 
-/* =====================================================
+/* =========================================
+ AUTH
+========================================= */
+
+db.auth.onAuthStateChange(
+ (event,session)=>{
+
+  if(session && !user){
+
+   start();
+
+  }
+
+ }
+);
+
+
+/* =========================================
  START
-===================================================== */
+========================================= */
 
 start();
 
 </script>
 
 </body>
+
 </html>
